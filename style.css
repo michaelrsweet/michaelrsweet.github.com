@@ -76,10 +76,10 @@ DIV#body {
 }
 
 DIV#sidebar {
-  background: black;
-  border: solid thin black;
+  background: #cccccc;
+  border: solid thin #cccccc;
   border-radius: 10px;
-  color: white;
+  color: black;
   display: inline;
   float: left;
   margin: 0px 10px 10px; /* top right+left bottom */

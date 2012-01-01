@@ -1,10 +1,7 @@
 /* Sidebar loading code - we do it here to avoid changing it on every page */
 function load_sidebar() {
   contents =
-'<p>Michael<br>\
-R<br>\
-Sweet<br>\
-<ul>\
+'<ul>\
   <li><a href="index.html">Home</a></li>\
   <li><a href="Mini-XML/index.html">Mini-XML</a></li>\
 </ul>';
