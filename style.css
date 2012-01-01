@@ -90,11 +90,11 @@ DIV#sidebar {
 }
 
 DIV#sidebar A {
-  color: white;
+  color: black;
 }
 
 DIV#sidebar P {
-  color: white;
+  color: black;
   font-size: 200%;
   line-height: 100%;
   margin: 0px 0px 10px;
