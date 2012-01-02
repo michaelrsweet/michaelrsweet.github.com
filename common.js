@@ -1,9 +1,11 @@
 /* Sidebar loading code - we do it here to avoid changing it on every page */
 function load_sidebar() {
   contents =
-'<ul>\
+'<img src="images/mike.png" alt="Michael R Sweet">\
+<ul>\
   <li><a href="index.html">Home</a></li>\
-  <li><a href="Mini-XML/index.html">Mini-XML</a></li>\
+  <li><a href="https://github.com/michaelrsweet">GitHub Profile</a><hr></li>\
+  <li><b>Projects</b><br><a href="Mini-XML/index.html">Mini-XML</a></li>\
 </ul>';
 
   if (document.anchors.length > 0)
