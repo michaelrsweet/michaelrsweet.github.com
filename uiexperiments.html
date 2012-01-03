@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+	<meta http-equiv="X-UA-Compatible" content="IE=9">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="shortcut icon" href="images/mike-128.jpg" type="image/jpeg">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<script type="text/javascript" src="common.js"></script>
+	<title>UI Experiments - Michael R Sweet</title>
+  </head>
+  <body onload="load_sidebar();">
+	<div id="sidebar">Loading...</div>
+	<div id="body">
+	  <h1>UI Experiments</h1>
+	  <p>This page holds some of my publicly-available experimental user-interfaces, right now just print dialogs.</p>
+	  <h2><a name="PRINT1">Print Dialog Demo #1</a></h2>
+	  <p><img align='right' src='images/pddemo.gif' width='373' height='624' hspace='10' alt='Print Dialog Demo #1'>The print dialog shown at the right provides an expandable user-interface. Each pane has a title/summary bar - click on the bar to show/hide the pane and change the options in the pane. The destination pane also shows the status of the selected printer.</p>
+	  <p>Download the demo source (requires <a href='http://www.fltk.org/'>FLTK</a> and <a href='http://www.cups.org/'>CUPS</a>):</p>
+	  <ul>
+		<li><a href='files/pddemo-2005-12-16.tar.gz'>Source Code (2005-12-16)</a></li>
+	  </ul>
+	  <br clear="all">
+	  <h2><a name="PRINT2">Print Dialog Demo #2</a></h2>
+	  <p>My second dialog (below) was going to be part of a new version of ESP Print Pro. I used the Apple Print dialog as inspiration, combined with some research here to determine which options are most used and what some of our advanced users wanted. The dialog dynamically resizes based on the options and printer shown.</p>
+	  <p>The "Files to Print" field only appears if you are printing from the command-line. Click on the "..." button to select one or more files for printing.</p>
+	  <p>Hover over the printer status line to see the detailed printer information in a tooltip.</p>
+	  <p>While I can't provide the source for this demo, I do have a Linux 32-bit x86 binary you can run on systems with CUPS 1.2 or higher installed:</p>
+	  <ul>
+		<li><a href='files/glp-2007-04-10.gz'>Linux 32-bit x86 Binary (2007-04-10)</a></li>
+	  </ul>
+	  <p><img src='images/glp.gif' width='475' height='561' alt='Print Dialog Demo #2'></p>
+	</div>
+	<div id="footer">Copyright 1991-2012 by Michael R Sweet.</div>
+  </body>
+</html>

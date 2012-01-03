@@ -1,0 +1,270 @@
+<!doctype html>
+<html>
+  <head>
+	<meta http-equiv="X-UA-Compatible" content="IE=9">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="shortcut icon" href="images/mike-128.jpg" type="image/jpeg">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<script type="text/javascript" src="common.js"></script>
+	<title>QuickModel File Format - Michael R Sweet</title>
+  </head>
+  <body onload="load_sidebar();">
+	<div id="sidebar">Loading...</div>
+	<div id="body">
+	  <h1>QuickModel File Format</h1>
+<blockquote><b>Note:</b>
+  <p>This text has been taken from the appendix of the SGI "Using QuickModel" manual, document number 007-9031-010, which is copyright 1989 by Silicon Graphics, Inc. The appendix was written by Martin Tuori at Alias Research. It is reproduced here without permission but in the hopes of being useful should anyone still be using the old QuickModel (.qm) 3D format.</p>
+  <p>"Notes" appearing in shaded boxes like this one have been added by me to clarify the original documentation.</p>
+</blockquote>
+<p>The file format used by QuickModel to store 3-D scenes is a simple text format, intended to provide basic scene description capabilities.</p>
+<p>Throughout the format, 3-D values for geometry and transformations are given in the order <var>x</var>, <var>y</var>, and <var>z</var>. Two dimensional values in surface parameter space are given in the order <var>u</var> and <var>v</var>. Color values are given in the order <var>red</var>, <var>green</var>, and <var>blue</var>. Decimal points are optional in integer values.</p>
+<h2><a name="GEOMETRIC_PRIMITIVES">Geometric Primitives</a></h2>
+<p>Each component of a scene is called a <em>model</em>. You may want to think of these as <em>objects</em>. Here is a simple example - a sphere of default size, position, orientation, and surface characteristics:</p>
+<pre class="example">
+model
+{
+    sphere();
+}
+</pre>
+<p>The default sphere is of radius 0.5. Other primitive model types and their defaults are:</p>
+<UL>
+  <LI><tt>cone()</tt>, main axis is the y-axis, base at <var>z=-0.5</var>, point at <var>z=0.5</var>, radius at base = 0.5</LI>
+  <LI><tt>cube()</tt>, length of each size = 1.0, center at 0, 0, 0</LI>
+  <LI><tt>cylinder()</tt>, main axis is the y-axis, radius = 0.5, bottom at <var>z=-0.5</var></LI>
+  <LI><tt>light()</tt>, color is always white, located at the origin</LI>
+</UL>
+<p>These primitives currently take no parameters, although the parenthesis are included for consistency. There is no provision for object hierarchy, although temporary groups are supported in QuickModel (see <a href="#transformations">"Transformations"</a> (below) for information on group transforms).</p>
+<h2><a name="SPLINE_CURVES_AND_SURFACES">Spline Curves and Surfaces</a></h2>
+<p>The QuickModel format supports cardinal splines for curves and surfaces. Here is an example of an open curve, containing four points:</p>
+<pre class="example">
+model
+{
+    surface( 4, 1 );
+    {
+        CV( 3.1, 0, 3.0, 1, 0 );
+        CV( 3.8, 0, 1.2, 0, 0 );
+        CV( 3.0, 0, -0.2, 0, 0 );
+        CV( 3.6, 0, -2.0, 1, 0 );
+    }
+}
+</pre>
+<p>A curve is represented as a one-dimensional surface; hence the parameters ( 4, 1 ). The <em>control vertices</em> (CV's) contain position information (the first three parameters) and multiplicity information (the last two parameters). To draw the spline curve out to the end points, it is necessary to treat the first and last CV's as if they were doubled.</p>
+<p>The fourth parameter describes this multiplicity in the <var>u</var> direction, alone the curve. In this example, the first and last CV's of the curve have multiplicity of 1, meaning they are doubled. The other CV's have multiplicity of 0, meaning they are not doubled.</p>
+<p>Multiplicity is also used to draw straight lines, rather than curved, between points. Try drawing a curve, picking one CV in the middle of the curve, and applying the Shape -> straight function. Save the model to a file and look at the multiplicity of the point that you straightened.</p>
+<p>A closed curve is created by dropping the multiplicity of the end-points, and repeating 3 CV's, as in the following example of a closed, three-point curve:</p>
+<pre class="example">
+model
+{
+    surface( 6, 1 );
+    {
+        CV( -3.9, 0, 2.9, 0, 0 );
+        CV( -3.5, 0, -0.0, 0, 0 );
+        CV( -3.9, 0, -2.9, 0, 0 );
+        CV( -3.9, 0, 2.9, 0, 0 );
+        CV( -3.5, 0, -0.0, 0, 0 );
+        CV( -3.9, 0, -2.9, 0, 0 );
+    }
+}
+</pre>
+<p>Here is an example of an open, two-dimensional surface. It is a four-by-four patch:</p>
+<pre class="example">
+model
+{
+    surface( 4, 4 );
+    {
+        CV( 1.0, -0.2, 3.1, 1, 1 );
+        CV( 1.7, -0.2, 1.3, 0, 1 );
+        CV( 0.9, -0.2, -0.1, 0, 1 );
+        CV( 1.5, -0.2, -1.9, 1, 1 );
+
+        CV( 1.3, -0.2, 3.1, 1, 0 );
+        CV( 2.0, -0.2, 1.3, 0, 0 );
+        CV( 1.3, -0.2, -0.1, 0, 0 );
+        CV( 1.9, -0.2, -1.9, 1, 0 );
+
+        CV( 1.7, -0.3, 3.0, 1, 0 );
+        CV( 2.4, -0.3, 1.3, 0, 0 );
+        CV( 1.6, -0.3, -0.1, 0, 0 );
+        CV( 2.3, -0.3, -1.9, 1, 0 );
+
+        CV( 2.1, -0.4, 3.0, 1, 1 );
+        CV( 2.7, -0.4, 1.3, 0, 1 );
+        CV( 2.0, -0.4, -0.1, 0, 1 );
+        CV( 2.6, -0.4, -2.0, 1, 1 );
+    }
+}
+</pre>
+<p>The fifth parameter of each CV is its multiplicity in the <var>v</var> direction. CV's at the corners of a surface patch have multiplicities of 1 and 1, and those along the edges have multiplicities of 1 and 0, or 0 and 1.</p>
+<p>If you want a CV in the middle of a surface to have multiplicity of 1, you must do the same to all CV's in the same row or column. This is necessitated by the way geometry is handled internally - the CV's with multiplicity of 1 are duplicated when fed to the geometry pipeline, and a consistent CV count in <var>u</var> or <var>v</var> must be maintained. For simplicity, all surface patches created using the Surface -> patch function have the same number of CV's in the <var>u</var> and <var>v</var> directions.</p>
+<p>Surfaces created using the Surface -> revolve function have as many CV's in the <var>u</var> direction as the starting curve but always have six CV's in the <var>v</var> direction (nine, counting the CV's used to close the loop). Surfaces created using the Surface -> extrude function have just two CV's in the <var>v</var> direction.</p>
+<p>For generality, however, QuickModel can read surface patches from other sources that have different numbers of CV's in <var>u</var> and <var>v</var>.</p>
+<p>Below is an example of a surface that is closed in one direction. It was created by resolving a curve of three points. As in a closed curve, repetition is used to create a smooth closure; but in this example the three-point curve is repeated, rather than a single point.</p>
+<pre class="example">
+model
+{
+    surface( 3, 9 );
+    {
+        CV( -2.9, 0, 1.4, 1, 0 );
+        CV( -2.9, 0, -1.2, 0, 0 );
+        CV( -3.0, 0, -3.0, 1, 0 );
+
+        CV( -1.4, -2.5, 1.4, 1, 0 );
+        CV( -1.4, -2.5, -1.2, 0, 0 );
+        CV( -1.5, -2.5, -3.0, 1, 0 );
+
+        CV( 1.4, -2.5, 1.4, 1, 0 );
+        CV( 1.4, -2.5, -1.2, 0, 0 );
+        CV( 1.5, -2.5, -3.0, 1, 0 );
+
+        CV( 2.9, 0, 1.4, 1, 0 );
+        CV( 2.9, 0, -1.2, 0, 0 );
+        CV( 3.0, 0, -3.0, 1, 0 );
+
+        CV( 1.4, 2.5, 1.4, 1, 0 );
+        CV( 1.4, 2.5, -1.2, 0, 0 );
+        CV( 1.5, 2.5, -3.0, 1, 0 );
+
+        CV( -1.4, 2.5, 1.4, 1, 0 );
+        CV( -1.4, 2.5, -1.2, 0, 0 );
+        CV( -1.5, 2.5, -3.0, 1, 0 );
+
+        CV( -2.9, 0, 1.4, 1, 0 );
+        CV( -2.9, 0, -1.2, 0, 0 );
+        CV( -3.0, 0, -3.0, 1, 0 );
+
+        CV( -1.4, -2.5, 1.4, 1, 0 );
+        CV( -1.4, -2.5, -1.2, 0, 0 );
+        CV( -1.5, -2.5, -3.0, 1, 0 );
+
+        CV( 1.4, -2.5, 1.4, 1, 0 );
+        CV( 1.4, -2.5, -1.2, 0, 0 );
+        CV( 1.5, -2.5, -3.0, 1, 0 );
+
+    }
+}
+</pre>
+<p>Finally, here is an example of a surface that is closed in both directions. It is a doughnut, created by revolving a closed curve of three points.</p>
+<pre class="example">
+model
+{
+    surface( 6, 9 );
+    {
+        CV( -3.5, 0, 1.3, 0, 0 );
+        CV( -2.4, 0, -0.6, 0, 0 );
+        CV( -4.8, 0, -0.7, 0, 0 );
+        CV( -3.5, 0, 1.3, 0, 0 );
+        CV( -2.4, 0, -0.6, 0, 0 );
+        CV( -4.8, 0, -0.7, 0, 0 );
+
+        CV( -1.7, -3.0, 1.3, 0, 0 );
+        CV( -1.2, -2.1, -0.6, 0, 0 );
+        CV( -2.4, -4.1, -0.7, 0, 0 );
+        CV( -1.7, -3.0, 1.3, 0, 0 );
+        CV( -1.2, -2.1, -0.6, 0, 0 );
+        CV( -2.4, -4.1, -0.7, 0, 0 );
+
+        CV( 1.7, -3.0, 1.3, 0, 0 );
+        CV( 1.2, -2.1, -0.6, 0, 0 );
+        CV( 2.4, -4.1, -0.7, 0, 0 );
+        CV( 1.7, -3.0, 1.3, 0, 0 );
+        CV( 1.2, -2.1, -0.6, 0, 0 );
+        CV( 2.4, -4.1, -0.7, 0, 0 );
+
+        CV( 3.5, 0, 1.3, 0, 0 );
+        CV( 2.4, -1.3, -0.6, 0, 0 );
+        CV( 4.8, 0, -0.7, 0, 0 );
+        CV( 3.5, 0, 1.3, 0, 0 );
+        CV( 2.4, -1.3, -0.6, 0, 0 );
+        CV( 4.8, 0, -0.7, 0, 0 );
+
+        CV( 1.7, 3.0, 1.3, 0, 0 );
+        CV( 1.2, 2.1, -0.6, 0, 0 );
+        CV( 2.4, 4.1, -0.7, 0, 0 );
+        CV( 1.7, 3.0, 1.3, 0, 0 );
+        CV( 1.2, 2.1, -0.6, 0, 0 );
+        CV( 2.4, 4.1, -0.7, 0, 0 );
+
+        CV( -1.7, 3.0, 1.3, 0, 0 );
+        CV( -1.2, 2.1, -0.6, 0, 0 );
+        CV( -2.4, 4.1, -0.7, 0, 0 );
+        CV( -1.7, 3.0, 1.3, 0, 0 );
+        CV( -1.2, 2.1, -0.6, 0, 0 );
+        CV( -2.4, 4.1, -0.7, 0, 0 );
+
+        CV( -3.5, 0, 1.3, 0, 0 );
+        CV( -2.4, 0, -0.6, 0, 0 );
+        CV( -4.8, 0, -0.7, 0, 0 );
+        CV( -3.5, 0, 1.3, 0, 0 );
+        CV( -2.4, 0, -0.6, 0, 0 );
+        CV( -4.8, 0, -0.7, 0, 0 );
+
+        CV( -1.7, -3.0, 1.3, 0, 0 );
+        CV( -1.2, -2.1, -0.6, 0, 0 );
+        CV( -2.4, -4.1, -0.7, 0, 0 );
+        CV( -1.7, -3.0, 1.3, 0, 0 );
+        CV( -1.2, -2.1, -0.6, 0, 0 );
+        CV( -2.4, -4.1, -0.7, 0, 0 );
+
+        CV( 1.7, -3.0, 1.3, 0, 0 );
+        CV( 1.2, -2.1, -0.6, 0, 0 );
+        CV( 2.4, -4.1, -0.7, 0, 0 );
+        CV( 1.7, -3.0, 1.3, 0, 0 );
+        CV( 1.2, -2.1, -0.6, 0, 0 );
+        CV( 2.4, -4.1, -0.7, 0, 0 );
+
+    }
+}
+</pre>
+<h2><a name="TRANSFORMATIONS">Transformations</a></h2>
+<p>The transformation of a model is given by the rotate(), scale(), and translate() functions. Here is an example of a cube that has undergone some transforms:</p>
+<pre class="example">
+model
+{
+    rotate( 45, 30, 0 );
+    scale( 2.0, 1, 5.5 );
+    translate( -0.6, 0, -4.0 );
+    cube();
+}
+</pre>
+<p>Rotation is given in degrees, around the <var>x</var>, <var>y</var>, or <var>z</var> axis, relative to the center of the model. A scale of two doubles the size of the model. A translation of one corresponds to one grid unit in QuickModel.</p>
+<p>An additional transformation matrix may also be specified. QuickModel uses this tm() to represent the transformations that a model has undergone as part of temporary groups. For data translation from other 3-D sources, the tm() provides an alternate to rotate(), scale(), and translate() as a means of representing a model's transformations. Here is the previous example, shown with the addition of the default tm().</p>
+<pre class="example">
+model
+{
+    tm( ( 1, 0, 0, 0 ),
+        ( 0, 1, 0, 0 ),
+        ( 0, 0, 1, 0 ),
+        ( 0, 0, 0, 1 ) );
+    rotate( 45, 30, 0 );
+    scale( 2.0, 1, 5.5 );
+    translate( -0.6, 0, -4.0 );
+    cube();
+}
+</pre>
+<p>The transformations are applied in this order: scale, rotate, translate, and then the tm(). The tm() is represented as in SGI's GL.</p>
+<blockquote><b>Note:</b>
+  <p>The rotate(), scale(), tm(), and translate() transformations are applied using OpenGL function calls in the following order:</p>
+  <pre>
+glMultMatrixf(tm);
+glTranslatef(tx, ty, tz);
+glRotatef(rx, 1.0, 0.0, 0.0);
+glRotatef(ry, 0.0, 1.0, 0.0);
+glRotatef(rz, 0.0, 0.0, 1.0);
+glScalef(sx, sy, sz);
+  </pre>
+  <p>where <var>tm</var> is the matrix defined by the tm() function, <var>tx</var>, <var>ty</var>, and <var>tz</var> are the values passed to the translate() function,  <var>rx</var>, <var>ry</var>, and <var>rz</var> are the values passed to the rotate() function, and <var>sx</var>, <var>sy</var>, and <var>sz</var> are the values passed to the scale() function.</p>
+</blockquote>
+<h2><a name="SURFACE_CHARACTERISTICS">Surface Characteristics</a></h2>
+<p>The functions color(), diffusion(), and specularity() describe the surface appearance of a model for rendering. If a model has no explicit surface characteristics, it is given the defaults color(0.3, 0.6, 1.0), diffusion(0.8), and specularity(0.6).</p>
+<p>QuickModel produces diffusion and specularity values in the range 0.0 to 1.0, but higher values are permitted.</p>
+<blockquote><b>Note:</b>
+  <p>There is at least one QuickModel rendering library that uses the diffusion() value to specify alpha, with the default alpha value being 1.0
+(opaque).</p>
+</blockquote>
+<h2><a name="SUMMARY">Summary</a></h2>
+<p>The QuickModel file format was designed for ease of use. It is human-readable, to facilitate experimentation and data translation to and from other data sources.</p>
+	</div>
+	<div id="footer">Copyright 2007 by Michael R Sweet.</div>
+  </body>
+</html>
