@@ -164,14 +164,6 @@ DIV#sidebar A:hover {
   color: white;
 }
 
-DIV#sidebar HR {
-  border-bottom: none;
-  border-left: none;
-  border-right: none;
-  border-top: solid 2px #666666;
-  margin: 5px 10px 5px 0px;
-}
-
 DIV#sidebar IMG {
   border-bottom: solid 2px #666666;
   height: 128px;
