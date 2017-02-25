@@ -1,10 +1,28 @@
-<!doctype html>
-<html>
-  <head>
-    <meta http-equiv="refresh" content="3; http://www.msweet.org/">
-	<title>Michael R Sweet</title>
-  </head>
-  <body>
-    <p>You really want to go to <a href="http://www.msweet.org/">msweet.org</a>.</p>
-  </body>
-</html>
+---
+title: Michael R Sweet
+layout: default
+---
+
+<div class="head">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1>msweet.org <small>The Personal Development Site of Michael R Sweet</small></h1>
+        <p class="justify">This site is the combined home of various projects created or maintained by me, Michael R Sweet. I currently work for <a href="http://www.apple.com">Apple Inc.</a> and am probably best known as the creator of <a href="http://www.cups.org/">CUPS</a>, the de-facto standard printing system for Linux<sup>&reg;</sup>, macOS<sup>&reg;</sup>, and UNIX<sup>&reg;</sup>. I am also the secretary of the <a href="http://www.pwg.org/ipp/">Internet Printing Protocol</a> workgroup, author of many printing standards, and one of two IETF designated experts for printing.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  {% for post in site.posts offset: 0 limit: 4 %}
+  <div class="row">
+    <div class="col-12">
+      <h1>{{post.title}} <small>{{ post.date | date_to_string }}</small></h1>
+      {{ post.excerpt }}
+      {% if post.excerpt != post.content %}
+      <p><a class="btn btn-default btn-xs" href=".{{ post.url }}">More</a></p>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
