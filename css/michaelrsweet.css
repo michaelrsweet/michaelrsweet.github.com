@@ -29,7 +29,7 @@ body {
   background: #fff8f0;
   color: black;
   font-size: 20px;
-  line-height: 22px;
+  line-height: 32px;
 }
 
 small {
@@ -97,86 +97,72 @@ a.button:hover {
 }
 
 /* Header, footer, and navigation */
-.nav {
+nav.navbar-inverse {
   background-color: rgba(0,0,0,0.8);
   box-shadow: 0px 0px 10px rgba(0,0,0,0.8) inset;
-  color: #fff;
-  font-size: 18px;
-  height: 30px;
-  line-height: 20px;
-  padding: 15px;
-  position: fixed;
-  top: 0px;
-  width: 100%;
-  z-index: 100;
 }
 
-.nav .glyphicon {
-  font-size: 14px;
+a.navbar-brand {
+  padding: 10px 15px;
 }
 
-.nav ul {
-  display: inline;
-  margin: 0px;
-}
-
-.nav li {
-  display: inline;
-}
-
-.nav a {
-  color: #fff;
-  padding: 7px 10px 10px;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.nav a:hover {
-  background: rgba(221,208,192,0.8);
-  color: black;
-}
-
-.nav img {
+a.navbar-brand img {
   border: thin solid #fff;
-  height: 27px;
-  vertical-align: middle;
+  height: 30px;
+  vertical-align: top;
 }
 
-.nav img:hover {
+a.navbar-brand img:hover {
   border: thin solid #b8c3ff;
 }
 
-.head {
+nav .container-fluid {
+  padding: 5px 15px;
+}
+
+.container-fluid {
+  padding: 25px 50px;
+}
+
+.container-header {
   background: #ccc0b0;
   background-image: linear-gradient(#ccc0b0, #ddd0c0);
   color: black;
-  padding: 50px 0px;
+  padding-top: 75px;
   width: 100%;
 }
 
-.foot {
-  background: #ccc0b0;
-  background-image: linear-gradient(#ddd0c0, #ccc0b0);
-  color: black;
+.container-footer {
+  padding-top: 0px;
+}
+
+.footer {
+  background-color: rgba(0,0,0,0.8);
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.8) inset;
+  bottom: 0px;
+  color: #999999;
+  font-size: 14px;
+  left: 0px;
+  padding: 15px 15px 5px;
+  position: fixed;
   width: 100%;
 }
 
-.foot p {
+.footer p {
   margin-top: 0px;
-  padding: 15px;
   text-align: justify;
 }
 
-.foot p, .foot a {
-  color: #black;
+.footer p, .footer a {
+  color: #999999;
   font-size: 14px;
 }
 
-.head a.button, .foot a.button {
+.container-main a.button, .footer a.button {
   background: #101008;
   color: white;
 }
-.head a.button:hover, .foot a.button:hover {
+.container-main a.button:hover, .footer a.button:hover {
   background: #202010;
 }
 
@@ -216,8 +202,8 @@ a.button:hover {
   background: rgba(221,208,192,0.9);
 }
 
-.container {
-  padding-bottom: 10px;
+.justify {
+  text-align: justify;
 }
 
 .mobile {
@@ -518,6 +504,9 @@ div.body dd {
     font-size: 10px;
     line-height: 12px;
   }
+  nav.navbar-fixed-top {
+    position: relative;
+  }
   .head {
     padding: 10px 0px;
   }
@@ -533,6 +522,32 @@ div.body dd {
     display: table-cell;
   }
   .no-mobile, td.no-mobile, th.no-mobile {
+    display: none;
+  }
+}
+
+/* Print overrides */
+@media print {
+  nav.navbar {
+    display: none;
+  }
+
+  DIV.footer {
+    font-style: italic;
+    position: relative;
+  }
+
+  .hidden-print {
+    display: none;
+  }
+
+  /* Bootstrap adds URLs after every link, stop doing that... */
+  a[href]:after {
+    content: none !important;
+  }
+
+  /* and don't print any form controls, either */
+  input {
     display: none;
   }
 }

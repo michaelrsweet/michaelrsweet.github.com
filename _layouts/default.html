@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" type="text/css" href="/css/simple-grid.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/michaelrsweet.css">
     <link rel="shortcut icon" href="/apple-touch-icon.png" type="image/png">
     <meta charset="utf-8">
@@ -12,19 +12,35 @@
     <meta name="keywords" content="linux,macos,software,unix,windows">
   </head>
   <body>
-    <div class="nav">
-      <ul>
-        <li><a href="/"><img src="apple-touch-icon.png"></a></li>
-        <li><a href="https://github.com/michaelrsweet">Github Projects</a></li>
-        <li><a href="/epm">EPM</a></li>
-        <li><a href="/htmldoc">HTMLDOC</a></li>
-        <li><a href="/mxml">Mini-XML</a></li>
-        <li><a href="/rasterview">RasterView</a></li>
-      </ul>
-    </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#msweet-nav-collapse">
+	    <span class="sr-only">Toggle Navigation</span>
+	    <span class="icon-bar"></span>
+	    <span class="icon-bar"></span>
+	    <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><img src="apple-touch-icon.png"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="msweet-nav-collapse">
+	  <ul class="nav navbar-nav">
+	    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <span class="caret"></span></a><ul class="dropdown-menu" role="menu">
+	      <li><a href="/epm">EPM</a></li>
+	      <li><a href="/htmldoc">HTMLDOC</a></li>
+	      <li><a href="/mxml">Mini-XML</a></li>
+	      <li><a href="/rasterview">RasterView</a></li>
+	    </ul></li>
+	  </ul>
+	</div>
+      </div>
+    </nav>
     {{ content }}
-    <div class="foot">
-      <p>Copyright &copy; 2017 by Michael R Sweet.</p>
+    <div class="container-fluid container-footer">&nbsp;</div>
+    <div class="footer">
+      <p>Copyright &copy; 2017 by Michael R Sweet. All rights reserved.</p>
     </div>
+    <script type="text/javascript" href="/js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" href="/js/bootstrap.js"></script>
   </body>
 </html>
