@@ -12,7 +12,7 @@ code, kbd, p.code, p.command, p.summary, pre, ul.code li, input[type="search"], 
   font-size: 90%;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, p.list {
   font-family: 'Architects Daughter', cursive;
 }
 
@@ -96,6 +96,10 @@ a.button:hover {
   background: #262d54;
 }
 
+h1 {
+  margin-top: 0px;
+}
+
 /* Header, footer, and navigation */
 nav.navbar-inverse {
   background-color: rgba(0,0,0,0.8);
@@ -128,7 +132,7 @@ nav .container-fluid {
   background: #ccc0b0;
   background-image: linear-gradient(#ccc0b0, #ddd0c0);
   color: black;
-  padding-top: 75px;
+  padding-top: 90px;
   width: 100%;
 }
 

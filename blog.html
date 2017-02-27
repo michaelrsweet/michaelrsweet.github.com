@@ -1,0 +1,25 @@
+---
+title: Blog
+layout: default
+---
+
+<div class="container-fluid container-header">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>Blog <small>Project Updates and Random Thoughts</small></h1>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      {% for post in site.posts %}
+      <h1>{{post.title}} <small>{{ post.date | date_to_string }}</small></h1>
+      {{ post.excerpt }}
+      {% if post.excerpt != post.content %}
+      <p><a class="btn btn-default btn-xs" href="{{ post.url }}">More</a></p>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
