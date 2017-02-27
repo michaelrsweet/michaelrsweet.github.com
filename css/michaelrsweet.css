@@ -24,6 +24,11 @@ small {
   font-size: 66%;
 }
 
+a[name] {
+  color: inherit;
+  text-decoration: inherit;
+}
+
 /* General look-n-feel */
 body {
   background: #fff8f0;
