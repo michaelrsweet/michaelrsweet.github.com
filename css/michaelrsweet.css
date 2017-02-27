@@ -55,8 +55,9 @@ a:link:hover, a:active {
   vertical-align: baseline;
 }
 
-a.btn, button.btn {
+a.btn {
   background: #ccc0b0;
+  border-color: #ccc0b0;
   border-radius: 10px;
   font-family: 'Architects Daughter', cursive;
   font-size: 80%;
@@ -64,41 +65,37 @@ a.btn, button.btn {
   text-decoration: none;
 }
 
-a.btn:link:hover, button.btn:hover {
+a.btn:hover {
   background: #ddd0c0;
+  border-color: #ddd0c0;
 }
 
-a.btn-primary, button.btn-primary {
+.container-header a.btn {
+  background: #999080;
+  border-color: #999080;
+  color: #333028;
+}
+
+.container-header a.btn:hover {
+  background: #aaa090;
+  border-color: #aaa090;
+}
+
+a.btn-primary, .container-header a.btn-primary {
   background: #333028;
+  border-color: #333028;
   color: #fff8e0;
 }
 
-a.btn-primary:link:hover, button.btn-primary:hover {
+a.btn-primary:hover, .container-header a.btn-primary:hover {
   background: #555040;
+  border-color: #555040;
   color: #fff8e0;
 }
 
 /* Site theme */
 pre.highlight {
   padding-left: 2em;
-}
-
-p.buttons {
-  line-height: 48px;
-  text-align: center;
-}
-
-a.button {
-  background: #4b5aa8;
-  border-radius: 12px;
-  color: #fff;
-  margin: 0px 5px;
-  padding: 8px 16px;
-  text-decoration: none;
-  white-space: nowrap;
-}
-a.button:hover {
-  background: #262d54;
 }
 
 h1 {
@@ -165,14 +162,6 @@ nav .container-fluid {
 .footer p, .footer a {
   color: #999999;
   font-size: 14px;
-}
-
-.container-main a.button, .footer a.button {
-  background: #101008;
-  color: white;
-}
-.container-main a.button:hover, .footer a.button:hover {
-  background: #202010;
 }
 
 .bg10 {
