@@ -498,21 +498,23 @@ div.body dd {
 /* iPhone/iPod touch overrides */
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px),
        only screen and (min-device-width: 320px) and (max-device-width: 568px) {
-  body {
-    font-size: 10px;
-    line-height: 12px;
-  }
   nav.navbar-fixed-top {
     position: relative;
   }
-  .head {
-    padding: 10px 0px;
+  .footer {
+    position: relative;
   }
-
-  .foot {
-    padding: 5px 0px;
+  .container-header {
+    padding-top: 20px;
+    margin-top: -20px;
   }
-
+  .container-fluid {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  h1 small, h2 small {
+    display: inline-block;
+  }
   .mobile {
     display: inline;
   }
