@@ -49,6 +49,13 @@ a:link:hover, a:active {
   color: #ff6600;
 }
 
+img.logo {
+  height: 32px;
+  margin-right: 10px;
+  vertical-align: top;
+  width: 32px;
+}
+
 [class^="icon-"],
 [class*=" icon-"] {
   line-height: 20px;
