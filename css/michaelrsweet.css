@@ -31,22 +31,24 @@ a[name] {
 
 /* General look-n-feel */
 body {
-  background: #fff8f0;
+  background: #fff;
   color: black;
   font-size: 20px;
   line-height: 32px;
 }
 
 small {
-  color: #555040;
+  color: #555;
 }
 
 a:link, a:visited {
-  color: #995500;
+  color: #300;
+  text-decoration: none;
 }
 
 a:link:hover, a:active {
-  color: #ff6600;
+  color: #f00;
+  text-decoration: none;
 }
 
 img.logo {
@@ -63,9 +65,10 @@ img.logo {
 }
 
 a.btn {
-  background: #ccc0b0;
-  border-color: #ccc0b0;
+  background: #ccc;
+  border-color: #ccc;
   border-radius: 10px;
+  color: #000;
   font-family: 'Architects Daughter', cursive;
   font-size: 80%;
   padding: 2px 10px;
@@ -73,31 +76,39 @@ a.btn {
 }
 
 a.btn:hover {
-  background: #ddd0c0;
-  border-color: #ddd0c0;
+  background: #ddd;
+  border-color: #ddd;
+  color: #f00;
+}
+
+.container-header {
+  background: #eee;
+  background-image: linear-gradient(#ddd, #eee);
+  color: black;
 }
 
 .container-header a.btn {
-  background: #999080;
-  border-color: #999080;
-  color: #333028;
+  background: #ccc;
+  border-color: #ccc;
+  color: #000;
 }
 
 .container-header a.btn:hover {
-  background: #aaa090;
-  border-color: #aaa090;
+  background: #ddd;
+  border-color: #ddd;
+  color: #f00;
 }
 
 a.btn-primary, .container-header a.btn-primary {
-  background: #333028;
-  border-color: #333028;
-  color: #fff8e0;
+  background: #333;
+  border-color: #333;
+  color: #eee;
 }
 
 a.btn-primary:hover, .container-header a.btn-primary:hover {
-  background: #555040;
-  border-color: #555040;
-  color: #fff8e0;
+  background: #555;
+  border-color: #555;
+  color: #fff;
 }
 
 /* Site theme */
@@ -113,6 +124,13 @@ h1 {
 nav.navbar-inverse {
   background-color: rgba(0,0,0,0.8);
   box-shadow: 0px 0px 10px rgba(0,0,0,0.8) inset;
+}
+
+.navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover {
+  color: #e00;
+}
+.navbar-inverse .navbar-nav > li > a:hover {
+  color: #f00;
 }
 
 a.navbar-brand {
@@ -138,9 +156,6 @@ nav .container-fluid {
 }
 
 .container-header {
-  background: #ccc0b0;
-  background-image: linear-gradient(#ccc0b0, #ddd0c0);
-  color: black;
   padding-top: 90px;
   width: 100%;
 }
@@ -172,39 +187,39 @@ nav .container-fluid {
 }
 
 .bg10 {
-  background: rgba(221,208,192,0.1);
+  background: rgba(221,221,221,0.1);
 }
 
 .bg20 {
-  background: rgba(221,208,192,0.2);
+  background: rgba(221,221,221,0.2);
 }
 
 .bg30 {
-  background: rgba(221,208,192,0.3);
+  background: rgba(221,221,221,0.3);
 }
 
 .bg40 {
-  background: rgba(221,208,192,0.4);
+  background: rgba(221,221,221,0.4);
 }
 
 .bg50 {
-  background: rgba(221,208,192,0.5);
+  background: rgba(221,221,221,0.5);
 }
 
 .bg60 {
-  background: rgba(221,208,192,0.6);
+  background: rgba(221,221,221,0.6);
 }
 
 .bg70 {
-  background: rgba(221,208,192,0.7);
+  background: rgba(221,221,221,0.7);
 }
 
 .bg80 {
-  background: rgba(221,208,192,0.8);
+  background: rgba(221,221,221,0.8);
 }
 
 .bg90 {
-  background: rgba(221,208,192,0.9);
+  background: rgba(221,221,221,0.9);
 }
 
 .justify {
