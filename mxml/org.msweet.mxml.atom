@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:docset="http://developer.apple.com/rss/docset_extensions" xml:lang="en">
+    <id>https://michaelrsweet.github.io/mxml/org.msweet.mxml.atom/20170406150256</id>
+    <title type="text">org.msweet.mxml</title>
+    <link rel="self" href="https://michaelrsweet.github.io/mxml/org.msweet.mxml.atom"></link>
+    <updated>2017-04-06T15:02:56-04:00</updated>
+    <entry>
+        <id>tag:michaelrsweet.github.io,2017-04-6:org.msweet.mxml.docset/2.11.0</id>
+        <title type="text">Mini-XML API Reference</title>
+        <updated>2017-04-06T15:02:56-04:00</updated>
+        <content type="text">Mini-XML API Reference (v2.11.0)</content>
+        <link rel="enclosure" type="application/octet-stream" href="https://michaelrsweet.github.io/mxml/org.msweet.mxml.xar" length="75377"></link>
+        <docset:identifier>org.msweet.mxml.docset</docset:identifier>
+        <docset:version>2.11.0</docset:version>
+    </entry>
+</feed>
