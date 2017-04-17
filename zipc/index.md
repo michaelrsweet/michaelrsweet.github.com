@@ -1,8 +1,11 @@
 ---
 title: zipc
-subtitle: a simple ZIP container &ldquo;library&rdquo;
-layout: project
+subtitle: A Simple ZIP Container "Library"
+author: Michael R Sweet
+copyright: Copyright © 2017 by Michael R Sweet.
 project: zipc
+project_name: zipc
+layout: project
 ---
 
 `zipc` is a simple ZIP container "library" consisting of a C source file and

@@ -1,10 +1,11 @@
 ---
 title: How to Use the zipc "Library"
-subtitle: a simple ZIP container "library"
+subtitle: A Simple ZIP Container "Library"
 author: Michael R Sweet
-copyright: Copyright 2017 by Michael R Sweet.
-layout: project
+copyright: Copyright © 2017 by Michael R Sweet.
 project: zipc
+project_name: zipc
+layout: project
 ...
 
 # How to Use the zipc "Library"
