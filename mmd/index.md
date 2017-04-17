@@ -9,7 +9,7 @@ layout: project
 ---
 
 `mmd` is a miniature markdown parsing "library" consisting of a single C source
-\file and accompanying header file.  `mmd` mostly conforms to the CommonMark
+file and accompanying header file.  `mmd` mostly conforms to the CommonMark
 version of markdown syntax with the following exceptions:
 
 - Embedded HTML markup and entities are explicitly not supported or allowed; the
