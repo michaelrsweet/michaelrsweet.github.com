@@ -285,7 +285,7 @@ Here is the complete function:
             break;
 
         case MMD_TYPE_LINKED_TEXT :
-            element = "a";
+            element = NULL;
             break;
 
         case MMD_TYPE_CODE_TEXT :
@@ -323,7 +323,8 @@ Here is the complete function:
         else
           printf("<a href=\"%s\">", url);
       }
-      else if (element)
+
+      if (element)
         printf("<%s>", element);
 
       if (!strcmp(text, "(c)"))
@@ -337,6 +338,9 @@ Here is the complete function:
 
       if (element)
         printf("</%s>", element);
+
+      if (url)
+        fputs("</a>", stdout);
     }
 
 
