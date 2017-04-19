@@ -13,12 +13,13 @@ layout: project
 ## Overview
 
 `mmd` represents a markdown document as a tree of nodes, each of type `mmd_t`.
-The `mmdLoad` function loads a document on disk into memory and returns the root
-node:
+The [`mmdLoad`](@) function loads a document on disk into memory and returns the
+root node of the document:
 
     mmd_t *doc = mmdLoad("filename.md");
 
-Each node has an associated type that can be retrieved using the `mmdGetType` function. The value is represented as an enumeration:
+Each node has an associated type that can be retrieved using the
+[`mmdGetType`](@) function.  The value is represented as an enumeration:
 
 - `MMD_TYPE_DOCUMENT`; The root node of a document.
 - `MMD_TYPE_METADATA`; The document metadata; child nodes are only of type
@@ -58,13 +59,14 @@ Each node has an associated type that can be retrieved using the `mmdGetType` fu
 
 Generally there are two categories of nodes: "block" nodes which contain other
 nodes and "leaf" nodes that contain text fragments, links, images, and breaks.
-The `mmdIsBlock` function provides a quick test whether a given node is a block
-or leak node.
+The [`mmdIsBlock`](@) function provides a quick test whether a given node is a
+block or leaf node.
 
-The `mmdGetText` function retrieves the text fragment associated with the node.
-The `mmdGetWhitespace` function reports whether there was leading whitespace
-before the text fragment or image. And the `mmdGetURL` function retrieves the
-URL associated with a `MMD_TYPE_LINKED_TEXT` or `MMD_TYPE_IMAGE` node.
+The [`mmdGetText`](@) function retrieves the text fragment associated with the
+node.  The [`mmdGetWhitespace`](@) function reports whether there was leading
+whitespace before the text fragment or image.  And the [`mmdGetURL`](@) function
+retrieves the URL associated with a `MMD_TYPE_LINKED_TEXT` or `MMD_TYPE_IMAGE`
+node.
 
 
 ## Navigating the Document Tree
@@ -82,9 +84,10 @@ following shows a typical markdown document tree:
                                                           "It" "so" ...
 
 Except for the document root node, each node has a parent which can be accessed
-using the `mmdGetParent` function.  Child nodes are accessed using the
-`mmdGetFirstChild` and `mmdGetLastChild` functions.  Sibling nodes are accessed
-using the `mmdGetPrevSibling` and `mmdGetNextSibling` functions:
+using the [`mmdGetParent`](@) function.  Child nodes are accessed using the
+[`mmdGetFirstChild`](@) and [`mmdGetLastChild`](@) functions.  Sibling nodes are
+accessed using the [`mmdGetPrevSibling`](@) and [`mmdGetNextSibling`](@)
+functions:
 
     mmd_t *node;
 
@@ -97,8 +100,8 @@ using the `mmdGetPrevSibling` and `mmdGetNextSibling` functions:
 
 ## Retrieving Document Metadata
 
-The `mmdGetMetadata` function retrieves the metadata associated with a given
-keyword.  For example, the following code will retrieve the title of the
+The [`mmdGetMetadata`](@) function retrieves the metadata associated with a
+given keyword.  For example, the following code will retrieve the title of the
 document:
 
     mmd_t *doc; /* previously loaded document */
@@ -108,7 +111,7 @@ document:
 
 ## Freeing Memory
 
-The `mmdFree` function frees the memory used for the document tree:
+The [`mmdFree`](@) function frees the memory used for the document tree:
 
     mmd_t *doc; /* previously loaded document */
 
@@ -119,7 +122,7 @@ The `mmdFree` function frees the memory used for the document tree:
 
 One of the most common uses for Markdown is for generating HTML, and the
 `testmmd` program included with `mmd` does exactly that using four functions:
-`write_block`, `write_inline`, `write_html`, and `make_anchor`.
+`write_block`, `write_leaf`, `write_html`, and `make_anchor`.
 
 ## write_block - Write Block Nodes
 
@@ -237,9 +240,9 @@ Here is the complete function:
     }
 
 
-## write_inline - Write Text Nodes for a Block
+## write_leaf - Write Leaf Nodes for a Block
 
-The `write_inline` function is responsible for writing HTML text and inline
+The `write_leaf` function is responsible for writing HTML text and inline
 elements.  Generally speaking, the function writes the text for the node
 surrounded by open and close tags.  If whitespace preceded the node, it writes
 a space before the text.  There are three exceptions:
@@ -256,7 +259,7 @@ trademark, and trademark.
 Here is the complete function:
 
     static void
-    write_inline(mmd_t *node)
+    write_leaf(mmd_t *node)
     {
       const char *element, *text, *url;
 
@@ -398,7 +401,7 @@ Here is the complete function:
 
 # Reference
 
-# mmd\_t - Markdown Node
+# mmd\_t
 
     typedef struct _mmd_s mmd_t;
 
@@ -407,7 +410,7 @@ node has an associated type and may have text, link, siblings, children, and
 a parent.
 
 
-# mmd\_type\_t - Markdown Node Type Enumeration
+# mmd\_type\_t
 
     typedef enum mmd_type_e
     {
@@ -442,7 +445,7 @@ a parent.
 The `mmd_type_t` enumeration represents all of the Markdown node types.
 
 
-## mmdFree - Free a Markdown Document
+## mmdFree
 
     void
     mmdFree(mmd_t *node);
@@ -452,7 +455,7 @@ typically only used to free the entire Markdown document, starting at the root
 node.
 
 
-## mmdGetFirstChild - Get the First Child of a Node
+## mmdGetFirstChild
 
     mmd_t *
     mmdGetFirstChild(mmd_t *node);
@@ -461,7 +464,7 @@ The `mmdGetFirstChild` function returns the first child of the specified node,
 if any.
 
 
-## mmdGetLastChild - Get the Last Child of a Node
+## mmdGetLastChild
 
     mmd_t *
     mmdGetLastChild(mmd_t *node);
@@ -470,7 +473,7 @@ The `mmdGetLastChild` functions returns the last child of the specified node,
 if any.
 
 
-## mmdGetMetadata - Get Metadata for a Document
+## mmdGetMetadata
 
     const char *
     mmdGetMetadata(mmd_t *doc, const char *keyword);
@@ -479,7 +482,7 @@ The `mmdGetMetadata` function returns the document metadata for the specified
 keyword.  Standard keywords include "author", "copyright", and "title".
 
 
-## mmdGetNextSibling - Get the Next Sibling of a Node
+## mmdGetNextSibling
 
     mmd_t *
     mmdGetNextSibling(mmd_t *node);
@@ -488,7 +491,7 @@ The `mmdGetNextSibling` function returns the next sibling of the specified node,
 if any.
 
 
-## mmdGetParent - Get the Parent of a Node
+## mmdGetParent
 
     mmd_t *
     mmdGetParent(mmd_t *node);
@@ -496,7 +499,7 @@ if any.
 The `mmdGetParent` function returns the parent of the specified node, if any.
 
 
-## mmdGetPrevSibling - Get the Previous Sibling of a Node
+## mmdGetPrevSibling
 
     mmd_t *
     mmdGetPrevSibling(mmd_t *node);
@@ -505,7 +508,7 @@ The `mmdGetPrevSibling` function returns the previous sibling of the specified
 node, if any.
 
 
-## mmdGetText - Get Text Associated with a Node
+## mmdGetText
 
     const char *
     mmdGetText(mmd_t *node);
@@ -514,7 +517,7 @@ The `mmdGetText` function returns any text that is associated with the specified
 node.
 
 
-## mmdGetType - Get the Node Type
+## mmdGetType
 
     mmd_type_t
     mmdGetType(mmd_t *node);
@@ -522,7 +525,7 @@ node.
 The `mmdGetType` function returns the type of the specified node.
 
 
-## mmdGetURL - Get a URL Associated with a Node
+## mmdGetURL
 
     const char *
     mmdGetURL(mmd_t *node);
@@ -531,16 +534,16 @@ The `mmdGetURL` function returns any URL that is associated with the specified
 node.
 
 
-## mmdGetWhitespace - Get Whitespace Associated with a Node
+## mmdGetWhitespace
 
     int
     mmdGetWhitespace(mmd_t *node);
 
-The `mmdGetWhitespace` function returns whether whitespace preceded the
-specified node.
+The `mmdGetWhitespace` function returns `1` if whitespace preceded the specified
+node and `0` otherwise.
 
 
-## mmdIsBlock - Report Whether a Node is a Block
+## mmdIsBlock
 
     int
     mmdIsBlock(mmd_t *node);
@@ -549,10 +552,14 @@ The `mmdIsBlock` function returns `1` when the specified node is a Markdown
 block and `0` otherwise.
 
 
-## mmdLoad - Load a Markdown Document
+## mmdLoad
 
     mmd_t *
     mmdLoad(const char *filename);
 
 The `mmdLoad` function loads a Markdown document from the specified file.  The
 function understands the CommonMark syntax and Jekyll metadata.
+
+The return value is a pointer to the root document node on success or `NULL` on
+failure.  Due to the nature of Markdown, the only failures are file open errors
+and out-of-memory conditions.

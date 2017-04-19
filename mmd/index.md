@@ -12,18 +12,25 @@ layout: project
 file and accompanying header file.  `mmd` mostly conforms to the CommonMark
 version of markdown syntax with the following exceptions:
 
-- Embedded HTML markup and entities are explicitly not supported or allowed; the
-  reason for this is to better support different kinds of output from the
+- Embedded HTML markup and entities are explicitly not supported or allowed;
+  the reason for this is to better support different kinds of output from the
   markdown "source", including XHTML, man, and `xml2rfc`.
+
+- Link reference definitions are not supported; these probably will be supported
+  in a future version of the parsing code but will need explicit support in any
+  output code to resolve the references.
+
+- Link titles are silently ignored.
+
 - Thematic breaks using a mix of whitespace and the separator character are not
   supported ("* * * *", "-- -- -- --", etc.); these could conceivably be added
   but did not seem particularly important.
-- Link titles are silently ignored.
 
 In addition, <code>mmd</code> supports a couple (otherwise undocumented)
 CommonMark extensions:
 
 - Metadata as used by Jekyll and other web markdown solutions.
+
 - "@" links which resolve to headings within the file.
 
 I'm providing `mmd` as open source under the "new" 2-clause BSD license which
