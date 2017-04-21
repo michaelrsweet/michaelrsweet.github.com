@@ -12,6 +12,10 @@ code, kbd, p.code, p.command, p.summary, pre, ul.code li, input[type="search"], 
   font-size: 90%;
 }
 
+pre, pre code {
+  white-space: pre;
+}
+
 h1, h2, h3, h4, h5, h6, p.list {
   font-family: 'Architects Daughter', cursive;
 }
@@ -536,6 +540,13 @@ div.body dd {
   }
   h1 small, h2 small {
     display: inline-block;
+  }
+  pre, pre code {
+    display: block;
+    font-size: 66%;
+    overflow-x: scroll;
+    padding: 5px;
+    -webkit-overflow-scrolling: touch;
   }
   .mobile {
     display: inline;
