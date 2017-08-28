@@ -28,12 +28,13 @@ as:
   many requests to add support for PDF forms over the years, I have not found a
   satisfactory way to do so.
 - Tables: HTMLDOC supports HTML 3.2 tables with basic support for TBODY and
-  TFOOT.
+  THEAD.
 - Unicode: While HTMLDOC does support UTF-8 for "Western" languages, there is
   absolutely no support for languages that require dynamic rewriting or
   right-to-left text formatting.  Basically this means you can't use HTMLDOC to
   format Arabic, Chinese, Hebrew, Japanese, or other languages that are not
   based on latin-based alphabets that read left-to-right.
+- Emoji: The fonts bundled with HTMLDOC do not include Unicode Emoji characters.
 
 My focus is on addressing security, build, and formatting issues and not on
 extending HTMLDOC to support CSS or full Unicode.
