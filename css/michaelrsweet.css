@@ -68,7 +68,7 @@ img.logo {
   vertical-align: baseline;
 }
 
-a.btn {
+a.btn, button.btn {
   background: #ccc;
   border-color: #ccc;
   border-radius: 10px;

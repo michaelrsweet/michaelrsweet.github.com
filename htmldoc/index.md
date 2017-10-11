@@ -5,7 +5,7 @@ author: Michael R Sweet
 copyright: Copyright © 1997-2017 by Michael R Sweet
 project: htmldoc
 project_name: HTMLDOC
-layout: project-logo
+layout: project-full
 ---
 
 HTMLDOC is a program that reads HTML and Markdown source files or web pages and
