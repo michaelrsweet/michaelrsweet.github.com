@@ -56,10 +56,11 @@ a:link:hover, a:active {
 }
 
 img.logo {
-  height: 32px;
+  float: left;
+  height: 80px;
   margin-right: 10px;
   vertical-align: top;
-  width: 32px;
+  width: 80px;
 }
 
 [class^="icon-"],
@@ -524,6 +525,11 @@ div.body dd {
 /* iPhone/iPod touch overrides */
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px),
        only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+  img.logo {
+    float: none;
+    height: 40px;
+    width: 40px;
+  }
   nav.navbar-fixed-top {
     position: relative;
   }
