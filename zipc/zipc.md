@@ -10,7 +10,50 @@ layout: project
 
 # How to Use the zipc "Library"
 
-## Creating a ZIP Container
+## Opening a ZIP Container for Reading
+
+The `zipcOpen` function opens a ZIP container:
+
+    zipc_t *zc = zipcOpen("filename.epub", "r");
+
+
+## Reading Files from a ZIP Container
+
+> Note: You can only read one file from a ZIP container at a time.
+
+The `zipcOpenFile` function opens a file within the ZIP container:
+
+    zipc_file_t *zf = zipcOpenFile(zc, "META-INF/container.xml");
+
+The `zc` argument is the container and "META-INF/container.xml" specifies the
+filename within the container.
+
+Once opened, the `zipcFileRead` function can be used to read arbitrary bytes
+from the file in the container:
+
+    char buffer[1024];
+    ssize_t bytes = zipcFileRead(zf, buffer, sizeof(buffer));
+
+Lines of text can be read using the `zipcFileGets` function:
+
+    char line[1024];
+    while (zipcFileGets(zf, line, sizeof(line)) == 0)
+      puts(line);
+
+XML elements and text fragments can be read using the `zipcFileXMLGets`
+function:
+
+    char xml[1024];
+    while (zipcFileXMLGets(zf, xml, sizeof(xml)) == 0)
+      puts(xml);
+
+When all data has been read, call the `zipcFileFinish` function to "close"
+it:
+
+    zipcFileFinish(zf);
+
+
+## Creating a ZIP Container for Writing
 
 The `zipcOpen` function creates a ZIP container:
 
@@ -187,6 +230,18 @@ using the `zipcCreateFile` function.  `0` is returned on success or `-1` on
 error.
 
 
+## zipcFileGets
+
+    int
+    zipcFileGets(zipc_file_t *zf, char *line, size_t linesize);
+
+The `zipcFileGets` function reads a line of text from a ZIP container file that
+was opened using the `zipcOpenFile` function.  The line may be terminated by a
+carriage return and line feed (Windows-style) or just a line feed (everybody
+else).  The line ending is not copied to the line buffer.  `0` is returned on
+success or `-1` on error.
+
+
 ## zipcFilePrintf
 
     int
@@ -208,6 +263,16 @@ that was created using the `zipcCreateFile` function.  `0` is returned on
 success or `-1` on error.
 
 
+## zipcFileRead
+
+    ssize_t
+    zipcFileRead(zipc_file_t *zf, void *data, size_t bytes);
+
+The `zipcFileRead` function reads a buffer of data from a ZIP container file
+that was opened using the `zipcOpenFile` function.  The actual number of bytes
+read is returned on success or `-1` on error.
+
+
 ## zipcFileWrite
 
     int
@@ -218,6 +283,31 @@ file that was created using the `zipcCreateFile` function.  `0` is returned on
 success or `-1` on error.
 
 
+## zipcFileXMLGets
+
+    int
+    zipcFileXMLGets(zipc_file_t *zf, char *fragment, size_t fragsize);
+
+The `zipcFileXMLGets` function reads an XML fragment from a ZIP container file
+that was opened using the `zipcOpenFile` function.  The text or element from the
+XML file is stored in the buffer pointed to by `fragment` whose size is
+`fragsize`.  Text fragments have XML escaping removed.  `0` is returned on
+success or `-1` on error.
+
+For example, the following XML:
+
+    <element url="https://example.com?a=1&amp;b=2">foo &amp; bar</element>
+
+is returned as the following sequence of fragment strings:
+
+    <element url="https://example.com?a=1&amp;b=2">
+    foo & bar
+    </element>
+
+The `zipcXMLGetAttribute` function can be used to retrieve the attribute values
+from XML element fragments.
+
+
 ## zipcFileXMLPrintf
 
     int
@@ -225,8 +315,8 @@ success or `-1` on error.
 
 The `zipcFileXMLPrintf` function writes a formatted XML string to a ZIP
 container file that was created using the `zipcCreateFile` function.  The format
-string supports the "%%", "%d", and "%s" `printf` directives, where the "%s"
-(string) directive handles escaping of special XML/HTML characters.  `0` is
+string supports the "%%", "%d", "%f", and "%s" `printf` directives, where the
+"%s" (string) directive handles escaping of special XML/HTML characters.  `0` is
 returned on success or `-1` on error.
 
 
@@ -236,7 +326,39 @@ returned on success or `-1` on error.
     zipcOpen(const char *filename, const char *mode);
 
 The `zipcOpen` function opens a new ZIP container file.  The `mode` argument
-specifies how the container is opened and currently must be the string "w" to
-indicate that the ZIP container file is opened for writing, replacing any
-existing file of the given name.  `NULL` is returned if the file cannot be
-created.
+specifies how the container is opened:
+
+- "r" indicates that the ZIP container file is opened for reading.
+- "w" indicates that the ZIP container file is opened for writing, replacing any
+existing file of the given name.
+
+`NULL` is returned if the file cannot be opened or created.
+
+
+## zipcOpenFile
+
+    zipc_file_t *
+    zipcOpenFile(zipc_t *zc, const char *filename);
+
+The `zipcOpenFile` function opens a file in the ZIP container.  `NULL` is
+returned if the file cannot be found.
+
+
+## zipcXMLGetAttribute
+
+    const char *
+    zipcXMLGetAttribute(const char *element, const char *attrname,
+                        char *buffer, size_t bufsize);
+
+The `zipcXMLGetAttribute` function retrieves the attribute value from an XML
+element fragment read using the `zipcFileXMLGets` function.  The value is copied
+to the buffer with escaping removed.  `NULL` is returned if the named attribute
+is not present in the element.
+
+For example, the "url" attribute value returned from the element string:
+
+    <element url="https://example.com?a=1&amp;b=2">
+
+will be:
+
+    https://example.com?a=1&b=2
