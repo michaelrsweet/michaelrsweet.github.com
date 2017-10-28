@@ -5,7 +5,7 @@ author: Michael R Sweet
 copyright: Copyright © 2017 by Michael R Sweet
 project: mmd
 project_name: mmd
-layout: project
+layout: project-logo
 ---
 
 # How to Use the mmd "Library"

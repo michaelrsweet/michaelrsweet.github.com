@@ -5,7 +5,7 @@ author: Michael R Sweet
 copyright: Copyright © 2017 by Michael R Sweet
 project: mmd
 project_name: mmd
-layout: project
+layout: project-logo
 ---
 
 `mmd` is a miniature markdown parsing "library" consisting of a single C source
