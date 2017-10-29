@@ -15,10 +15,7 @@ layout: default
   <div class="row">
     <div class="col-sm-12">
       <h1>{{post.title}} <small>{{ post.date | date_to_string }}</small></h1>
-      {{ post.excerpt }}
-      {% if post.excerpt != post.content %}
-      <p><a class="btn btn-default btn-xs" href="{{ post.url }}">More</a></p>
-      {% endif %}
+      {{ post.content }}
     </div>
   </div>
 </div>
