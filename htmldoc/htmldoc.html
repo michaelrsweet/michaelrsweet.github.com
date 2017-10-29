@@ -1,27 +1,16 @@
-<!DOCTYPE html>
-<HTML>
-<HEAD>
-<TITLE>HTMLDOC 1.9 Users Manual</TITLE>
-<META NAME="author" CONTENT="Michael R Sweet">
-<META NAME="copyright" CONTENT="Copyright © 1997-2017, All Rights Reserved.">
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=iso-8859-1">
-<STYLE TYPE="text/css"><!--
-BODY { font-family: serif }
-H1 { font-family: sans-serif }
-H2 { font-family: sans-serif }
-H3 { font-family: sans-serif }
-H4 { font-family: sans-serif }
-H5 { font-family: sans-serif }
-H6 { font-family: sans-serif }
-SUB { font-size: smaller }
-SUP { font-size: smaller }
-PRE { font-family: monospace }
---></STYLE>
-</HEAD>
-<BODY>
-<CENTER><A HREF="#CONTENTS"><H1>HTMLDOC 1.9 Users Manual</H1></A><BR>
+---
+title: HTMLDOC 1.9.1 Users Manual
+subtitle: HTML Conversion Software
+author: Michael R Sweet
+copyright: Copyright Â© 1997-2017 by Michael R Sweet
+project: htmldoc
+project_name: HTMLDOC
+layout: project-full
+---
+
+<CENTER><A HREF="#CONTENTS"><H1>HTMLDOC 1.9.1 Users Manual</H1></A><BR>
 Michael R Sweet<BR>
-Copyright © 1997-2017, All Rights Reserved.<BR>
+Copyright Â© 1997-2017, All Rights Reserved.<BR>
 </CENTER>
 <HR NOSHADE>
 <h1 ALIGN="CENTER"><a NAME="CONTENTS">Table of Contents</a></h1>
@@ -953,8 +942,11 @@ class htmldoc
 <tr><td>iso-8859-14</td><td>ISO-8859-14</td></tr>
 <tr><td>iso-8859-15</td><td>ISO-8859-15</td></tr>
 <tr><td>koi8-r</td><td>KOI8-R</td></tr>
+<tr><td>utf-8</td><td>UTF-8</td></tr>
 </table>
 </center>
+<blockquote><b>Note:</b> UTF-8 support is limited to the first 128
+ Unicode characters found in the input.</blockquote>
 <h3><a NAME="3_2_13">--color</a></h3>
 <p>The <code>--color</code> option specifies that color output is
  desired.</p>
@@ -2559,5 +2551,4 @@ b-book.html
 a-license.html
 b-book.html
 </pre>
-</div></BODY>
-</HTML>
+</div>
