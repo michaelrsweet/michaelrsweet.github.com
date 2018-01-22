@@ -3,30 +3,23 @@ title: The Official Site of Michael R Sweet
 layout: default
 ---
 
-<div class="container-fluid container-header">
+<div class="container-fluid container-header container-header-small">
   <div class="row">
     <div class="col-sm-12">
-      <h1>The Official Site of Michael R Sweet</h1>
+      <h1><small>The Official Site of Michael R Sweet</small></h1>
     </div>
   </div>
 </div>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-6 col-sm-12">
-      <h1>About This Site</h1>
-      <p class="justify">This site is the combined home of various projects created or maintained by me, Michael R Sweet. I currently work for <a href="http://www.apple.com">Apple Inc.</a> and am probably best known as the creator of <a href="http://www.cups.org/">CUPS</a>, the de-facto standard printing system for Linux<sup>&reg;</sup>, macOS<sup>&reg;</sup>, and UNIX<sup>&reg;</sup>. I am also the secretary of the <a href="http://www.pwg.org/ipp/">Internet Printing Protocol</a> workgroup, author of many printing standards, and one of two IETF designated experts for printing.</p>
-      <p class="justify">I previously ran Easy Software Products with my wife Tammy and worked for various companies doing 2D and 3D graphics displays, printing software, server software, multi-channel audio processing, real-time data acquisition, AI simulations, natural language interfaces, and shared memory databases. I have written several books and started, contributed to, and developed a lot of open source projects over the years.</p>
-      <p class="justify">When I am not writing software, standards, or books, I spend time with my wife, son, and extended family, and take lots of photos, an addiction I learned from my father on the many family camping trips we'd take. Ah, slideshows!</p>
-    </div>
-    <div class="col-md-1 col-sm-12">
-    </div>
-    <div class="col-md-5 col-sm-12">
-      <h1>Recent Posts</h1>
-{% for post in site.posts offset: 0 limit: 2 %}
+    <div class="col-sm-12">
+{% for post in site.posts offset: 0 limit: 4 %}
       <h2>{{post.title}} <small>{{ post.date | date_to_string }}</small></h2>
       {{ post.excerpt }}
       {% if post.excerpt != post.content %}
-      <p><a class="btn btn-default btn-xs" href="{{ post.url }}">More</a></p>
+      <p><a class="btn btn-default btn-xs" href="{{ post.url }}">More</a><br>&nbsp;</p>
+      {% else %}
+      <p>&nbsp;</p>
       {% endif %}
 {% endfor %}
       <p><a class="btn btn-default btn-xs" href="blog.html">View All Posts</a></p>

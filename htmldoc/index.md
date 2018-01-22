@@ -2,11 +2,15 @@
 title: HTMLDOC
 subtitle: HTML Conversion Software
 author: Michael R Sweet
-copyright: Copyright © 1997-2017 by Michael R Sweet
+copyright: Copyright © 1997-2018 by Michael R Sweet
 project: htmldoc
 project_name: HTMLDOC
 layout: project-full
 ---
+
+
+> Now available as a [snap package](https://snapcraft.io/store/)! Run `snap install htmldoc` to install on Linux.<br>
+> [![Snap Status](https://build.snapcraft.io/badge/michaelrsweet/htmldoc.svg)](https://build.snapcraft.io/user/michaelrsweet/htmldoc)
 
 HTMLDOC is a program that reads HTML and Markdown source files or web pages and
 generates corresponding EPUB, HTML, PostScript, or PDF files with an optional
@@ -15,8 +19,7 @@ License.
 
 HTMLDOC was developed in the 1990's as a documentation generator for my previous
 company, and has since seen a lot of usage as a report generator embedded in web
-servers.  However, it does not support many things in "the modern web", such
-as:
+servers.  However, it does not support many things in "the modern web", such as:
 
 - Cascading Style Sheets (CSS): While I have experimented with adding CSS
   support to HTMLDOC, proper CSS support is non-trivial especially for paged
@@ -28,7 +31,7 @@ as:
   many requests to add support for PDF forms over the years, I have not found a
   satisfactory way to do so.
 - Tables: HTMLDOC supports HTML 3.2 tables with basic support for TBODY and
-  THEAD.
+  THEAD from HTML 4.0.
 - Unicode: While HTMLDOC does support UTF-8 for "Western" languages, there is
   absolutely no support for languages that require dynamic rewriting or
   right-to-left text formatting.  Basically this means you can't use HTMLDOC to
