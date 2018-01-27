@@ -532,8 +532,9 @@ div.body dd {
 }
 
 /* iPhone/iPod touch overrides */
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px),
-       only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+@media only screen and (min-device-width: 320px),
+       only screen and (min-device-width: 375px),
+       only screen and (min-device-width: 414px) {
   img.logo {
     float: none;
     height: 40px;
@@ -550,8 +551,7 @@ div.body dd {
     margin-top: -20px;
   }
   .container-fluid {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 25px 20px;
   }
   h1 small, h2 small {
     display: inline-block;
