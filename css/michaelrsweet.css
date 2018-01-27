@@ -532,9 +532,7 @@ div.body dd {
 }
 
 /* iPhone/iPod touch overrides */
-@media only screen and (min-device-width: 320px),
-       only screen and (min-device-width: 375px),
-       only screen and (min-device-width: 414px) {
+@media only screen and (max-width: 414px) {
   img.logo {
     float: none;
     height: 40px;
