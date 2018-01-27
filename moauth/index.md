@@ -2,7 +2,7 @@
 title: mOAuth
 subtitle: A Basic OAuth 2.0 Client/Server Implementation
 author: Michael R Sweet
-copyright: Copyright © 2017 by Michael R Sweet
+copyright: Copyright © 2017-2018 by Michael R Sweet
 project: moauth
 project_name: mOAuth
 layout: project-logo
@@ -23,4 +23,5 @@ The server is both an Authorization Server and a Resource Server that supports:
 
 mOAuth currently requires CUPS for its HTTPS support.
 
-mOAuth is licensed under the Apache License Version 2.0.
+mOAuth is licensed under the Apache License Version 2.0 with an exception to
+allow linking against GPL2/LGPL2 software (like older versions of CUPS).

@@ -55,6 +55,10 @@ a:link:hover, a:active {
   text-decoration: none;
 }
 
+h2 a:link, h2 a:visited, h2 a:link:hover, h2 a:active {
+  color: black;
+}
+
 img.logo {
   float: left;
   height: 80px;
