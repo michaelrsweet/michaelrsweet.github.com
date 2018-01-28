@@ -1,5 +1,6 @@
 ---
 title: Moved the Site to Github
+category: website
 layout: post
 permalink: /blog/:year-:month-:day-:title.html
 excerpt_separator: <!--more-->

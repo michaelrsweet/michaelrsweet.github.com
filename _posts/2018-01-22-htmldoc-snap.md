@@ -1,5 +1,6 @@
 ---
 title: HTMLDOC Now Available as a Snap
+category: htmldoc
 layout: post
 permalink: /blog/:year-:month-:day-:title.html
 excerpt_separator: <!--more-->
