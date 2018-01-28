@@ -170,8 +170,18 @@ nav .container-fluid {
 }
 
 .container-header-small {
-  padding-top: 65px;
+  padding-top: 75px;
   padding-bottom: 0px;
+}
+
+.container-header-small h1 {
+  color: #555;
+  font-size: 120%;
+}
+
+.container-header-small h1 img.logo {
+  height: 60px;
+  width: 60px;
 }
 
 .container-footer {
