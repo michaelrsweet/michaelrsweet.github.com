@@ -5,7 +5,11 @@ author: Michael R Sweet
 copyright: Copyright © 2006-2017 by Michael R Sweet
 project: epm
 project_name: ESP Package Manager
-layout: project-full
+logo: epm-160.png
+epub_doc: epm.epub
+html_doc: epm.html
+pdf_doc: epm.pdf
+layout: project
 ---
 
 EPM is a simple cross-platform tool that generates software and patch

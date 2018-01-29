@@ -5,7 +5,9 @@ author: Michael R Sweet
 copyright: Copyright © 2002-2017 by Michael R Sweet
 project: rasterview
 project_name: RasterView
-layout: project-logo
+logo: rasterview-160.png
+html_doc: rasterview.html
+layout: project
 ---
 
 The program is called "rasterview" on UNIX/Linux and "RasterView.app" on macOS.

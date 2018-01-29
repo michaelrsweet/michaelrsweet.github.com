@@ -5,7 +5,9 @@ author: Michael R Sweet
 copyright: Copyright © 2017-2018 by Michael R Sweet
 project: moauth
 project_name: mOAuth
-layout: project-logo
+logo: moauth-160.png
+html_doc: moauth.html
+layout: project
 ---
 
 mOAuth Documentation

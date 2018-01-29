@@ -5,7 +5,11 @@ author: Michael R Sweet
 copyright: Copyright © 1997-2018 by Michael R Sweet
 project: htmldoc
 project_name: HTMLDOC
-layout: project-full
+logo: htmldoc-160.png
+epub_doc: htmldoc.epub
+html_doc: htmldoc.html
+pdf_doc: htmldoc.pdf
+layout: project
 ---
 
 
