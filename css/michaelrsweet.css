@@ -181,6 +181,7 @@ nav .container-fluid {
 
 .container-header-small h1 img.logo {
   height: 60px;
+  margin-top: 2px;
   width: 60px;
 }
 
