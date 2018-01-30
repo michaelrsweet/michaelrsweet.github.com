@@ -545,10 +545,11 @@ div.body dd {
 
 /* iPhone/iPod touch overrides */
 @media only screen and (max-width: 414px) {
-  img.logo {
+  img.logo, .container-header-small h1 img.logo {
+    display: block;
     float: none;
-    height: 40px;
-    width: 40px;
+    height: 80px;
+    width: 80px;
   }
   nav.navbar-fixed-top {
     position: relative;
@@ -566,9 +567,10 @@ div.body dd {
   h1 small, h2 small {
     display: inline-block;
   }
-  pre, pre code {
+  pre, pre code, pre.command, pre.example {
     display: block;
-    font-size: 66%;
+    font-size: 50%;
+    margin-left: 0px;
     overflow-x: scroll;
     padding: 5px;
     -webkit-overflow-scrolling: touch;
