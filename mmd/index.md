@@ -2,7 +2,7 @@
 title: Mini-Markdown "Library"
 subtitle: A Miniature Markdown "Library"
 author: Michael R Sweet
-copyright: Copyright © 2017 by Michael R Sweet
+copyright: Copyright © 2017-2018 by Michael R Sweet
 project: mmd
 project_name: mmd
 logo: mmd-160.png
@@ -35,7 +35,9 @@ CommonMark extensions:
 
 - "@" links which resolve to headings within the file.
 
-I'm providing `mmd` as open source under the "new" 2-clause BSD license which
-allows you do pretty much do whatever you like with it.  Please do provide
-feedback and report bugs to the Github project page so that everyone can
-benefit.
+- Tables.
+
+I'm providing this as open source under the Apache License Version 2.0 with
+exceptions for use with GPL2/LGPL2 applications which allows you do pretty much
+do whatever you like with it.  Please do provide feedback and report bugs to the
+Github project page so that everyone can benefit.
