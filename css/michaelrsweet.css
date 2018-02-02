@@ -7,7 +7,7 @@ body, p {
   font-family: 'Open Sans', sans-serif;
 }
 
-code, kbd, p.code, p.command, p.summary, pre, ul.code li, input[type="search"], {
+code, kbd, p.code, p.command, p.summary, pre, ul.code li, input[type="search"] {
   font-family: 'Source Code Pro', monospace;
   font-size: 90%;
 }
@@ -45,18 +45,26 @@ small {
   color: #555;
 }
 
+code, kbd {
+  background: inherit;
+  border-radius: inherit;
+  color: #600;
+  padding: inherit;
+}
+
 a:link, a:visited {
   color: #c00;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 a:link:hover, a:active {
   color: #f00;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 h2 a:link, h2 a:visited, h2 a:link:hover, h2 a:active {
   color: black;
+  text-decoration: none;
 }
 
 img.logo {
@@ -138,13 +146,19 @@ nav.navbar-inverse {
 
 .navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover {
   color: #e00;
+  text-decoration: none;
 }
 .navbar-inverse .navbar-nav > li > a:hover {
   color: #f00;
+  text-decoration: none;
+}
+ul.dropdown-menu a:link, ul.dropdown-menu a:visited {
+  text-decoration: none;
 }
 
 a.navbar-brand {
   padding: 10px 15px;
+  text-decoration: none;
 }
 
 a.navbar-brand img {
