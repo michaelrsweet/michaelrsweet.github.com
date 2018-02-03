@@ -96,6 +96,7 @@ a.btn:hover {
   background: #ddd;
   border-color: #ddd;
   color: #f00;
+  text-decoration: none;
 }
 
 .container-header {

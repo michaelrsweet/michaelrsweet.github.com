@@ -1,8 +1,8 @@
 ---
-title: HTMLDOC 1.9.1 Users Manual
+title: HTMLDOC 1.9.2 Users Manual
 subtitle: HTML Conversion Software
 author: Michael R Sweet
-copyright: Copyright © 1997-2017 by Michael R Sweet
+copyright: Copyright © 1997-2018 by Michael R Sweet
 project: htmldoc
 project_name: HTMLDOC
 logo: htmldoc-160.png
@@ -12,9 +12,9 @@ pdf_doc: htmldoc.pdf
 layout: project
 ---
 
-<CENTER><A HREF="#CONTENTS"><H1>HTMLDOC 1.9.1 Users Manual</H1></A><BR>
+<CENTER><A HREF="#CONTENTS"><H1>HTMLDOC 1.9.2 Users Manual</H1></A><BR>
 Michael R Sweet<BR>
-Copyright © 1997-2017, All Rights Reserved.<BR>
+Copyright � 1997-2018, All Rights Reserved.<BR>
 </CENTER>
 <HR NOSHADE>
 <h1 ALIGN="CENTER"><a NAME="CONTENTS">Table of Contents</a></h1>
@@ -183,27 +183,34 @@ Copyright © 1997-2017, All Rights Reserved.<BR>
 <li><a HREF="#META">META Attributes</a></li>
 <li><a HREF="#TABLE">Tables</a></li>
 </ul>
+<b><a HREF="#MDREF">Chapter 5 - Markdown Reference</a></b>
+<ul>
+<li><a HREF="#5_1">General Syntax</a></li>
+<li><a HREF="#5_2">Metadata Syntax</a></li>
+<li><a HREF="#5_3">Link Targets and @ Links</a></li>
+<li><a HREF="#5_4">Table Syntax</a></li>
+</ul>
 <b><a HREF="#LICENSE">Appendix A - License Agreement</a></b>
 <br>
 <br><b><a HREF="#BOOKFORMAT">Appendix B - Book File Format</a></b>
 <ul>
-<li><a HREF="#6_1">Introduction</a></li>
-<li><a HREF="#6_2">The Header</a></li>
-<li><a HREF="#6_3">The Options</a></li>
-<li><a HREF="#6_4">The Files</a></li>
-<li><a HREF="#6_5">Putting It All Together</a></li>
+<li><a HREF="#7_1">Introduction</a></li>
+<li><a HREF="#7_2">The Header</a></li>
+<li><a HREF="#7_3">The Options</a></li>
+<li><a HREF="#7_4">The Files</a></li>
+<li><a HREF="#7_5">Putting It All Together</a></li>
 </ul>
 <HR NOSHADE>
 
 <!-- FOOTER RIGHT &quot;1-$CHAPTERPAGE&quot; -->
 <div align="justify">
 <h1 align="right"><a name="INTRO">Chapter 1 - Introduction</a></h1>
-<p>This document describes how to use the HTMLDOC software, version 1.9.
- HTMLDOC reads HTML and Markdown source files or web pages and generates
- corresponding EPUB, HTML, PostScript, or PDF files with an optional
- table of contents. HTMLDOC can be used as a standalone application, in
- a batch document processing environment, or as a web-based report
- generation application.</p>
+<p>This document describes how to use the HTMLDOC software, version
+ 1.9.2. HTMLDOC reads HTML and Markdown source files or web pages and
+ generates corresponding EPUB, HTML, PostScript, or PDF files with an
+ optional table of contents. HTMLDOC can be used as a standalone
+ application, in a batch document processing environment, or as a
+ web-based report generation application.</p>
 <p>HTMLDOC is open source software under the terms of version 2 of the
  GNU General Public License. No restrictions are placed upon the output
  produced by HTMLDOC.</p>
@@ -240,6 +247,7 @@ sgi</code> that generated &quot;compiled&quot; Standard Generalized Markup
 <li><a href="#USING">Chapter 2</a> - Using HTMLDOC</li>
 <li><a href="#CMDREF">Chapter 3</a> - Command-Line Reference</li>
 <li><a href="#HTMLREF">Chapter 4</a> - HTML Reference</li>
+<li><a href="#MDREF">Chapter 5</a> - Markdown Reference</li>
 <li><a href="#LICENSE">Appendix A</a> - License Agreement</li>
 <li><a href="#BOOKFORMAT">Appendix B</a> - Book File Format</li>
 </ul>
@@ -249,7 +257,7 @@ sgi</code> that generated &quot;compiled&quot; Standard Generalized Markup
  freely used and exported under current US laws, other countries may
  restrict your use and possession of this code and software.</p>
 <h2><a NAME="1_4">Legal Stuff</a></h2>
-<p>HTMLDOC is copyright &copy; 1997-2017 by Michael R Sweet. See <a href="#LICENSE">
+<p>HTMLDOC is copyright &copy; 1997-2018 by Michael R Sweet. See <a href="#LICENSE">
 Appendix A - License Agreement</a> for the terms of use. This software
  is based in part on the work of the Independent JPEG Group and FLTK
  project.</p>
@@ -261,9 +269,8 @@ Appendix A - License Agreement</a> for the terms of use. This software
 <p>This chapter describes the basics of how to use HTMLDOC to convert
  HTML and Markdown files into PostScript and PDF files.</p>
 <blockquote><b>Note:</b> HTMLDOC currently does not support HTML 4.0
- features such as stylesheets or the <code>STYLE</code>, <code>TBODY</code>
-, <code>THEAD</code>, or <code>TFOOT</code> elements. For more
- information, please consult <a href="#HTMLREF">Chapter 4 - HTML
+ features such as stylesheets or the <code>STYLE</code> element. For
+ more information, please consult <a href="#HTMLREF">Chapter 4 - HTML
  Reference</a>.</blockquote>
 <h2><a NAME="2_1">Using the HTMLDOC GUI</a></h2>
 <p>After opening the HTMLDOC application, the HTMLDOC window will appear
@@ -2179,6 +2186,145 @@ filename.html</code>) links are fully supported for HTML and PDF output.</p>
 RULES</code>.</b></p>
 </div><HR NOSHADE>
 
+<!-- FOOTER RIGHT &quot;5-$CHAPTERPAGE&quot; -->
+<div align="justify">
+<h1 align="right"><a name="MDREF">Chapter 5 - Markdown Reference</a></h1>
+<p>This chapter describes the markdown syntax that is recognized and
+ supported by HTMLDOC.</p>
+<h2><a NAME="5_1">General Syntax</a></h2>
+<p>Markdown is a simple plain-text format that uses formatting
+ conventions that are commonly used in email and other text-based
+ communications. Markdown is used by most of the major blogging, web
+ site, and project hosting platforms and is supported by many standalone
+ text editors.</p>
+<p>HTMLDOC supports the <a href="http://spec.commonmark.org/">CommonMark</a>
+ version of markdown syntax with the following exceptions:</p>
+<ul>
+<li>Metadata as used by Jekyll and other web markdown solutions can be
+ placed at the beginning of the file;</li>
+<li>&quot;@&quot; links can be used which resolve to headings within the file;</li>
+<li>Tables can be embedded using the &quot;|&quot; separator;</li>
+<li>Embedded HTML markup and entities are explicitly not supported or
+ allowed;</li>
+<li>Link reference definitions are not supported;</li>
+<li>Link titles are silently ignored; and</li>
+<li>Thematic breaks using a mix of whitespace and the separator
+ character are not supported - &quot;* * * *&quot;, &quot;-- -- -- --&quot;, etc.</li>
+</ul>
+<blockquote><b>Note:</b> HTMLDOC does not support embedded HTML in
+ markdown documents because the version of HTML (or XHTML) cannot be
+ reliably determined, making support of certain character entities and
+ language elements problematic.</blockquote>
+<h2><a NAME="5_2">Metadata Syntax</a></h2>
+<p>Metadata is specified at the top of a markdown file between two lines
+ containing three hyphens, for example:</p>
+<pre>
+---
+title: My Great Novel
+author: John Doe
+copyright: Copyright &copy; 2018 by John Doe
+version: 1.0
+---
+
+# Preamble
+
+...
+</pre>
+<p>HTMLDOC supports the &quot;title&quot;, &quot;author&quot;, &quot;copyright&quot;, and &quot;version&quot;
+ metadata and silently ignores everything else.</p>
+<h2><a NAME="5_3">Link Targets and @ Links</a></h2>
+<p>CommonMark defines no standard for how implementations generate
+ anchors or identifiers for headings in a markdown file - this makes
+ hyperlinking to a named section within a document basically impossible.
+ Jekyll and other markdown implementations allow the special link &quot;@&quot; to
+ be used, which HTMLDOC supports:</p>
+<pre>
+See [Screwing in a Light Bulb](@) for instructions on installing a
+light bulb.
+
+...
+
+# Screwing in a Light Bulb
+
+...
+</pre>
+<p>To reference a markdown heading from a HTML file, convert the heading
+ to lowercase, replace spaces with the hyphen (&quot;-&quot;), and remove any
+ special characters. Thus, a HTML file would reference the previous
+ heading using the following HTML:</p>
+<pre>
+&lt;a href=&quot;#screwing-in-a-light-bulb&quot;&gt; ... &lt;/a&gt;
+</pre>
+
+<!-- NEED 5in -->
+<h2><a NAME="5_4">Table Syntax</a></h2>
+<p>CommonMark does not define a syntax for plain-text tables, instead
+ relying on embedded HTML which HTMLDOC does not support. Both Github
+ and Jekyll support a common markdown extension for plain text tables
+ that uses the vertical pipe (&quot;|&quot;) character to specify column
+ separations. The first line contains the table header, the second line
+ is a horizontal separator, and the remaining lines contain the table
+ body. For example:</p>
+<pre>
+| Heading 1 | Heading 2 | Heading 3 |
+| --------- | --------- | --------- |
+| Cell 1,1  | Cell 1,2  | Cell 1,3  |
+| Cell 2,1  | Cell 2,2  | Cell 2,3  |
+| Cell 3,1  | Cell 3,2  | Cell 3,3  |
+</pre>
+<p>will produce:</p>
+<table border="1" cellpadding="2"><thead>
+<tr><th bgcolor="#cccccc">Heading 1</th><th bgcolor="#cccccc">Heading 2</th><th
+bgcolor="#cccccc">Heading 3</th></tr>
+</thead><tbody>
+<tr><td>Cell 1,1</td><td>Cell 1,2</td><td>Cell 1,3</td></tr>
+<tr><td>Cell 2,1</td><td>Cell 2,2</td><td>Cell 2,3</td></tr>
+<tr><td>Cell 3,1</td><td>Cell 3,2</td><td>Cell 3,3</td></tr>
+</tbody></table>
+<p>The outer pipes can be omitted, for example:</p>
+<pre>
+Heading 1 | Heading 2 | Heading 3
+--------- | --------- | ---------
+Cell 1,1  | Cell 1,2  | Cell 1,3
+Cell 2,1  | Cell 2,2  | Cell 2,3
+Cell 3,1  | Cell 3,2  | Cell 3,3
+</pre>
+<p>While table headings are always centered, you can control the
+ alignment of the body cells by using the colon (&quot;:&quot;) character in the
+ separator line. Put a leading colon to specify left alignment (the
+ default), a trailing colon for right alignment, or both to specify
+ centering. For example:</p>
+<p></p>
+<pre>
+Left Alignment | Center Alignment | Right Alignment
+:------------- | :--------------: | --------------:
+Cell 1,1       |     Cell 1,2     |               1
+Cell 2,1       |     Cell 2,2     |              12
+Cell 3,1       |     Cell 3,2     |             123
+</pre>
+<p>will produce:</p>
+<table border="1" cellpadding="2"><thead>
+<tr><th bgcolor="#cccccc">Left Alignment</th><th bgcolor="#cccccc">
+Center Alignment</th><th bgcolor="#cccccc">Right Alignment</th></tr>
+</thead><tbody>
+<tr><td>Cell 1,1</td><td align="center">Cell 1,2</td><td align="right">1</td>
+</tr>
+<tr><td>Cell 2,1</td><td align="center">Cell 2,2</td><td align="right">
+12</td></tr>
+<tr><td>Cell 3,1</td><td align="center">Cell 3,2</td><td align="right">
+123</td></tr>
+</tbody></table>
+<p>Table columns do not need to be padded so that they line up - the
+ following (less readable) example is perfectly valid:</p>
+<pre>
+Left Alignment|Center Alignment|Right Alignment
+:--|:--:|--:
+Cell 1,1|Cell 1,2|1
+Cell 2,1|Cell 2,2|12
+Cell 3,1|Cell 3,2|123
+</pre>
+</div><HR NOSHADE>
+
 <!-- FOOTER RIGHT &quot;A-$CHAPTERPAGE&quot; -->
 <div align="justify">
 <h1 align="right"><a name="LICENSE">Appendix A - License Agreement</a></h1>
@@ -2497,7 +2643,7 @@ Ty Coon, President of Vice
 <div ALIGN="justify">
 <h1 ALIGN="RIGHT"><a NAME="BOOKFORMAT">Appendix B - Book File Format</a></h1>
 <p>This appendix describes the HTMLDOC<var> .book</var> file format.</p>
-<h2><a NAME="6_1">Introduction</a></h2>
+<h2><a NAME="7_1">Introduction</a></h2>
 <p>The HTMLDOC<var> .book</var> file format is a simple text format that
  provides the command-line options and files that are part of the
  document. These files can be used from the GUI interface or from the
@@ -2513,13 +2659,13 @@ htmldoc --batch filename.book
 ghtmldoc.exe filename.book
 htmldoc.exe --batch filename.book
 </pre>
-<h2><a NAME="6_2">The Header</a></h2>
+<h2><a NAME="7_2">The Header</a></h2>
 <p>Each<var> .book</var> file starts with a line reading:</p>
 <pre>
 #HTMLDOC 1.9
 </pre>
 <p>The version number (1.9) is optional.</p>
-<h2><a NAME="6_3">The Options</a></h2>
+<h2><a NAME="7_3">The Options</a></h2>
 <p>Following the header is a line containing the options for the book.
  You can use any valid command-line option on this line:</p>
 <pre>
@@ -2531,7 +2677,7 @@ htmldoc.exe --batch filename.book
 -f htmldoc.pdf --titleimage htmldoc.png --duplex \
 --compression=9 --jpeg=90
 </pre>
-<h2><a NAME="6_4">The Files</a></h2>
+<h2><a NAME="7_4">The Files</a></h2>
 <p>Following the options are a list of files or URLs to include in the
  document:</p>
 <pre>
@@ -2542,7 +2688,7 @@ htmldoc.exe --batch filename.book
 a-license.html
 b-book.html
 </pre>
-<h2><a NAME="6_5">Putting It All Together</a></h2>
+<h2><a NAME="7_5">Putting It All Together</a></h2>
 <p>The following is the complete book file needed to generate this
  documentation:</p>
 <pre>

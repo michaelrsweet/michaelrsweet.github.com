@@ -13,7 +13,7 @@ layout: project
 ---
 
 
-> Now available as a [snap package](https://snapcraft.io/store/)! Run `snap install htmldoc` to install on Linux.<br>
+> Now available as a [snap package](https://snapcraft.io/htmldoc)! Run `snap install htmldoc` to install on Linux.<br>
 > [![Snap Status](https://build.snapcraft.io/badge/michaelrsweet/htmldoc.svg)](https://build.snapcraft.io/user/michaelrsweet/htmldoc)
 
 HTMLDOC is a program that reads HTML and Markdown source files or web pages and
