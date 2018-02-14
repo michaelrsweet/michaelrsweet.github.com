@@ -172,6 +172,11 @@ a.navbar-brand img:hover {
   border: thin solid #b8c3ff;
 }
 
+.navbar-status {
+  float: right;
+  margin-top: 8px;
+}
+
 nav .container-fluid {
   padding: 5px 15px;
 }
@@ -578,6 +583,10 @@ div.body dd {
   }
   .container-fluid {
     padding: 25px 20px;
+  }
+  .navbar-status {
+    float: none;
+    margin-top: inherit;
   }
   h1 small, h2 small {
     display: inline-block;

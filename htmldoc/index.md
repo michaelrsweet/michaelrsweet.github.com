@@ -9,12 +9,9 @@ logo: htmldoc-160.png
 epub_doc: htmldoc.epub
 html_doc: htmldoc.html
 pdf_doc: htmldoc.pdf
+snap: htmldoc
 layout: project
 ---
-
-
-> Now available as a [snap package](https://snapcraft.io/htmldoc)! Run `snap install htmldoc` to install on Linux.<br>
-> [![Snap Status](https://build.snapcraft.io/badge/michaelrsweet/htmldoc.svg)](https://build.snapcraft.io/user/michaelrsweet/htmldoc)
 
 HTMLDOC is a program that reads HTML and Markdown source files or web pages and
 generates corresponding EPUB, HTML, PostScript, or PDF files with an optional
@@ -29,8 +26,8 @@ servers.  However, it does not support many things in "the modern web", such as:
   support to HTMLDOC, proper CSS support is non-trivial especially for paged
   output (which is not well supported by CSS)
 - Encryption: HTMLDOC currently supports the older (and very insecure) PDF 1.4
-  (128-bit RC4) encryption.  I have looked at supporting AES (256-bit)
-  encryption...
+  (128-bit RC4) encryption.  I am investigating [supporting AES (256-bit)
+  encryption](https://github.com/michaelrsweet/htmldoc/issues/325).
 - Forms: HTML forms and PDF forms are very different things.  While I have had
   many requests to add support for PDF forms over the years, I have not found a
   satisfactory way to do so.
