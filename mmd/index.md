@@ -7,6 +7,7 @@ project: mmd
 project_name: mmd
 logo: mmd-160.png
 html_doc: mmd.html
+snap: mmd
 layout: project
 ---
 
@@ -36,6 +37,9 @@ CommonMark extensions:
 - "@" links which resolve to headings within the file.
 
 - Tables.
+
+`mmd` also includes a standalone utility called `mmdutil` that can be used to
+generate HTML and man page source from markdown.
 
 I'm providing this as open source under the Apache License Version 2.0 with
 exceptions for use with GPL2/LGPL2 applications which allows you do pretty much

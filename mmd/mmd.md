@@ -7,6 +7,7 @@ project: mmd
 project_name: mmd
 logo: mmd-160.png
 html_doc: mmd.html
+snap: mmd
 layout: project
 ---
 
@@ -465,6 +466,7 @@ Here is the complete function:
 
 - [mmd_t](@)
 - [mmd_type_t](@)
+- [mmdCopyAllText](@)
 - [mmdFree](@)
 - [mmdGetFirstChild](@)
 - [mmdGetLastChild](@)
@@ -530,6 +532,17 @@ a parent.
     } mmd_type_t;
 
 The `mmd_type_t` enumeration represents all of the Markdown node types.
+
+
+## mmdCopyAllText
+
+    char *
+    mmdCopyAllText(mmd_t *node);
+
+The `mmdCopyAllText` function copies all of the text under the specified node.
+It is typically used for extracting text for headings and other block nodes.
+The returned string pointer must be freed using the `free` function.  `NULL` is
+returned if there is no text under the node.
 
 
 ## mmdFree
