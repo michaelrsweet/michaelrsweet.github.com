@@ -84,10 +84,11 @@ img.logo {
 a.btn, button.btn {
   background: #ccc;
   border-color: #ccc;
-  border-radius: 10px;
+  border-radius: 5px;
   color: #000;
   font-family: 'Architects Daughter', cursive;
   font-size: 80%;
+  margin-right: 5px;
   padding: 2px 10px;
   text-decoration: none;
 }
