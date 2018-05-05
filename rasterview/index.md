@@ -2,11 +2,12 @@
 title: RasterView
 subtitle: CUPS/PWG/Apple Raster File Viewer
 author: Michael R Sweet
-copyright: Copyright © 2002-2017 by Michael R Sweet
+copyright: Copyright © 2002-2018 by Michael R Sweet
 project: rasterview
 project_name: RasterView
 logo: rasterview-160.png
 html_doc: rasterview.html
+snap: rasterview
 layout: project
 ---
 
@@ -16,5 +17,4 @@ you to look at the raster data produced by any of the standard CUPS RIP filters
 to either test those filters or look at the data that is being sent to your
 raster printer driver.
 
-RasterView is provided as free software under version 2 of the GNU General
-Public license.
+RasterView is licensed under the Apache License Version 2.0.

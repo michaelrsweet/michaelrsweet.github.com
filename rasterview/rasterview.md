@@ -2,11 +2,12 @@
 title: RasterView
 subtitle: CUPS/PWG/Apple Raster File Viewer
 author: Michael R Sweet
-copyright: Copyright © 2002-2017 by Michael R Sweet
+copyright: Copyright © 2002-2018 by Michael R Sweet
 project: rasterview
 project_name: RasterView
 logo: rasterview-160.png
 html_doc: rasterview.html
+snap: rasterview
 layout: project
 ---
 
