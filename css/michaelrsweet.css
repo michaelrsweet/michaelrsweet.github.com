@@ -316,8 +316,8 @@ pre.man {
 }
 
 pre.example {
-  background: #eeeeee;
-  border: dotted thin #999999;
+  background: #eee;
+  border: dotted thin #999;
   margin-left: 36pt;
   padding: 10pt;
 }
@@ -332,8 +332,8 @@ p.formula {
 }
 
 blockquote {
-  background: #eeeeee;
-  border: solid thin #999999;
+  background: #eee;
+  border: solid thin #999;
   padding: 10pt;
 }
 
@@ -574,7 +574,17 @@ div.body dd {
     color: #ccc;
   }
   code, kbd {
-    color: #900;
+    color: #c00;
+  }
+  blockquote {
+    background: #333;
+    border-color: #666;
+    color: #eee;
+  }
+  pre, pre.example {
+    background: #333;
+    border: dotted thin #666;
+    color: #eee;
   }
   .container-header {
     background: #333;
