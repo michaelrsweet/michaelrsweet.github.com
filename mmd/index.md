@@ -2,7 +2,7 @@
 title: Mini-Markdown "Library"
 subtitle: A Miniature Markdown "Library"
 author: Michael R Sweet
-copyright: Copyright © 2017-2018 by Michael R Sweet
+copyright: Copyright © 2017-2019 by Michael R Sweet
 project: mmd
 project_name: mmd
 logo: mmd-160.png
