@@ -2,11 +2,12 @@
 title: mOAuth Documentation
 subtitle: Documentation
 author: Michael R Sweet
-copyright: Copyright © 2017-2018 by Michael R Sweet
+copyright: Copyright © 2017-2019 by Michael R Sweet
 project: moauth
 project_name: mOAuth
 logo: moauth-160.png
 html_doc: moauth.html
+snap: moauth
 layout: project
 ---
 
