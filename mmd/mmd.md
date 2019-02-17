@@ -2,7 +2,8 @@
 title: How to Use the mmd "Library"
 subtitle: A Miniature Markdown "Library"
 author: Michael R Sweet
-copyright: Copyright © 2017-2018 by Michael R Sweet
+copyright: Copyright © 2017-2019 by Michael R Sweet
+version: 1.5
 project: mmd
 project_name: mmd
 logo: mmd-160.png
@@ -13,20 +14,46 @@ layout: project
 
 # Contents
 
-[How to Use the mmd "Library"](@)
-- [Overview](@)
-- [Navigating the Document Tree](@)
-- [Retrieving Document Metadata](@)
-- [Freeing Memory](@)
+[How to Use the mmd "Library"](#how-to-use-the-mmd-library)
+- [Overview](#overview)
+- [Navigating the Document Tree](#navigating-the-document-tree)
+- [Retrieving Document Metadata](#retrieving-document-metadata)
+- [Freeing Memory](#freeing-memory)
 
-[Example: Generating HTML from Markdown](@)
+[Example: Generating HTML from Markdown](#example-generating-html-from-markdown)
 
-[Reference](@)
+[Reference](#references)
 
 
 # How to Use the mmd "Library"
 
 ## Overview
+
+`mmd` is a miniature markdown parsing "library" consisting of a single C source
+file and accompanying header file.  `mmd` mostly conforms to the [CommonMark][]
+version of markdown syntax with the following exceptions:
+
+- Embedded HTML markup and entities are explicitly not supported or allowed;
+  the reason for this is to better support different kinds of output from the
+  markdown "source", including XHTML, man, and `xml2rfc`.
+
+- Link titles are silently ignored.
+
+- Thematic breaks using a mix of whitespace and the separator character are not
+  supported ("* * * *", "-- -- -- --", etc.); these could conceivably be added
+  but did not seem particularly important.
+
+In addition, `mmd` supports a couple (otherwise undocumented) CommonMark
+extensions:
+
+- Metadata as used by Jekyll and other web markdown solutions.
+
+- "@" links which resolve to headings within the file.
+
+- Tables as used by the [Github Flavored Markdown Spec][GFM].
+
+[CommonMark]: https://spec.commonmark.org
+[GFM]: https://github.github.com/gfm
 
 `mmd` represents a markdown document as a tree of nodes, each of type `mmd_t`.
 The `mmdLoad` function loads a document on disk into memory and returns the root
