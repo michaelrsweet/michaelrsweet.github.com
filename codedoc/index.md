@@ -11,13 +11,16 @@ snap: codedoc
 layout: project
 ---
 
-Codedoc is a documentation generator that scans the specified C and C++ source
-files to produce an XML representation of globally accessible classes,
-constants, enumerations, functions, structures, typedefs, unions, and
-variables - the XML file is updated as necessary.
+Codedoc is a general-purpose utility which scans HTML, markdown, C, and C++
+source files to produce EPUB, HTML, and man page documentation that can be read
+by humans.  Unlike popular C/C++ documentation generators like Doxygen or
+Javadoc, Codedoc uses in-line comments rather than comment headers, allowing for
+more "natural" code documentation.  Additional markdown documentation content
+can be included to make the generated documentation even more useful and
+complete.
 
-By default, a HTML representation of the XML file is written to the standard
-output.  Codedoc also supports generating man pages and EPUB books.
+Codedoc was originally bundled with the Mini-XML library as the `mxmldoc`
+utility.
 
 Codedoc is licensed under the Apache License Version 2.0.  Please do provide
 feedback and report bugs to the Github project page so that everyone can
