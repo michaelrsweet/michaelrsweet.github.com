@@ -19,13 +19,13 @@ version of markdown syntax with the following exceptions:
   the reason for this is to better support different kinds of output from the
   markdown "source", including XHTML, man, and `xml2rfc`.
 
-- Link titles are silently ignored.
+- Tabs are silently expanded to the markdown standard of four spaces since HTML
+  uses eight spaces per tab.
 
-- Thematic breaks using a mix of whitespace and the separator character are not
-  supported ("* * * *", "-- -- -- --", etc.); these could conceivably be added
-  but did not seem particularly important.
+- Some pathological nested link and inline style features supported by
+  CommonMark (`******Really Strong Text******`) are not supported by `mmd`.
 
-In addition, `mmd` supports a couple (otherwise undocumented) CommonMark
+In addition, `mmd` supports a couple (otherwise undocumented) markdown
 extensions:
 
 - Metadata as used by Jekyll and other web markdown solutions.
@@ -34,13 +34,6 @@ extensions:
 
 - Tables as used by the [Github Flavored Markdown Spec][GFM].
 
-`mmd` also includes a standalone utility called `mmdutil` that can be used to
-generate HTML and man page source from markdown.
-
-I'm providing this as open source under the Apache License Version 2.0 with
-exceptions for use with GPL2/LGPL2 applications which allows you do pretty much
-do whatever you like with it.  Please do provide feedback and report bugs to the
-Github project page so that everyone can benefit.
-
 [CommonMark]: https://spec.commonmark.org
 [GFM]: https://github.github.com/gfm
+
