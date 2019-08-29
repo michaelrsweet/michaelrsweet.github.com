@@ -3,7 +3,7 @@ title: How to Use the mmd "Library"
 subtitle: A Miniature Markdown "Library"
 author: Michael R Sweet
 copyright: Copyright © 2017-2019 by Michael R Sweet
-version: 1.6
+version: 1.7
 project: mmd
 project_name: mmd
 logo: mmd-160.png
