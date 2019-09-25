@@ -1,8 +1,8 @@
 ---
-title: HTMLDOC 1.9.4 Users Manual
+title: HTMLDOC 1.9.6 Users Manual
 subtitle: HTML Conversion Software
 author: Michael R Sweet
-copyright: Copyright © 1997-2018 by Michael R Sweet
+copyright: Copyright © 1997-2019 by Michael R Sweet
 project: htmldoc
 project_name: HTMLDOC
 logo: htmldoc-160.png
@@ -15,7 +15,7 @@ layout: project
 
 <CENTER><A HREF="#CONTENTS"><H1>HTMLDOC Users Manual</H1></A><BR>
 Michael R Sweet<BR>
-Copyright © 1997-2018, All Rights Reserved.<BR>
+Copyright � 1997-2019, All Rights Reserved.<BR>
 </CENTER>
 <HR NOSHADE>
 <h1 ALIGN="CENTER"><a NAME="CONTENTS">Table of Contents</a></h1>
@@ -258,7 +258,7 @@ sgi</code> that generated &quot;compiled&quot; Standard Generalized Markup
  freely used and exported under current US laws, other countries may
  restrict your use and possession of this code and software.</p>
 <h2><a NAME="1_4">Legal Stuff</a></h2>
-<p>HTMLDOC is copyright &copy; 1997-2018 by Michael R Sweet. See <a href="#LICENSE">
+<p>HTMLDOC is copyright &copy; 1997-2019 by Michael R Sweet. See <a href="#LICENSE">
 Appendix A - License Agreement</a> for the terms of use. This software
  is based in part on the work of the Independent JPEG Group and FLTK
  project.</p>
@@ -2207,10 +2207,11 @@ RULES</code>.</b></p>
 <li>Tables can be embedded using the &quot;|&quot; separator;</li>
 <li>Embedded HTML markup and entities are explicitly not supported or
  allowed;</li>
-<li>Link reference definitions are not supported;</li>
-<li>Link titles are silently ignored; and</li>
-<li>Thematic breaks using a mix of whitespace and the separator
- character are not supported - &quot;* * * *&quot;, &quot;-- -- -- --&quot;, etc.</li>
+<li>Tabs are silently expanded to the markdown standard of four spaces
+ since HTML uses eight spaces per tab; and</li>
+<li>Some pathological nested link and inline style features supported by
+ CommonMark (<code>******Really Strong Text******</code>) are not
+ supported by <code>mmd</code>.</li>
 </ul>
 <blockquote><b>Note:</b> HTMLDOC does not support embedded HTML in
  markdown documents because the version of HTML (or XHTML) cannot be
@@ -2225,14 +2226,16 @@ title: My Great Novel
 author: John Doe
 copyright: Copyright &copy; 2018 by John Doe
 version: 1.0
+language: en-US
+subject: Fiction
 ---
 
 # Preamble
 
 ...
 </pre>
-<p>HTMLDOC supports the &quot;title&quot;, &quot;author&quot;, &quot;copyright&quot;, and &quot;version&quot;
- metadata and silently ignores everything else.</p>
+<p>HTMLDOC supports the &quot;author&quot;, &quot;copyright&quot;, &quot;language&quot;, &quot;subject&quot;,
+ &quot;title&quot;, and &quot;version&quot; metadata and silently ignores everything else.</p>
 <h2><a NAME="5_3">Link Targets and @ Links</a></h2>
 <p>CommonMark defines no standard for how implementations generate
  anchors or identifiers for headings in a markdown file - this makes
@@ -2704,3 +2707,4 @@ b-book.html
 a-license.html
 b-book.html
 </pre>
+</div>
