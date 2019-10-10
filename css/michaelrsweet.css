@@ -604,6 +604,10 @@ div.body dd {
     border-color: #777;
     color: #fff;
   }
+  input, textarea {
+    background: #333;
+    color: #eee;
+  }
 }
 
 /* iPhone/iPod touch overrides */
