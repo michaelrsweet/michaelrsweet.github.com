@@ -9,7 +9,43 @@ html_doc: codedoc.html
 snap: codedoc
 layout: project
 ---
-<style type="text/css"><!--
+    <style type="text/css"><!--
+body, p, h1, h2, h3, h4, h5, h6 {
+  font-family: sans-serif;
+  line-height: 1.4;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  page-break-inside: avoid;
+}
+h1 {
+  font-size: 250%;
+  margin: 0;
+}
+h2 {
+  font-size: 250%;
+  margin-top: 1.5em;
+}
+h3 {
+  font-size: 200%;
+  margin-bottom: 0.5em;
+  margin-top: 1.5em;
+}
+h4 {
+  font-size: 150%;
+  margin-bottom: 0.5em;
+  margin-top: 1.5em;
+}
+h5 {
+  font-size: 125%;
+  margin-bottom: 0.5em;
+  margin-top: 1.5em;
+}
+h6 {
+  font-size: 110%;
+  margin-bottom: 0.5em;
+  margin-top: 1.5em;
+}
 div.header h1, div.header p {
   text-align: center;
 }
@@ -32,19 +68,15 @@ blockquote {
   page-break-inside: avoid;
 }
 p code, li code, p.code, pre, ul.code li {
-  background: rgba(127,127,127,0.1);
-  border: thin dotted gray;
   font-family: monospace;
-  font-size: 90%;
   hyphens: manual;
   -webkit-hyphens: manual;
-  page-break-inside: avoid;
 }
 p.code, pre, ul.code li {
+  background: rgba(127,127,127,0.1);
+  border: thin dotted gray;
   padding: 10px;
-}
-p code, li code {
-  padding: 2px 5px;
+  page-break-inside: avoid;
 }
 a:link, a:visited {
   text-decoration: none;
@@ -144,6 +176,7 @@ h2.title, h3.title {
         </ul></li>
         <li><a href="#annotating-your-cc-code">Annotating Your C/C++ Code</a><ul class="subcontents">
           <li><a href="#-directives-in-comments">@ Directives in Comments</a></li>
+          <li><a href="#markdown-in-comments">Markdown in Comments</a></li>
         </ul></li>
         <li><a href="#epub-and-html-stylesheets">EPUB and HTML Stylesheets</a><ul class="subcontents">
           <li><a href="#css-classes">CSS Classes</a></li>
@@ -185,18 +218,29 @@ codedoc --epub documentation.epub documentation.xml
     <h3 class="title" id="adding-content-and-metadata">Adding Content and Metadata</h3>
     <p>Codedoc supports several options for adding content and metadata to the generated documentation:</p>
     <ul>
-    <li><code>--author &quot;name&quot;</code>: Sets the author name</li>
-    <li><code>--body filename</code>: Inserts the named file between the table of contents and API documentation; the file can be markdown, HTML, or man source</li>
-    <li><code>--copyright &quot;copyright text&quot;</code>: Sets the copyright string</li>
-    <li><code>--coverimage filename.png</code>: Uses the specified cover page image file</li>
-    <li><code>--css filename.css</code>: Uses the specified style sheet file (HTML and EPUB output)</li>
-    <li><code>--footer filename</code>: Appends the named file after the API documentation; the file can be markdown, HTML, or man source</li>
-    <li><code>--header filename</code>: Inserts the named file before the table of contents; the file can be markdown, HTML, or man source</li>
-    <li><code>--section &quot;{name,number}&quot;</code>: Sets the section/category name (HTML and EPUB output) or section number (man page output)</li>
-    <li><code>--title &quot;title text'</code>; Sets the title text</li>
+    <li>    <p><code>--author &quot;name&quot;</code>: Sets the author name</p>
+</li>
+    <li>    <p><code>--body filename</code>: Inserts the named file between the table of contents and API documentation; the file can be markdown, HTML, or man source</p>
+</li>
+    <li>    <p><code>--copyright &quot;copyright text&quot;</code>: Sets the copyright string</p>
+</li>
+    <li>    <p><code>--coverimage filename.png</code>: Uses the specified cover page image file</p>
+</li>
+    <li>    <p><code>--css filename.css</code>: Uses the specified style sheet file (HTML and EPUB output)</p>
+</li>
+    <li>    <p><code>--footer filename</code>: Appends the named file after the API documentation; the file can be markdown, HTML, or man source</p>
+</li>
+    <li>    <p><code>--header filename</code>: Inserts the named file before the table of contents; the file can be markdown, HTML, or man source</p>
+</li>
+    <li>    <p><code>--language ll[-LOC]</code>: Sets the ISO language and locality codes; the default is &quot;en-US&quot; for US English</p>
+</li>
+    <li>    <p><code>--section &quot;{name,number}&quot;</code>: Sets the section/category name (HTML and EPUB output) or section number (man page output)</p>
+</li>
+    <li>    <p><code>--title &quot;title text'</code>: Sets the title text</p>
+</li>
 </ul>
     <h2 class="title" id="annotating-your-cc-code">Annotating Your C/C++ Code</h2>
-    <p>Codedoc looks for in-line comments to describe the functions, types, and constants in your code. Codedoc documents all public names it finds in your source files - any names starting with the underscore character (<em>)</em> or names that are documented with the <a href="#-directives-in-comments"><code>@private@</code></a> directive are treated as private and are not documented.</p>
+    <p>Codedoc looks for in-line comments to describe the functions, types, and constants in your code. Codedoc documents all public names it finds in your source files - any names starting with the underscore character (_) or names that are documented with the <a href="#-directives-in-comments"><code>@private@</code></a> directive are treated as private and are not documented.</p>
     <p>Comments appearing directly before a function or type definition are used to document that function or type. Comments appearing after argument, definition, return type, or variable declarations are used to document that argument, definition, return type, or variable. For example, the following code excerpt defines a key/value structure and a function that creates a new instance of that structure:</p>
     <pre><code>/* A key/value pair. This is used with the
    dictionary structure. */
@@ -233,13 +277,57 @@ new_keyval(
     <h3 class="title" id="-directives-in-comments">@ Directives in Comments</h3>
     <p>Comments can also include the following special <code>@name ...@</code> directive strings:</p>
     <ul>
-    <li><code>@code text@</code>: formats the text as code</li>
-    <li><code>@deprecated@</code>: flags the item as deprecated to discourage its use</li>
-    <li><code>@exclude format[,...,format]@</code>: excludes the item from the documentation in the specified formats: &quot;all&quot; for all formats, &quot;epub&quot; for EPUB books, &quot;html&quot; for HTML output, and &quot;man&quot; for man page output</li>
-    <li><code>@link name@</code>: creates a hyperlink to the named function, type, etc.</li>
-    <li><code>@private@</code>: flags the item as private so it will not be included in the documentation</li>
-    <li><code>@since ...@</code>: flags the item as new since a particular release. The text following the <code>@since</code> up to the closing <code>@</code> is highlighted in the generated documentation, e.g. <code>@since libexample 1.1@</code>.</li>
+    <li>    <p><code>@code text@</code>: formats the text as code</p>
+</li>
+    <li>    <p><code>@deprecated@</code>: flags the item as deprecated to discourage its use</p>
+</li>
+    <li>    <p><code>@exclude format[,...,format]@</code>: excludes the item from the documentation in the specified formats: &quot;all&quot; for all formats, &quot;epub&quot; for EPUB books, &quot;html&quot; for HTML output, and &quot;man&quot; for man page output</p>
+</li>
+    <li>    <p><code>@link name@</code>: creates a hyperlink to the named function, type, etc.</p>
+</li>
+    <li>    <p><code>@private@</code>: flags the item as private so it will not be included in the documentation</p>
+</li>
+    <li>    <p><code>@since ...@</code>: flags the item as new since a particular release. The text following the <code>@since</code> up to the closing <code>@</code> is highlighted in the generated documentation, e.g. <code>@since libexample 1.1@</code>.</p>
+</li>
 </ul>
+    <h3 class="title" id="markdown-in-comments">Markdown in Comments</h3>
+    <p>Comments can use a small subset of markdown inline formatting characters:</p>
+    <ul>
+    <li>    <p>&quot;`code`&quot;: formats the text as code</p>
+</li>
+    <li>    <p>&quot;*emphasized*&quot;: emphasizes the text (usually italics)</p>
+</li>
+    <li>    <p>&quot;**strong**&quot;: strongly emphasizes the text (usually boldface)</p>
+</li>
+    <li>    <p>&quot;[text](url)&quot;: inserts a named hyperlink</p>
+</li>
+    <li>    <p>&quot;&lt;url&gt;&quot;: inserts a hyperlink</p>
+</li>
+    <li>    <p>&quot;\&quot;: escapes the character that follows</p>
+</li>
+</ul>
+    <p>In addition, example code can be surrounded by lines containing &quot;```&quot;. Use a leading &quot;|&quot; to ensure that any indentation is not lost:</p>
+    <pre><code>/*
+ * Example code:
+ *
+ * ```
+ * | foo = get_foo() + get_baz();
+ * | bar = get_bar() / foo;
+ * | if (bar &gt; 42)
+ * |   do_waz();
+ * ```
+ */
+</code></pre>
+    <p>and bulleted lists can be provided using a leading hyphen:</p>
+    <pre><code>/*
+ * Example list:
+ *
+ * - One fish
+ * - Two fish
+ * - Red fish
+ * - Blue fish
+ */
+</code></pre>
     <h2 class="title" id="epub-and-html-stylesheets">EPUB and HTML Stylesheets</h2>
     <p>Codedoc makes use of a CSS stylesheet for EPUB and HTML output. The default stylesheet should be usable for both display and printing, but you can override it using the <code>--css</code> option, for example:</p>
     <pre><code>codedoc --epub documentation.epub --css filename.css documentation.xml *.h *.c
@@ -250,225 +338,137 @@ new_keyval(
 </blockquote>
     <h3 class="title" id="css-classes">CSS Classes</h3>
     <p>The following CSS classes are used to group the sections in the generated documentation:</p>
-    <table>    <thead>    <tr>    <th> Class<br>
-</th>
-    <th> Description<br>
-</th>
-    <th> Usage<br>
-</th>
+    <table>    <thead>    <tr>    <th> Class</th>
+    <th> Description</th>
+    <th> Usage</th>
 </tr>
 </thead>
-    <tbody>    <tr>    <td> body<br>
-</td>
-    <td> The body of the documentation<br>
-</td>
-    <td> <code>&lt;div class=&quot;body&quot;&gt;</code><br>
-</td>
+    <tbody>    <tr>    <td> body</td>
+    <td> The body of the documentation</td>
+    <td> <code>&lt;div class=&quot;body&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> center<br>
-</td>
-    <td> Centered text in cell<br>
-</td>
-    <td> <code>&lt;td class=&quot;center&quot;&gt;</code><br>
-</td>
+    <tr>    <td> center</td>
+    <td> Centered text in cell</td>
+    <td> <code>&lt;td class=&quot;center&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> class<br>
-</td>
-    <td> A class<br>
-</td>
-    <td> <code>&lt;hN class=&quot;class&quot;&gt;</code><br>
-</td>
+    <tr>    <td> class</td>
+    <td> A class</td>
+    <td> <code>&lt;hN class=&quot;class&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> code<br>
-</td>
-    <td> Wrapped monospace code text<br>
-</td>
-    <td> <code>&lt;p class=&quot;code&quot;&gt;</code><br>
-</td>
+    <tr>    <td> code</td>
+    <td> Wrapped monospace code text</td>
+    <td> <code>&lt;p class=&quot;code&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> constants<br>
-</td>
-    <td> A list of constants<br>
-</td>
-    <td> <code>&lt;hN class=&quot;constants&quot;&gt;</code><br>
-</td>
+    <tr>    <td> constants</td>
+    <td> A list of constants</td>
+    <td> <code>&lt;hN class=&quot;constants&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> contents<br>
-</td>
-    <td> The table of contents<br>
-</td>
-    <td> <code>&lt;div class=&quot;contents&quot;&gt;</code><br>
-</td>
+    <tr>    <td> contents</td>
+    <td> The table of contents</td>
+    <td> <code>&lt;div class=&quot;contents&quot;&gt;</code></td>
 </tr>
-    <tr>    <td><br>
-</td>
-    <td> (first level)<br>
-</td>
-    <td> <code>&lt;ul class=&quot;contents&quot;&gt;</code><br>
-</td>
+    <tr>    <td></td>
+    <td> (first level)</td>
+    <td> <code>&lt;ul class=&quot;contents&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> description<br>
-</td>
-    <td> Short description<br>
-</td>
-    <td> <code>&lt;p class=&quot;description&quot;&gt;</code><br>
-</td>
+    <tr>    <td> description</td>
+    <td> Short description</td>
+    <td> <code>&lt;p class=&quot;description&quot;&gt;</code></td>
 </tr>
-    <tr>    <td><br>
-</td>
-    <td> (in table)<br>
-</td>
+    <tr>    <td></td>
+    <td> (in table)</td>
     <td> <code>&lt;td class=&quot;description&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> discussion<br>
-</td>
-    <td> Additional description<br>
-</td>
-    <td> <code>&lt;p class=&quot;discussion&quot;&gt;</code><br>
-</td>
+    <tr>    <td> discussion</td>
+    <td> Additional description</td>
+    <td> <code>&lt;p class=&quot;discussion&quot;&gt;</code></td>
 </tr>
-    <tr>    <td><br>
-</td>
-    <td> (title)<br>
-</td>
-    <td> <code>&lt;hN class=&quot;discussion&quot;&gt;</code><br>
-</td>
+    <tr>    <td></td>
+    <td> (title)</td>
+    <td> <code>&lt;hN class=&quot;discussion&quot;&gt;</code></td>
 </tr>
-    <tr>    <td><br>
-</td>
-    <td> (in table)<br>
-</td>
-    <td> <code>&lt;td class=&quot;discussion&quot;&gt;</code><br>
-</td>
+    <tr>    <td></td>
+    <td> (in table)</td>
+    <td> <code>&lt;td class=&quot;discussion&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> enumeration<br>
-</td>
-    <td> An enumeration type<br>
-</td>
+    <tr>    <td> enumeration</td>
+    <td> An enumeration type</td>
     <td> <code>&lt;hN class=&quot;enumeration&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> footer<br>
-</td>
-    <td> The footer of the documentation<br>
-</td>
-    <td> <code>&lt;div class=&quot;footer&quot;&gt;</code><br>
-</td>
+    <tr>    <td> footer</td>
+    <td> The footer of the documentation</td>
+    <td> <code>&lt;div class=&quot;footer&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> function<br>
-</td>
-    <td> A global function<br>
-</td>
-    <td> <code>&lt;hN class=&quot;function&quot;&gt;</code><br>
-</td>
+    <tr>    <td> function</td>
+    <td> A global function</td>
+    <td> <code>&lt;hN class=&quot;function&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> header<br>
-</td>
-    <td> The header of the documentation<br>
-</td>
-    <td> <code>&lt;div class=&quot;header&quot;&gt;</code><br>
-</td>
+    <tr>    <td> header</td>
+    <td> The header of the documentation</td>
+    <td> <code>&lt;div class=&quot;header&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> info<br>
-</td>
-    <td> Availability information<br>
-</td>
-    <td> <code>&lt;span class=&quot;info&quot;&gt;</code><br>
-</td>
+    <tr>    <td> info</td>
+    <td> Availability information</td>
+    <td> <code>&lt;span class=&quot;info&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> left<br>
-</td>
-    <td> Left-aligned text in cell<br>
-</td>
-    <td> <code>&lt;td class=&quot;left&quot;&gt;</code><br>
-</td>
+    <tr>    <td> left</td>
+    <td> Left-aligned text in cell</td>
+    <td> <code>&lt;td class=&quot;left&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> list<br>
-</td>
-    <td> A table list<br>
-</td>
-    <td> <code>&lt;table class=&quot;list&quot;&gt;</code><br>
-</td>
+    <tr>    <td> list</td>
+    <td> A table list</td>
+    <td> <code>&lt;table class=&quot;list&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> members<br>
-</td>
-    <td> A list of class/struct members<br>
-</td>
-    <td> <code>&lt;table class=&quot;members&quot;&gt;</code><br>
-</td>
+    <tr>    <td> members</td>
+    <td> A list of class/struct members</td>
+    <td> <code>&lt;table class=&quot;members&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> method<br>
-</td>
-    <td> A class or structure method<br>
-</td>
-    <td> <code>&lt;hN class=&quot;method&quot;&gt;</code><br>
-</td>
+    <tr>    <td> method</td>
+    <td> A class or structure method</td>
+    <td> <code>&lt;hN class=&quot;method&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> parameters<br>
-</td>
-    <td> A list of function parameters<br>
-</td>
-    <td> <code>&lt;hN class=&quot;parameters&quot;&gt;</code><br>
-</td>
+    <tr>    <td> parameters</td>
+    <td> A list of function parameters</td>
+    <td> <code>&lt;hN class=&quot;parameters&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> returnvalue<br>
-</td>
-    <td> The return value of a function<br>
-</td>
+    <tr>    <td> returnvalue</td>
+    <td> The return value of a function</td>
     <td> <code>&lt;hN class=&quot;returnvalue&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> right<br>
-</td>
-    <td> Right-aligned text in cell<br>
-</td>
-    <td> <code>&lt;td class=&quot;right&quot;&gt;</code><br>
-</td>
+    <tr>    <td> right</td>
+    <td> Right-aligned text in cell</td>
+    <td> <code>&lt;td class=&quot;right&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> struct<br>
-</td>
-    <td> A structure<br>
-</td>
-    <td> <code>&lt;hN class=&quot;struct&quot;&gt;</code><br>
-</td>
+    <tr>    <td> struct</td>
+    <td> A structure</td>
+    <td> <code>&lt;hN class=&quot;struct&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> subcontents<br>
-</td>
-    <td> Second-level contents<br>
-</td>
+    <tr>    <td> subcontents</td>
+    <td> Second-level contents</td>
     <td> <code>&lt;ul class=&quot;subcontents&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> title<br>
-</td>
-    <td> A title<br>
-</td>
-    <td> <code>&lt;hN class=&quot;title&quot;&gt;</code><br>
-</td>
+    <tr>    <td> title</td>
+    <td> A title</td>
+    <td> <code>&lt;hN class=&quot;title&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> typedef<br>
-</td>
-    <td> A typedef<br>
-</td>
-    <td> <code>&lt;hN class=&quot;typedef&quot;&gt;</code><br>
-</td>
+    <tr>    <td> typedef</td>
+    <td> A typedef</td>
+    <td> <code>&lt;hN class=&quot;typedef&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> union<br>
-</td>
-    <td> A union<br>
-</td>
-    <td> <code>&lt;hN class=&quot;union&quot;&gt;</code><br>
-</td>
+    <tr>    <td> union</td>
+    <td> A union</td>
+    <td> <code>&lt;hN class=&quot;union&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> variable<br>
-</td>
-    <td> A global variable<br>
-</td>
-    <td> <code>&lt;hN class=&quot;variable&quot;&gt;</code><br>
-</td>
+    <tr>    <td> variable</td>
+    <td> A global variable</td>
+    <td> <code>&lt;hN class=&quot;variable&quot;&gt;</code></td>
 </tr>
 </tbody>
 </table>
     <h3 class="title" id="default-stylesheet">Default Stylesheet</h3>
     <pre><code>body, p, h1, h2, h3, h4, h5, h6 {
   font-family: sans-serif;
+  line-height: 1.4;
 }
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
@@ -524,19 +524,15 @@ blockquote {
   page-break-inside: avoid;
 }
 p code, li code, p.code, pre, ul.code li {
-  background: rgba(127,127,127,0.1);
-  border: thin dotted gray;
   font-family: monospace;
-  font-size: 90%;
   hyphens: manual;
   -webkit-hyphens: manual;
-  page-break-inside: avoid;
 }
 p.code, pre, ul.code li {
+  background: rgba(127,127,127,0.1);
+  border: thin dotted gray;
   padding: 10px;
-}
-p code, li code {
-  padding: 2px 5px;
+  page-break-inside: avoid;
 }
 a:link, a:visited {
   text-decoration: none;
