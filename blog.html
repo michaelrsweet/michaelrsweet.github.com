@@ -18,6 +18,8 @@ layout: default
       {{ post.excerpt }}
       {% if post.excerpt != post.content %}
       <p><a class="btn btn-default btn-xs" href="{{ post.url }}">More</a><br>&nbsp;</p>
+      {% elsif post.comments %}
+      <p><a class="btn btn-default btn-xs" href="{{ post.url }}">Comments</a><br>&nbsp;</p>
       {% else %}
       <p>&nbsp;</p>
       {% endif %}

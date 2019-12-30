@@ -60,31 +60,28 @@
 	<div class="col-sm-12">
 	  {{content}}
 	  {% if page.comments %}
-	  <div id="msweet_comments"></div>
+	  <h2>Comments (<span id="comment-count">0</span>)</h2>
+	  <div id="comments"></div>
 	  {% endif %}
 	  {% if page.commentform %}
-	  <h3 id="comment-new">New Comment</h3>
-	  <form method="POST" class="form-horizontal" action="https://api.msweet.org/post-comment.php">
-	    <input type="hidden" name="PAGE" value="{{page.url}}">
-	    <input id="website" type="text" name="website">
-	    <div class="form-group">
-	      <label class="col-sm-2 control-label" for="name">Name:</label>
-	      <div class="col-sm-10">
-	        <input type="text" name="name" size="40" placeholder="Your name or blank for anonymous.">
-	      </div>
+	  <div class="panel panel-default">
+	    <div class="panel-heading"><h3 id="comment-new" class="panel-title">New Comment</h3></div>
+	    <div class="panel-body">
+	      <form id="comment-form">
+		<input type="hidden" name="PAGE" value="{{page.url}}">
+		<input id="website" type="text" name="website">
+		<div class="form-group">
+		  <label for="name">Name:</label>
+		  <input class="form-control" type="text" name="name" placeholder="Your name or blank for anonymous.">
+		</div>
+		<div class="form-group">
+		  <label for="body">Comment:</label>
+		  <textarea class="form-control" id="comment-body" name="body" rows="5" wrap="virtual" placeholder="Your comment."></textarea>
+		</div>
+		<button type="submit" class="btn">Post Comment</button>
+	      </form>
 	    </div>
-	    <div class="form-group">
-	      <label class="col-sm-2 control-label" for="body">Comment:</label>
-	      <div class="col-sm-10">
-	        <textarea name="body" cols="80" rows="5" wrap="virtual" placeholder="Your comment (markdown supported)."></textarea>
-	      </div>
-	    </div>
-	    <div class="form-group">
-	      <div class="col-sm-10 col-sm-offset-2">
-	        <button type="submit" class="btn">Post Comment</button>
-	      </div>
-	    </div>
-	  </form>
+	  </div>
 	  {% endif %}
 	</div>
       </div>
@@ -98,7 +95,27 @@
     {% if page.comments %}
     <script type="text/javascript">
     $(document).ready( function() {
-      $('#msweet_comments').load('https://api.msweet.org/list-comments.php?PAGE={{page.url | cg==cgi_escape}}');
+      $('#comments').load('https://api.msweet.org/list-comments.php?PAGE={{page.url | cgi_escape}}', function() {
+	count = $('#comments div.panel').length;
+	$('#comment-count').html(count.toString());
+      });
+    });
+    function post_comment() {
+      const XHR = new XMLHttpRequest();
+      const FD = new FormData(document.getElementById('comment-form'));
+      XHR.addEventListener('load', function(event) {
+        $('#comments').append(event.target.responseText);
+	count = $('#comments div.panel').length;
+	$('#comment-count').html(count.toString());
+      });
+      XHR.open('POST', 'https://api.msweet.org/post-comment.php');
+      XHR.send(FD);
+    }
+    $('#comment-form').submit('submit', function(event) {
+      event.preventDefault();
+      if ($('#comment-body').val() != '')
+        post_comment();
+      $('#comment-body').val('');
     });
     </script>
     {% endif %}
