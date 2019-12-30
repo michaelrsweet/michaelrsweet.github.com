@@ -15,7 +15,7 @@ layout: default
   <div class="row">
     <div class="col-sm-12">
 {% for post in site.posts offset: 0 limit: 8 %}
-      <h2><a href="{{ post.url }}">{{post.title}} <small>{{ post.date | date_to_string }}</small></a></h2>
+      <h2><a href="{{ post.url }}">{{post.title}} <small>{{ post.date | date: "%B %d, %Y" }}</small></a></h2>
       {{ post.excerpt }}
       {% if post.excerpt != post.content %}
       <p><a class="btn btn-default btn-xs" href="{{ post.url }}">More</a><br>&nbsp;</p>
