@@ -576,8 +576,13 @@ div.body dd {
   code, kbd {
     color: #c00;
   }
-  blockquote {
+  blockquote, div.panel {
     background: #333;
+    border-color: #666;
+    color: #eee;
+  }
+  div.panel-default > div.panel-heading, .form-control {
+    background: #444;
     border-color: #666;
     color: #eee;
   }
