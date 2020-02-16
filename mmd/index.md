@@ -8,7 +8,7 @@ project_name: mmd
 logo: mmd-160.png
 html_doc: mmd.html
 snap: mmd
-layout: project
+layout: project-news
 ---
 
 `mmd` is a miniature markdown parsing "library" consisting of a single C source

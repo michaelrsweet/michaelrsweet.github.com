@@ -8,7 +8,7 @@ project_name: LPrint
 logo: lprint-160.png
 html_doc: lprint.html
 snap: lprint
-layout: project
+layout: project-news
 ---
 
 LPrint implements printing for a variety of common label and receipt printers

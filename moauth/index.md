@@ -8,7 +8,7 @@ project_name: mOAuth
 logo: moauth-160.png
 html_doc: moauth.html
 snap: moauth
-layout: project
+layout: project-news
 ---
 
 mOAuth is a basic OAuth 2.0 client/server implementation designed for testing

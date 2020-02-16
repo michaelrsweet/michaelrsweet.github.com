@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/michaelrsweet.css">
+    <link rel="shortcut icon" href="/apple-touch-icon.png" type="image/png">
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>{{page.title}}</title>
+    <meta name="keywords" content="linux,macos,software,unix,windows">
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#msweet-nav-collapse">
+	    <span class="sr-only">Toggle Navigation</span>
+	    <span class="icon-bar"></span>
+	    <span class="icon-bar"></span>
+	    <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><img src="/apple-touch-icon.png"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="msweet-nav-collapse">
+	  <ul class="nav navbar-nav">
+	    <li><a href="/about.html">About</a></li>
+	    <li><a href="/blog.html">Blog</a></li>
+	    <li><a href="/books.html">Books</a></li>
+	    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <span class="caret"></span></a><ul class="dropdown-menu" role="menu">
+	      <li><a href="https://github.com/michaelrsweet">All</a></li>
+	      <li><a href="/pgp.html">PGP Information</a></li>
+	      <li class="divider"></li>
+	      <li><a href="/abnf">ABNF to REGEX</a></li>
+	      <li><a href="/codedoc"><img src="/codedoc/codedoc-160.png" width="24" height="24"> codedoc</a></li>
+	      <li><a href="/epm"><img src="/epm/epm-160.png" width="24" height="24"> EPM</a></li>
+	      <li><a href="/htmlcss"><img src="/htmlcss/htmlcss-160.png" width="24" height="24"> htmlcss</a></li>
+	      <li><a href="/htmldoc"><img src="/htmldoc/htmldoc-160.png" width="24" height="24"> HTMLDOC</a></li>
+	      <li><a href="/lprint"><img src="/lprint/lprint-160.png" width="24" height="24"> LPrint</a></li>
+	      <li><a href="/mxml"><img src="/mxml/mxml-160.png" width="24" height="24"> Mini-XML</a></li>
+	      <li><a href="/mmd"><img src="/mmd/mmd-160.png" width="24" height="24"> mmd</a></li>
+	      <li><a href="/moauth"><img src="/moauth/moauth-160.png" width="24" height="24"> moauth</a></li>
+	      <li><a href="/rasterview"><img src="/rasterview/rasterview-160.png" width="24" height="24"> RasterView</a></li>
+	      <li><a href="/zipc"><img src="/zipc/zipc-160.png" width="24" height="24"> zipc</a></li>
+	    </ul></li>
+	  </ul>
+	  {% if page.snap %}<div class="navbar-status"><a href="https://build.snapcraft.io/user/michaelrsweet/{{page.snap}}"><img src="https://build.snapcraft.io/badge/michaelrsweet/{{page.snap}}.svg" alt="Snapcraft Build Status"></a></div>{% endif %}
+	</div>
+      </div>
+    </nav>
+    <div class="container-fluid container-header">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1>{% if page.logo %}<img class="logo" src="{{page.logo}}">{% endif %}{{page.project_name}} <small>{{page.subtitle}}</small></h1>
+          <div class="btn-toolbar">
+            <div class="btn-group"><a class="btn btn-primary" href="index.html">Home Page <span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></div>
+            <div class="btn-group">
+              <button class="btn btn-normal dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Documentation <span class="glyphicon glyphicon-book" aria-hidden="true"></span> <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li><a href="{{page.html_doc}}">HTML</a></li>
+                {% if page.epub_doc %}<li><a href="{{page.epub_doc}}">EPUB</a></li>{% endif %}
+                {% if page.pdf_doc %}<li><a href="{{page.pdf_doc}}">PDF</a></li>{% endif %}
+              </ul>
+            </div>
+            <div class="btn-group"><a class="btn btn-normal" href="https://github.com/michaelrsweet/{{page.project}}/releases">Download {{page.project}} <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></div>
+            <div class="btn-group"><a class="btn btn-normal" href="https://github.com/michaelrsweet/{{page.project}}">Github Project <span class="glyphicon glyphicon-console" aria-hidden="true"></span></a></div>
+            <div class="btn-group"><a class="btn btn-normal" href="https://github.com/michaelrsweet/{{page.project}}/issues">Issue Tracker <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12 col-md-9">
+          {{ content }}
+        </div>
+        <div class="col-sm-12 col-md-3">
+          <h2 style="margin-top: 0;">News</h2>
+{% for post in site.posts %}
+{% if post.category == page.project %}
+          <p><a href="{{ post.url }}">{{post.title}} <small>{{ post.date | date: "%B %d, %Y" }}</small></a></p>
+{% endif %}
+{% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid container-footer">&nbsp;</div>
+    <div class="footer">
+      <p>Copyright &copy; 1991-{{ site.time | date: "%Y" }} by Michael R Sweet. All rights reserved.</p>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+  </body>
+</html>

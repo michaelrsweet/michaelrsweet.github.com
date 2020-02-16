@@ -7,7 +7,7 @@ project: zipc
 project_name: zipc
 logo: zipc-160.png
 html_doc: zipc.html
-layout: project
+layout: project-news
 ---
 
 `zipc` is a simple ZIP container "library" consisting of a C source file and

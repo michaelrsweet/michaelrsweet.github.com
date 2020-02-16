@@ -10,7 +10,7 @@ epub_doc: htmldoc.epub
 html_doc: htmldoc.html
 pdf_doc: htmldoc.pdf
 snap: htmldoc
-layout: project
+layout: project-news
 ---
 
 HTMLDOC is a program that reads HTML and Markdown source files or web pages and

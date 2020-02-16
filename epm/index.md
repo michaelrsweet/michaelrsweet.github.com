@@ -9,7 +9,7 @@ logo: epm-160.png
 epub_doc: epm.epub
 html_doc: epm.html
 pdf_doc: epm.pdf
-layout: project
+layout: project-news
 ---
 
 EPM is a simple cross-platform tool that generates software and patch

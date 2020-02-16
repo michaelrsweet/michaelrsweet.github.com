@@ -8,7 +8,7 @@ project_name: RasterView
 logo: rasterview-160.png
 html_doc: rasterview.html
 snap: rasterview
-layout: project
+layout: project-news
 ---
 
 RasterView is a CUPS, PWG, and Apple raster file viewer.  It basically allows

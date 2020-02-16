@@ -1,5 +1,5 @@
 ---
-title: RasterView 1.4 Now Available
+title: RasterView 1.4
 category: rasterview
 layout: post
 permalink: /blog/:year-:month-:day-:title.html

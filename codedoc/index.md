@@ -8,7 +8,7 @@ project_name: codedoc
 logo: codedoc-160.png
 html_doc: codedoc.html
 snap: codedoc
-layout: project
+layout: project-news
 ---
 
 Codedoc is a general-purpose utility which scans HTML, markdown, C, and C++
