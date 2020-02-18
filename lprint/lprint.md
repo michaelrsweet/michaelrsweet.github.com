@@ -14,7 +14,7 @@ layout: project
 LPrint Documentation
 ====================
 
-LPrint v1.0rc1 - February 10, 2020
+LPrint v1.0 - February 17, 2020
 Copyright 2019-2020 by Michael R Sweet
 
 LPrint is licensed under the Apache License Version 2.0 with an exception to
