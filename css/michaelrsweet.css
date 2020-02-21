@@ -75,12 +75,6 @@ img.logo {
   width: 80px;
 }
 
-[class^="icon-"],
-[class*=" icon-"] {
-  line-height: 20px;
-  vertical-align: baseline;
-}
-
 a.btn, button.btn {
   background: #ccc;
   border-color: #ccc;
@@ -93,7 +87,7 @@ a.btn, button.btn {
   text-decoration: none;
 }
 
-a.btn:hover {
+a.btn:hover, button.btn:hover {
   background: #ddd;
   border-color: #ddd;
   color: #f00;
@@ -107,13 +101,13 @@ a.btn:hover {
   color: black;
 }
 
-.container-header a.btn {
+.container-header a.btn, .container-header button.btn  {
   background: #ccc;
   border-color: #ccc;
   color: #000;
 }
 
-.container-header a.btn:hover {
+.container-header a.btn:hover, .container-header button.btn:hover {
   background: #ddd;
   border-color: #ddd;
   color: #f00;
@@ -140,21 +134,35 @@ h1 {
   margin-top: 0px;
 }
 
-/* Header, footer, and navigation */
-nav.navbar-inverse {
-  background-color: rgba(0,0,0,0.8);
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.8) inset;
+div.btn-toolbar {
+  margin-top: -10px;
 }
 
-.navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover {
+div.btn-group {
+  margin-top: 10px;
+}
+
+/* Header, footer, and navigation */
+nav.bg-msweet {
+  background-color: rgba(0,0,0,0.8);
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.8) inset;
+  padding: 5px 15px;
+}
+
+.navbar.navbar-dark .navbar-nav .nav-item a.nav-link {
   color: #e00;
   text-decoration: none;
 }
-.navbar-inverse .navbar-nav > li > a:hover {
+.navbar.navbar-dark .navbar-nav .nav-item a.nav-link:hover {
   color: #f00;
   text-decoration: none;
 }
-ul.dropdown-menu a:link, ul.dropdown-menu a:visited {
+a.dropdown-item:link, a.dropdown-item:visited {
+  text-decoration: none;
+}
+a.dropdown-item:hover {
+  background: rgba(238,238,238,0.95);
+  color: #f00;
   text-decoration: none;
 }
 
@@ -176,10 +184,6 @@ a.navbar-brand img:hover {
 .navbar-status {
   float: right;
   margin-top: 8px;
-}
-
-nav .container-fluid {
-  padding: 5px 15px;
 }
 
 .container-fluid {
@@ -591,6 +595,15 @@ div.body dd {
     border: dotted thin #666;
     color: #eee;
   }
+  .dropdown-menu {
+    background: rgba(34,34,34,0.95);
+  }
+  .dropdown-divider {
+    border-color: #444;
+  }
+  a.dropdown-item:hover {
+    background: rgba(68,68,68,0.95);
+  }
   .container-header {
     background: #333;
     background-image: linear-gradient(#222, #333);
@@ -623,7 +636,7 @@ div.body dd {
     height: 80px;
     width: 80px;
   }
-  nav.navbar-fixed-top {
+  nav.fixed-top {
     position: relative;
   }
   .footer {
@@ -635,6 +648,9 @@ div.body dd {
   }
   .container-fluid {
     padding: 25px 20px;
+  }
+  .container-footer {
+    display: none;
   }
   .navbar-status {
     float: none;
@@ -668,7 +684,7 @@ div.body dd {
     display: none;
   }
 
-  DIV.footer {
+  div.footer {
     font-style: italic;
     position: relative;
   }

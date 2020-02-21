@@ -13,4 +13,4 @@ install the official binaries on Linux.
 
 Enjoy!
 
-<a class="btn btn-default" href="/htmldoc/index.html">Home Page <span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
+<a class="btn btn-default" href="/htmldoc/index.html">Home Page</a>

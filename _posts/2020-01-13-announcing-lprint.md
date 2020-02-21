@@ -38,6 +38,6 @@ job status.
 
 I plan on doing a 1.0 beta release very soon.  Enjoy!
 
-<a class="btn btn-primary" href="https://github.com/michaelrsweet/lprint">Download LPrint <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a>
-<a class="btn btn-default" href="https://snapcraft.io/lprint">Install lprint Snap <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a>
-<a class="btn btn-default" href="/lprint/index.html">Home Page <span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>
+<a class="btn btn-primary" href="https://github.com/michaelrsweet/lprint">Download LPrint</a>
+<a class="btn btn-default" href="https://snapcraft.io/lprint">Install lprint Snap</a>
+<a class="btn btn-default" href="/lprint/index.html">Home Page</a>

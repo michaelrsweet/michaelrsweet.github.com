@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/michaelrsweet.css">
     <link rel="shortcut icon" href="/apple-touch-icon.png" type="image/png">
     <meta charset="utf-8">
@@ -13,52 +13,45 @@
     <meta name="keywords" content="linux,macos,software,unix,windows">
   </head>
   <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#msweet-nav-collapse">
-	    <span class="sr-only">Toggle Navigation</span>
-	    <span class="icon-bar"></span>
-	    <span class="icon-bar"></span>
-	    <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/"><img src="/apple-touch-icon.png"></a>
-        </div>
-        <div class="collapse navbar-collapse" id="msweet-nav-collapse">
-	  <ul class="nav navbar-nav">
-	    <li><a href="/about.html">About</a></li>
-	    <li><a href="/blog.html">Blog</a></li>
-	    <li><a href="/books.html">Books</a></li>
-	    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <span class="caret"></span></a><ul class="dropdown-menu" role="menu">
-	      <li><a href="https://github.com/michaelrsweet">All</a></li>
-	      <li><a href="/pgp.html">PGP Information</a></li>
-	      <li class="divider"></li>
-	      <li><a href="/abnf">ABNF to REGEX</a></li>
-	      <li><a href="/codedoc"><img src="/codedoc/codedoc-160.png" width="24" height="24"> codedoc</a></li>
-	      <li><a href="/epm"><img src="/epm/epm-160.png" width="24" height="24"> EPM</a></li>
-	      <li><a href="/htmlcss"><img src="/htmlcss/htmlcss-160.png" width="24" height="24"> htmlcss</a></li>
-	      <li><a href="/htmldoc"><img src="/htmldoc/htmldoc-160.png" width="24" height="24"> HTMLDOC</a></li>
-	      <li><a href="/lprint"><img src="/lprint/lprint-160.png" width="24" height="24"> LPrint</a></li>
-	      <li><a href="/mxml"><img src="/mxml/mxml-160.png" width="24" height="24"> Mini-XML</a></li>
-	      <li><a href="/mmd"><img src="/mmd/mmd-160.png" width="24" height="24"> mmd</a></li>
-	      <li><a href="/moauth"><img src="/moauth/moauth-160.png" width="24" height="24"> moauth</a></li>
-	      <li><a href="/rasterview"><img src="/rasterview/rasterview-160.png" width="24" height="24"> RasterView</a></li>
-	      <li><a href="/zipc"><img src="/zipc/zipc-160.png" width="24" height="24"> zipc</a></li>
-	    </ul></li>
-	  </ul>
-	</div>
+    <nav class="navbar navbar-expand-md navbar-dark bg-msweet fixed-top" role="navigation">
+      <a class="navbar-brand" href="/"><img src="/apple-touch-icon.png"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#msweet-nav-collapse" aria-controls="msweet-nav-collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="msweet-nav-collapse">
+        <ul class="nav navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="/about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="/blog.html">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="/books.html">Books</a></li>
+          <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="projects" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Projects</a><div class="dropdown-menu" aria-labelledby="projects">
+            <a class="dropdown-item" href="https://github.com/michaelrsweet">All</a>
+            <a class="dropdown-item" href="/pgp.html">PGP Information</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/abnf">ABNF to REGEX</a>
+            <a class="dropdown-item" href="/codedoc"><img src="/codedoc/codedoc-160.png" width="24" height="24"> codedoc</a>
+            <a class="dropdown-item" href="/epm"><img src="/epm/epm-160.png" width="24" height="24"> EPM</a>
+            <a class="dropdown-item" href="/htmlcss"><img src="/htmlcss/htmlcss-160.png" width="24" height="24"> htmlcss</a>
+            <a class="dropdown-item" href="/htmldoc"><img src="/htmldoc/htmldoc-160.png" width="24" height="24"> HTMLDOC</a>
+            <a class="dropdown-item" href="/lprint"><img src="/lprint/lprint-160.png" width="24" height="24"> LPrint</a>
+            <a class="dropdown-item" href="/mxml"><img src="/mxml/mxml-160.png" width="24" height="24"> Mini-XML</a>
+            <a class="dropdown-item" href="/mmd"><img src="/mmd/mmd-160.png" width="24" height="24"> mmd</a>
+            <a class="dropdown-item" href="/moauth"><img src="/moauth/moauth-160.png" width="24" height="24"> moauth</a>
+            <a class="dropdown-item" href="/rasterview"><img src="/rasterview/rasterview-160.png" width="24" height="24"> RasterView</a>
+            <a class="dropdown-item" href="/zipc"><img src="/zipc/zipc-160.png" width="24" height="24"> zipc</a>
+          </div></li>
+        </ul>
       </div>
     </nav>
     <div class="container-fluid container-header">
       <div class="row">
-	<div class="col-sm-12">
+	<div class="col-12">
 	  <h1>{{page.title}} <small>{{ page.date | date: "%B %d, %Y" }}</small></h1>
 	</div>
       </div>
     </div>
     <div class="container-fluid">
       <div class="row">
-	<div class="col-sm-12">
+	<div class="col-12">
 	  {{content}}
 	  {% if page.comments %}
 	  <h2>Comments (<span id="comment-count">0</span>)</h2>
@@ -92,7 +85,8 @@
       <p>Copyright &copy; 1991-{{ site.time | date: "%Y" }} by Michael R Sweet. All rights reserved. Contact &ldquo;webmaster&#64;msweet&#46;org&rdquo; for assistance.</p>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     {% if page.comments %}
     <script type="text/javascript">
     $(document).ready( function() {
