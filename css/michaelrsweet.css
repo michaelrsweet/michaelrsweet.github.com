@@ -134,6 +134,10 @@ h1 {
   margin-top: 0px;
 }
 
+h2 a:link {
+  text-decoration: underline;
+}
+
 div.btn-toolbar {
   margin-top: -10px;
 }
