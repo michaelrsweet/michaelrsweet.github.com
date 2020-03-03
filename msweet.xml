@@ -1,0 +1,38 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<title>The Random Books, Software, and Thoughts</title>
+	<subtitle>of Michael R Sweet</subtitle>
+	<link href="https://www.msweet.org/msweet.xml" rel="self" />
+	<link href="https://www.msweet.org/" />
+	<id>urn:uuid:ef1d5fc0-f993-4845-879c-cf587eb10e4f</id>
+	<icon>https://www.msweet.org/apple-touch-icon.png</icon>
+	<updated>{{ site.time | date_to_xmlschema }}</updated>
+        {% for post in site.posts %}
+	<entry>
+		<title type="html">{{ post.title | xml_escape }}</title>
+		<category term="{{ post.category }}" />
+		<link rel="alternate" type="text/html" href="https://www.msweet.org{{ post.url }}" />
+		<id>https://www.msweet.org{{ post.url}}</id>
+		<updated>{{ post.date | date_to_xmlschema }}</updated>
+		<content type="html" base="https://www.msweet.org">
+			<html>
+				<head>
+					<title>{{ post.title | xml_escape }}</title>
+					<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+					<link rel="stylesheet" type="text/css" href="/css/michaelrsweet.css" />
+				</head>
+				<body>
+					{{ post.content }}
+				</body>
+			</html>
+		</content>
+		<author>
+			<name>Michael R Sweet</name>
+			<email>webmaster@msweet.org</email>
+		</author>
+	</entry>
+        {% endfor %}
+</feed>
