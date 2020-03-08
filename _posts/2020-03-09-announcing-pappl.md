@@ -8,7 +8,8 @@ comments: true
 commentform: true
 ---
 
-PAPPL is a Printer Application framework/library.  I am developing it to support
+<img class="float-left mr-2 mt-2" src="/pappl/pappl-160.png" width="80" height="80">PAPPL
+is a Printer Application framework/library.  I am developing it to support
 future features in LPrint as well as making a Printer Application for
 Gutenprint.  My hope is that it will accelerate the adoption of IPP Everywhere™
 and make it easier for people to support other IPP-based licensing programs like
