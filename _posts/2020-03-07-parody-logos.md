@@ -27,9 +27,10 @@ Operating System Logos:
 <img class="bg-light rounded" src="/images/doors.png" width="200" height="100" alt="Operating System: Doors">
 <img class="bg-light rounded" src="/images/humanoid.png" width="300" height="84" alt="Operating System: humanoid">
 
-Technology Logo:
+Technology Logos:
 
 <img class="bg-light rounded" src="/images/cup-and-string.png" width="200" height="144" alt="Technology: CUPS and String">
+<img class="bg-light rounded" src="/images/goldtooth.png" width="300" height="75" alt="Technology: Goldtooth">
 
 Licensing Logo:
 
