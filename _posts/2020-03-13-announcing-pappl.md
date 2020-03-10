@@ -11,9 +11,11 @@ commentform: true
 <img class="float-left mr-2 mt-2" src="/pappl/pappl-160.png" width="80" height="80">PAPPL
 is a Printer Application framework/library.  I am developing it to support
 future features in LPrint as well as making a Printer Application for
-Gutenprint.  My hope is that it will accelerate the adoption of IPP Everywhere™
-and make it easier for people to support other IPP-based licensing programs like
-AirPrint™ and Mopria™.
+Gutenprint.  My hope is that it will accelerate the adoption of
+[IPP Everywhere™](https://www.pwg.org/ipp/everywhere.html) and make it easier
+for people to support other IPP-based licensing programs like
+[AirPrint™](https://support.apple.com/en-us/HT201311) and
+[Mopria®](https://mopria.org).
 
 PAPPL is licensed under the Apache License Version 2.0 with an exception
 to allow linking against GPL2/LGPL2 software (like older versions of CUPS),
@@ -27,6 +29,7 @@ I am also available to do consulting and/or development through my company
 <a class="btn btn-default" href="https://github.com/michaelrsweet/pappl">Github Project</a>
 
 <!--more-->
+
 
 Overview
 --------
@@ -60,8 +63,8 @@ IPP Server
 ----------
 
 PAPPL fully implements the
-[IPP Everywhere™](https://ftp.pwg.org/pub/pwg/candidates/cs-ippeve10-20130128-5100.14.pdf)
-specification and passes the
+[IPP Everywhere™ specification](https://ftp.pwg.org/pub/pwg/candidates/cs-ippeve10-20130128-5100.14.pdf)
+and passes the
 [IPP Everywhere™ Printer Self-Certification Manual](https://ftp.pwg.org/pub/pwg/candidates/cs-ippeveselfcert10-20160219-5100.20.pdf)
 tests.  PAPPL also implements several IPP extensions used for IPP-based
 licensing programs to simplify certification, including the CUPS "marker-xxx"
@@ -69,8 +72,8 @@ attributes, the Get-Printer-Attributes operation using the resource path "/",
 and the CUPS-Get-Printers operation.
 
 When configured to support multiple printers, PAPPL implements a subset of the
-[IPP System Service v1.0](https://ftp.pwg.org/pub/pwg/candidates/cs-ippsystem10-20191122-5100.22.pdf)
-specification to allow creation, deletion, and enumeration of printers.
+[IPP System Service v1.0 specification](https://ftp.pwg.org/pub/pwg/candidates/cs-ippsystem10-20191122-5100.22.pdf)
+to allow creation, deletion, and enumeration of printers.
 
 
 DNS-SD Discovery
@@ -114,18 +117,18 @@ and capability information to PAPPL, and PAPPL then calls the driver to start
 a job, start a page, output lines of graphics, end a page, and finally end a
 job during the processing of a print job.
 
-The driver interface supports 1-bit grayscale (clustered-dot or dispersed-dot)
-and 1-bit bi-level (threshold) dithering using a 16x16 matrix.  This is
+The driver interface supports 1-bit grayscale (clustered- or dispersed-dot)
+and 1-bit bi-level (threshold) dithering using a 16x16 matrix, which is
 sufficient to support most B&W printing needs.  Continuous tone printing is
 supported using 8-bit and 16-bit per component sGray, sRGB, AdobeRGB, or
 DeviceN (K, RGB, CMYK, etc.) raster data.
 
 Drivers can also specify "raw" formats that the printer accepts directly - this
 is most useful for printers that support industry standard formats such as FGL,
-PCL, or ZPL which are produced directly by common applications - shipping and
-billing automation often falls into this category.  "Raw" files are submitted to
-the driver using a "print file" interface, allowing the driver to add any
-printer-specific commands that are needed to successfully print them.
+PCL, or ZPL which are produced directly by common shipping and billing
+automation applications.  "Raw" files are submitted to the driver using a
+separate "print file" interface, allowing the driver to add any printer-specific
+commands that are needed to successfully print them.
 
 Aside from printing functionality, drivers can also provide up-to-date status
 and configuration information by querying the printer when requested by the
@@ -133,10 +136,9 @@ embedded server.  This is an improvement over the CUPS command file interface
 and allows a PAPPL-based driver to provide details such as updated media
 information.
 
-Drivers can also provide printer identification - usually a sound or a light on
-the printer - that is used when multiple printers are present and the user needs
-to know which printer they are using.
-
+Drivers can also support printer identification, usually a sound or a light on
+the printer, which is a requirement for IPP Everywhere™ and is used to visually
+or audibly isolate a particular printer for the user.
 
 
 Embedded Web Interface
@@ -152,6 +154,7 @@ to:
 - Set the printer location and DNS-SD name,
 - Configure the loaded media,
 - Configure remote access accounts,
+- Configure networking settings such as hostname and IP address,
 - Update the TLS certificates used by the server, and/or
 - Request software/firmware updates.
 
@@ -161,3 +164,12 @@ external files or directories.
 > Note: An embedded web interface is required for IPP Everywhere™ conformance.
 > The optional features allow a Printer Application to easily support the
 > functionality required for other IPP-based licensing programs.
+
+
+Going Forward
+-------------
+
+I'm planning on starting a series of beta releases soon, along with
+corresponding changes in the LPrint and Gutenprint repositories to use PAPPL.
+Once I have all three projects working as desired I'll do a 1.0 release of
+PAPPL.
