@@ -93,7 +93,7 @@
     <script type="text/javascript">
     $(document).ready( function() {
       $('#comments').load('https://api.msweet.org/list-comments.php?PAGE={{page.url | cgi_escape}}', function() {
-	count = $('#comments div.panel').length;
+	var count = $('#comments div.panel').length;
 	$('#comment-count').html(count.toString());
       });
     });
