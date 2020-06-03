@@ -12,6 +12,12 @@ code, kbd, p.code, p.command, p.summary, pre, ul.code li, input[type="search"] {
   font-size: 90%;
 }
 
+pre {
+  background: #eee;
+  margin-left: 40px;
+  padding: 10px;
+}
+
 pre, pre code {
   white-space: pre;
 }
@@ -45,11 +51,11 @@ small {
   color: #555;
 }
 
-code, kbd {
+kbd {
   background: inherit;
-  border-radius: inherit;
+}
+code, kbd {
   color: #600;
-  padding: inherit;
 }
 
 a:link, a:visited {
