@@ -11,8 +11,6 @@ html_doc: pappl.html
 layout: project-news
 ---
 
-> Note: This project is in its infancy and is *not* yet in a working state.
-
 PAPPL is a simple C-based framework/library for developing CUPS Printer
 Applications, which are the recommended replacement for printer drivers.  I
 have specifically developed PAPPL to support [LPrint][1] and a [Gutenprint][2]
@@ -26,9 +24,9 @@ PAPPL provides access to the printer via its embedded [IPP Everywhere™][3]
 service, either local to the computer or on your whole network, which can then
 be discovered and used by any application.
 
-PAPPL includes a tutorial showing how to migrate the `rastertopcl` driver from
-CUPS to a Printer Application, which can be used as a recipe for migrating any
-CUPS driver.
+The OpenPrinting group has [written a tutorial][12] showing how to migrate the
+`rastertohp` driver from CUPS to a Printer Application, which can be used as a
+recipe for migrating any CUPS driver.
 
 PAPPL is licensed under the Apache License Version 2.0 with an exception
 to allow linking against GPL2/LGPL2 software (like older versions of CUPS),
@@ -92,18 +90,14 @@ File Formats
 ------------
 
 PAPPL supports JPEG, PNG, PWG Raster, and Apple Raster documents in all of the
-standard color spaces and bit depths.  JPEG images are scaled to the destination
-media size and print resolution using bilinear interpolation, while PNG images
-are scaled using a nearest-neighbor algorithm to preserve edge detail in bar
-codes and other non-photographic content.  PWG Raster and Apple Raster documents
-are not scaled as they are normally sent at the proper resolution and size by
-the print client.
+standard color spaces and bit depths.  JPEG and PNG images are scaled to the
+destination media size and print resolution.  PWG Raster and Apple Raster
+documents are *not* scaled as they are normally sent at the proper resolution
+and size by the print client.
 
 PAPPL also allows drivers to advertise support for other "raw" formats that are
-directly supported by the printer.
-
-> I am investigating options for PDF printing support in a future version of
-> PAPPL.  This work is being tracked the Github project.
+directly supported by the printer.  And applications can register filters for
+other formats.
 
 
 Driver Interface
@@ -152,9 +146,8 @@ to:
 - Set the printer location and DNS-SD name,
 - Configure the loaded media,
 - Configure remote access accounts,
-- Configure networking settings such as hostname and IP address,
-- Update the TLS certificates used by the server, and/or
-- Request software/firmware updates.
+- Configure networking settings such as the hostname, and/or
+- Update the TLS certificates used by the server.
 
 You can also add custom pages and content using callbacks, static data, or
 external files or directories.
@@ -169,9 +162,9 @@ Legal Stuff
 
 PAPPL is Copyright © 2019-2020 by Michael R Sweet.
 
-This software is licensed under the Apache License Version 2.0 with an exception
-to allow linking against GPL2/LGPL2 software (like older versions of CUPS).  See
-the files "LICENSE" and "NOTICE" for more information.
+This software is licensed under the Apache License Version 2.0 with an
+(optional) exception to allow linking against GPL2/LGPL2 software (like older
+versions of CUPS).  See the files "LICENSE" and "NOTICE" for more information.
 
 This software is based loosely on the "ippeveprinter.c" code from [CUPS][11].
 
@@ -187,3 +180,4 @@ This software is based loosely on the "ippeveprinter.c" code from [CUPS][11].
 [9]: https://ftp.pwg.org/pub/pwg/candidates/cs-ippeveselfcert10-20160219-5100.20.pdf
 [10]: https://ftp.pwg.org/pub/pwg/candidates/cs-ippsystem10-20191122-5100.22.pdf
 [11]: https://www.cups.org/
+[12]: https://openprinting.github.io/documentation/02-designing-printer-drivers/
