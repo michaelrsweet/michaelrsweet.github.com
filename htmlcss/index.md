@@ -2,7 +2,7 @@
 title: HTML/CSS Parsing Library
 subtitle: A HTML/CSS Parsing Library
 author: Michael R Sweet
-copyright: Copyright © 2018-2019 by Michael R Sweet
+copyright: Copyright © 2018-2020 by Michael R Sweet
 project: htmlcss
 project_name: htmlcss
 logo: htmlcss-160.png
@@ -10,7 +10,7 @@ xhtml_doc: htmlcss.html
 layout: project
 ---
 
-> Note: This library is under active development and is not yet complete!
+> Note: This library is under development and is not yet complete!
 
 HTMLCSS is a lightweight HTML/CSS parser written in C that allows applications
 to prepare a HTML document for rendering or conversion.  HTMLCSS is extremely
