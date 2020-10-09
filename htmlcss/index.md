@@ -6,7 +6,7 @@ copyright: Copyright © 2018-2020 by Michael R Sweet
 project: htmlcss
 project_name: htmlcss
 logo: htmlcss-160.png
-xhtml_doc: htmlcss.html
+html_doc: htmlcss.html
 layout: project
 ---
 
