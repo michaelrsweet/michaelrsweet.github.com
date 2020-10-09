@@ -1,15 +1,29 @@
----
-title: How to Use the codedoc Utility
-author: Michael R Sweet
-copyright: Copyright © 2003-2019 by Michael R Sweet
-project: codedoc
-project_name: codedoc
-logo: codedoc-160.png
-html_doc: codedoc.html
-snap: codedoc
-layout: project
----
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>How to Use the codedoc Utility</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="generator" content="codedoc v3.5">
+    <meta name="author" content="Michael R Sweet">
+    <meta name="language" content="en-US">
+    <meta name="copyright" content="Copyright © 2003-2020 by Michael R Sweet">
+    <meta name="version" content="3.5">
     <style type="text/css"><!--
+body {
+  background: white;
+  color: black;
+  font-family: sans-serif;
+  font-size: 12pt;
+}
+a {
+  color: black;
+}
+a:link, a:visited {
+  color: #00f;
+}
+a:link:hover, a:visited:hover, a:active {
+  color: #c0c;
+}
 body, p, h1, h2, h3, h4, h5, h6 {
   font-family: sans-serif;
   line-height: 1.4;
@@ -46,6 +60,9 @@ h6 {
   margin-bottom: 0.5em;
   margin-top: 1.5em;
 }
+img.title {
+  width: 256px;
+}
 div.header h1, div.header p {
   text-align: center;
 }
@@ -63,7 +80,7 @@ div.contents, div.body, div.footer {
 }
 blockquote {
   border: solid thin gray;
-  box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+  box-shadow: 3px 3px 5px rgba(127,127,127,0.25);
   padding: 0px 10px;
   page-break-inside: avoid;
 }
@@ -73,7 +90,7 @@ p code, li code, p.code, pre, ul.code li {
   -webkit-hyphens: manual;
 }
 p.code, pre, ul.code li {
-  background: rgba(127,127,127,0.1);
+  background: rgba(127,127,127,0.25);
   border: thin dotted gray;
   padding: 10px;
   page-break-inside: avoid;
@@ -115,7 +132,7 @@ table {
   border-spacing: 0;
 }
 td {
-  border: solid 1px #666;
+  border: solid 1px gray;
   padding: 5px 10px;
   vertical-align: top;
 }
@@ -129,13 +146,14 @@ td.right {
   text-align: right;
 }
 th {
-  border-bottom: solid 2px #000;
+  border-bottom: solid 2px gray;
   padding: 1px 5px;
   text-align: center;
   vertical-align: bottom;
 }
 tr:nth-child(even) {
-  background: rgba(127,127,127,0.1);n}
+  background: rgba(127,127,127,0.25);
+}
 table.list {
   border-collapse: collapse;
   width: 100%;
@@ -144,6 +162,7 @@ table.list th {
   border-bottom: none;
   border-right: 2px solid gray;
   font-family: monospace;
+  font-weight: normal;
   padding: 5px 10px 5px 2px;
   text-align: right;
   vertical-align: top;
@@ -155,13 +174,59 @@ table.list td {
   vertical-align: top;
 }
 h2.title, h3.title {
-  border-bottom: solid 2px black;
+  border-bottom: solid 2px gray;
+}
+/* Dark mode overrides */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: black;
+    color: #ccc;
+  }
+  a {
+    color: #ccc;
+  }
+  a:link, a:visited {
+    color: #66f;
+  }
+  a:link:hover, a:visited:hover, a:active {
+    color: #f06;
+  }
+}
+/* Show contents on left side in web browser */
+@media screen and (min-width: 800px) {
+  div.contents {
+    border-right: solid thin gray;
+    bottom: 0px;
+    box-shadow: 3px 3px 5px rgba(127,127,127,0.5);
+    font-size: 10pt;
+    left: 0px;
+    overflow: scroll;
+    padding: 1%;
+    position: fixed;
+    top: 0px;
+    width: 18%;
+  }
+  div.contents h2.title {
+    margin-top: 0px;
+  }
+  div.header, div.body, div.footer {
+    margin-left: 20%;
+    padding: 1% 2%;
+  }
+}
+/* Center title page content vertically */
+@media print {
+  div.header {
+    padding-top: 33%;
+  }
 }
 --></style>
+  </head>
+  <body>
     <div class="header">
       <h1 class="title">How to Use the codedoc Utility</h1>
       <p>Michael R Sweet</p>
-      <p>Copyright &#xa9; 2003-2019 by Michael R Sweet</p>
+      <p>Copyright © 2003-2020 by Michael R Sweet</p>
     </div>
     <div class="contents">
       <h2 class="title">Contents</h2>
@@ -181,6 +246,7 @@ h2.title, h3.title {
         <li><a href="#epub-and-html-stylesheets">EPUB and HTML Stylesheets</a><ul class="subcontents">
           <li><a href="#css-classes">CSS Classes</a></li>
           <li><a href="#default-stylesheet">Default Stylesheet</a></li>
+          <li><a href="#additional-css-for-html-output">Additional CSS for HTML Output</a></li>
         </ul></li>
       </ul>
     </div>
@@ -274,6 +340,7 @@ new_keyval(
     <p>Compute the value of PI.</p>
     <p>The function connects to an Internet server that streams audio of mathematical monks chanting the first 100 digits of PI.</p>
 </blockquote>
+    <p>The first paragraph of a comment is used as the short description of an item. Any subsequent paragraphs are used as the detailed description of an item.</p>
     <h3 class="title" id="-directives-in-comments">@ Directives in Comments</h3>
     <p>Comments can also include the following special <code>@name ...@</code> directive strings:</p>
     <ul>
@@ -451,6 +518,10 @@ new_keyval(
     <td> A title</td>
     <td> <code>&lt;hN class=&quot;title&quot;&gt;</code></td>
 </tr>
+    <tr>    <td></td>
+    <td> (title image)</td>
+    <td> <code>&lt;img class=&quot;title&quot;&gt;</code></td>
+</tr>
     <tr>    <td> typedef</td>
     <td> A typedef</td>
     <td> <code>&lt;hN class=&quot;typedef&quot;&gt;</code></td>
@@ -466,7 +537,22 @@ new_keyval(
 </tbody>
 </table>
     <h3 class="title" id="default-stylesheet">Default Stylesheet</h3>
-    <pre><code>body, p, h1, h2, h3, h4, h5, h6 {
+    <pre><code>body {
+  background: white;
+  color: black;
+  font-family: sans-serif;
+  font-size: 12pt;
+}
+a {
+  color: black;
+}
+a:link, a:visited {
+  color: #00f;
+}
+a:link:hover, a:visited:hover, a:active {
+  color: #c0c;
+}
+body, p, h1, h2, h3, h4, h5, h6 {
   font-family: sans-serif;
   line-height: 1.4;
 }
@@ -502,6 +588,9 @@ h6 {
   margin-bottom: 0.5em;
   margin-top: 1.5em;
 }
+img.title {
+  width: 256px;
+}
 div.header h1, div.header p {
   text-align: center;
 }
@@ -519,7 +608,7 @@ div.contents, div.body, div.footer {
 }
 blockquote {
   border: solid thin gray;
-  box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+  box-shadow: 3px 3px 5px rgba(127,127,127,0.25);
   padding: 0px 10px;
   page-break-inside: avoid;
 }
@@ -529,7 +618,7 @@ p code, li code, p.code, pre, ul.code li {
   -webkit-hyphens: manual;
 }
 p.code, pre, ul.code li {
-  background: rgba(127,127,127,0.1);
+  background: rgba(127,127,127,0.25);
   border: thin dotted gray;
   padding: 10px;
   page-break-inside: avoid;
@@ -571,7 +660,7 @@ table {
   border-spacing: 0;
 }
 td {
-  border: solid 1px #666;
+  border: solid 1px gray;
   padding: 5px 10px;
   vertical-align: top;
 }
@@ -585,13 +674,13 @@ td.right {
   text-align: right;
 }
 th {
-  border-bottom: solid 2px #000;
+  border-bottom: solid 2px gray;
   padding: 1px 5px;
   text-align: center;
   vertical-align: bottom;
 }
-tr:nth-child(odd) {
-  background: rgba(127,127,127,0.1);
+tr:nth-child(even) {
+  background: rgba(127,127,127,0.25);
 }
 table.list {
   border-collapse: collapse;
@@ -601,6 +690,7 @@ table.list th {
   border-bottom: none;
   border-right: 2px solid gray;
   font-family: monospace;
+  font-weight: normal;
   padding: 5px 10px 5px 2px;
   text-align: right;
   vertical-align: top;
@@ -612,7 +702,55 @@ table.list td {
   vertical-align: top;
 }
 h2.title, h3.title {
-  border-bottom: solid 2px black;
+  border-bottom: solid 2px gray;
+}
+/* Dark mode overrides */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: black;
+    color: #ccc;
+  }
+  a {
+    color: #ccc;
+  }
+  a:link, a:visited {
+    color: #66f;
+  }
+  a:link:hover, a:visited:hover, a:active {
+    color: #f06;
+  }
+}
+</code></pre>
+    <h3 class="title" id="additional-css-for-html-output">Additional CSS for HTML Output</h3>
+    <pre><code>/* Show contents on left side in web browser */
+@media screen and (min-width: 800px) {
+  div.contents {
+    border-right: solid thin gray;
+    bottom: 0px;
+    box-shadow: 3px 3px 5px rgba(127,127,127,0.5);
+    font-size: 10pt;
+    left: 0px;
+    overflow: scroll;
+    padding: 1%;
+    position: fixed;
+    top: 0px;
+    width: 18%;
+  }
+  div.contents h2.title {
+    margin-top: 0px;
+  }
+  div.header, div.body, div.footer {
+    margin-left: 20%;
+    padding: 1% 2%;
+  }
+}
+/* Center title page content vertically */
+@media print {
+  div.header {
+    padding-top: 33%;
+  }
 }
 </code></pre>
     </div>
+  </body>
+</html>
