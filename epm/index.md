@@ -30,4 +30,6 @@ one package a snap.  The installers can be customized with product logos,
 EPM is provided as free software under version 2 of the GNU General Public
 license.
 
-> Note: This software is currently in maintenance mode.
+> Note: Future versions of this software will be maintained and developed by
+> [Jim Jagielski](https://github.com/jimjag).  The new home page for EPM is
+> <https://jimjag.github.io/epm/>.
