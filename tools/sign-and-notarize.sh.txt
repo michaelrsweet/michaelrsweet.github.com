@@ -1,0 +1,135 @@
+#!/bin/sh
+#
+# macOS code signing and notarization script.
+#
+# Copyright © 2020 by Michael R Sweet
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice, this
+#    list of conditions and the following disclaimer.
+#
+# THIS SOFTWARE IS PROVIDED BY MICHAEL R SWEERT "AS IS" AND ANY EXPRESS OR
+# IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+# EVENT SHALL MICHAEL R SWEET BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+# Usage:
+#
+#   sign-and-notarize [--prefix BUNDLE-PREFIX] FILE [ ... FILE ]
+#
+
+
+if test "x$APPLEID" = x; then
+  echo Please set the APPLEID environment variable.
+  exit 1
+fi
+
+if test "x$TEAMID" = x; then
+  echo Please set the TEAMID environment variable.
+  exit 1
+fi
+
+primary=""
+prefix=""
+files=""
+zipfile="$TMPDIR/notarize$$.zip"
+alfile="$TMPDIR/notarize$$.txt"
+
+# Collect files and do code signing...
+while test $# -gt 0; do
+  arg="$1"
+  shift
+
+  case "$arg" in
+    --help)
+      echo "Usage: sign-and-notarize [--prefix BUNDLE-PREFIX] FILE [ ... FILE]"
+      exit 0
+      ;;
+
+    --prefix)
+      prefix="$1"
+      shift
+      ;;
+
+    -*)
+      echo "Unknown option '$arg'."
+      exit 1
+      ;;
+
+    *.app | *.pkg)
+      files="$files $arg"
+
+      # Get the primary bundle ID...
+      if test -f $arg/Contents/Info.plist; then
+        primary=`plutil -p $arg/Contents/Info.plist | grep CFBundleIdentifier | awk -F\" '{print $4}'`
+      fi
+
+      echo "xcrun codesign -f -s $TEAMID -o runtime --timestamp $arg"
+      xcrun codesign -f -s $TEAMID -o runtime --timestamp $arg
+      ;;
+
+    *)
+      if test "x$prefix" = x; then
+        echo "Missing --prefix option."
+        exit 1
+      fi
+
+      files="$files $arg"
+      echo "xcrun codesign -f -s $TEAMID --prefix $prefix -o runtime --timestamp $arg"
+      xcrun codesign -f -s $TEAMID --prefix $prefix -o runtime --timestamp $arg
+      ;;
+  esac
+done
+
+if test "x$files" = x; then
+  echo "Usage: sign-and-notarize [--prefix BUNDLE-PREFIX] FILE [ ... FILE]"
+  exit 1
+fi
+
+# Notarize...
+echo "zip -rv ... $files"
+zip -rv $zipfile $files
+
+if test "x$primary" = x; then
+  # When signing multiple command-line tools, use the prefix as the primary
+  if (echo $files | grep -q ' '); then
+    primary="$prefix"
+  else
+    primary="$prefix.`echo $files`"
+  fi
+fi
+
+echo "xcrun altool --notarize-app -f ... --primary-bundle-id $primary ..."
+xcrun altool --notarize-app -f $zipfile --primary-bundle-id $primary --username $APPLEID --password @keychain:AC_$TEAMID --asc-provider $TEAMID > $alfile || exit 1
+
+uuid=`grep RequestUUID $alfile | awk '{print $3}'`
+status="in progress"
+
+while test "$status" = "in progress"; do
+  echo "    $uuid: $status"
+  sleep 10
+  echo "xcrun altool --notarization-info ..."
+  xcrun altool --notarization-info $uuid --username $APPLEID --password @keychain:AC_$TEAMID --asc-provider $TEAMID > $alfile || exit 1
+  status="`grep Status: $alfile | cut -b14-`"
+done
+
+echo "    $uuid: $status"
+rm -f $alfile $zipfile
+
+# Staple the notarization...
+for file in $files; do
+  case "$file" in
+    *.app | *.pkg)
+      echo "xcrun stapler staple $file"
+      xcrun stapler staple $file
+      ;;
+  esac
+done
