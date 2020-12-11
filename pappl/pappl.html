@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <title>PAPPL Programmers Manual</title>
+    <title>PAPPL v1.0 Programmers Manual</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <meta name="generator" content="codedoc v3.6">
     <meta name="author" content="Michael R Sweet">
     <meta name="language" content="en-US">
     <meta name="copyright" content="Copyright © 2020 by Michael R Sweet">
-    <meta name="version" content="1.0rc1">
+    <meta name="version" content="1.0b2">
     <style type="text/css"><!--
 body {
   background: white;
@@ -245,7 +245,7 @@ span.string {
   <body>
     <div class="header">
       <p><img class="title" src="pappl-512.png"></p>
-      <h1 class="title">PAPPL Programmers Manual</h1>
+      <h1 class="title">PAPPL v1.0 Programmers Manual</h1>
       <p>Michael R Sweet</p>
       <p>Copyright © 2020 by Michael R Sweet</p>
     </div>
@@ -385,6 +385,7 @@ span.string {
           <li><a href="#papplPrinterGetNumberOfJobs">papplPrinterGetNumberOfJobs</a></li>
           <li><a href="#papplPrinterGetOrganization">papplPrinterGetOrganization</a></li>
           <li><a href="#papplPrinterGetOrganizationalUnit">papplPrinterGetOrganizationalUnit</a></li>
+          <li><a href="#papplPrinterGetPath">papplPrinterGetPath</a></li>
           <li><a href="#papplPrinterGetPrintGroup">papplPrinterGetPrintGroup</a></li>
           <li><a href="#papplPrinterGetReasons">papplPrinterGetReasons</a></li>
           <li><a href="#papplPrinterGetState">papplPrinterGetState</a></li>
@@ -515,6 +516,7 @@ span.string {
           <li><a href="#pappl_kind_t">pappl_kind_t</a></li>
           <li><a href="#pappl_label_mode_t">pappl_label_mode_t</a></li>
           <li><a href="#pappl_loglevel_t">pappl_loglevel_t</a></li>
+          <li><a href="#pappl_loptions_t">pappl_loptions_t</a></li>
           <li><a href="#pappl_media_col_t">pappl_media_col_t</a></li>
           <li><a href="#pappl_media_tracking_t">pappl_media_tracking_t</a></li>
           <li><a href="#pappl_mime_cb_t">pappl_mime_cb_t</a></li>
@@ -576,6 +578,7 @@ span.string {
           <li><a href="#pappl_kind_e">pappl_kind_e</a></li>
           <li><a href="#pappl_label_mode_e">pappl_label_mode_e</a></li>
           <li><a href="#pappl_loglevel_e">pappl_loglevel_e</a></li>
+          <li><a href="#pappl_loptions_e">pappl_loptions_e</a></li>
           <li><a href="#pappl_media_tracking_e">pappl_media_tracking_e</a></li>
           <li><a href="#pappl_preason_e">pappl_preason_e</a></li>
           <li><a href="#pappl_raster_type_e">pappl_raster_type_e</a></li>
@@ -950,6 +953,8 @@ LIBS    +=      `pkg-config --libs pappl`
     <li>    <p><a href="#papplPrinterGetOrganization"><code>papplPrinterGetOrganization</code></a>: Gets the organization name,</p>
 </li>
     <li>    <p><a href="#papplPrinterGetOrganizationalUnit"><code>papplPrinterGetOrganizationalUnit</code></a>: Gets the organizational unit name,</p>
+</li>
+    <li>    <p><a href="#papplPrinterGetPath"><code>papplPrinterGetPath</code></a>: Gets the path of a printer web page,</p>
 </li>
     <li>    <p><a href="#papplPrinterGetPrintGroup"><code>papplPrinterGetPrintGroup</code></a>: Gets the print authorization group name,</p>
 </li>
@@ -2992,7 +2997,7 @@ callbacks.</p>
 <h3 class="function"><a id="papplPrinterAddLink">papplPrinterAddLink</a></h3>
         <p class="description">Add a printer link to the navigation header.</p>
 <p class="code">
-void papplPrinterAddLink(<a href="#pappl_printer_t">pappl_printer_t</a> *printer, const char *label, const char *path_or_url, bool secure);</p>
+void papplPrinterAddLink(<a href="#pappl_printer_t">pappl_printer_t</a> *printer, const char *label, const char *path_or_url, <a href="#pappl_loptions_t">pappl_loptions_t</a> options);</p>
 <h4 class="parameters">Parameters</h4>
 <table class="list"><tbody>
 <tr><th>printer</th>
@@ -3001,15 +3006,15 @@ void papplPrinterAddLink(<a href="#pappl_printer_t">pappl_printer_t</a> *printer
         <td class="description">Label string</td></tr>
 <tr><th>path_or_url</th>
         <td class="description">Path or URL</td></tr>
-<tr><th>secure</th>
-        <td class="description"><code>true</code> to force HTTPS, <code>false</code> otherwise</td></tr>
+<tr><th>options</th>
+        <td class="description">Link options</td></tr>
 </tbody></table>
 <h4 class="discussion">Discussion</h4>
         <p class="discussion">This function adds a navigation link for a printer.  The &quot;path_or_url&quot;
 argument specifies a absolute path such as &quot;/ipp/print/example/page&quot; or an
-absolute URL such as &quot;https://www.example.com/&quot;.  The &quot;secure&quot; argument
-specifies whether the link should redirect an absolute path to the secure
-(&quot;https://.../path&quot;) web interface.</p>
+absolute URL such as &quot;https://www.example.com/&quot;.  The &quot;options&quot; argument
+specifies where the link is shown and whether the link should redirect an
+absolute path to the secure (&quot;https://.../path&quot;) web interface.</p>
 <h3 class="function"><a id="papplPrinterCancelAllJobs">papplPrinterCancelAllJobs</a></h3>
         <p class="description">Cancel all jobs on the printer.</p>
 <p class="code">
@@ -3418,6 +3423,27 @@ char *papplPrinterGetOrganizationalUnit(<a href="#pappl_printer_t">pappl_printer
 <h4 class="discussion">Discussion</h4>
         <p class="discussion">This function copies the printer's organizational unit name to the buffer
 pointed to by the &quot;buffer&quot; argument.</p>
+<h3 class="function"><a id="papplPrinterGetPath">papplPrinterGetPath</a></h3>
+        <p class="description">Get the URL path for a printer web page.</p>
+<p class="code">
+char *papplPrinterGetPath(<a href="#pappl_printer_t">pappl_printer_t</a> *printer, const char *subpath, char *buffer, size_t bufsize);</p>
+<h4 class="parameters">Parameters</h4>
+<table class="list"><tbody>
+<tr><th>printer</th>
+        <td class="description">Printer</td></tr>
+<tr><th>subpath</th>
+        <td class="description">Sub-path or <code>NULL</code> for none</td></tr>
+<tr><th>buffer</th>
+        <td class="description">String buffer</td></tr>
+<tr><th>bufsize</th>
+        <td class="description">Size of string buffer</td></tr>
+</tbody></table>
+<h4 class="returnvalue">Return Value</h4>
+        <p class="description">URI path or <code>NULL</code> on error</p>
+<h4 class="discussion">Discussion</h4>
+        <p class="discussion">This function generates and returns the URL path for the printer's web page.
+The &quot;subpath&quot; argument specifies an optional sub-path for a specific printer
+web page.</p>
 <h3 class="function"><a id="papplPrinterGetPrintGroup">papplPrinterGetPrintGroup</a></h3>
         <p class="description">Get the print authorization group, if any.</p>
 <p class="code">
@@ -3931,7 +3957,7 @@ on Linux with compatible hardware such as the Raspberry Pi.</blockquote>
 <h3 class="function"><a id="papplSystemAddLink">papplSystemAddLink</a></h3>
         <p class="description">Add a link to the navigation header.</p>
 <p class="code">
-void papplSystemAddLink(<a href="#pappl_system_t">pappl_system_t</a> *system, const char *label, const char *path_or_url, bool secure);</p>
+void papplSystemAddLink(<a href="#pappl_system_t">pappl_system_t</a> *system, const char *label, const char *path_or_url, <a href="#pappl_loptions_t">pappl_loptions_t</a> options);</p>
 <h4 class="parameters">Parameters</h4>
 <table class="list"><tbody>
 <tr><th>system</th>
@@ -3940,15 +3966,15 @@ void papplSystemAddLink(<a href="#pappl_system_t">pappl_system_t</a> *system, co
         <td class="description">Label string</td></tr>
 <tr><th>path_or_url</th>
         <td class="description">Path or URL</td></tr>
-<tr><th>secure</th>
-        <td class="description"><code>true</code> to force HTTPS, <code>false</code> otherwise</td></tr>
+<tr><th>options</th>
+        <td class="description">Link options</td></tr>
 </tbody></table>
 <h4 class="discussion">Discussion</h4>
         <p class="discussion">This function adds a navigation link for the system.  The &quot;path_or_url&quot;
 argument specifies a absolute path such as &quot;/page&quot; or an absolute URL such
-as &quot;https://www.example.com/&quot;.  The &quot;secure&quot; argument specifies whether the
-link should redirect an absolute path to the secure (&quot;https://.../path&quot;) web
-interface.</p>
+as &quot;https://www.example.com/&quot;.  The &quot;options&quot; argument specifies where the
+link is shown and whether the link should redirect an absolute path to the
+secure (&quot;https://.../path&quot;) web interface.</p>
 <h3 class="function"><a id="papplSystemAddListeners">papplSystemAddListeners</a></h3>
         <p class="description">Add network or domain socket listeners.</p>
 <p class="code">
@@ -5414,6 +5440,11 @@ typedef unsigned short pappl_label_mode_t;
       <p class="code">
 typedef enum <a href="#pappl_loglevel_e">pappl_loglevel_e</a> pappl_loglevel_t;
 </p>
+      <h3 class="typedef"><a id="pappl_loptions_t">pappl_loptions_t</a></h3>
+        <p class="description">Bitfield for link options</p>
+      <p class="code">
+typedef unsigned short pappl_loptions_t;
+</p>
       <h3 class="typedef"><a id="pappl_media_col_t">pappl_media_col_t</a></h3>
         <p class="description">Media details structure</p>
       <p class="code">
@@ -6193,6 +6224,22 @@ typedef struct <a href="#pappl_version_s">pappl_version_s</a> pappl_version_t;
         <tr><th>PAPPL_LOGLEVEL_INFO </th>        <td class="description">Informational message</td></tr>
         <tr><th>PAPPL_LOGLEVEL_UNSPEC </th>        <td class="description">Not specified</td></tr>
         <tr><th>PAPPL_LOGLEVEL_WARN </th>        <td class="description">Warning message</td></tr>
+</tbody></table>
+      <h3 class="enumeration"><a id="pappl_loptions_e">pappl_loptions_e</a></h3>
+        <p class="description">Link option bits</p>
+      <h4 class="constants">Constants</h4>
+      <table class="list"><tbody>
+        <tr><th>PAPPL_LOPTIONS_CONFIGURATION </th>        <td class="description">Link shown in configuration section</td></tr>
+        <tr><th>PAPPL_LOPTIONS_HTTPS_REQUIRED </th>        <td class="description">Link requires HTTPS</td></tr>
+        <tr><th>PAPPL_LOPTIONS_JOB </th>        <td class="description">Link shown in job(s) section</td></tr>
+        <tr><th>PAPPL_LOPTIONS_LOGGING </th>        <td class="description">Link shown in logging section</td></tr>
+        <tr><th>PAPPL_LOPTIONS_NAVIGATION </th>        <td class="description">Link shown in navigation bar</td></tr>
+        <tr><th>PAPPL_LOPTIONS_NETWORK </th>        <td class="description">Link shown in network section</td></tr>
+        <tr><th>PAPPL_LOPTIONS_OTHER </th>        <td class="description">Link shown in other section</td></tr>
+        <tr><th>PAPPL_LOPTIONS_PRINTER </th>        <td class="description">Link shown in printer(s) section</td></tr>
+        <tr><th>PAPPL_LOPTIONS_SECURITY </th>        <td class="description">Link shown in security section</td></tr>
+        <tr><th>PAPPL_LOPTIONS_STATUS </th>        <td class="description">Link shown in status section</td></tr>
+        <tr><th>PAPPL_LOPTIONS_TLS </th>        <td class="description">Link shown in TLS section</td></tr>
 </tbody></table>
       <h3 class="enumeration"><a id="pappl_media_tracking_e">pappl_media_tracking_e</a></h3>
         <p class="description">IPP &quot;media-tracking&quot; bit values</p>
