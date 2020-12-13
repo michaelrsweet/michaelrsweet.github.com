@@ -154,8 +154,8 @@ div.btn-group {
 
 /* Header, footer, and navigation */
 nav.bg-msweet {
-  background-color: rgba(0,0,0,0.8);
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.8) inset;
+  background-color: rgba(34,34,34,0.8);
+  box-shadow: 0px 0px 20px rgba(17,17,17,0.8) inset;
   padding: 5px 15px;
 }
 
@@ -226,8 +226,8 @@ a.navbar-brand img:hover {
 }
 
 .footer {
-  background-color: rgba(8,8,8,0.8);
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.8) inset;
+  background-color: rgba(34,34,34,0.8);
+  box-shadow: 0px 0px 20px rgba(17,17,17,0.8) inset;
   bottom: 0px;
   color: #999999;
   font-size: 14px;
@@ -654,7 +654,7 @@ div.body dd {
   }
   .container-header {
     padding-top: 20px;
-    margin-top: -20px;
+    margin-top: 0px;
   }
   .container-fluid {
     padding: 25px 20px;
