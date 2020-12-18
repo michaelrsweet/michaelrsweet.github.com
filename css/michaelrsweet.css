@@ -1,7 +1,7 @@
 /* Font Stuff */
-@import 'https://fonts.googleapis.com/css?family=Architects+Daughter';
-@import 'https://fonts.googleapis.com/css?family=Open+Sans';
-@import 'https://fonts.googleapis.com/css?family=Source+Code+Pro';
+@import 'https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Open+Sans&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap';
 
 body, p {
   font-family: 'Open Sans', sans-serif;
@@ -23,7 +23,7 @@ pre, pre code {
 }
 
 h1, h2, h3, h4, h5, h6, p.list {
-  font-family: 'Architects Daughter', cursive;
+  font-family: 'Architects Daughter', sans-serif;
 }
 
 a, small {
@@ -232,7 +232,7 @@ a.navbar-brand img:hover {
   color: #999999;
   font-size: 14px;
   left: 0px;
-  padding: 15px 15px 5px;
+  padding: 5px 15px;
   position: fixed;
   width: 100%;
 }
@@ -617,20 +617,30 @@ div.body dd {
   .container-header {
     background: #333;
     background-image: linear-gradient(#222, #333);
-    color: white;
+    color: #eee;
   }
   .container-header-small h1 {
     color: #999;
   }
   a.btn-primary, .container-header a.btn-primary {
-    background: #555;
-    border-color: #555;
-    color: #eee;
+    background: #333;
+    border-color: #999;
+    color: #ccc;
   }
   a.btn-primary:hover, .container-header a.btn-primary:hover {
+    background: #444;
+    border-color: #aaa;
+    color: #ddd;
+  }
+  a.btn-default, a.btn-normal, .container-header a.btn-normal, .container-header button.btn-normal {
+    background: #666;
+    border-color: #999;
+    color: black;
+  }
+  a.btn-default:hover, a.btn-normal:hover, .container-header a.btn-normal:hover, .container-header button.btn-normal:hover {
     background: #777;
-    border-color: #777;
-    color: #fff;
+    border-color: #aaa;
+    color: #700;
   }
   input, textarea {
     background: #333;
