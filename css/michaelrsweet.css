@@ -633,14 +633,14 @@ div.body dd {
     color: #ddd;
   }
   a.btn-default, a.btn-normal, .container-header a.btn-normal, .container-header button.btn-normal {
-    background: #666;
-    border-color: #999;
-    color: black;
+    background: #888;
+    border-color: #ccc;
+    color: #000;
   }
   a.btn-default:hover, a.btn-normal:hover, .container-header a.btn-normal:hover, .container-header button.btn-normal:hover {
-    background: #777;
-    border-color: #aaa;
-    color: #700;
+    background: #999;
+    border-color: #ddd;
+    color: #333;
   }
   input, textarea {
     background: #333;
