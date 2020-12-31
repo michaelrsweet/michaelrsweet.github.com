@@ -368,7 +368,7 @@ tr.data th {
   text-align: left;
 }
 
-table.standard {
+table, table.standard {
   border: solid thin #999999;
   border-collapse: collapse;
   border-spacing: 0;
@@ -376,7 +376,7 @@ table.standard {
   margin-right: auto;
 }
 
-table.standard caption {
+table caption, table.standard caption {
   caption-side: top;
   font-size: 120%;
   font-style: italic;
@@ -385,15 +385,15 @@ table.standard caption {
   margin-right: auto;
 }
 
-table.standard td {
-  border: solid thin #cccccc;
-  padding-top: 5pt;
+table td, table.standard td {
+  border: solid thin rgb(127,127,127,0.5);
+  padding: 1px 5px;
 }
 
-table.standard th {
-  background: #cccccc;
+table th, table.standard th {
+  background: #ccc;
   border: none;
-  border-bottom: solid thin #999999;
+  border-bottom: solid thin rgb(127,127,127,0.5);
   padding: 1px 5px;
 }
 
@@ -604,6 +604,9 @@ div.body dd {
     background: #333;
     border: dotted thin #666;
     color: #eee;
+  }
+  table th, table.standard th {
+    background: #333;
   }
   .dropdown-menu {
     background: rgba(34,34,34,0.95);
