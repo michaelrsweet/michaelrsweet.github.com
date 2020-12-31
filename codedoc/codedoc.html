@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en-US">
-  <head>
-    <title>How to Use the codedoc Utility</title>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <meta name="generator" content="codedoc v3.5">
-    <meta name="author" content="Michael R Sweet">
-    <meta name="language" content="en-US">
-    <meta name="copyright" content="Copyright © 2003-2020 by Michael R Sweet">
-    <meta name="version" content="3.5">
-    <style type="text/css"><!--
+<head>
+<title>How to Use the codedoc Utility</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta name="generator" content="codedoc v3.6">
+<meta name="author" content="Michael R Sweet">
+<meta name="language" content="en-US">
+<meta name="copyright" content="Copyright © 2003-2020 by Michael R Sweet">
+<meta name="version" content="3.6">
+<style type="text/css"><!--
 body {
   background: white;
   color: black;
@@ -81,7 +81,8 @@ div.contents, div.body, div.footer {
 blockquote {
   border: solid thin gray;
   box-shadow: 3px 3px 5px rgba(127,127,127,0.25);
-  padding: 0px 10px;
+  margin: 1em 0;
+  padding: 10px;
   page-break-inside: avoid;
 }
 p code, li code, p.code, pre, ul.code li {
@@ -94,6 +95,9 @@ p.code, pre, ul.code li {
   border: thin dotted gray;
   padding: 10px;
   page-break-inside: avoid;
+}
+pre {
+  white-space: pre-wrap;
 }
 a:link, a:visited {
   text-decoration: none;
@@ -176,6 +180,22 @@ table.list td {
 h2.title, h3.title {
   border-bottom: solid 2px gray;
 }
+/* Syntax highlighting */
+span.comment {
+  color: darkgreen;
+}
+span.directive {
+  color: purple;
+}
+span.number {
+  color: brown;
+}
+span.reserved {
+  color: darkcyan;
+}
+span.string {
+  color: magenta;
+}
 /* Dark mode overrides */
 @media (prefers-color-scheme: dark) {
   body {
@@ -221,94 +241,117 @@ h2.title, h3.title {
   }
 }
 --></style>
-  </head>
-  <body>
-    <div class="header">
-      <h1 class="title">How to Use the codedoc Utility</h1>
-      <p>Michael R Sweet</p>
-      <p>Copyright © 2003-2020 by Michael R Sweet</p>
-    </div>
-    <div class="contents">
-      <h2 class="title">Contents</h2>
-      <ul class="contents">
-        <li><a href="#introduction">Introduction</a><ul class="subcontents">
-          <li><a href="#history">History</a></li>
-        </ul></li>
-        <li><a href="#running-codedoc">Running Codedoc</a><ul class="subcontents">
-          <li><a href="#creating-man-pages">Creating Man Pages</a></li>
-          <li><a href="#creating-epub-books">Creating EPUB Books</a></li>
-          <li><a href="#adding-content-and-metadata">Adding Content and Metadata</a></li>
-        </ul></li>
-        <li><a href="#annotating-your-cc-code">Annotating Your C/C++ Code</a><ul class="subcontents">
-          <li><a href="#-directives-in-comments">@ Directives in Comments</a></li>
-          <li><a href="#markdown-in-comments">Markdown in Comments</a></li>
-        </ul></li>
-        <li><a href="#epub-and-html-stylesheets">EPUB and HTML Stylesheets</a><ul class="subcontents">
-          <li><a href="#css-classes">CSS Classes</a></li>
-          <li><a href="#default-stylesheet">Default Stylesheet</a></li>
-          <li><a href="#additional-css-for-html-output">Additional CSS for HTML Output</a></li>
-        </ul></li>
-      </ul>
-    </div>
-    <div class="body">
-    <h2 class="title" id="introduction">Introduction</h2>
-    <p>Codedoc is a general-purpose utility which scans HTML, markdown, C, and C++ source files to produce EPUB, HTML, and man page documentation that can be read by humans. Unlike popular C/C++ documentation generators like Doxygen or Javadoc, Codedoc uses in-line comments rather than comment headers, allowing for more &quot;natural&quot; code documentation. Additional markdown documentation content can be included to make the generated documentation even more useful and complete.</p>
-    <p>Codedoc is licensed under the Apache License Version 2.0 with an exception to allow linking against GPL2/LGPL2-only software. See the files &quot;LICENSE&quot; and &quot;NOTICE&quot; in the source code archive or Git repository for more information.</p>
-    <h3 class="title" id="history">History</h3>
-    <p>Codedoc was originally part of the <a href="https://www.msweet.org/mxml">Mini-XML</a> project (as &quot;codedoc&quot;) and was developed specifically to generate the API documentation for Mini-XML and <a href="https://www.cups.org">CUPS</a>. It is now much more general purpose.</p>
-    <h2 class="title" id="running-codedoc">Running Codedoc</h2>
-    <p>Codedoc produces HTML documentation by default. For example, the following command will scan all of the C source and header files in the current directory and produce a HTML documentation file called &quot;documentation.html&quot;:</p>
-    <pre><code>codedoc *.h *.c &gt;documentation.html
+</head>
+<body>
+<div class="header">
+<h1 class="title">How to Use the codedoc Utility</h1>
+<p>Michael R Sweet</p>
+<p>Copyright © 2003-2020 by Michael R Sweet</p>
+</div>
+<div class="contents">
+<h2 class="title">Contents</h2>
+<ul class="contents">
+<li><a href="#introduction">Introduction</a><ul class="subcontents">
+<li><a href="#history">History</a></li>
+</ul></li>
+<li><a href="#running-codedoc">Running Codedoc</a><ul class="subcontents">
+<li><a href="#creating-man-pages">Creating Man Pages</a></li>
+<li><a href="#creating-epub-books">Creating EPUB Books</a></li>
+<li><a href="#adding-content-and-metadata">Adding Content and Metadata</a></li>
+<li><a href="#markdown-extensions">Markdown Extensions</a></li>
+</ul></li>
+<li><a href="#annotating-your-cc-code">Annotating Your C/C++ Code</a><ul class="subcontents">
+<li><a href="#-directives-in-comments">@ Directives in Comments</a></li>
+<li><a href="#markdown-in-comments">Markdown in Comments</a></li>
+</ul></li>
+<li><a href="#epub-and-html-stylesheets">EPUB and HTML Stylesheets</a><ul class="subcontents">
+<li><a href="#css-classes">CSS Classes</a></li>
+<li><a href="#default-stylesheet">Default Stylesheet</a></li>
+<li><a href="#additional-css-for-html-output">Additional CSS for HTML Output</a></li>
+</ul></li>
+</ul>
+</div>
+<div class="body">
+<h2 class="title" id="introduction">Introduction</h2>
+<p>Codedoc is a general-purpose utility which scans HTML, markdown, C, and C++ source files to produce EPUB, HTML, and man page documentation that can be read by humans. Unlike popular C/C++ documentation generators like Doxygen or Javadoc, Codedoc uses in-line comments rather than comment headers, allowing for more &quot;natural&quot; code documentation. Additional markdown documentation content can be included to make the generated documentation even more useful and complete.</p>
+<p>Codedoc is licensed under the Apache License Version 2.0 with an exception to allow linking against GPL2/LGPL2-only software. See the files &quot;LICENSE&quot; and &quot;NOTICE&quot; in the source code archive or Git repository for more information.</p>
+<h3 class="title" id="history">History</h3>
+<p>Codedoc was originally part of the <a href="https://www.msweet.org/mxml">Mini-XML</a> project (as &quot;codedoc&quot;) and was developed specifically to generate the API documentation for Mini-XML and <a href="https://www.cups.org">CUPS</a>. It is now much more general purpose.</p>
+<h2 class="title" id="running-codedoc">Running Codedoc</h2>
+<p>Codedoc produces HTML documentation by default. For example, the following command will scan all of the C source and header files in the current directory and produce a HTML documentation file called &quot;documentation.html&quot;:</p>
+<pre><code>codedoc *.h *.c &gt;documentation.html
 </code></pre>
-    <p>You can also specify an XML file to create which contains all of the information from the source files. For example, the following command creates an XML file called &quot;documentation.xml&quot; in addition to the HTML file:</p>
-    <pre><code>codedoc documentation.xml *.h *.c &gt;documentation.html
+<p>You can also specify an XML file to create which contains all of the information from the source files. For example, the following command creates an XML file called &quot;documentation.xml&quot; in addition to the HTML file:</p>
+<pre><code>codedoc documentation.xml *.h *.c &gt;documentation.html
 </code></pre>
-    <p>The <code>--no-output</code> option disables the default HTML output:</p>
-    <pre><code>codedoc --no-output documentation.xml *.h *.c
+<p>The <code>--no-output</code> option disables the default HTML output:</p>
+<pre><code>codedoc --no-output documentation.xml *.h *.c
 </code></pre>
-    <p>You can then run codedoc again with the XML file alone to generate the HTML documentation:</p>
-    <pre><code>codedoc documentation.xml &gt;documentation.html
+<p>You can then run codedoc again with the XML file alone to generate the HTML documentation:</p>
+<pre><code>codedoc documentation.xml &gt;documentation.html
 </code></pre>
-    <h3 class="title" id="creating-man-pages">Creating Man Pages</h3>
-    <p>The <code>--man name</code> option tells codedoc to create a man page instead of HTML documentation, for example:</p>
-    <pre><code>codedoc --man libexample *.h *.c &gt;libexample.3
+<h3 class="title" id="creating-man-pages">Creating Man Pages</h3>
+<p>The <code>--man name</code> option tells codedoc to create a man page instead of HTML documentation, for example:</p>
+<pre><code>codedoc --man libexample *.h *.c &gt;libexample.3
 codedoc --man libexample documentation.xml *.h *.c &gt;libexample.3
 codedoc --man libexample documentation.xml &gt;libexample.3
 </code></pre>
-    <h3 class="title" id="creating-epub-books">Creating EPUB Books</h3>
-    <p>The <code>--epub filename.epub</code> option tells codedoc to create an EPUB book containing the HTML documentation, for example:</p>
-    <pre><code>codedoc --epub documentation.epub *.h *.c
+<h3 class="title" id="creating-epub-books">Creating EPUB Books</h3>
+<p>The <code>--epub filename.epub</code> option tells codedoc to create an EPUB book containing the HTML documentation, for example:</p>
+<pre><code>codedoc --epub documentation.epub *.h *.c
 codedoc --epub documentation.epub documentation.xml *.h *.c
 codedoc --epub documentation.epub documentation.xml
 </code></pre>
-    <h3 class="title" id="adding-content-and-metadata">Adding Content and Metadata</h3>
-    <p>Codedoc supports several options for adding content and metadata to the generated documentation:</p>
-    <ul>
-    <li>    <p><code>--author &quot;name&quot;</code>: Sets the author name</p>
+<h3 class="title" id="adding-content-and-metadata">Adding Content and Metadata</h3>
+<p>Codedoc supports several options for adding content and metadata to the generated documentation:</p>
+<ul>
+<li><p><code>--author &quot;name&quot;</code>: Sets the author name</p>
 </li>
-    <li>    <p><code>--body filename</code>: Inserts the named file between the table of contents and API documentation; the file can be markdown, HTML, or man source</p>
+<li><p><code>--body filename</code>: Inserts the named file between the table of contents and API documentation; the file can be markdown, HTML, or man source</p>
 </li>
-    <li>    <p><code>--copyright &quot;copyright text&quot;</code>: Sets the copyright string</p>
+<li><p><code>--copyright &quot;copyright text&quot;</code>: Sets the copyright string</p>
 </li>
-    <li>    <p><code>--coverimage filename.png</code>: Uses the specified cover page image file</p>
+<li><p><code>--coverimage filename.png</code>: Uses the specified cover page image file</p>
 </li>
-    <li>    <p><code>--css filename.css</code>: Uses the specified style sheet file (HTML and EPUB output)</p>
+<li><p><code>--css filename.css</code>: Uses the specified style sheet file (HTML and EPUB output)</p>
 </li>
-    <li>    <p><code>--footer filename</code>: Appends the named file after the API documentation; the file can be markdown, HTML, or man source</p>
+<li><p><code>--footer filename</code>: Appends the named file after the API documentation; the file can be markdown, HTML, or man source</p>
 </li>
-    <li>    <p><code>--header filename</code>: Inserts the named file before the table of contents; the file can be markdown, HTML, or man source</p>
+<li><p><code>--header filename</code>: Inserts the named file before the table of contents; the file can be markdown, HTML, or man source</p>
 </li>
-    <li>    <p><code>--language ll[-LOC]</code>: Sets the ISO language and locality codes; the default is &quot;en-US&quot; for US English</p>
+<li><p><code>--language ll[-LOC]</code>: Sets the ISO language and locality codes; the default is &quot;en-US&quot; for US English</p>
 </li>
-    <li>    <p><code>--section &quot;{name,number}&quot;</code>: Sets the section/category name (HTML and EPUB output) or section number (man page output)</p>
+<li><p><code>--section &quot;{name,number}&quot;</code>: Sets the section/category name (HTML and EPUB output) or section number (man page output)</p>
 </li>
-    <li>    <p><code>--title &quot;title text'</code>: Sets the title text</p>
+<li><p><code>--title &quot;title text'</code>: Sets the title text</p>
 </li>
 </ul>
-    <h2 class="title" id="annotating-your-cc-code">Annotating Your C/C++ Code</h2>
-    <p>Codedoc looks for in-line comments to describe the functions, types, and constants in your code. Codedoc documents all public names it finds in your source files - any names starting with the underscore character (_) or names that are documented with the <a href="#-directives-in-comments"><code>@private@</code></a> directive are treated as private and are not documented.</p>
-    <p>Comments appearing directly before a function or type definition are used to document that function or type. Comments appearing after argument, definition, return type, or variable declarations are used to document that argument, definition, return type, or variable. For example, the following code excerpt defines a key/value structure and a function that creates a new instance of that structure:</p>
-    <pre><code>/* A key/value pair. This is used with the
+<h3 class="title" id="markdown-extensions">Markdown Extensions</h3>
+<p>Codedoc uses the <a href="https://www.msweet.org/mmd">mmd</a> library for markdown which mostly conforms to the CommonMark version of markdown syntax with the following exceptions:</p>
+<ul>
+<li><p>Embedded HTML markup and entities are explicitly not supported or allowed; the reason for this is to better support different kinds of output from the markdown &quot;source&quot;, including XHTML, man, and <code>xml2rfc</code>.</p>
+</li>
+<li><p>Tabs are silently expanded to the markdown standard of four spaces since HTML uses eight spaces per tab.</p>
+</li>
+<li><p>Some pathological nested link and inline style features supported by CommonMark (<code>******Really Strong Text******</code>) are not supported.</p>
+</li>
+<li><p>Support for metadata as used by Jekyll and other web markdown solutions.</p>
+</li>
+<li><p>Support for <code>@</code> links which resolve to headings within the documentation.</p>
+</li>
+<li><p>Support for <code>@@</code> links which resolve to literal names such as functions and types within the documentation.</p>
+</li>
+<li><p>Support for <code>::WIDTHxHEIGHT</code>, <code>::WIDTHx</code>, and <code>::xHEIGHT</code> in image (ALT) text to scale images to the specified size.</p>
+</li>
+<li><p>Support for the &quot;c&quot; and &quot;cpp&quot; languages for syntax highlighting in fenced code text.</p>
+</li>
+<li><p>Support for tables as used by the <a href="https://github.github.com/gfm">Github Flavored Markdown Spec</a>.</p>
+</li>
+</ul>
+<h2 class="title" id="annotating-your-cc-code">Annotating Your C/C++ Code</h2>
+<p>Codedoc looks for in-line comments to describe the functions, types, and constants in your code. Codedoc documents all public names it finds in your source files - any names starting with the underscore character (_) or names that are documented with the <a href="#-directives-in-comments"><code>@private@</code></a> directive are treated as private and are not documented.</p>
+<p>Comments appearing directly before a function or type definition are used to document that function or type. Comments appearing after argument, definition, return type, or variable declarations are used to document that argument, definition, return type, or variable. For example, the following code excerpt defines a key/value structure and a function that creates a new instance of that structure:</p>
+<pre><code>/* A key/value pair. This is used with the
    dictionary structure. */
 
 struct keyval
@@ -327,54 +370,54 @@ new_keyval(
   ...
 }
 </code></pre>
-    <p>Codedoc also knows to remove extra asterisks (*) from the comment string, so the comment string:</p>
-    <pre><code>/*
+<p>Codedoc also knows to remove extra asterisks (*) from the comment string, so the comment string:</p>
+<pre><code>/*
  * Compute the value of PI.
  *
  * The function connects to an Internet server that streams audio of
  * mathematical monks chanting the first 100 digits of PI.
  */
 </code></pre>
-    <p>will be shown as:</p>
-    <blockquote>
-    <p>Compute the value of PI.</p>
-    <p>The function connects to an Internet server that streams audio of mathematical monks chanting the first 100 digits of PI.</p>
+<p>will be shown as:</p>
+<blockquote>
+<p>Compute the value of PI.</p>
+<p>The function connects to an Internet server that streams audio of mathematical monks chanting the first 100 digits of PI.</p>
 </blockquote>
-    <p>The first paragraph of a comment is used as the short description of an item. Any subsequent paragraphs are used as the detailed description of an item.</p>
-    <h3 class="title" id="-directives-in-comments">@ Directives in Comments</h3>
-    <p>Comments can also include the following special <code>@name ...@</code> directive strings:</p>
-    <ul>
-    <li>    <p><code>@code text@</code>: formats the text as code</p>
+<p>The first paragraph of a comment is used as the short description of an item. Any subsequent paragraphs are used as the detailed description of an item.</p>
+<h3 class="title" id="-directives-in-comments">@ Directives in Comments</h3>
+<p>Comments can also include the following special <code>@name ...@</code> directive strings:</p>
+<ul>
+<li><p><code>@code text@</code>: formats the text as code</p>
 </li>
-    <li>    <p><code>@deprecated@</code>: flags the item as deprecated to discourage its use</p>
+<li><p><code>@deprecated@</code>: flags the item as deprecated to discourage its use</p>
 </li>
-    <li>    <p><code>@exclude format[,...,format]@</code>: excludes the item from the documentation in the specified formats: &quot;all&quot; for all formats, &quot;epub&quot; for EPUB books, &quot;html&quot; for HTML output, and &quot;man&quot; for man page output</p>
+<li><p><code>@exclude format[,...,format]@</code>: excludes the item from the documentation in the specified formats: &quot;all&quot; for all formats, &quot;epub&quot; for EPUB books, &quot;html&quot; for HTML output, and &quot;man&quot; for man page output</p>
 </li>
-    <li>    <p><code>@link name@</code>: creates a hyperlink to the named function, type, etc.</p>
+<li><p><code>@link name@</code>: creates a hyperlink to the named function, type, etc.</p>
 </li>
-    <li>    <p><code>@private@</code>: flags the item as private so it will not be included in the documentation</p>
+<li><p><code>@private@</code>: flags the item as private so it will not be included in the documentation</p>
 </li>
-    <li>    <p><code>@since ...@</code>: flags the item as new since a particular release. The text following the <code>@since</code> up to the closing <code>@</code> is highlighted in the generated documentation, e.g. <code>@since libexample 1.1@</code>.</p>
-</li>
-</ul>
-    <h3 class="title" id="markdown-in-comments">Markdown in Comments</h3>
-    <p>Comments can use a small subset of markdown inline formatting characters:</p>
-    <ul>
-    <li>    <p>&quot;`code`&quot;: formats the text as code</p>
-</li>
-    <li>    <p>&quot;*emphasized*&quot;: emphasizes the text (usually italics)</p>
-</li>
-    <li>    <p>&quot;**strong**&quot;: strongly emphasizes the text (usually boldface)</p>
-</li>
-    <li>    <p>&quot;[text](url)&quot;: inserts a named hyperlink</p>
-</li>
-    <li>    <p>&quot;&lt;url&gt;&quot;: inserts a hyperlink</p>
-</li>
-    <li>    <p>&quot;\&quot;: escapes the character that follows</p>
+<li><p><code>@since ...@</code>: flags the item as new since a particular release. The text following the <code>@since</code> up to the closing <code>@</code> is highlighted in the generated documentation, e.g. <code>@since libexample 1.1@</code>.</p>
 </li>
 </ul>
-    <p>In addition, example code can be surrounded by lines containing &quot;```&quot;. Use a leading &quot;|&quot; to ensure that any indentation is not lost:</p>
-    <pre><code>/*
+<h3 class="title" id="markdown-in-comments">Markdown in Comments</h3>
+<p>Comments can use a small subset of markdown inline formatting characters:</p>
+<ul>
+<li><p>&quot;`code`&quot;: formats the text as code</p>
+</li>
+<li><p>&quot;*emphasized*&quot;: emphasizes the text (usually italics)</p>
+</li>
+<li><p>&quot;**strong**&quot;: strongly emphasizes the text (usually boldface)</p>
+</li>
+<li><p>&quot;[text](url)&quot;: inserts a named hyperlink</p>
+</li>
+<li><p>&quot;&lt;url&gt;&quot;: inserts a hyperlink</p>
+</li>
+<li><p>&quot;\&quot;: escapes the character that follows</p>
+</li>
+</ul>
+<p>In addition, example code can be surrounded by lines containing &quot;```&quot;. Use a leading &quot;|&quot; to ensure that any indentation is not lost:</p>
+<pre><code>/*
  * Example code:
  *
  * ```
@@ -385,8 +428,8 @@ new_keyval(
  * ```
  */
 </code></pre>
-    <p>and bulleted lists can be provided using a leading hyphen:</p>
-    <pre><code>/*
+<p>Bulleted lists can be provided using a leading hyphen:</p>
+<pre><code>/*
  * Example list:
  *
  * - One fish
@@ -395,149 +438,157 @@ new_keyval(
  * - Blue fish
  */
 </code></pre>
-    <h2 class="title" id="epub-and-html-stylesheets">EPUB and HTML Stylesheets</h2>
-    <p>Codedoc makes use of a CSS stylesheet for EPUB and HTML output. The default stylesheet should be usable for both display and printing, but you can override it using the <code>--css</code> option, for example:</p>
-    <pre><code>codedoc --epub documentation.epub --css filename.css documentation.xml *.h *.c
+<p>and block quotes can be provided using the &quot;&gt;&quot; character:</p>
+<pre><code>/*
+ * Some sort of documentation...
+ *
+ * &gt; Note: This is a block quote that is typically used for special
+ * &gt; notes to the reader.
+ */
 </code></pre>
-    <blockquote>
-    <p><strong>Note:</strong></p>
-    <p>Since EPUB uses XHTML (which is case-sensitive), your stylesheet should always use lowercase element names (&quot;pre&quot;, not &quot;PRE&quot;, etc.)</p>
+<h2 class="title" id="epub-and-html-stylesheets">EPUB and HTML Stylesheets</h2>
+<p>Codedoc makes use of a CSS stylesheet for EPUB and HTML output. The default stylesheet should be usable for both display and printing, but you can override it using the <code>--css</code> option, for example:</p>
+<pre><code>codedoc --epub documentation.epub --css filename.css documentation.xml *.h *.c
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong></p>
+<p>Since EPUB uses XHTML (which is case-sensitive), your stylesheet should always use lowercase element names (&quot;pre&quot;, not &quot;PRE&quot;, etc.)</p>
 </blockquote>
-    <h3 class="title" id="css-classes">CSS Classes</h3>
-    <p>The following CSS classes are used to group the sections in the generated documentation:</p>
-    <table>    <thead>    <tr>    <th> Class</th>
-    <th> Description</th>
-    <th> Usage</th>
+<h3 class="title" id="css-classes">CSS Classes</h3>
+<p>The following CSS classes are used to group the sections in the generated documentation:</p>
+<table><thead><tr><th> Class</th>
+<th> Description</th>
+<th> Usage</th>
 </tr>
 </thead>
-    <tbody>    <tr>    <td> body</td>
-    <td> The body of the documentation</td>
-    <td> <code>&lt;div class=&quot;body&quot;&gt;</code></td>
+<tbody><tr><td> body</td>
+<td> The body of the documentation</td>
+<td> <code>&lt;div class=&quot;body&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> center</td>
-    <td> Centered text in cell</td>
-    <td> <code>&lt;td class=&quot;center&quot;&gt;</code></td>
+<tr><td> center</td>
+<td> Centered text in cell</td>
+<td> <code>&lt;td class=&quot;center&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> class</td>
-    <td> A class</td>
-    <td> <code>&lt;hN class=&quot;class&quot;&gt;</code></td>
+<tr><td> class</td>
+<td> A class</td>
+<td> <code>&lt;hN class=&quot;class&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> code</td>
-    <td> Wrapped monospace code text</td>
-    <td> <code>&lt;p class=&quot;code&quot;&gt;</code></td>
+<tr><td> code</td>
+<td> Wrapped monospace code text</td>
+<td> <code>&lt;p class=&quot;code&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> constants</td>
-    <td> A list of constants</td>
-    <td> <code>&lt;hN class=&quot;constants&quot;&gt;</code></td>
+<tr><td> constants</td>
+<td> A list of constants</td>
+<td> <code>&lt;hN class=&quot;constants&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> contents</td>
-    <td> The table of contents</td>
-    <td> <code>&lt;div class=&quot;contents&quot;&gt;</code></td>
+<tr><td> contents</td>
+<td> The table of contents</td>
+<td> <code>&lt;div class=&quot;contents&quot;&gt;</code></td>
 </tr>
-    <tr>    <td></td>
-    <td> (first level)</td>
-    <td> <code>&lt;ul class=&quot;contents&quot;&gt;</code></td>
+<tr><td></td>
+<td> (first level)</td>
+<td> <code>&lt;ul class=&quot;contents&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> description</td>
-    <td> Short description</td>
-    <td> <code>&lt;p class=&quot;description&quot;&gt;</code></td>
+<tr><td> description</td>
+<td> Short description</td>
+<td> <code>&lt;p class=&quot;description&quot;&gt;</code></td>
 </tr>
-    <tr>    <td></td>
-    <td> (in table)</td>
-    <td> <code>&lt;td class=&quot;description&quot;&gt;</code></td>
+<tr><td></td>
+<td> (in table)</td>
+<td> <code>&lt;td class=&quot;description&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> discussion</td>
-    <td> Additional description</td>
-    <td> <code>&lt;p class=&quot;discussion&quot;&gt;</code></td>
+<tr><td> discussion</td>
+<td> Additional description</td>
+<td> <code>&lt;p class=&quot;discussion&quot;&gt;</code></td>
 </tr>
-    <tr>    <td></td>
-    <td> (title)</td>
-    <td> <code>&lt;hN class=&quot;discussion&quot;&gt;</code></td>
+<tr><td></td>
+<td> (title)</td>
+<td> <code>&lt;hN class=&quot;discussion&quot;&gt;</code></td>
 </tr>
-    <tr>    <td></td>
-    <td> (in table)</td>
-    <td> <code>&lt;td class=&quot;discussion&quot;&gt;</code></td>
+<tr><td></td>
+<td> (in table)</td>
+<td> <code>&lt;td class=&quot;discussion&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> enumeration</td>
-    <td> An enumeration type</td>
-    <td> <code>&lt;hN class=&quot;enumeration&quot;&gt;</code></td>
+<tr><td> enumeration</td>
+<td> An enumeration type</td>
+<td> <code>&lt;hN class=&quot;enumeration&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> footer</td>
-    <td> The footer of the documentation</td>
-    <td> <code>&lt;div class=&quot;footer&quot;&gt;</code></td>
+<tr><td> footer</td>
+<td> The footer of the documentation</td>
+<td> <code>&lt;div class=&quot;footer&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> function</td>
-    <td> A global function</td>
-    <td> <code>&lt;hN class=&quot;function&quot;&gt;</code></td>
+<tr><td> function</td>
+<td> A global function</td>
+<td> <code>&lt;hN class=&quot;function&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> header</td>
-    <td> The header of the documentation</td>
-    <td> <code>&lt;div class=&quot;header&quot;&gt;</code></td>
+<tr><td> header</td>
+<td> The header of the documentation</td>
+<td> <code>&lt;div class=&quot;header&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> info</td>
-    <td> Availability information</td>
-    <td> <code>&lt;span class=&quot;info&quot;&gt;</code></td>
+<tr><td> info</td>
+<td> Availability information</td>
+<td> <code>&lt;span class=&quot;info&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> left</td>
-    <td> Left-aligned text in cell</td>
-    <td> <code>&lt;td class=&quot;left&quot;&gt;</code></td>
+<tr><td> left</td>
+<td> Left-aligned text in cell</td>
+<td> <code>&lt;td class=&quot;left&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> list</td>
-    <td> A table list</td>
-    <td> <code>&lt;table class=&quot;list&quot;&gt;</code></td>
+<tr><td> list</td>
+<td> A table list</td>
+<td> <code>&lt;table class=&quot;list&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> members</td>
-    <td> A list of class/struct members</td>
-    <td> <code>&lt;table class=&quot;members&quot;&gt;</code></td>
+<tr><td> members</td>
+<td> A list of class/struct members</td>
+<td> <code>&lt;table class=&quot;members&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> method</td>
-    <td> A class or structure method</td>
-    <td> <code>&lt;hN class=&quot;method&quot;&gt;</code></td>
+<tr><td> method</td>
+<td> A class or structure method</td>
+<td> <code>&lt;hN class=&quot;method&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> parameters</td>
-    <td> A list of function parameters</td>
-    <td> <code>&lt;hN class=&quot;parameters&quot;&gt;</code></td>
+<tr><td> parameters</td>
+<td> A list of function parameters</td>
+<td> <code>&lt;hN class=&quot;parameters&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> returnvalue</td>
-    <td> The return value of a function</td>
-    <td> <code>&lt;hN class=&quot;returnvalue&quot;&gt;</code></td>
+<tr><td> returnvalue</td>
+<td> The return value of a function</td>
+<td> <code>&lt;hN class=&quot;returnvalue&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> right</td>
-    <td> Right-aligned text in cell</td>
-    <td> <code>&lt;td class=&quot;right&quot;&gt;</code></td>
+<tr><td> right</td>
+<td> Right-aligned text in cell</td>
+<td> <code>&lt;td class=&quot;right&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> struct</td>
-    <td> A structure</td>
-    <td> <code>&lt;hN class=&quot;struct&quot;&gt;</code></td>
+<tr><td> struct</td>
+<td> A structure</td>
+<td> <code>&lt;hN class=&quot;struct&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> subcontents</td>
-    <td> Second-level contents</td>
-    <td> <code>&lt;ul class=&quot;subcontents&quot;&gt;</code></td>
+<tr><td> subcontents</td>
+<td> Second-level contents</td>
+<td> <code>&lt;ul class=&quot;subcontents&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> title</td>
-    <td> A title</td>
-    <td> <code>&lt;hN class=&quot;title&quot;&gt;</code></td>
+<tr><td> title</td>
+<td> A title</td>
+<td> <code>&lt;hN class=&quot;title&quot;&gt;</code></td>
 </tr>
-    <tr>    <td></td>
-    <td> (title image)</td>
-    <td> <code>&lt;img class=&quot;title&quot;&gt;</code></td>
+<tr><td></td>
+<td> (title image)</td>
+<td> <code>&lt;img class=&quot;title&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> typedef</td>
-    <td> A typedef</td>
-    <td> <code>&lt;hN class=&quot;typedef&quot;&gt;</code></td>
+<tr><td> typedef</td>
+<td> A typedef</td>
+<td> <code>&lt;hN class=&quot;typedef&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> union</td>
-    <td> A union</td>
-    <td> <code>&lt;hN class=&quot;union&quot;&gt;</code></td>
+<tr><td> union</td>
+<td> A union</td>
+<td> <code>&lt;hN class=&quot;union&quot;&gt;</code></td>
 </tr>
-    <tr>    <td> variable</td>
-    <td> A global variable</td>
-    <td> <code>&lt;hN class=&quot;variable&quot;&gt;</code></td>
+<tr><td> variable</td>
+<td> A global variable</td>
+<td> <code>&lt;hN class=&quot;variable&quot;&gt;</code></td>
 </tr>
 </tbody>
 </table>
-    <h3 class="title" id="default-stylesheet">Default Stylesheet</h3>
-    <pre><code>body {
+<h3 class="title" id="default-stylesheet">Default Stylesheet</h3>
+<pre><code>body {
   background: white;
   color: black;
   font-family: sans-serif;
@@ -623,6 +674,9 @@ p.code, pre, ul.code li {
   padding: 10px;
   page-break-inside: avoid;
 }
+pre {
+  white-space: pre-wrap;
+}
 a:link, a:visited {
   text-decoration: none;
 }
@@ -704,6 +758,22 @@ table.list td {
 h2.title, h3.title {
   border-bottom: solid 2px gray;
 }
+/* Syntax highlighting */
+span.comment {
+  color: darkgreen;
+}
+span.directive {
+  color: purple;
+}
+span.number {
+  color: orange;
+}
+span.reserved {
+  color: blue;
+}
+span.string {
+  color: magenta;
+}
 /* Dark mode overrides */
 @media (prefers-color-scheme: dark) {
   body {
@@ -721,8 +791,8 @@ h2.title, h3.title {
   }
 }
 </code></pre>
-    <h3 class="title" id="additional-css-for-html-output">Additional CSS for HTML Output</h3>
-    <pre><code>/* Show contents on left side in web browser */
+<h3 class="title" id="additional-css-for-html-output">Additional CSS for HTML Output</h3>
+<pre><code>/* Show contents on left side in web browser */
 @media screen and (min-width: 800px) {
   div.contents {
     border-right: solid thin gray;
@@ -751,6 +821,6 @@ h2.title, h3.title {
   }
 }
 </code></pre>
-    </div>
-  </body>
+</div>
+</body>
 </html>
