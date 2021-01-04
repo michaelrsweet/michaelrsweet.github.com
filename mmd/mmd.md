@@ -1,28 +1,21 @@
 ---
 title: How to Use the mmd "Library"
-subtitle: A Miniature Markdown "Library"
 author: Michael R Sweet
-copyright: Copyright © 2017-2019 by Michael R Sweet
-version: 1.7
-project: mmd
-project_name: mmd
-logo: mmd-160.png
-html_doc: mmd.html
-snap: mmd
-layout: project
----
+copyright: Copyright © 2017-2021 by Michael R Sweet
+version: 1.8
+...
 
 # Contents
 
-[How to Use the mmd "Library"](#how-to-use-the-mmd-library)
-- [Overview](#overview)
-- [Navigating the Document Tree](#navigating-the-document-tree)
-- [Retrieving Document Metadata](#retrieving-document-metadata)
-- [Freeing Memory](#freeing-memory)
+[How to Use the mmd "Library"](@)
+- [Overview](@)
+- [Navigating the Document Tree](@)
+- [Retrieving Document Metadata](@)
+- [Freeing Memory](@)
 
-[Example: Generating HTML from Markdown](#example-generating-html-from-markdown)
+[Example: Generating HTML from Markdown](@)
 
-[Reference](#references)
+[Reference](@)
 
 
 # How to Use the mmd "Library"
