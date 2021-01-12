@@ -2,7 +2,7 @@
 title: PAPPL
 subtitle: Printer Application Framework
 author: Michael R Sweet
-copyright: Copyright © 2019-2020 by Michael R Sweet
+copyright: Copyright © 2019-2021 by Michael R Sweet
 project: pappl
 project_name: PAPPL
 logo: pappl-160.png
@@ -14,6 +14,7 @@ layout: project-news
 ![Version](https://img.shields.io/github/v/release/michaelrsweet/pappl?include_prereleases)
 ![Apache 2.0](https://img.shields.io/github/license/michaelrsweet/pappl)
 [![Build Status](https://travis-ci.org/michaelrsweet/pappl.svg?branch=master)](https://travis-ci.org/github/michaelrsweet/pappl)
+[![Coverity Scan Status](https://img.shields.io/coverity/scan/22385.svg)](https://scan.coverity.com/projects/michaelrsweet-pappl)
 [![LGTM Grade](https://img.shields.io/lgtm/grade/cpp/github/michaelrsweet/pappl)](https://lgtm.com/projects/g/michaelrsweet/pappl/context:cpp)
 [![LGTM Alerts](https://img.shields.io/lgtm/alerts/github/michaelrsweet/pappl)](https://lgtm.com/projects/g/michaelrsweet/pappl/)
 
@@ -55,6 +56,8 @@ GNU make), a C99-compatible C compiler such as GCC or Clang, and the
 - JPEGLIB 9 or later for JPEG image support (optional for B&W printers)
 - LIBPNG 1.6 or later for PNG image support (optional)
 - LIBPAM for authentication support (optional)
+- LIBUSB 1.0 or later for USB printing support
+- PAM for authentication support (optional)
 - ZLIB 1.1 or later for compression support
 
 Most development happens on a Mac, with testing on various Linux distributions
@@ -81,7 +84,7 @@ Ghostscript-based printers.
 Legal Stuff
 -----------
 
-PAPPL is Copyright © 2019-2020 by Michael R Sweet.
+PAPPL is Copyright © 2019-2021 by Michael R Sweet.
 
 This software is licensed under the Apache License Version 2.0 with an
 (optional) exception to allow linking against GPL2/LGPL2 software (like older
