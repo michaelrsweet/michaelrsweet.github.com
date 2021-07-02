@@ -118,9 +118,15 @@
     }
     $('#comment-form').submit('submit', function(event) {
       event.preventDefault();
-      if ($('#comment-body').val() != '')
-        post_comment();
-      $('#comment-body').val('');
+      let body = $('#comment-body').val();
+      if (body != '') {
+        if (body.length < 16 || !body.includes(" ")) {
+          alert("Sorry, I don't understand your comment?!?");
+        } else {
+          post_comment();
+          $('#comment-body').val('');
+        }
+      }
     });
     </script>
     {% endif %}
