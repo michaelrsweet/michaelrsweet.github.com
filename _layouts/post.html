@@ -73,7 +73,7 @@
 		<input id="website" type="text" name="website">
 		<div class="form-group">
 		  <label for="name">Name:</label>
-		  <input class="form-control" type="text" name="name" placeholder="Your name or blank for anonymous.">
+		  <input class="form-control" type="text" id="comment-name" name="name" placeholder="Your name or blank for anonymous.">
 		</div>
 		<div class="form-group">
 		  <label for="body">Comment:</label>
@@ -118,10 +118,14 @@
     }
     $('#comment-form').submit('submit', function(event) {
       event.preventDefault();
+      var re = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/i
+      let name = $('#comment-name').val();
       let body = $('#comment-body').val();
       if (body != '') {
-        if (body.length < 16 || !body.includes(" ")) {
+        if (body.length < 12 || !body.includes(" ")) {
           alert("Sorry, I don't understand your comment?!?");
+        } else if (re.test(name) || re.test(body)) {
+          alert("Please don't include email addresses in comments.");
         } else {
           post_comment();
           $('#comment-body').val('');
