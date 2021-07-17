@@ -2,7 +2,7 @@
 title: RasterView
 subtitle: CUPS/PWG/Apple Raster File Viewer
 author: Michael R Sweet
-copyright: Copyright © 2002-2018 by Michael R Sweet
+copyright: Copyright © 2002-2021 by Michael R Sweet
 project: rasterview
 project_name: RasterView
 logo: rasterview-160.png
@@ -40,7 +40,7 @@ RasterView starts in *zoom in* mode (`Z`) which allows you to click on the page
 or drag a zoom box on the page to zoom in. You can also use *pan* mode (`P`) to
 drag/pan the page in the window, *zoom out* mode (`SHIFT + Z`) to click on the
 page to zoom out, or *color viewing* mode (`C`) to click or drag the mouse and
-view the raw colors on the page.
+view the raw colors on the page and copy the color values to the clipboard.
 
 
 Keyboard Shortcuts
