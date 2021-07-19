@@ -4,6 +4,8 @@ category: rasterview
 layout: post
 permalink: /blog/:year-:month-:day-:title.html
 excerpt_separator: <!--more-->
+comments: true
+commentform: true
 ---
 
 RasterView 1.8 includes some minor improvements and bug fixes.  Changes include:
