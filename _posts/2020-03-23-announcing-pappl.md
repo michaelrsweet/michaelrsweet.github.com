@@ -8,7 +8,7 @@ comments: true
 commentform: true
 ---
 
-<img class="float-left mr-2 mt-2" src="/pappl/pappl-160.png" width="80" height="80">PAPPL
+<img class="float-start me-2 my-2" src="/pappl/pappl-160.png" width="80" height="80">PAPPL
 is a C-based Printer Application framework/library.  I am developing it to
 support future features in  [LPrint][1] as well as making a Printer Application
 for [Gutenprint][2].  My hope is that it will accelerate the adoption of

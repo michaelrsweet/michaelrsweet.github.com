@@ -609,15 +609,6 @@ div.body dd {
   table th, table.standard th {
     background: #333;
   }
-  .dropdown-menu {
-    background: rgba(34,34,34,0.95);
-  }
-  .dropdown-divider {
-    border-color: #444;
-  }
-  a.dropdown-item:hover {
-    background: rgba(68,68,68,0.95);
-  }
   .container-header {
     background: #333;
     background-image: linear-gradient(#222, #333);

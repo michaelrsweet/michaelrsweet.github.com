@@ -8,7 +8,7 @@ comments: true
 commentform: true
 ---
 
-<img class="float-left mr-2 mt-2" src="/pdfio/pdfio-160.png" width="80" height="80">PDFio is a simple C library for reading and writing PDF files. I've been working on it sporadically for the last few weeks to prototype some new printing features and support a future version of HTMLDOC. The primary goals of PDFio are:
+<img class="float-start me-2 my-2" src="/pdfio/pdfio-160.png" width="80" height="80">PDFio is a simple C library for reading and writing PDF files. I've been working on it sporadically for the last few weeks to prototype some new printing features and support a future version of HTMLDOC. The primary goals of PDFio are:
 
 - Read and write any version of PDF file
 - Provide access to pages, objects, and streams within a PDF file
