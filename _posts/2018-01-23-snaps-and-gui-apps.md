@@ -1,6 +1,6 @@
 ---
 title: Building Snaps for GUI Applications
-category: how-to
+category: website
 layout: post
 permalink: /blog/:year-:month-:day-:title.html
 excerpt_separator: <!--more-->
