@@ -178,6 +178,7 @@ a.dropdown-item:hover {
 }
 
 a.navbar-brand {
+  margin-right: 0px;
   padding: 10px 15px;
   text-decoration: none;
 }
