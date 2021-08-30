@@ -6,7 +6,6 @@ copyright: Copyright © 2021 by Michael R Sweet
 project: pdfio
 project_name: PDFio
 logo: pdfio-160.png
-xepub_doc: pdfio.epub
 html_doc: pdfio.html
 layout: project-news
 ---
