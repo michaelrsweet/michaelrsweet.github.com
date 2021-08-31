@@ -45,10 +45,11 @@ make it easier for people to support other IPP-based licensing programs like
 Requirements
 ------------
 
-PAPPL requires a POSIX-compliant host operating system such as Linux®, macOS®,
-QNX®, or VxWorks®, a "make" utility that supports the `include` directive (like
-GNU make), a C99-compatible C compiler such as GCC or Clang, and the
-"pkg-config" utility.  It also requires the following support libraries:
+PAPPL requires Microsoft® Windows® 10 or higher or a POSIX-compliant host
+operating system such as Linux®, macOS®, QNX®, or VxWorks®, a "make" utility
+that supports the `include` directive (like GNU make), a C99-compatible C
+compiler such as GCC or Clang, and the "pkg-config" utility.  It also requires
+the following support libraries:
 
 - Avahi 0.8 or later (except on macOS) for mDNS/DNS-SD support
 - CUPS 2.2 or later for the CUPS libraries
