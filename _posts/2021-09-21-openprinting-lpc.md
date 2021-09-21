@@ -16,4 +16,4 @@ Linux. Till presented developments in printer management and packaging on Linux,
 print dialogs, and printer applications. And Bhavna talked about her Google
 Summer of Code work to extend PAPPL with scanning support.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/5KogjLb1Hb4" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="video" src="https://www.youtube.com/embed/5KogjLb1Hb4" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

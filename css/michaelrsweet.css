@@ -39,6 +39,11 @@ a[name] {
   text-decoration: inherit;
 }
 
+iframe.video {
+  height: 315px;
+  width: 560px;
+}
+
 /* General look-n-feel */
 body {
   background: white;
@@ -646,6 +651,11 @@ div.body dd {
 
 /* iPhone/iPod touch overrides */
 @media only screen and (max-width: 414px) {
+  iframe.video {
+    height: 158px;
+    width: 280px;
+  }
+
   img.logo, .container-header-small h1 img.logo {
     display: block;
     float: none;
