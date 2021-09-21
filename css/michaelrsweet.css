@@ -40,8 +40,9 @@ a[name] {
 }
 
 iframe.video {
-  height: 315px;
-  width: 560px;
+  height: 300px;
+  margin: 20px 40px;
+  width: 480px;
 }
 
 /* General look-n-feel */
@@ -652,10 +653,10 @@ div.body dd {
 /* iPhone/iPod touch overrides */
 @media only screen and (max-width: 414px) {
   iframe.video {
-    height: 158px;
-    width: 280px;
+    height: 56.25vw;
+    margin: 20px 0;
+    width: 90vw;
   }
-
   img.logo, .container-header-small h1 img.logo {
     display: block;
     float: none;
