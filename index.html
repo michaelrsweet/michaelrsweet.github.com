@@ -15,7 +15,7 @@ layout: default
   <div class="row">
     <div class="col-sm-12">
 {% for post in site.posts offset: 0 limit: 8 %}
-      <h2><img class="float-start me-2" src="/{{post.category}}/{{post.category}}-160.png" width="40" height="40"> <a href="{{ post.url }}">{{post.title}}</a> <small>{{ post.date | date: "%B %d, %Y" }}</small></h2>
+      <h2><img class="float-start me-2 glow" src="/{{post.category}}/{{post.category}}-160.png" width="40" height="40"> <a href="{{ post.url }}">{{post.title}}</a> <small>{{ post.date | date: "%B %d, %Y" }}</small></h2>
       {{ post.excerpt }}
       {% if post.excerpt != post.content %}
       <p><a class="btn btn-default btn-xs" href="{{ post.url }}">More{% if post.comments %} + <span  id="{{ post.url | slugify }}">Comments</span>{% endif %}</a><br>&nbsp;</p>
