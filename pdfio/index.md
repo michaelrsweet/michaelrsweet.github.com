@@ -7,6 +7,7 @@ project: pdfio
 project_name: PDFio
 logo: pdfio-160.png
 html_doc: pdfio.html
+epub_doc: pdfio.epub
 layout: project-news
 ---
 
