@@ -11,6 +11,13 @@ project: mxml
 project_name: Mini-XML
 ---
 
+![Version](https://img.shields.io/github/v/release/michaelrsweet/mxml?include_prereleases)
+![Apache 2.0](https://img.shields.io/github/license/michaelrsweet/mxml)
+![Build](https://github.com/michaelrsweet/mxml/workflows/Build/badge.svg)
+[![Coverity Scan Status](https://img.shields.io/coverity/scan/23959.svg)](https://scan.coverity.com/projects/michaelrsweet-mxml)
+[![LGTM Grade](https://img.shields.io/lgtm/grade/cpp/github/michaelrsweet/mxml)](https://lgtm.com/projects/g/michaelrsweet/mxml/context:cpp)
+[![LGTM Alerts](https://img.shields.io/lgtm/alerts/github/michaelrsweet/mxml)](https://lgtm.com/projects/g/michaelrsweet/mxml/)
+
 Mini-XML is a tiny XML library that you can use to read and write XML and
 XML-like data files in your application without requiring large non-standard
 libraries.  Mini-XML only requires an ANSI C compatible compiler (GCC works,
