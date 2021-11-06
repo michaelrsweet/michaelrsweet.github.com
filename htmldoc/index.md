@@ -2,7 +2,7 @@
 title: HTMLDOC
 subtitle: HTML Conversion Software
 author: Michael R Sweet
-copyright: Copyright © 1997-2020 by Michael R Sweet
+copyright: Copyright © 1997-2021 by Michael R Sweet
 project: htmldoc
 project_name: HTMLDOC
 logo: htmldoc-160.png
@@ -12,6 +12,13 @@ pdf_doc: htmldoc.pdf
 snap: htmldoc
 layout: project-news
 ---
+
+![Version](https://img.shields.io/github/v/release/michaelrsweet/htmldoc?include_prereleases)
+![GPL-2.0](https://img.shields.io/github/license/michaelrsweet/htmldoc)
+[![Build](https://github.com/michaelrsweet/pdfio/workflows/Build/badge.svg)](https://github.com/michaelrsweet/htmldoc/actions/workflows/build.yml)
+[![Coverity Scan Status](https://img.shields.io/coverity/scan/22389.svg)](https://scan.coverity.com/projects/michaelrsweet-htmldoc)
+[![LGTM Grade](https://img.shields.io/lgtm/grade/cpp/github/michaelrsweet/htmldoc)](https://lgtm.com/projects/g/michaelrsweet/htmldoc/context:cpp)
+[![LGTM Alerts](https://img.shields.io/lgtm/alerts/github/michaelrsweet/htmldoc)](https://lgtm.com/projects/g/michaelrsweet/htmldoc/)
 
 HTMLDOC is a program that reads HTML and Markdown source files or web pages and
 generates corresponding EPUB, HTML, PostScript, or PDF files with an optional
