@@ -11,6 +11,11 @@ snap: lprint
 layout: project-news
 ---
 
+![Version](https://img.shields.io/github/v/release/michaelrsweet/lprint?include_prereleases)
+![Apache 2.0](https://img.shields.io/github/license/michaelrsweet/lprint)
+[![LGTM Grade](https://img.shields.io/lgtm/grade/cpp/github/michaelrsweet/lprint)](https://lgtm.com/projects/g/michaelrsweet/lprint/context:cpp)
+[![LGTM Alerts](https://img.shields.io/lgtm/alerts/github/michaelrsweet/lprint)](https://lgtm.com/projects/g/michaelrsweet/lprint/)
+
 LPrint implements printing for a variety of common label and receipt printers
 connected via network or USB.  Features include:
 
