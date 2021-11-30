@@ -18,7 +18,6 @@ layout: project-news
 [![LGTM Grade](https://img.shields.io/lgtm/grade/cpp/github/michaelrsweet/pdfio)](https://lgtm.com/projects/g/michaelrsweet/pdfio/context:cpp)
 [![LGTM Alerts](https://img.shields.io/lgtm/alerts/github/michaelrsweet/pdfio)](https://lgtm.com/projects/g/michaelrsweet/pdfio/)
 
-
 PDFio is a simple C library for reading and writing PDF files.  The primary
 goals of PDFio are:
 
