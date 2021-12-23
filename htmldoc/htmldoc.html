@@ -386,8 +386,8 @@ Appendix A - License Agreement</a> for the terms of use. This software
 <kbd>htmldoc --titlefile filename.png ... ENTER</kbd>
 <kbd>htmldoc --titlefile filename.html ... ENTER</kbd>
 </pre>
-<p>HTMLDOC supports BMP, GIF, JPEG, and PNG images, as well as generic
- HTML or Markdown text you supply for the title page(s).</p>
+<p>HTMLDOC supports GIF, JPEG, and PNG images, as well as generic HTML
+ or Markdown text you supply for the title page(s).</p>
 <h2><a name="CGI">Using HTMLDOC on a Web Server</a></h2>
 <p>HTMLDOC can be used in a variety of ways to generate formatted
  reports on a web server. The most common way is to use HTMLDOC as a CGI
@@ -909,8 +909,8 @@ class htmldoc
 </center>
 <h3><a NAME="3_2_8">--bodyimage filename</a></h3>
 <p>The <code>--bodyimage</code> option specifies the background image
- for all pages in the document. The supported formats are BMP, GIF,
- JPEG, and PNG.</p>
+ for all pages in the document. The supported formats are GIF, JPEG, and
+ PNG.</p>
 <h3><a NAME="3_2_9">--book</a></h3>
 <p>The <code>--book</code> option specifies that the input files
  comprise a book with chapters and headings.</p>
@@ -1212,7 +1212,7 @@ spacing</code> value of 1 makes each line of text the same height as the
 <h3><a NAME="3_2_35">--hfimage<i>N</i> filename</a></h3>
 <p>The <code>--hfimage<i>N</i></code> option specifies an image to use
  in the header and/or footer, where N is a number from 1 to 10. The
- supported formats are BMP, GIF, JPEG, and PNG.</p>
+ supported formats are GIF, JPEG, and PNG.</p>
 <h3><a NAME="3_2_36">--jpeg[=quality]</a></h3>
 <p>The <code>--jpeg</code> option enables JPEG compression of
  continuous-tone images. The optional <code>quality</code> parameter
@@ -1235,7 +1235,7 @@ spacing</code> value of 1 makes each line of text the same height as the
 <h3><a NAME="3_2_39">--letterhead filename</a></h3>
 <p>The <code>--letterhead</code> option specifies the letterhead image
  for the page headers and footers for PostScript and PDF files. The
- supported formats are BMP, GIF, JPEG, and PNG.</p>
+ supported formats are GIF, JPEG, and PNG.</p>
 <blockquote><b>Note:</b> You need to use the <code>--header</code>
  and/or <code>--footer</code> options with the <code>L</code> parameter
  or use the corresponding HTML page comments to display the logo image
@@ -1256,7 +1256,7 @@ spacing</code> value of 1 makes each line of text the same height as the
 <h3><a NAME="3_2_43">--logoimage filename</a></h3>
 <p>The <code>--logoimage</code> option specifies the logo image for the
  HTML navigation bar and page headers and footers for PostScript and PDF
- files. The supported formats are BMP, GIF, JPEG, and PNG.</p>
+ files. The supported formats are GIF, JPEG, and PNG.</p>
 <blockquote><b>Note:</b> You need to use the <code>--header</code>
  and/or <code>--footer</code> options with the <code>l</code> parameter
  or use the corresponding HTML page comments to display the logo image
@@ -1511,7 +1511,7 @@ size</code> parameter can be one of the following standard sizes:</p>
  to use for the title page.</p>
 <h3><a NAME="3_2_79">--titleimage filename</a></h3>
 <p>The <code>--titleimage</code> option specifies the title image for
- the title page. The supported formats are BMP, GIF, JPEG, and PNG.</p>
+ the title page. The supported formats are GIF, JPEG, and PNG.</p>
 <h3><a NAME="3_2_80">--tocfooter lcr</a></h3>
 <p>The <code>--tocfooter</code> option specifies the contents of the
  table-of-contents footer. The <code>lcr</code> parameter is a
@@ -2171,8 +2171,10 @@ Helvetica Oblique</td></tr>
 
 <!-- NEED 2in -->
 <h2><a NAME="IMAGES">Images</a></h2>
- HTMLDOC supports loading of BMP, GIF, JPEG, and PNG image files. EPS
- and other types of image files are not supported at this time.
+ HTMLDOC supports loading of GIF, JPEG, and PNG image files. BMP image
+ support is deprecated and will be removed in a future version of
+ HTMLDOC. EPS and other types of image files are not supported at this
+ time.
 <!-- NEED 2in -->
 <h2><a NAME="LINKS">Links</a></h2>
 <p>External URL and internal (<code>#target</code> and <code>
