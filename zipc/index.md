@@ -27,7 +27,7 @@ encryption, password protection, etc. as those features of ZIP are typically not
 used for ZIP container-based formats.
 
 Among other places, `zipc` is used by my [HTMLDOC](../htmldoc) and
-[Mini-XML](../mxml) projects to generate EPUB books.
+[Codedoc](../codedoc) projects to generate EPUB books.
 
 I'm providing this as open source under the "new" 2-clause BSD license which
 allows you do pretty much do whatever you like with it.  Please do provide
