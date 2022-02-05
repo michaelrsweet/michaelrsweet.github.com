@@ -2,7 +2,7 @@
 title: HTMLDOC
 subtitle: HTML Conversion Software
 author: Michael R Sweet
-copyright: Copyright © 1997-2021 by Michael R Sweet
+copyright: Copyright © 1997-2022 by Michael R Sweet
 project: htmldoc
 project_name: HTMLDOC
 logo: htmldoc-160.png
