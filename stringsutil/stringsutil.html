@@ -290,7 +290,7 @@ span.string {
 </li>
 <li><p>Tool for scanning C/C++ source files for localization strings.</p>
 </li>
-<li><p>Tool for doing a first pass machine translation.</p>
+<li><p>Tool for doing a first pass machine translation using the LibreTranslate service/software.</p>
 </li>
 </ul>
 <h3 class="title" id="apple-.strings-files">Apple &quot;.strings&quot; Files</h3>
@@ -328,6 +328,9 @@ stringsutil -f es.strings import es.po
 </code></pre>
 <p>Then add those changes to the &quot;es.strings&quot; file with the &quot;merge&quot; sub-command:</p>
 <pre><code>stringsutil -f es.strings -c merge base.strings
+</code></pre>
+<p>The &quot;translate&quot; sub-command uses a LibreTranslate service to do a first-pass machine translation of your strings. For example, the following command will use a local Docker instance of LibreTranslate:</p>
+<pre><code>stringsutil -f es.strings -l es -T http://localhost:5000 translate base.strings
 </code></pre>
 <p>You also use the &quot;export&quot; command to produce a C header file containing a strings file that can be embedded in a program:</p>
 <pre><code>stringsutil -f es.strings export es_strings.h

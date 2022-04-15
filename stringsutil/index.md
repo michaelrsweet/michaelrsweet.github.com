@@ -29,7 +29,8 @@ embeddable, and more flexible alternative to GNU gettext.  Key features include:
 - Tools for exporting, importing, and merging localization files.
 - Tool for reporting on the quality of a localization.
 - Tool for scanning C/C++ source files for localization strings.
-- *Coming Soon*: Tool for doing a first pass machine translation.
+- Tool for doing a first pass machine translation using the LibreTranslate
+  service/software.
 
 StringsUtil is licensed under the Apache License Version 2.0 with an (optional)
 exception to allow linking against GPL2/LGPL2-only software.  See the files
