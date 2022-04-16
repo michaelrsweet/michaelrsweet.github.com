@@ -258,17 +258,20 @@ span.string {
 <li><a href="#using-the-libsf-library">Using the libsf Library</a></li>
 </ul></li>
 <li><a href="#FUNCTIONS">Functions</a><ul class="subcontents">
+<li><a href="#sfAddString">sfAddString</a></li>
 <li><a href="#sfDelete">sfDelete</a></li>
 <li><a href="#sfFormatString">sfFormatString</a></li>
 <li><a href="#sfGetError">sfGetError</a></li>
 <li><a href="#sfGetString">sfGetString</a></li>
-<li><a href="#sfLoadFromFile">sfLoadFromFile</a></li>
-<li><a href="#sfLoadFromString">sfLoadFromString</a></li>
+<li><a href="#sfHasString">sfHasString</a></li>
+<li><a href="#sfLoadFile">sfLoadFile</a></li>
+<li><a href="#sfLoadString">sfLoadString</a></li>
 <li><a href="#sfNew">sfNew</a></li>
 <li><a href="#sfPrintf">sfPrintf</a></li>
 <li><a href="#sfPuts">sfPuts</a></li>
 <li><a href="#sfRegisterDirectory">sfRegisterDirectory</a></li>
 <li><a href="#sfRegisterString">sfRegisterString</a></li>
+<li><a href="#sfRemoveString">sfRemoveString</a></li>
 <li><a href="#sfSetLocale">sfSetLocale</a></li>
 </ul></li>
 <li><a href="#TYPES">Data Types</a><ul class="subcontents">
@@ -340,10 +343,10 @@ stringsutil -f es.strings import es.po
 <pre><code class="language-c"><span class="directive">#include &lt;sf.h&gt;</span>
 </code></pre>
 <p>Use the <code>pkg-config</code> command to get the proper compiler and linker options:</p>
-<pre><code>CFLAGS = `pkgconfig --cflags libsf`
-LIBS = `pkgconfig --libs libsf`
+<pre><code>CFLAGS = `pkg-config --cflags libsf`
+LIBS = `pkg-config --libs libsf`
 
-cc -o myprogram `pkgconfig --cflags libsf` myprogram.c `pkgconfig --libs libsf`
+cc -o myprogram `pkg-config --cflags libsf` myprogram.c `pkg-config --libs libsf`
 </code></pre>
 <p>A typical program will either have a directory containing &quot;.strings&quot; files installed on disk or a collection of header files containing &quot;.strings&quot; files as constant C strings. Call <a href="#sfSetLocale"><code>sfSetLocale</code></a> to initialize the current locale and then <a href="#sfRegisterDirectory"><code>sfRegisterDirectory</code></a> or <a href="#sfRegisterString"><code>sfRegisterString</code></a> to initialize the default localization strings:</p>
 <pre><code class="language-c"><span class="comment">// &quot;.strings&quot; files in &quot;/usr/local/share/myapp/strings&quot;...</span>
@@ -384,6 +387,25 @@ sfPrintf(stderr, SFSTR(<span class="string">&quot;myprogram: Expected '-n' value
 sfPrintf(stderr, SFSTR(<span class="string">&quot;myprogram: Syntax error on line %d of '%s'.&quot;</span>), linenum, filename);
 </code></pre>
 <h2 class="title"><a id="FUNCTIONS">Functions</a></h2>
+<h3 class="function"><a id="sfAddString">sfAddString</a></h3>
+<p class="description">Add a localization string.</p>
+<p class="code">
+bool sfAddString(<a href="#sf_t">sf_t</a> *sf, const char *key, const char *text, const char *comment);</p>
+<h4 class="parameters">Parameters</h4>
+<table class="list"><tbody>
+<tr><th>sf</th>
+<td class="description">Strings</td></tr>
+<tr><th>key</th>
+<td class="description">Key</td></tr>
+<tr><th>text</th>
+<td class="description">Text</td></tr>
+<tr><th>comment</th>
+<td class="description">Comment or <code>NULL</code> for none</td></tr>
+</tbody></table>
+<h4 class="returnvalue">Return Value</h4>
+<p class="description"><code>true</code> on success, <code>false</code> on error</p>
+<h4 class="discussion">Discussion</h4>
+<p class="discussion">This function adds a localization string to the collection.</p>
 <h3 class="function"><a id="sfDelete">sfDelete</a></h3>
 <p class="description">Free a collection of localization strings.</p>
 <p class="code">
@@ -434,8 +456,8 @@ const char *sfGetError(<a href="#sf_t">sf_t</a> *sf);</p>
 <h4 class="returnvalue">Return Value</h4>
 <p class="description">Last error message or <code>NULL</code> for none</p>
 <h4 class="discussion">Discussion</h4>
-<p class="discussion">This function returns the last error from <a href="#sfLoadFromFile"><code>sfLoadFromFile</code></a> and
-<a href="#sfLoadFromString"><code>sfLoadFromString</code></a>, if any.</p>
+<p class="discussion">This function returns the last error from <a href="#sfLoadFile"><code>sfLoadFile</code></a> and
+<a href="#sfLoadString"><code>sfLoadString</code></a>, if any.</p>
 <h3 class="function"><a id="sfGetString">sfGetString</a></h3>
 <p class="description">Lookup a localized string.</p>
 <p class="code">
@@ -456,10 +478,26 @@ If no localization exists, the key string is returned.<br>
 The default localization strings (&quot;sf&quot; passed as <code>NULL</code>) are initialized
 using the <a href="#sfSetLocale"><code>sfSetLocale</code></a>, <a href="#sfRegisterDirectory"><code>sfRegisterDirectory</code></a>, and
 <a href="#sfRegisterString"><code>sfRegisterString</code></a> functions.</p>
-<h3 class="function"><a id="sfLoadFromFile">sfLoadFromFile</a></h3>
+<h3 class="function"><a id="sfHasString">sfHasString</a></h3>
+<p class="description">Determine whether a string is localized.</p>
+<p class="code">
+bool sfHasString(<a href="#sf_t">sf_t</a> *sf, const char *key);</p>
+<h4 class="parameters">Parameters</h4>
+<table class="list"><tbody>
+<tr><th>sf</th>
+<td class="description">Localization strings</td></tr>
+<tr><th>key</th>
+<td class="description">Key string</td></tr>
+</tbody></table>
+<h4 class="returnvalue">Return Value</h4>
+<p class="description"><code>true</code> if the string exists, <code>false</code> otherwise</p>
+<h4 class="discussion">Discussion</h4>
+<p class="discussion">This function looks up a localization string, returning <code>true</code> if the string
+exists and <code>false</code> otherwise.</p>
+<h3 class="function"><a id="sfLoadFile">sfLoadFile</a></h3>
 <p class="description">Load a &quot;.strings&quot; file.</p>
 <p class="code">
-bool sfLoadFromFile(<a href="#sf_t">sf_t</a> *sf, const char *filename);</p>
+bool sfLoadFile(<a href="#sf_t">sf_t</a> *sf, const char *filename);</p>
 <h4 class="parameters">Parameters</h4>
 <table class="list"><tbody>
 <tr><th>sf</th>
@@ -476,10 +514,10 @@ function.<br>
 <br>
 When loading the strings, any existing strings in the collection are left
 unchanged.</p>
-<h3 class="function"><a id="sfLoadFromString">sfLoadFromString</a></h3>
+<h3 class="function"><a id="sfLoadString">sfLoadString</a></h3>
 <p class="description">Load a &quot;.strings&quot; file from a compiled-in string.</p>
 <p class="code">
-bool sfLoadFromString(<a href="#sf_t">sf_t</a> *sf, const char *data);</p>
+bool sfLoadString(<a href="#sf_t">sf_t</a> *sf, const char *data);</p>
 <h4 class="parameters">Parameters</h4>
 <table class="list"><tbody>
 <tr><th>sf</th>
@@ -504,7 +542,7 @@ unchanged.</p>
 <p class="description">Localization strings</p>
 <h4 class="discussion">Discussion</h4>
 <p class="discussion">This function creates a new (empty) set of localization strings.  Use the
-<a href="#sfLoadFromFile"><code>sfLoadFromFile</code></a> and/or <a href="#sfLoadFromString"><code>sfLoadFromString</code></a> functions to load
+<a href="#sfLoadFile"><code>sfLoadFile</code></a> and/or <a href="#sfLoadString"><code>sfLoadString</code></a> functions to load
 localization strings.</p>
 <h3 class="function"><a id="sfPrintf">sfPrintf</a></h3>
 <p class="description">Print a formatted localized message followed by a newline.</p>
@@ -566,6 +604,21 @@ void sfRegisterString(const char *locale, const char *data);</p>
 <h4 class="discussion">Discussion</h4>
 <p class="discussion">This function registers a &quot;.strings&quot; file from a compiled-in string.  You
 must call <a href="#sfSetLocale"><code>sfSetLocale</code></a> first to initialize the current locale.</p>
+<h3 class="function"><a id="sfRemoveString">sfRemoveString</a></h3>
+<p class="description">Remove a localization string.</p>
+<p class="code">
+bool sfRemoveString(<a href="#sf_t">sf_t</a> *sf, const char *key);</p>
+<h4 class="parameters">Parameters</h4>
+<table class="list"><tbody>
+<tr><th>sf</th>
+<td class="description">Strings</td></tr>
+<tr><th>key</th>
+<td class="description">Key</td></tr>
+</tbody></table>
+<h4 class="returnvalue">Return Value</h4>
+<p class="description">'true<code> on success, </code>false<code> on error</code></p>
+<h4 class="discussion">Discussion</h4>
+<p class="discussion">This function removes a localization string from the collection.</p>
 <h3 class="function"><a id="sfSetLocale">sfSetLocale</a></h3>
 <p class="description">Set the current locale.</p>
 <p class="code">
