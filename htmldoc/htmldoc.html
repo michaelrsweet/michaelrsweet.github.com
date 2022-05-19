@@ -178,6 +178,7 @@ Copyright © 1997-2022, All Rights Reserved.<BR>
 <li><a HREF="#COMMENTS">Comments</a>
 <ul>
 <li><a HREF="#4_3_1">Header/Footer Strings</a></li>
+<li><a HREF="#DATETIME">Date/Time Formats</a></li>
 </ul>
 </li>
 <li><a HREF="#FONT">FONT Attributes</a></li>
@@ -2008,7 +2009,10 @@ Helvetica Oblique</td></tr>
 <!-- NEED 1in -->
 </dd>
 <dt><code>$DATE</code></dt>
-<dd>Inserts the current date.
+<dt><code>$DATE(format)</code></dt>
+<dd>Inserts the current date. See <a href="#DATETIME">Date/Time Formats</a>
+ for details on the format string. When no format is supplied, the
+ default date format for the current locale is used.
 <!-- NEED 1in -->
 </dd>
 <dt><code>$HEADING</code></dt>
@@ -2056,7 +2060,10 @@ Helvetica Oblique</td></tr>
 <!-- NEED 1in -->
 </dd>
 <dt><code>$TIME</code></dt>
-<dd>Inserts the current time.
+<dt><code>$TIME(format)</code></dt>
+<dd>Inserts the current time. See <a href="#DATETIME">Date/Time Formats</a>
+ for details on the format string. When no format is supplied, the
+ default time format for the current locale is used.
 <!-- NEED 1in -->
 </dd>
 <dt><code>$TITLE</code></dt>
@@ -2066,6 +2073,49 @@ Helvetica Oblique</td></tr>
 <dt><code>$URL</code></dt>
 <dd>Inserts the document filename or URL.</dd>
 </dl>
+<h3><a NAME="DATETIME">Date/Time Formats</a></h3>
+<p>The <code>$DATE</code> and <code>$TIME</code> header/footer strings
+ support an optional format string in parenthesis. Letters represent
+ date/time values while other characters are inserted verbatim. The
+ following letters are supported:</p>
+<center>
+<table border="1" cellpadding="5">
+<tr><th>Letter</th><th>Description</th></tr>
+<tr><td><code>A</code></td><td>Full weekday name</td></tr>
+<tr><td><code>a</code></td><td>Abbreviated weekday name</td></tr>
+<tr><td><code>B</code></td><td>Full month name</td></tr>
+<tr><td><code>b</code></td><td>Abbreviated month name</td></tr>
+<tr><td><code>C</code></td><td>Century (CC)</td></tr>
+<tr><td><code>c</code></td><td>Default date and time format</td></tr>
+<tr><td><code>d</code></td><td>Day of the month (&quot;01&quot; to &quot;31&quot;)</td></tr>
+<tr><td><code>e</code></td><td>Day of the month (&quot; 1&quot; to &quot;31&quot;)</td></tr>
+<tr><td><code>F</code></td><td>YYYY-MM-DD</td></tr>
+<tr><td><code>H</code></td><td>Hours for 24-hour clock (&quot;00&quot; to &quot;23&quot;)</td>
+</tr>
+<tr><td><code>I</code></td><td>Hours for 12-hour clock (&quot;01&quot; to &quot;12&quot;)</td>
+</tr>
+<tr><td><code>j</code></td><td>Day of the year (&quot;001&quot; to &quot;366&quot;)</td></tr>
+<tr><td><code>k</code></td><td>Hours for 24-hour clock (&quot; 0&quot; to &quot;23&quot;)</td>
+</tr>
+<tr><td><code>l</code></td><td>Hours for 12-hour clock (&quot; 1&quot; to &quot;12&quot;)</td>
+</tr>
+<tr><td><code>M</code></td><td>Minutes (&quot;00&quot; to &quot;59&quot;)</td></tr>
+<tr><td><code>m</code></td><td>Month number (&quot;01&quot; to &quot;12&quot;)</td></tr>
+<tr><td><code>p</code></td><td>&quot;am&quot; or &quot;pm&quot;</td></tr>
+<tr><td><code>R</code></td><td>Hours and minutes (&quot;HH:MM&quot;)</td></tr>
+<tr><td><code>r</code></td><td>Hours, minutes, seconds, and am/pm
+ (&quot;HH:MM:SS am/pm&quot;)</td></tr>
+<tr><td><code>S</code></td><td>Seconds (&quot;00&quot; to &quot;60&quot;)</td></tr>
+<tr><td><code>T</code></td><td>Hours, minutes, and seconds (&quot;HH:MM:SS&quot;)</td>
+</tr>
+<tr><td><code>X</code></td><td>Default time format</td></tr>
+<tr><td><code>x</code></td><td>Default date format</td></tr>
+<tr><td><code>Y</code></td><td>Year with century (CCYY)</td></tr>
+<tr><td><code>y</code></td><td>Year without century (YY)</td></tr>
+<tr><td><code>Z</code></td><td>Time zone name</td></tr>
+<tr><td><code>z</code></td><td>Time zone offset from UTC</td></tr>
+</table>
+</center>
 
 <!-- NEED 5in -->
 <h2><a NAME="FONT">FONT Attributes</a></h2>
