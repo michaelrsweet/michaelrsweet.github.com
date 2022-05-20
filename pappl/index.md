@@ -23,7 +23,35 @@ Applications, which are the recommended replacement for printer drivers.  It
 was developed to support any kind of printer or driver that can be used on
 desktops, servers, and in embedded environments.
 
-[System Requirements](pappl.html#requirements)
+System Requirements
+-------------------
+
+<div class="row"><div class="col col-lg-4 bg20 border pt-2">
+  <h3>Operating Systems</h3>
+  <ul>
+    <li>Linux®</li>
+    <li>macOS® 10.14+</li>
+    <li>Microsoft® Windows® 10+</li>
+    <li>Unix®</li>
+    <li>Other POSIX-compliant OS's</li>
+  </ul>
+</div><div class="col col-lg-4 bg20 border pt-2">
+  <h3>Required Libraries</h3>
+  <ul>
+    <li>Avahi (0.8+) or mDNSResponder</li>
+    <li>CUPS (2.2+) or libcups (3.0+)</li>
+    <li>GNU TLS (3.0+), LibreSSL (3.0+), or OpenSSL (1.1+)</li>
+    <li>ZLIB (1.1+)</li>
+  </ul>
+</div><div class="col col-lg-4 bg20 border pt-2">
+  <h3>Optional Libraries</h3>
+  <ul>
+    <li>JPEGLIB (8+) or libjpeg-turbo (2.0+)</li>
+    <li>LIBPAM</li>
+    <li>LIBPNG (1.6+)</li>
+    <li>LIBUSB (1.0+)</li>
+  </ul>
+</div></div>
 
 The following PAPPL-based printer applications are currently available:
 
