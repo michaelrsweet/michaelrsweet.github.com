@@ -20,10 +20,17 @@ layout: project-news
 
 PAPPL is a simple C-based framework/library for developing CUPS Printer
 Applications, which are the recommended replacement for printer drivers.  It
-was specifically developed to support [LPrint][1] and a future [Gutenprint][2]
-Printer Application but is sufficiently general purpose to support any kind of
-printer or driver that can be used on desktops, servers, and in embedded
-environments.
+was developed to support any kind of printer or driver that can be used on
+desktops, servers, and in embedded environments.
+
+The following PAPPL-based printer applications are currently available:
+
+- [Ghostscript Printer Application][12] for Ghostscript-supported printers,
+- [Gutenprint Printer Application][14] for [Gutenprint][2]-supported printers,
+- [HP Printer Application][9] for HP PCL printers,
+- [HPLIP Printer Application][13] for HPLIP-supported printers,
+- [LPrint][1] for DYMO, EPL, and ZPL label printers, and
+- [PostScript Printer Application][10] for PostScript printers.
 
 PAPPL supports JPEG, PNG, PWG Raster, Apple Raster, and "raw" printing to
 printers connected via USB and network (AppSocket/JetDirect) connections.
@@ -74,16 +81,6 @@ Documentation and Examples
 
 Documentation can be found in the "doc" and "man" directories.
 
-The OpenPrinting group has [written a tutorial][8] showing how to migrate the
-`rastertohp` driver from CUPS to a Printer Application using PAPPL, which can
-be used as a recipe for migrating any CUPS driver.  This example is available
-in the [hp-printer-app][9] project and is also discussed in the PAPPL
-documentation.
-
-The OpenPrinting group is also developing a [PostScript printer application][10]
-using PAPPL to support the many otherwise unsupported PostScript and
-Ghostscript-based printers.
-
 
 Legal Stuff
 -----------
@@ -108,3 +105,6 @@ This software is based loosely on the "ippeveprinter.c" code from [CUPS][11].
 [9]: https://github.com/michaelrsweet/hp-printer-app
 [10]: https://github.com/openprinting/ps-printer-app
 [11]: https://openprinting.github.io/cups
+[12]: https://github.com/OpenPrinting/ghostscript-printer-app
+[13]: https://github.com/OpenPrinting/hplip-printer-app
+[14]: https://github.com/OpenPrinting/gutenprint-printer-app
