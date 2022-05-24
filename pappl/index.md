@@ -52,6 +52,7 @@ System Requirements
     <li>LIBUSB (1.0+)</li>
   </ul>
 </div></div>
+<br>
 
 The following PAPPL-based printer applications are currently available:
 
