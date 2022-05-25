@@ -16,60 +16,71 @@ layout: project-news
 [![LGTM Grade](https://img.shields.io/lgtm/grade/cpp/github/michaelrsweet/lprint)](https://lgtm.com/projects/g/michaelrsweet/lprint/context:cpp)
 [![LGTM Alerts](https://img.shields.io/lgtm/alerts/github/michaelrsweet/lprint)](https://lgtm.com/projects/g/michaelrsweet/lprint/)
 
-LPrint implements printing for a variety of common label and receipt printers
-connected via network or USB.  Features include:
+LPrint implements printing for a variety of common label and receipt printers connected via network or USB.  Features include:
 
 - A single executable handles spooling, status, and server functionality.
 - Multiple printer support.
-- Each printer implements an IPP Everywhere™ print service and is compatible
-  with the driverless printing support in Android™, Chrome OS™, iOS®, Linux®,
-  macOS®, and Windows® 10/11 clients.
-- Each printer can support options such as label modes, tear-off offsets,
-  media tracking, media top offset, print darkness, resolution, roll selection,
-  and speed.
+- Each printer implements an IPP Everywhere™ print service and is compatible with the driverless printing support in Android™, Chrome OS™, iOS®, Linux®, macOS®, and Windows® 10/11 clients.
+- Each printer can support options such as label modes, tear-off offsets, media tracking, media top offset, print darkness, resolution, roll selection, and speed.
 - Each printer can directly print "raw", Apple/PWG Raster, and/or PNG files.
-- Each printer automatically recovers from out-of-media, power loss, and
-  disconnected/bad cable issues.
+- Each printer automatically recovers from out-of-media, power loss, and disconnected/bad cable issues.
+
+LPrint is licensed under the Apache License Version 2.0.  See the files "LICENSE" and "NOTICE" for more information.
 
 
-Requirements
-------------
-
-LPrint depends on:
-
-- A POSIX-compliant "make" program (both GNU and BSD make are known to work),
-- A C99 compiler (both Clang and GCC are known to work),
-- [PAPPL](https://www.msweet.org/pappl) 1.1 or later.
-- [CUPS](https://openprinting.github.io/cups) 2.2 or later (for libcups).
-
-
-Supported Printers
-------------------
-
-The following printers are currently supported:
-
-- Dymo LabelWriter printers
-- Zebra/Eltron EPL2 printers
-- Zebra ZPL printers
-
-Others will be added as time and access to printers permits.
-
-
-Standards
----------
-
-Through PAPPL, LPrint implements PWG 5100.14-2013: IPP Everywhere™ and the IPP
-Label Printing Extensions v1.0 for each printer, and has a partial
-implementation of PWG 5100.22-2019: IPP System Service v1.0 for managing the
-print queues and default printer.
-
-
-Legal Stuff
------------
-
-LPrint is Copyright © 2019-2021 by Michael R Sweet.
-
-LPrint is licensed under the Apache License Version 2.0.  See the files
-"LICENSE" and "NOTICE" for more information.
-
-LPrint is based loosely on the "rastertolabel.c" code from CUPS.
+<div class="border bg20 px-3 py-2 mb-3">
+  <h2>What is Supported?</h2>
+  <div class="row"><div class="col-lg-3 border-end">
+    <p>Clients:</p>
+    <ul>
+      <li>Android™ (4.4+)</li>
+      <li>Chrome OS™</li>
+      <li>iOS® (4+)</li>
+      <li>Linux® (w/CUPS 1.4+)</li>
+      <li>macOS® (10.8+)</li>
+      <li>Windows® (10+)</li>
+    </ul>
+  </div><div class="col-lg-9">
+    <p>Printers:</p>
+    <ul>
+      <li>DYMO:  LabelMANAGER 400, LabelMANAGER 450, LabelMANAGER PC, LabelMANAGER PC II, LabelMANAGER PNP, LabelPOINT 350, LabelWriter 300, LabelWriter 310, LabelWriter 315, LabelWriter 320, LabelWriter 330, LabelWriter 330 Turbo, LabelWriter 400, LabelWriter 400 Turbo, LabelWriter 450, LabelWriter 450 DUO, LabelWriter 450 Turbo, LabelWriter 4XL, LabelWriter DUO, LabelWriter DUO 128, and LabelWriter SE450</li>
+      <li>Zebra: All EPL2 and ZPL printers</li>
+    </ul>
+  </div></div>
+</div>
+<div class="border bg20 px-3 py-2">
+  <h2>System Requirements</h2>
+  <div class="row"><div class="col-lg-3 border-end">
+    <p>Operating Systems:</p>
+    <ul>
+      <li>Linux®</li>
+      <li>macOS® 10.14+</li>
+      <li>Microsoft® Windows® 10+</li>
+      <li>Unix®</li>
+      <li>Other POSIX-compliant OS's</li>
+    </ul>
+  </div><div class="col-lg-3 border-end">
+    <p>Tools:</p>
+    <ul>
+      <li>C99 compiler (Clang, GCC, MSVC)</li>
+      <li>POSIX-compliant `make` (all but Windows)</li>
+      <li>Xcode (optional for macOS)</li>
+      <li>Visual Studio 2019 or later (Windows)</li>
+    </ul>
+  </div><div class="col-lg-3 border-end">
+    <p>Required Libraries:</p>
+    <ul>
+      <li>Avahi (0.8+) or mDNSResponder</li>
+      <li>CUPS (2.2+) or libcups (3.0+)</li>
+      <li>GNU TLS (3.0+), LibreSSL (3.0+), or OpenSSL (1.1+)</li>
+      <li><a href="../pappl">PAPPL</a> (1.1+)</li>
+      <li>ZLIB (1.1+)</li>
+    </ul>
+  </div><div class="col-lg-3">
+    <p>Optional Libraries:</p>
+    <ul>
+      <li>JPEGLIB (8+) or libjpeg-turbo (2.0+)</li>
+      <li>LIBPNG (1.6+)</li>
+    </ul>
+  </div></div>
+</div>

@@ -27,7 +27,7 @@ PAPPL is licensed under the Apache License Version 2.0 with an exception to allo
 
 <div class="border bg20 px-3 py-2">
   <h2>System Requirements</h2>
-  <div class="row"><div class="col-lg-4 border-end">
+  <div class="row"><div class="col-lg-3 border-end">
     <p>Operating Systems:</p>
     <ul>
       <li>Linux®</li>
@@ -36,7 +36,15 @@ PAPPL is licensed under the Apache License Version 2.0 with an exception to allo
       <li>Unix®</li>
       <li>Other POSIX-compliant OS's</li>
     </ul>
-  </div><div class="col-lg-4 border-end">
+  </div><div class="col-lg-3 border-end">
+    <p>Tools:</p>
+    <ul>
+      <li>C99 compiler (Clang, GCC, MSVC)</li>
+      <li>POSIX-compliant `make` (all but Windows)</li>
+      <li>Xcode (optional for macOS)</li>
+      <li>Visual Studio 2019 or later (Windows)</li>
+    </ul>
+  </div><div class="col-lg-3 border-end">
     <p>Required Libraries:</p>
     <ul>
       <li>Avahi (0.8+) or mDNSResponder</li>
@@ -44,7 +52,7 @@ PAPPL is licensed under the Apache License Version 2.0 with an exception to allo
       <li>GNU TLS (3.0+), LibreSSL (3.0+), or OpenSSL (1.1+)</li>
       <li>ZLIB (1.1+)</li>
     </ul>
-  </div><div class="col-lg-4">
+  </div><div class="col-lg-3">
     <p>Optional Libraries:</p>
     <ul>
       <li>JPEGLIB (8+) or libjpeg-turbo (2.0+)</li>

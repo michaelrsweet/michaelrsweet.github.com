@@ -56,3 +56,36 @@ My focus is on addressing security, build, and formatting issues and not on
 extending HTMLDOC to support CSS or full Unicode.
 
 HTMLDOC is provided under the terms of the GNU General Public License version 2.
+
+<div class="border bg20 px-3 py-2">
+  <h2>System Requirements</h2>
+  <div class="row"><div class="col-lg-4 border-end">
+    <p>Operating Systems:</p>
+    <ul>
+      <li>Linux®</li>
+      <li>macOS® 10.14+</li>
+      <li>Microsoft® Windows® 10+</li>
+      <li>Unix®</li>
+      <li>Other POSIX-compliant OS's</li>
+    </ul>
+  </div><div class="col-lg-4 border-end">
+    <p>Tools:</p>
+    <ul>
+      <li>C99 compiler (Clang, GCC, MSVC)</li>
+      <li>POSIX-compliant `make` (all but Windows)</li>
+      <li>Xcode (optional for macOS)</li>
+      <li>Visual Studio 2019 or later (Windows)</li>
+    </ul>
+  </div><div class="col-lg-4 border-end">
+    <p>Required Libraries:</p>
+    <ul>
+      <li>GNU TLS (3.0+), LibreSSL (3.0+), or OpenSSL (1.1+)</li>
+      <li>ZLIB (1.1+)</li>
+    </ul>
+    <p>Optional Libraries:</p>
+    <ul>
+      <li>JPEGLIB (8+) or libjpeg-turbo (2.0+)</li>
+      <li>LIBPNG (1.6+)</li>
+    </ul>
+  </div></div>
+</div>
