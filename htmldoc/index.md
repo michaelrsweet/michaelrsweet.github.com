@@ -18,7 +18,7 @@ platforms: Linux | macOS | Unix | Windows
 
 HTMLDOC converts HTML and Markdown source files or web pages to EPUB, PostScript, or PDF files with an optional table of contents. While it currently does not support many things in "the modern web" such as Cascading Style Sheets (CSS), forms, full Unicode, and Emoji characters, it is still useful for converting HTML documentation, invoices, and reports. It provides a convenient GUI and can be integrated with many continuous integration and web server solutions.
 
-Binaries are provided by me for Linux® on the snapcraft store, macOS® (10.14 and higher), and Microsoft Windows® (10 and higher), and most Linux distributions provide native packages.
+Binaries are provided by me for Linux® on the snapcraft store, macOS® (10.14 and higher) on the Github download page, and Microsoft Windows® (10 and higher) on the Github download page. Most Linux distributions also provide native packages.
 
 ![HTMLDOC Screenshot](htmldoc-ubuntu.png)
 

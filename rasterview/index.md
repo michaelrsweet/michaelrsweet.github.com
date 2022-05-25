@@ -16,4 +16,6 @@ platforms: Linux | macOS | Unix
 
 RasterView is a CUPS, PWG, and Apple raster file viewer.  It basically allows you to look at the raster data produced by any of the standard CUPS RIP filters (`cgpdftoraster`, `imagetoraster`, `pdftoraster`, and `pstoraster`) or the `ipptransform` tool and is normally used to either test those filters or look at the data that is being sent to your raster printer driver or printer.
 
+Binaries are provided by me for Linux® on the snapcraft store and macOS® (10.14 and higher) on the Github download page.
+
 ![RasterView Screenshot](rasterview-ubuntu.png)
