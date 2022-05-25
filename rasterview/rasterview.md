@@ -30,7 +30,7 @@ The program is called "rasterview" on UNIX/Linux and "RasterView.app" on macOS.
 Run the program and then open a raster file, or pass the filename on the
 command-line.  You can view multiple files simultaneously.
 
-![RasterView Screenshot](rasterview-screenshot.png)
+![RasterView Screenshot](rasterview-ubuntu.png)
 
 
 The Basics
