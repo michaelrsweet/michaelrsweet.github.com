@@ -9,14 +9,10 @@ epub_doc: mxml.epub
 html_doc: mxml.html
 project: mxml
 project_name: Mini-XML
+language: C
+lgtm: cpp
+platforms: Linux | macOS | Unix | Windows
 ---
-
-![Version](https://img.shields.io/github/v/release/michaelrsweet/mxml?include_prereleases)
-![Apache 2.0](https://img.shields.io/github/license/michaelrsweet/mxml)
-![Build](https://github.com/michaelrsweet/mxml/workflows/Build/badge.svg)
-[![Coverity Scan Status](https://img.shields.io/coverity/scan/23959.svg)](https://scan.coverity.com/projects/michaelrsweet-mxml)
-[![LGTM Grade](https://img.shields.io/lgtm/grade/cpp/github/michaelrsweet/mxml)](https://lgtm.com/projects/g/michaelrsweet/mxml/context:cpp)
-[![LGTM Alerts](https://img.shields.io/lgtm/alerts/github/michaelrsweet/mxml)](https://lgtm.com/projects/g/michaelrsweet/mxml/)
 
 Mini-XML is a tiny XML library that you can use to read and write XML and
 XML-like data files in your application without requiring large non-standard
@@ -42,7 +38,3 @@ based upon schema files or other sources of definition information.
 > Note: Version 3.0 hides the definition of the `mxml_node_t` structure,
 > requiring the use of the various accessor functions that were introduced in
 > version 2.0.
-
-The Mini-XML library is licensed under the Apache License Version 2.0 with an
-exception to allow linking against GPL2/LGPL2-only software.  See the files
-"LICENSE" and "NOTICE" for more information.

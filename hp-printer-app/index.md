@@ -9,11 +9,10 @@ logo: hp-printer-app-160.png
 html_doc: hp-printer-app.html
 snap: hp-printer-app
 layout: project-news
+language: C
+xlgtm: cpp
+platforms: Linux | macOS | Unix
 ---
-
-![Version](https://img.shields.io/github/v/release/michaelrsweet/hp-printer-app?include_prereleases)
-![Apache 2.0](https://img.shields.io/github/license/michaelrsweet/hp-printer-app)
-
 
 `hp-printer-app` implements printing for a variety of common PCL printers
 connected via network or USB.  Features include:
@@ -28,40 +27,49 @@ connected via network or USB.  Features include:
   disconnected/bad cable issues.
 
 
-Requirements
-------------
-
-`hp-printer-app` depends on:
-
-- A POSIX-compliant "make" program (both GNU and BSD make are known to work),
-- A C99 compiler (both Clang and GCC are known to work),
-- [PAPPL](https://www.msweet.org/pappl) 1.1 or later.
-- [CUPS](https://openprinting.github.io/cups) 2.2 or later (for libcups).
-
-
-Supported Printers
-------------------
-
-The following printers are currently supported:
-
-- HP LaserJet printers with PCL 5 language support
-- Most HP DeskJet, OfficeJet, and Photosmart printers
-- Laser printers with PCL 5 support from Canon, IBM, Lexmark, Kyocera, Ricoh,
-  Xerox, etc.
-
-
-Standards
----------
-
-Through PAPPL, `hp-printer-app` implements PWG 5100.14-2013: IPP Everywhere™
-for each printer, and has a partial implementation of PWG 5100.22-2019: IPP
-System Service v1.0 for managing the print queues and default printer.
-
-
-Legal Stuff
------------
-
-The HP Printer Application is Copyright © 2019-2022 by Michael R Sweet.
-
-This software is licensed under the Apache License Version 2.0.  See the files
-"LICENSE" and "NOTICE" for more information.
+<div class="border bg20 px-3 py-2 mb-3">
+  <h2>What is Supported?</h2>
+  <div class="row"><div class="col-lg-3 border-end">
+    <p>Clients:</p>
+    <ul>
+      <li>Android™ (4.4+)</li>
+      <li>Chrome OS™</li>
+      <li>iOS® (4+)</li>
+      <li>Linux® (w/CUPS 1.4+)</li>
+      <li>macOS® (10.8+)</li>
+      <li>Windows® (10+)</li>
+    </ul>
+  </div><div class="col-lg-9">
+    <p>Printers:</p>
+    <ul>
+      <li>HP: Most DeskJet, LaserJet, Photosmart, and OfficeJet</li>
+      <li>Other: Laser printers with PCL 5 support from Canon, IBM, Lexmark, Kyocera, Ricoh, Xerox, etc.</li>
+    </ul>
+  </div></div>
+</div>
+<div class="border bg20 px-3 py-2">
+  <h2>System Requirements</h2>
+  <div class="row"><div class="col-lg-4 border-end">
+    <p>Tools:</p>
+    <ul>
+      <li>C99 compiler (Clang, GCC, MSVC)</li>
+      <li>POSIX-compliant `make` (all but Windows)</li>
+      <li>Xcode (optional for macOS)</li>
+    </ul>
+  </div><div class="col-lg-4 border-end">
+    <p>Required Libraries:</p>
+    <ul>
+      <li>Avahi (0.8+) or mDNSResponder</li>
+      <li>CUPS (2.2+) or libcups (3.0+)</li>
+      <li>GNU TLS (3.0+), LibreSSL (3.0+), or OpenSSL (1.1+)</li>
+      <li><a href="../pappl">PAPPL</a> (1.1+)</li>
+      <li>ZLIB (1.1+)</li>
+    </ul>
+  </div><div class="col-lg-4">
+    <p>Optional Libraries:</p>
+    <ul>
+      <li>JPEGLIB (8+) or libjpeg-turbo (2.0+)</li>
+      <li>LIBPNG (1.6+)</li>
+    </ul>
+  </div></div>
+</div>

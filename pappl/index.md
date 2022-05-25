@@ -9,14 +9,10 @@ logo: pappl-160.png
 epub_doc: pappl.epub
 html_doc: pappl.html
 layout: project-news
+language: C
+lgtm: cpp
+platforms: Linux | macOS | Unix | Windows
 ---
-
-![Version](https://img.shields.io/github/v/release/michaelrsweet/pappl?include_prereleases)
-![Apache 2.0](https://img.shields.io/github/license/michaelrsweet/pappl)
-![Build](https://github.com/michaelrsweet/pappl/workflows/Build/badge.svg)
-[![Coverity Scan Status](https://img.shields.io/coverity/scan/22385.svg)](https://scan.coverity.com/projects/michaelrsweet-pappl)
-[![LGTM Grade](https://img.shields.io/lgtm/grade/cpp/github/michaelrsweet/pappl)](https://lgtm.com/projects/g/michaelrsweet/pappl/context:cpp)
-[![LGTM Alerts](https://img.shields.io/lgtm/alerts/github/michaelrsweet/pappl)](https://lgtm.com/projects/g/michaelrsweet/pappl/)
 
 PAPPL is a simple C-based framework/library for developing CUPS Printer Applications, which are the recommended replacement for printer drivers.  It was developed to support any kind of printer or driver that can be used on desktops, servers, and in embedded environments.
 
@@ -27,16 +23,7 @@ PAPPL is licensed under the Apache License Version 2.0 with an exception to allo
 
 <div class="border bg20 px-3 py-2">
   <h2>System Requirements</h2>
-  <div class="row"><div class="col-lg-3 border-end">
-    <p>Operating Systems:</p>
-    <ul>
-      <li>Linux®</li>
-      <li>macOS® 10.14+</li>
-      <li>Microsoft® Windows® 10+</li>
-      <li>Unix®</li>
-      <li>Other POSIX-compliant OS's</li>
-    </ul>
-  </div><div class="col-lg-3 border-end">
+  <div class="row"><div class="col-lg-4 border-end">
     <p>Tools:</p>
     <ul>
       <li>C99 compiler (Clang, GCC, MSVC)</li>
@@ -44,7 +31,7 @@ PAPPL is licensed under the Apache License Version 2.0 with an exception to allo
       <li>Xcode (optional for macOS)</li>
       <li>Visual Studio 2019 or later (Windows)</li>
     </ul>
-  </div><div class="col-lg-3 border-end">
+  </div><div class="col-lg-4 border-end">
     <p>Required Libraries:</p>
     <ul>
       <li>Avahi (0.8+) or mDNSResponder</li>
@@ -52,7 +39,7 @@ PAPPL is licensed under the Apache License Version 2.0 with an exception to allo
       <li>GNU TLS (3.0+), LibreSSL (3.0+), or OpenSSL (1.1+)</li>
       <li>ZLIB (1.1+)</li>
     </ul>
-  </div><div class="col-lg-3">
+  </div><div class="col-lg-4">
     <p>Optional Libraries:</p>
     <ul>
       <li>JPEGLIB (8+) or libjpeg-turbo (2.0+)</li>

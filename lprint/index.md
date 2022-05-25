@@ -9,12 +9,10 @@ logo: lprint-160.png
 html_doc: lprint.html
 snap: lprint
 layout: project-news
+language: C
+lgtm: cpp
+platforms: Linux | macOS | Unix
 ---
-
-![Version](https://img.shields.io/github/v/release/michaelrsweet/lprint?include_prereleases)
-![Apache 2.0](https://img.shields.io/github/license/michaelrsweet/lprint)
-[![LGTM Grade](https://img.shields.io/lgtm/grade/cpp/github/michaelrsweet/lprint)](https://lgtm.com/projects/g/michaelrsweet/lprint/context:cpp)
-[![LGTM Alerts](https://img.shields.io/lgtm/alerts/github/michaelrsweet/lprint)](https://lgtm.com/projects/g/michaelrsweet/lprint/)
 
 LPrint implements printing for a variety of common label and receipt printers connected via network or USB.  Features include:
 
@@ -24,8 +22,6 @@ LPrint implements printing for a variety of common label and receipt printers co
 - Each printer can support options such as label modes, tear-off offsets, media tracking, media top offset, print darkness, resolution, roll selection, and speed.
 - Each printer can directly print "raw", Apple/PWG Raster, and/or PNG files.
 - Each printer automatically recovers from out-of-media, power loss, and disconnected/bad cable issues.
-
-LPrint is licensed under the Apache License Version 2.0.  See the files "LICENSE" and "NOTICE" for more information.
 
 
 <div class="border bg20 px-3 py-2 mb-3">
@@ -50,24 +46,14 @@ LPrint is licensed under the Apache License Version 2.0.  See the files "LICENSE
 </div>
 <div class="border bg20 px-3 py-2">
   <h2>System Requirements</h2>
-  <div class="row"><div class="col-lg-3 border-end">
-    <p>Operating Systems:</p>
-    <ul>
-      <li>Linux®</li>
-      <li>macOS® 10.14+</li>
-      <li>Microsoft® Windows® 10+</li>
-      <li>Unix®</li>
-      <li>Other POSIX-compliant OS's</li>
-    </ul>
-  </div><div class="col-lg-3 border-end">
+  <div class="row"><div class="col-lg-4 border-end">
     <p>Tools:</p>
     <ul>
       <li>C99 compiler (Clang, GCC, MSVC)</li>
       <li>POSIX-compliant `make` (all but Windows)</li>
       <li>Xcode (optional for macOS)</li>
-      <li>Visual Studio 2019 or later (Windows)</li>
     </ul>
-  </div><div class="col-lg-3 border-end">
+  </div><div class="col-lg-4 border-end">
     <p>Required Libraries:</p>
     <ul>
       <li>Avahi (0.8+) or mDNSResponder</li>
@@ -76,7 +62,7 @@ LPrint is licensed under the Apache License Version 2.0.  See the files "LICENSE
       <li><a href="../pappl">PAPPL</a> (1.1+)</li>
       <li>ZLIB (1.1+)</li>
     </ul>
-  </div><div class="col-lg-3">
+  </div><div class="col-lg-4">
     <p>Optional Libraries:</p>
     <ul>
       <li>JPEGLIB (8+) or libjpeg-turbo (2.0+)</li>

@@ -8,6 +8,9 @@ project_name: htmlcss
 logo: htmlcss-160.png
 html_doc: htmlcss.html
 layout: project
+language: C
+lgtm: cpp
+platforms: Linux | macOS | Unix
 ---
 
 > Note: This library is under development and is not yet complete!

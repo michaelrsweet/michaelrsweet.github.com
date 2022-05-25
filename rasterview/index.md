@@ -9,17 +9,9 @@ logo: rasterview-160.png
 html_doc: rasterview.html
 snap: rasterview
 layout: project-news
+language: C++
+lgtm: cpp
+platforms: Linux | macOS | Unix
 ---
 
-![Version](https://img.shields.io/github/v/release/michaelrsweet/rasterview?include_prereleases)
-![Apache 2.0](https://img.shields.io/github/license/michaelrsweet/rasterview)
-[![LGTM Grade](https://img.shields.io/lgtm/grade/cpp/github/michaelrsweet/rasterview)](https://lgtm.com/projects/g/michaelrsweet/rasterview/context:cpp)
-[![LGTM Alerts](https://img.shields.io/lgtm/alerts/github/michaelrsweet/rasterview)](https://lgtm.com/projects/g/michaelrsweet/rasterview/)
-
-RasterView is a CUPS, PWG, and Apple raster file viewer.  It basically allows
-you to look at the raster data produced by any of the standard CUPS RIP filters
-(`cgpdftoraster`, `imagetoraster`, `pdftoraster`, and `pstoraster`) or the
-`ipptransform` tool and is normally used to either test those filters or look
-at the data that is being sent to your raster printer driver or printer.
-
-RasterView is licensed under the Apache License Version 2.0.
+RasterView is a CUPS, PWG, and Apple raster file viewer.  It basically allows you to look at the raster data produced by any of the standard CUPS RIP filters (`cgpdftoraster`, `imagetoraster`, `pdftoraster`, and `pstoraster`) or the `ipptransform` tool and is normally used to either test those filters or look at the data that is being sent to your raster printer driver or printer.

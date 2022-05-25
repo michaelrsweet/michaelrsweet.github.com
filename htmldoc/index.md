@@ -11,14 +11,10 @@ html_doc: htmldoc.html
 pdf_doc: htmldoc.pdf
 snap: htmldoc
 layout: project-news
+language: C++
+lgtm: cpp
+platforms: Linux | macOS | Unix | Windows
 ---
-
-![Version](https://img.shields.io/github/v/release/michaelrsweet/htmldoc?include_prereleases)
-![GPL-2.0](https://img.shields.io/github/license/michaelrsweet/htmldoc)
-[![Build](https://github.com/michaelrsweet/pdfio/workflows/Build/badge.svg)](https://github.com/michaelrsweet/htmldoc/actions/workflows/build.yml)
-[![Coverity Scan Status](https://img.shields.io/coverity/scan/22389.svg)](https://scan.coverity.com/projects/michaelrsweet-htmldoc)
-[![LGTM Grade](https://img.shields.io/lgtm/grade/cpp/github/michaelrsweet/htmldoc)](https://lgtm.com/projects/g/michaelrsweet/htmldoc/context:cpp)
-[![LGTM Alerts](https://img.shields.io/lgtm/alerts/github/michaelrsweet/htmldoc)](https://lgtm.com/projects/g/michaelrsweet/htmldoc/)
 
 HTMLDOC is a program that reads HTML and Markdown source files or web pages and
 generates corresponding EPUB, HTML, PostScript, or PDF files with an optional
@@ -60,15 +56,6 @@ HTMLDOC is provided under the terms of the GNU General Public License version 2.
 <div class="border bg20 px-3 py-2">
   <h2>System Requirements</h2>
   <div class="row"><div class="col-lg-4 border-end">
-    <p>Operating Systems:</p>
-    <ul>
-      <li>Linux®</li>
-      <li>macOS® 10.14+</li>
-      <li>Microsoft® Windows® 10+</li>
-      <li>Unix®</li>
-      <li>Other POSIX-compliant OS's</li>
-    </ul>
-  </div><div class="col-lg-4 border-end">
     <p>Tools:</p>
     <ul>
       <li>C99 compiler (Clang, GCC, MSVC)</li>
@@ -82,6 +69,7 @@ HTMLDOC is provided under the terms of the GNU General Public License version 2.
       <li>GNU TLS (3.0+), LibreSSL (3.0+), or OpenSSL (1.1+)</li>
       <li>ZLIB (1.1+)</li>
     </ul>
+  </div><div class="col-lg-4">
     <p>Optional Libraries:</p>
     <ul>
       <li>JPEGLIB (8+) or libjpeg-turbo (2.0+)</li>

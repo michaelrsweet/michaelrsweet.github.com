@@ -212,11 +212,6 @@ a.navbar-brand img:hover {
   padding-bottom: 0px;
 }
 
-.container-header-small h1 {
-  color: #555;
-  font-size: 120%;
-}
-
 .container-header-small h1 img.logo {
   height: 60px;
   margin-top: 2px;
