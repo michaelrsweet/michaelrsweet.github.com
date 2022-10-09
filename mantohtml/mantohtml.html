@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="author" content="Michael R Sweet">
+    <meta name="copyright" content="Copyright © 2022 by Michael R Sweet">
+    <meta name="creator" content="mantohtml v2022.10">
+    <title>mantohtml Documentation</title>
+  </head>
+  <body>
+    <h1 id="mantohtml-1">mantohtml(1)</h1>
+    <h2 id="mantohtml-1.name">Name</h2>
+<p>mantohtml - convert man page source to html
+</p>
+    <h2 id="mantohtml-1.synopsis">Synopsis</h2>
+<p><strong>mantohtml</strong>
+[
+<strong>--author</strong>
+<em>AUTHOR</em>
+] [
+<strong>--chapter</strong>
+<em>CHAPTER</em>
+] [
+<strong>--copyright</strong>
+<em>COPYRIGHT</em>
+] [
+<strong>--css</strong>
+<em>CSS-FILE-OR-URL</em>
+] [
+<strong>--help</strong>
+] [
+<strong>--subject</strong>
+<em>SUBJECT</em>
+] [
+<strong>--title</strong>
+<em>TITLE</em>
+] [
+<strong>--version</strong>
+]
+<em>MAN-FILE</em>
+[ ...
+<em>MAN-FILE</em>
+] >
+<em>HTML-FILE</em>
+</p>
+    <h2 id="mantohtml-1.description">Description</h2>
+<p><strong>mantohtml</strong>
+converts
+<strong>man</strong>(1)
+
+source files to HTML and writes the result to the standard output.
+</p>
+    <h2 id="mantohtml-1.options">Options</h2>
+<p>The following options are recognized by
+<strong>mantohtml</strong>:
+
+</p>
+    <p style="margin-left: 2.5em; text-indent: -2.5em;"><strong>--author </strong><em>AUTHOR</em><br>
+Sets the author metadata of the HTML output.
+</p>
+    <p style="margin-left: 2.5em; text-indent: -2.5em;"><strong>--chapter </strong><em>CHAPTER</em><br>
+Sets the chapter (H1 heading) of the HTML output.
+If specified, each man page starts with a second-level (H2) heading with third-level (H3) sections and fourth-level (H4) sub-sections.
+If not specified, each man page starts with a first-level (H1) heading with second-level (H2) sections and third-level (H3) sub-sections.
+</p>
+    <p style="margin-left: 2.5em; text-indent: -2.5em;"><strong>--copyright </strong><em>COPYRIGHT</em><br>
+Sets the copyright metadata of the HTML output.
+</p>
+    <p style="margin-left: 2.5em; text-indent: -2.5em;"><strong>--css </strong><em>CSS-FILE-OR-URL</em><br>
+Sets the Cascading Style Sheet (CSS) for the HTML output.
+Files are embedded inline while 'http:' and 'https:' URLs are referenced.
+</p>
+    <p style="margin-left: 2.5em; text-indent: -2.5em;"><strong>--help</strong><br>
+Shows program help.
+</p>
+    <p style="margin-left: 2.5em; text-indent: -2.5em;"><strong>--subject </strong><em>SUBJECT</em><br>
+Sets the subject metadata of the HTML output.
+</p>
+    <p style="margin-left: 2.5em; text-indent: -2.5em;"><strong>--title </strong><em>TITLE</em><br>
+Sets the title of the HTML output.
+</p>
+    <p style="margin-left: 2.5em; text-indent: -2.5em;"><strong>--version</strong><br>
+Shows program version.
+</p>
+    <h2 id="mantohtml-1.exit-status">Exit Status</h2>
+<p><strong>mantohtml</strong>
+returns a non-zero exit status when an error occurs.
+</p>
+    <h2 id="mantohtml-1.examples">Examples</h2>
+<p>Convert the man page source file
+<em>example.1</em>
+to HTML with the default stylesheet, author, and title, with the output sent to the file
+<em>example.html</em>:
+
+</p>
+    <pre>
+    mantohtml example.1 >example.html
+
+</pre>
+<p>Convert all man pages in the current directory to HTML using the Bootstrap stylesheet:
+</p>
+    <pre>
+    mantohtml --author "Alex the Author" \
+        --css <a href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css</a> \
+        --title "Alex Project Manual" *.[1-8] >alex-manual.html
+</pre>
+    <h2 id="mantohtml-1.copyright">Copyright</h2>
+<p>Copyright &copy; 2022 by Michael R Sweet.
+</p>
+    <h2 id="mantohtml-1.see-also">See Also</h2>
+<p><strong>groff_man</strong>(7),
+
+<strong>man</strong>(1),
+
+<strong>man</strong>(7),
+
+<strong>man-pages</strong>(7).
+
+  </body>
+</html>
