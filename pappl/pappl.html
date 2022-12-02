@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-<title>PAPPL v1.2 Programmers Manual</title>
+<title>PAPPL v1.3 Programmers Manual</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 <meta name="generator" content="codedoc v3.7">
 <meta name="author" content="Michael R Sweet">
 <meta name="language" content="en-US">
 <meta name="copyright" content="Copyright © 2020-2022 by Michael R Sweet">
-<meta name="version" content="1.2.0">
+<meta name="version" content="1.3.0">
 <style type="text/css"><!--
 body {
   background: white;
@@ -245,7 +245,7 @@ span.string {
 <body>
 <div class="header">
 <p><img class="title" src="pappl-512.png"></p>
-<h1 class="title">PAPPL v1.2 Programmers Manual</h1>
+<h1 class="title">PAPPL v1.3 Programmers Manual</h1>
 <p>Michael R Sweet</p>
 <p>Copyright © 2020-2022 by Michael R Sweet</p>
 </div>
@@ -307,6 +307,7 @@ span.string {
 <li><a href="#papplClientHTMLPuts">papplClientHTMLPuts</a></li>
 <li><a href="#papplClientHTMLStartForm">papplClientHTMLStartForm</a></li>
 <li><a href="#papplClientIsAuthorized">papplClientIsAuthorized</a></li>
+<li><a href="#papplClientIsEncrypted">papplClientIsEncrypted</a></li>
 <li><a href="#papplClientIsValidForm">papplClientIsValidForm</a></li>
 <li><a href="#papplClientRespond">papplClientRespond</a></li>
 <li><a href="#papplClientRespondIPP">papplClientRespondIPP</a></li>
@@ -358,14 +359,17 @@ span.string {
 <li><a href="#papplJobGetTimeCreated">papplJobGetTimeCreated</a></li>
 <li><a href="#papplJobGetTimeProcessed">papplJobGetTimeProcessed</a></li>
 <li><a href="#papplJobGetUsername">papplJobGetUsername</a></li>
+<li><a href="#papplJobHold">papplJobHold</a></li>
 <li><a href="#papplJobIsCanceled">papplJobIsCanceled</a></li>
 <li><a href="#papplJobOpenFile">papplJobOpenFile</a></li>
+<li><a href="#papplJobRelease">papplJobRelease</a></li>
 <li><a href="#papplJobSetData">papplJobSetData</a></li>
 <li><a href="#papplJobSetImpressions">papplJobSetImpressions</a></li>
 <li><a href="#papplJobSetImpressionsCompleted">papplJobSetImpressionsCompleted</a></li>
 <li><a href="#papplJobSetMessage">papplJobSetMessage</a></li>
 <li><a href="#papplJobSetReasons">papplJobSetReasons</a></li>
 <li><a href="#papplLocFormatString">papplLocFormatString</a></li>
+<li><a href="#papplLocGetDefaultMediaSizeName">papplLocGetDefaultMediaSizeName</a></li>
 <li><a href="#papplLocGetString">papplLocGetString</a></li>
 <li><a href="#papplLog">papplLog</a></li>
 <li><a href="#papplLogClient">papplLogClient</a></li>
@@ -409,13 +413,17 @@ span.string {
 <li><a href="#papplPrinterGetState">papplPrinterGetState</a></li>
 <li><a href="#papplPrinterGetSupplies">papplPrinterGetSupplies</a></li>
 <li><a href="#papplPrinterGetSystem">papplPrinterGetSystem</a></li>
+<li><a href="#papplPrinterHoldNewJobs">papplPrinterHoldNewJobs</a></li>
 <li><a href="#papplPrinterIsAcceptingJobs">papplPrinterIsAcceptingJobs</a></li>
+<li><a href="#papplPrinterIsDeleted">papplPrinterIsDeleted</a></li>
+<li><a href="#papplPrinterIsHoldingNewJobs">papplPrinterIsHoldingNewJobs</a></li>
 <li><a href="#papplPrinterIterateActiveJobs">papplPrinterIterateActiveJobs</a></li>
 <li><a href="#papplPrinterIterateAllJobs">papplPrinterIterateAllJobs</a></li>
 <li><a href="#papplPrinterIterateCompletedJobs">papplPrinterIterateCompletedJobs</a></li>
 <li><a href="#papplPrinterOpenDevice">papplPrinterOpenDevice</a></li>
 <li><a href="#papplPrinterOpenFile">papplPrinterOpenFile</a></li>
 <li><a href="#papplPrinterPause">papplPrinterPause</a></li>
+<li><a href="#papplPrinterReleaseHeldNewJobs">papplPrinterReleaseHeldNewJobs</a></li>
 <li><a href="#papplPrinterRemoveLink">papplPrinterRemoveLink</a></li>
 <li><a href="#papplPrinterResume">papplPrinterResume</a></li>
 <li><a href="#papplPrinterSetContact">papplPrinterSetContact</a></li>
@@ -455,6 +463,7 @@ span.string {
 <li><a href="#papplSystemAddResourceString">papplSystemAddResourceString</a></li>
 <li><a href="#papplSystemAddStringsData">papplSystemAddStringsData</a></li>
 <li><a href="#papplSystemAddStringsFile">papplSystemAddStringsFile</a></li>
+<li><a href="#papplSystemAddTimerCallback">papplSystemAddTimerCallback</a></li>
 <li><a href="#papplSystemCleanJobs">papplSystemCleanJobs</a></li>
 <li><a href="#papplSystemCreate">papplSystemCreate</a></li>
 <li><a href="#papplSystemDelete">papplSystemDelete</a></li>
@@ -474,6 +483,7 @@ span.string {
 <li><a href="#papplSystemGetLocation">papplSystemGetLocation</a></li>
 <li><a href="#papplSystemGetLogLevel">papplSystemGetLogLevel</a></li>
 <li><a href="#papplSystemGetMaxClients">papplSystemGetMaxClients</a></li>
+<li><a href="#papplSystemGetMaxImageSize">papplSystemGetMaxImageSize</a></li>
 <li><a href="#papplSystemGetMaxLogSize">papplSystemGetMaxLogSize</a></li>
 <li><a href="#papplSystemGetMaxSubscriptions">papplSystemGetMaxSubscriptions</a></li>
 <li><a href="#papplSystemGetName">papplSystemGetName</a></li>
@@ -495,6 +505,7 @@ span.string {
 <li><a href="#papplSystemMatchDriver">papplSystemMatchDriver</a></li>
 <li><a href="#papplSystemRemoveLink">papplSystemRemoveLink</a></li>
 <li><a href="#papplSystemRemoveResource">papplSystemRemoveResource</a></li>
+<li><a href="#papplSystemRemoveTimerCallback">papplSystemRemoveTimerCallback</a></li>
 <li><a href="#papplSystemRun">papplSystemRun</a></li>
 <li><a href="#papplSystemSaveState">papplSystemSaveState</a></li>
 <li><a href="#papplSystemSetAdminGroup">papplSystemSetAdminGroup</a></li>
@@ -511,8 +522,10 @@ span.string {
 <li><a href="#papplSystemSetLogLevel">papplSystemSetLogLevel</a></li>
 <li><a href="#papplSystemSetMIMECallback">papplSystemSetMIMECallback</a></li>
 <li><a href="#papplSystemSetMaxClients">papplSystemSetMaxClients</a></li>
+<li><a href="#papplSystemSetMaxImageSize">papplSystemSetMaxImageSize</a></li>
 <li><a href="#papplSystemSetMaxLogSize">papplSystemSetMaxLogSize</a></li>
 <li><a href="#papplSystemSetMaxSubscriptions">papplSystemSetMaxSubscriptions</a></li>
+<li><a href="#papplSystemSetNetworkCallbacks">papplSystemSetNetworkCallbacks</a></li>
 <li><a href="#papplSystemSetNextPrinterID">papplSystemSetNextPrinterID</a></li>
 <li><a href="#papplSystemSetOperationCallback">papplSystemSetOperationCallback</a></li>
 <li><a href="#papplSystemSetOrganization">papplSystemSetOrganization</a></li>
@@ -568,6 +581,10 @@ span.string {
 <li><a href="#pappl_ml_subcmd_cb_t">pappl_ml_subcmd_cb_t</a></li>
 <li><a href="#pappl_ml_system_cb_t">pappl_ml_system_cb_t</a></li>
 <li><a href="#pappl_ml_usage_cb_t">pappl_ml_usage_cb_t</a></li>
+<li><a href="#pappl_netconf_t">pappl_netconf_t</a></li>
+<li><a href="#pappl_network_get_cb_t">pappl_network_get_cb_t</a></li>
+<li><a href="#pappl_network_set_cb_t">pappl_network_set_cb_t</a></li>
+<li><a href="#pappl_network_t">pappl_network_t</a></li>
 <li><a href="#pappl_pr_autoadd_cb_t">pappl_pr_autoadd_cb_t</a></li>
 <li><a href="#pappl_pr_create_cb_t">pappl_pr_create_cb_t</a></li>
 <li><a href="#pappl_pr_delete_cb_t">pappl_pr_delete_cb_t</a></li>
@@ -599,6 +616,7 @@ span.string {
 <li><a href="#pappl_supply_t">pappl_supply_t</a></li>
 <li><a href="#pappl_supply_type_t">pappl_supply_type_t</a></li>
 <li><a href="#pappl_system_t">pappl_system_t</a></li>
+<li><a href="#pappl_timer_cb_t">pappl_timer_cb_t</a></li>
 <li><a href="#pappl_uoptions_t">pappl_uoptions_t</a></li>
 <li><a href="#pappl_version_t">pappl_version_t</a></li>
 <li><a href="#pappl_wifi_join_cb_t">pappl_wifi_join_cb_t</a></li>
@@ -612,6 +630,7 @@ span.string {
 <li><a href="#pappl_devmetrics_s">pappl_devmetrics_s</a></li>
 <li><a href="#pappl_icon_s">pappl_icon_s</a></li>
 <li><a href="#pappl_media_col_s">pappl_media_col_s</a></li>
+<li><a href="#pappl_network_s">pappl_network_s</a></li>
 <li><a href="#pappl_pr_driver_data_s">pappl_pr_driver_data_s</a></li>
 <li><a href="#pappl_pr_driver_s">pappl_pr_driver_s</a></li>
 <li><a href="#pappl_pr_options_s">pappl_pr_options_s</a></li>
@@ -633,6 +652,7 @@ span.string {
 <li><a href="#pappl_loglevel_e">pappl_loglevel_e</a></li>
 <li><a href="#pappl_loptions_e">pappl_loptions_e</a></li>
 <li><a href="#pappl_media_tracking_e">pappl_media_tracking_e</a></li>
+<li><a href="#pappl_netconf_e">pappl_netconf_e</a></li>
 <li><a href="#pappl_preason_e">pappl_preason_e</a></li>
 <li><a href="#pappl_raster_type_e">pappl_raster_type_e</a></li>
 <li><a href="#pappl_scaling_e">pappl_scaling_e</a></li>
@@ -927,6 +947,15 @@ LIBS    +=      `pkg-config --libs pappl`
 &quot;smi32473-algorithm.ordered&quot; = &quot;À Motifs&quot;;
 &quot;smi32473-algorithm.contone&quot; = &quot;Tonalité Continue&quot;;
 </code></pre>
+<p>Web pages can display a localized HTML banner for the resource path, for example:</p>
+<pre><code>/* English strings file */
+&quot;/&quot; = &quot;Example text for the root web page.&quot;;
+&quot;/network&quot; = &quot;&lt;p&gt;Example text for the &lt;em&gt;network&lt;/em&gt; web page.&lt;/p&gt;&quot;;
+
+/* French strings file */
+&quot;/&quot; = &quot;Exemple de texte pour la page Web racine.&quot;;
+&quot;/network&quot; = &quot;&lt;p&gt;Exemple de texte pour la page Web du &lt;em&gt;réseau&lt;/em&gt;.&lt;/p&gt;&quot;;
+</code></pre>
 <h3 class="title" id="clients">Clients</h3>
 <p>The PAPPL client functions provide access to client connections. Client connections and the life cycle of the <a href="#pappl_client_t"><code>pappl_client_t</code></a> objects are managed automatically by the system object for the printer application.</p>
 <p>The <code>papplClientGet</code> functions get the current values for various client- supplied request data:</p>
@@ -1118,7 +1147,7 @@ LIBS    +=      `pkg-config --libs pappl`
 <h4 id="accessing-the-printer-device">Accessing the Printer Device</h4>
 <p>When necessary, the device associated with a printer can be opened with the <a href="#papplPrinterOpenDevice"><code>papplPrinterOpenDevice</code></a> function and subsequently closed using the <a href="#papplPrinterCloseDevice"><code>papplPrinterCloseDevice</code></a> function.</p>
 <h4 id="controlling-printers">Controlling Printers</h4>
-<p>Printers are stopped using the <a href="#papplPrinterPause"><code>papplPrinterPause</code></a> function and started using the <a href="#papplPrinterResume"><code>papplPrinterResume</code></a> function.</p>
+<p>Printers are stopped using the <a href="#papplPrinterPause"><code>papplPrinterPause</code></a> function and started using the <a href="#papplPrinterResume"><code>papplPrinterResume</code></a> function. New jobs can be held using the <a href="#papplPrinterHoldNewJobs"><code>papplPrinterHoldNewJobs</code></a> function and later released for printing using the <a href="#papplPrinterReleaseHeldNewJobs"><code>papplPrinterReleaseHeldNewJobs</code></a> function.</p>
 <h4 id="navigation-links">Navigation Links</h4>
 <p>Navigation links can be added to the web interface using the <a href="#papplPrinterAddLink"><code>papplPrinterAddLink</code></a> function and removed using the <a href="#papplPrinterRemoveLink"><code>papplPrinterRemoveLink</code></a> function.</p>
 <h3 class="title" id="jobs">Jobs</h3>
@@ -1173,6 +1202,7 @@ LIBS    +=      `pkg-config --libs pappl`
 </ul>
 <h4 id="controlling-jobs">Controlling Jobs</h4>
 <p>The <a href="#papplJobCancel"><code>papplJobCancel</code></a> function cancels processing of a job while the <a href="#papplJobIsCanceled"><code>papplJobIsCanceled</code></a> function returns whether a job is in the canceled state (<code>IPP_JSTATE_CANCELED</code>) or is in the process of being canceled (<code>IPP_JSTATE_PROCESSING</code> and <code>PAPPL_JREASON_PROCESSING_TO_STOP_POINT</code>).</p>
+<p>The <a href="#papplJobHold"><code>papplJobHold</code></a> function holds a job while the <a href="#papplJobRelease"><code>papplJobRelease</code></a> function releases a job for printing.</p>
 <h4 id="processing-jobs">Processing Jobs</h4>
 <p>PAPPL stores print options in <a href="#pappl_pr_options_t"><code>pappl_pr_options_t</code></a> objects. The <a href="#papplJobCreatePrintOptions"><code>papplJobCreatePrintOptions</code></a> function creates a new print option object and initializes it using the job's attributes and printer defaults. The creator of a print options object must free it using the <a href="#papplJobDeletePrintOptions"><code>papplJobDeletePrintOptions</code></a> function.</p>
 <p>The <a href="#papplJobOpenFile"><code>papplJobOpenFile</code></a> function opens a file associated with the job. The file descriptor must be closed by the caller using the <code>close</code> function. The primary document file for a job can be retrieved using the <a href="#papplJobGetFilename"><code>papplJobGetFilename</code></a> function, and its format using the <a href="#papplJobGetFormat"><code>papplJobGetFormat</code></a> function.</p>
@@ -1442,7 +1472,7 @@ papplJobSetImpressionsCompleted(job, <span class="number">1</span>);
 <h2 class="title"><a id="FUNCTIONS">Functions</a></h2>
 <h3 class="function"><a id="papplClientGetCSRFToken">papplClientGetCSRFToken</a></h3>
 <p class="description">Get a unique Cross-Site Request Forgery token
-string.</p>
+                              string.</p>
 <p class="code">
 char *papplClientGetCSRFToken(<a href="#pappl_client_t">pappl_client_t</a> *client, char *buffer, size_t bufsize);</p>
 <h4 class="parameters">Parameters</h4>
@@ -1522,7 +1552,7 @@ Note: Because the form data is read from the client connection, this
 function can only be called once per request.</blockquote>
 <h3 class="function"><a id="papplClientGetHTTP">papplClientGetHTTP</a></h3>
 <p class="description">Get the HTTP connection associated with a client
-object.</p>
+                         object.</p>
 <p class="code">
 http_t *papplClientGetHTTP(<a href="#pappl_client_t">pappl_client_t</a> *client);</p>
 <h4 class="parameters">Parameters</h4>
@@ -1538,7 +1568,7 @@ used when sending response data directly to the client using the CUPS
 <code>httpXxx</code> functions.</p>
 <h3 class="function"><a id="papplClientGetHostName">papplClientGetHostName</a></h3>
 <p class="description">Get the hostname from the client-supplied Host:
-field.</p>
+                             field.</p>
 <p class="code">
 const char *papplClientGetHostName(<a href="#pappl_client_t">pappl_client_t</a> *client);</p>
 <h4 class="parameters">Parameters</h4>
@@ -1553,7 +1583,7 @@ const char *papplClientGetHostName(<a href="#pappl_client_t">pappl_client_t</a> 
 be used in any URLs or URIs that you generate.</p>
 <h3 class="function"><a id="papplClientGetHostPort">papplClientGetHostPort</a></h3>
 <p class="description">Get the port from the client-supplied Host:
-field.</p>
+                             field.</p>
 <p class="code">
 int papplClientGetHostPort(<a href="#pappl_client_t">pappl_client_t</a> *client);</p>
 <h4 class="parameters">Parameters</h4>
@@ -1835,7 +1865,7 @@ by a trailing 0-length chunk to finish the current HTTP response.  Use the
 the footer.</p>
 <h3 class="function"><a id="papplClientHTMLPrinterHeader">papplClientHTMLPrinterHeader</a></h3>
 <p class="description">Show the web interface header and title
-for printers.</p>
+                                   for printers.</p>
 <p class="code">
 void papplClientHTMLPrinterHeader(<a href="#pappl_client_t">pappl_client_t</a> *client, <a href="#pappl_printer_t">pappl_printer_t</a> *printer, const char *title, int refresh, const char *label, const char *path_or_url);</p>
 <h4 class="parameters">Parameters</h4>
@@ -1869,7 +1899,7 @@ the system is not configured to support multiple printers
 (the <code>PAPPL_SOPTIONS_MULTI_QUEUE</code> option to <a href="#papplSystemCreate"><code>papplSystemCreate</code></a>).</p>
 <h3 class="function"><a id="papplClientHTMLPrintf">papplClientHTMLPrintf</a></h3>
 <p class="description">Send formatted text to the web browser client,
-escaping as needed.</p>
+                            escaping as needed.</p>
 <p class="code">
 void papplClientHTMLPrintf(<a href="#pappl_client_t">pappl_client_t</a> *client, const char *format, ...);</p>
 <h4 class="parameters">Parameters</h4>
@@ -1920,7 +1950,7 @@ is <code>true</code>, the form is annotated to support file attachments up to 2M
 size.</p>
 <h3 class="function"><a id="papplClientIsAuthorized">papplClientIsAuthorized</a></h3>
 <p class="description">Determine whether a client is authorized for
-administrative requests.</p>
+                              administrative requests.</p>
 <p class="code">
 http_status_t papplClientIsAuthorized(<a href="#pappl_client_t">pappl_client_t</a> *client);</p>
 <h4 class="parameters">Parameters</h4>
@@ -1939,6 +1969,20 @@ The return value is <code>HTTP_STATUS_CONTINUE</code> if access is authorized,
 if authorization is required, or <code>HTTP_STATUS_UPGRADE_REQUIRED</code> if the
 connection needs to be encrypted.  All of these values can be passed to the
 <a href="#papplClientRespond"><code>papplClientRespond</code></a> function.</p>
+<h3 class="function"><a id="papplClientIsEncrypted">papplClientIsEncrypted</a></h3>
+<p class="description">Return whether a Client connection is encrypted.</p>
+<p class="code">
+bool papplClientIsEncrypted(<a href="#pappl_client_t">pappl_client_t</a> *client);</p>
+<h4 class="parameters">Parameters</h4>
+<table class="list"><tbody>
+<tr><th>client</th>
+<td class="description">Client</td></tr>
+</tbody></table>
+<h4 class="returnvalue">Return Value</h4>
+<p class="description"><code>true</code> if encrypted, <code>false</code> otherwise</p>
+<h4 class="discussion">Discussion</h4>
+<p class="discussion">This function returns a boolean value indicating whether a Client connection
+is encrypted with TLS.</p>
 <h3 class="function"><a id="papplClientIsValidForm">papplClientIsValidForm</a></h3>
 <p class="description">Validate HTML form variables.</p>
 <p class="code">
@@ -1998,7 +2042,7 @@ supported:
 <li><code>HTTP_STATUS_FORBIDDEN</code>: Authenticated but not allowed.
 </li>
 <li><code>HTTP_STATUS_METHOD_NOT_ALLOWED</code>: The HTTP method is not supported for the
-given URI.
+  given URI.
 </li>
 <li><code>HTTP_STATUS_UNAUTHORIZED</code>: Not authenticated.
 </li>
@@ -2192,10 +2236,10 @@ Each of the callbacks corresponds to one of the <code>papplDevice</code> functio
 <li>&quot;list_cb&quot;: Implements discovery of devices (optional)
 </li>
 <li>&quot;open_cb&quot;: Opens communication with a device and allocates any device-
-specific data as needed
+  specific data as needed
 </li>
 <li>&quot;close_cb&quot;: Closes communication with a device and frees any device-
-specific data as needed
+  specific data as needed
 </li>
 <li>&quot;read_cb&quot;: Reads data from a device
 </li>
@@ -2266,10 +2310,10 @@ Each of the callbacks corresponds to one of the <code>papplDevice</code> functio
 <li>&quot;list_cb&quot;: Implements discovery of devices (optional)
 </li>
 <li>&quot;open_cb&quot;: Opens communication with a device and allocates any device-
-specific data as needed
+  specific data as needed
 </li>
 <li>&quot;close_cb&quot;: Closes communication with a device and frees any device-
-specific data as needed
+  specific data as needed
 </li>
 <li>&quot;read_cb&quot;: Reads data from a device
 </li>
@@ -2846,7 +2890,7 @@ int papplJobGetImpressions(<a href="#pappl_job_t">pappl_job_t</a> *job);</p>
 An impression is one side of an output page.</p>
 <h3 class="function"><a id="papplJobGetImpressionsCompleted">papplJobGetImpressionsCompleted</a></h3>
 <p class="description">Get the number of completed impressions
-(sides) in the job.</p>
+                                      (sides) in the job.</p>
 <p class="code">
 int papplJobGetImpressionsCompleted(<a href="#pappl_job_t">pappl_job_t</a> *job);</p>
 <h4 class="parameters">Parameters</h4>
@@ -2934,14 +2978,14 @@ as an enumeration:
 <li><code>IPP_JSTATE_COMPLETED</code>: Job has finished printing.
 </li>
 <li><code>IPP_JSTATE_HELD</code>: Job is being held for some reason, typically because
-the document data is being received.
+  the document data is being received.
 </li>
 <li><code>IPP_JSTATE_PENDING</code>: Job is queued and waiting to be printed.
 </li>
 <li><code>IPP_JSTATE_PROCESSING</code>: Job is being printed.
 </li>
 <li><code>IPP_JSTATE_STOPPED</code>: Job is paused, typically when the printer is not
-ready.</li>
+  ready.</li>
 </ul>
 <h3 class="function"><a id="papplJobGetTimeCompleted">papplJobGetTimeCompleted</a></h3>
 <p class="description">Get the job completion time, if any.</p>
@@ -2998,6 +3042,25 @@ const char *papplJobGetUsername(<a href="#pappl_job_t">pappl_job_t</a> *job);</p
 <p class="description">Username or <code>NULL</code> for unknown</p>
 <h4 class="discussion">Discussion</h4>
 <p class="discussion">This function returns the name of the user that submitted the job.</p>
+<h3 class="function"><a id="papplJobHold">papplJobHold</a></h3>
+<p class="description">Hold a job for printing.</p>
+<p class="code">
+bool papplJobHold(<a href="#pappl_job_t">pappl_job_t</a> *job, const char *username, const char *until, time_t until_time);</p>
+<h4 class="parameters">Parameters</h4>
+<table class="list"><tbody>
+<tr><th>job</th>
+<td class="description">Job</td></tr>
+<tr><th>username</th>
+<td class="description">User that held the job or <code>NULL</code> for none/system</td></tr>
+<tr><th>until</th>
+<td class="description">&quot;job-hold-until&quot; keyword or <code>NULL</code></td></tr>
+<tr><th>until_time</th>
+<td class="description">&quot;job-hold-until-time&quot; value or 0 for indefinite</td></tr>
+</tbody></table>
+<h4 class="returnvalue">Return Value</h4>
+<p class="description"><code>true</code> on success, <code>false</code> on failure</p>
+<h4 class="discussion">Discussion</h4>
+<p class="discussion">This function holds a pending job for printing at a later time.</p>
 <h3 class="function"><a id="papplJobIsCanceled">papplJobIsCanceled</a></h3>
 <p class="description">Return whether the job is canceled.</p>
 <p class="code">
@@ -3042,6 +3105,21 @@ alphanumeric characters.<br>
 The &quot;mode&quot; argument is &quot;r&quot; to read an existing job file or &quot;w&quot; to write a
 new job file.  New files are created with restricted permissions for
 security purposes.</p>
+<h3 class="function"><a id="papplJobRelease">papplJobRelease</a></h3>
+<p class="description">Release a job for printing.</p>
+<p class="code">
+bool papplJobRelease(<a href="#pappl_job_t">pappl_job_t</a> *job, const char *username);</p>
+<h4 class="parameters">Parameters</h4>
+<table class="list"><tbody>
+<tr><th>job</th>
+<td class="description">Job</td></tr>
+<tr><th>username</th>
+<td class="description">User that released the job or <code>NULL</code> for none/system</td></tr>
+</tbody></table>
+<h4 class="returnvalue">Return Value</h4>
+<p class="description"><code>true</code> on success, <code>false</code> on failure</p>
+<h4 class="discussion">Discussion</h4>
+<p class="discussion">This function releases a held job for printing.</p>
 <h3 class="function"><a id="papplJobSetData">papplJobSetData</a></h3>
 <p class="description">Set the per-job driver data pointer.</p>
 <p class="code">
@@ -3073,7 +3151,7 @@ void papplJobSetImpressions(<a href="#pappl_job_t">pappl_job_t</a> *job, int imp
 side of an output page.</p>
 <h3 class="function"><a id="papplJobSetImpressionsCompleted">papplJobSetImpressionsCompleted</a></h3>
 <p class="description">Add completed impressions (sides) to
-the job.</p>
+                                      the job.</p>
 <p class="code">
 void papplJobSetImpressionsCompleted(<a href="#pappl_job_t">pappl_job_t</a> *job, int add);</p>
 <h4 class="parameters">Parameters</h4>
@@ -3144,6 +3222,17 @@ const char *papplLocFormatString(<a href="#pappl_loc_t">pappl_loc_t</a> *loc, ch
 <p class="discussion">This function formats a localized string into a buffer using the specified
 localization data.  Numbers are formatted according to the locale and
 language used.</p>
+<h3 class="function"><a id="papplLocGetDefaultMediaSizeName">papplLocGetDefaultMediaSizeName</a></h3>
+<p class="description">Get the default media size name
+                                      associated with a locale.</p>
+<p class="code">
+const char *papplLocGetDefaultMediaSizeName(void);</p>
+<h4 class="returnvalue">Return Value</h4>
+<p class="description">PWG media size name</p>
+<h4 class="discussion">Discussion</h4>
+<p class="discussion">This function returns the default PWG media size name corresponding to the
+current locale.  Currently only &quot;na_letter_8.5x11in&quot; or &quot;iso_a4_210x297mm&quot;
+are returned.</p>
 <h3 class="function"><a id="papplLocGetString">papplLocGetString</a></h3>
 <p class="description">Get a localized version of a key string.</p>
 <p class="code">
@@ -3572,7 +3661,7 @@ const char *papplPrinterGetDeviceID(<a href="#pappl_printer_t">pappl_printer_t</
 <p class="discussion">This function returns the IEEE-1284 device ID of the printer.</p>
 <h3 class="function"><a id="papplPrinterGetDeviceURI">papplPrinterGetDeviceURI</a></h3>
 <p class="description">Get the URI of the device associated with the
-printer.</p>
+                               printer.</p>
 <p class="code">
 const char *papplPrinterGetDeviceURI(<a href="#pappl_printer_t">pappl_printer_t</a> *printer);</p>
 <h4 class="parameters">Parameters</h4>
@@ -3586,7 +3675,7 @@ const char *papplPrinterGetDeviceURI(<a href="#pappl_printer_t">pappl_printer_t<
 <p class="discussion">This function returns the device URI for the printer.</p>
 <h3 class="function"><a id="papplPrinterGetDriverAttributes">papplPrinterGetDriverAttributes</a></h3>
 <p class="description">Get a copy of the current driver
-attributes.</p>
+                                      attributes.</p>
 <p class="code">
 ipp_t *papplPrinterGetDriverAttributes(<a href="#pappl_printer_t">pappl_printer_t</a> *printer);</p>
 <h4 class="parameters">Parameters</h4>
@@ -3631,7 +3720,7 @@ const char *papplPrinterGetDriverName(<a href="#pappl_printer_t">pappl_printer_t
 <p class="discussion">This function returns the driver name for the printer.</p>
 <h3 class="function"><a id="papplPrinterGetGeoLocation">papplPrinterGetGeoLocation</a></h3>
 <p class="description">Get the current geo-location as a &quot;geo:&quot;
-URI.</p>
+                                 URI.</p>
 <p class="code">
 char *papplPrinterGetGeoLocation(<a href="#pappl_printer_t">pappl_printer_t</a> *printer, char *buffer, size_t bufsize);</p>
 <h4 class="parameters">Parameters</h4>
@@ -3663,7 +3752,7 @@ int papplPrinterGetID(<a href="#pappl_printer_t">pappl_printer_t</a> *printer);<
 <p class="discussion">This function returns the printer's unique positive integer identifier.</p>
 <h3 class="function"><a id="papplPrinterGetImpressionsCompleted">papplPrinterGetImpressionsCompleted</a></h3>
 <p class="description">Get the number of impressions
-(sides) that have been printed.</p>
+                                          (sides) that have been printed.</p>
 <p class="code">
 int papplPrinterGetImpressionsCompleted(<a href="#pappl_printer_t">pappl_printer_t</a> *printer);</p>
 <h4 class="parameters">Parameters</h4>
@@ -3696,7 +3785,7 @@ char *papplPrinterGetLocation(<a href="#pappl_printer_t">pappl_printer_t</a> *pr
 pointed to by the &quot;buffer&quot; argument.</p>
 <h3 class="function"><a id="papplPrinterGetMaxActiveJobs">papplPrinterGetMaxActiveJobs</a></h3>
 <p class="description">Get the maximum number of active (queued)
-jobs allowed by the printer.</p>
+                                   jobs allowed by the printer.</p>
 <p class="code">
 int papplPrinterGetMaxActiveJobs(<a href="#pappl_printer_t">pappl_printer_t</a> *printer);</p>
 <h4 class="parameters">Parameters</h4>
@@ -3711,7 +3800,7 @@ int papplPrinterGetMaxActiveJobs(<a href="#pappl_printer_t">pappl_printer_t</a> 
 supports, as configured by the <a href="#papplPrinterSetMaxActiveJobs"><code>papplPrinterSetMaxActiveJobs</code></a> function.</p>
 <h3 class="function"><a id="papplPrinterGetMaxCompletedJobs">papplPrinterGetMaxCompletedJobs</a></h3>
 <p class="description">Get the maximum number of jobs retained
-for history by the printer.</p>
+                                      for history by the printer.</p>
 <p class="code">
 int papplPrinterGetMaxCompletedJobs(<a href="#pappl_printer_t">pappl_printer_t</a> *printer);</p>
 <h4 class="parameters">Parameters</h4>
@@ -3727,7 +3816,7 @@ job history as configured by the <a href="#papplPrinterSetMaxCompletedJobs"><cod
 function.</p>
 <h3 class="function"><a id="papplPrinterGetMaxPreservedJobs">papplPrinterGetMaxPreservedJobs</a></h3>
 <p class="description">Get the maximum number of jobs
-preserved by the printer.</p>
+                                      preserved by the printer.</p>
 <p class="code">
 int papplPrinterGetMaxPreservedJobs(<a href="#pappl_printer_t">pappl_printer_t</a> *printer);</p>
 <h4 class="parameters">Parameters</h4>
@@ -3784,7 +3873,7 @@ int papplPrinterGetNumberOfActiveJobs(<a href="#pappl_printer_t">pappl_printer_t
 waiting to be printed.</p>
 <h3 class="function"><a id="papplPrinterGetNumberOfCompletedJobs">papplPrinterGetNumberOfCompletedJobs</a></h3>
 <p class="description">Get the number of completed print
-jobs.</p>
+                                           jobs.</p>
 <p class="code">
 int papplPrinterGetNumberOfCompletedJobs(<a href="#pappl_printer_t">pappl_printer_t</a> *printer);</p>
 <h4 class="parameters">Parameters</h4>
@@ -3919,7 +4008,7 @@ ipp_pstate_t papplPrinterGetState(<a href="#pappl_printer_t">pappl_printer_t</a>
 <li><code>IPP_PSTATE_IDLE</code>: The printer is idle and has no jobs to process.
 </li>
 <li><code>IPP_PSTATE_PROCESSING</code>: The printer is processing a job and/or producing
-output.
+  output.
 </li>
 <li><code>IPP_PSTATE_STOPPED</code>: The printer is stopped for maintenance.</li>
 </ul>
@@ -3959,6 +4048,21 @@ regardless of the size of the array.</p>
 <h4 class="discussion">Discussion</h4>
 <p class="discussion">This function returns a pointer to the system object that contains the
 printer.</p>
+<h3 class="function"><a id="papplPrinterHoldNewJobs">papplPrinterHoldNewJobs</a></h3>
+<p class="description">Hold new jobs for printing.</p>
+<p class="code">
+bool papplPrinterHoldNewJobs(<a href="#pappl_printer_t">pappl_printer_t</a> *printer);</p>
+<h4 class="parameters">Parameters</h4>
+<table class="list"><tbody>
+<tr><th>printer</th>
+<td class="description">Printer</td></tr>
+</tbody></table>
+<h4 class="returnvalue">Return Value</h4>
+<p class="description"><code>true</code> on success, <code>false</code> on failure</p>
+<h4 class="discussion">Discussion</h4>
+<p class="discussion">This function holds any new jobs for printing and is typically used prior to
+performing printer maintenance.  Existing jobs will finish printing but new
+jobs will be held until you call <a href="#papplPrinterReleaseHeldNewJobs"><code>papplPrinterReleaseHeldNewJobs</code></a>.</p>
 <h3 class="function"><a id="papplPrinterIsAcceptingJobs">papplPrinterIsAcceptingJobs</a></h3>
 <p class="description">Return whether the printer is accepting jobs.</p>
 <p class="code">
@@ -3973,6 +4077,34 @@ bool papplPrinterIsAcceptingJobs(<a href="#pappl_printer_t">pappl_printer_t</a> 
 <h4 class="discussion">Discussion</h4>
 <p class="discussion">This function returns a boolean value indicating whether a printer is
 accepting jobs.</p>
+<h3 class="function"><a id="papplPrinterIsDeleted">papplPrinterIsDeleted</a></h3>
+<p class="description">Return whether a printer is in the process of being deleted.</p>
+<p class="code">
+bool papplPrinterIsDeleted(<a href="#pappl_printer_t">pappl_printer_t</a> *printer);</p>
+<h4 class="parameters">Parameters</h4>
+<table class="list"><tbody>
+<tr><th>printer</th>
+<td class="description">Printer</td></tr>
+</tbody></table>
+<h4 class="returnvalue">Return Value</h4>
+<p class="description"><code>true</code> is printer is being deleted, <code>false</code> otherwise</p>
+<h4 class="discussion">Discussion</h4>
+<p class="discussion">This function returns a boolean value indicating whether a printer is being
+deleted.</p>
+<h3 class="function"><a id="papplPrinterIsHoldingNewJobs">papplPrinterIsHoldingNewJobs</a></h3>
+<p class="description">Return whether the printer is holding new jobs.</p>
+<p class="code">
+bool papplPrinterIsHoldingNewJobs(<a href="#pappl_printer_t">pappl_printer_t</a> *printer);</p>
+<h4 class="parameters">Parameters</h4>
+<table class="list"><tbody>
+<tr><th>printer</th>
+<td class="description">Printer</td></tr>
+</tbody></table>
+<h4 class="returnvalue">Return Value</h4>
+<p class="description"><code>true</code> if the printer is holding new jobs, <code>false</code> otherwise</p>
+<h4 class="discussion">Discussion</h4>
+<p class="discussion">This function returns a boolean value indicating whether a printer is
+holding new jobs.</p>
 <h3 class="function"><a id="papplPrinterIterateActiveJobs">papplPrinterIterateActiveJobs</a></h3>
 <p class="description">Iterate over the active jobs.</p>
 <p class="code">
@@ -4088,15 +4220,20 @@ int papplPrinterOpenFile(<a href="#pappl_printer_t">pappl_printer_t</a> *printer
 <h4 class="returnvalue">Return Value</h4>
 <p class="description">File descriptor or -1 on error</p>
 <h4 class="discussion">Discussion</h4>
-<p class="discussion">This function creates or opens a file for a printer.  The &quot;fname&quot; and
-&quot;fnamesize&quot; arguments specify the location and size of a buffer to store the
-printer filename, which incorporates the &quot;directory&quot;, printer ID, resource
-name, and &quot;ext&quot; values.  The job name is &quot;sanitized&quot; to only contain
-alphanumeric characters.<br>
+<p class="discussion">This function creates, opens, or removes a file for a printer.  The &quot;fname&quot;
+and &quot;fnamesize&quot; arguments specify the location and size of a buffer to store
+the printer filename, which incorporates the &quot;directory&quot;, printer ID,
+resource name, and &quot;ext&quot; values.  The resource name is &quot;sanitized&quot; to only
+contain alphanumeric characters.<br>
 <br>
-The &quot;mode&quot; argument is &quot;r&quot; to read an existing job file or &quot;w&quot; to write a
-new job file.  New files are created with restricted permissions for
-security purposes.</p>
+The &quot;mode&quot; argument is &quot;r&quot; to read an existing printer file, &quot;w&quot; to write a
+new printer file, or &quot;x&quot; to remove an exitsing printer file.  New files are
+created with restricted permissions for security purposes.<br>
+<br>
+For the &quot;r&quot; and &quot;w&quot; modes, the return value is the file descriptor number on
+success or <code>-1</code> on error.  For the &quot;x&quot; mode, the return value is <code>0</code> on
+success and <code>-1</code> on error.  The <code>errno</code> variable is set appropriately on
+error.</p>
 <h3 class="function"><a id="papplPrinterPause">papplPrinterPause</a></h3>
 <p class="description">Pause (stop) a printer.</p>
 <p class="code">
@@ -4109,6 +4246,22 @@ void papplPrinterPause(<a href="#pappl_printer_t">pappl_printer_t</a> *printer);
 <h4 class="discussion">Discussion</h4>
 <p class="discussion">This function pauses a printer.  If the printer is currently processing
 (printing) a job, it will be completed before the printer is stopped.</p>
+<h3 class="function"><a id="papplPrinterReleaseHeldNewJobs">papplPrinterReleaseHeldNewJobs</a></h3>
+<p class="description">Release any previously held jobs for printing.</p>
+<p class="code">
+bool papplPrinterReleaseHeldNewJobs(<a href="#pappl_printer_t">pappl_printer_t</a> *printer, const char *username);</p>
+<h4 class="parameters">Parameters</h4>
+<table class="list"><tbody>
+<tr><th>printer</th>
+<td class="description">Printer</td></tr>
+<tr><th>username</th>
+<td class="description">User that released the held jobs or <code>NULL</code> for none/system</td></tr>
+</tbody></table>
+<h4 class="returnvalue">Return Value</h4>
+<p class="description"><code>true</code> on success, <code>false</code> on failure</p>
+<h4 class="discussion">Discussion</h4>
+<p class="discussion">This function releases all jobs that were previously held due to a prior
+call to <a href="#papplPrinterHoldNewJobs"><code>papplPrinterHoldNewJobs</code></a>.</p>
 <h3 class="function"><a id="papplPrinterRemoveLink">papplPrinterRemoveLink</a></h3>
 <p class="description">Remove a printer link from the navigation header.</p>
 <p class="code">
@@ -4225,7 +4378,7 @@ void papplPrinterSetGeoLocation(<a href="#pappl_printer_t">pappl_printer_t</a> *
 <code>NULL</code>, the location is cleared to the 'unknown' value.</p>
 <h3 class="function"><a id="papplPrinterSetImpressionsCompleted">papplPrinterSetImpressionsCompleted</a></h3>
 <p class="description">Add impressions (sides) to the
-total count of printed impressions.</p>
+                                          total count of printed impressions.</p>
 <p class="code">
 void papplPrinterSetImpressionsCompleted(<a href="#pappl_printer_t">pappl_printer_t</a> *printer, int add);</p>
 <h4 class="parameters">Parameters</h4>
@@ -4254,7 +4407,7 @@ void papplPrinterSetLocation(<a href="#pappl_printer_t">pappl_printer_t</a> *pri
 the location is cleared.</p>
 <h3 class="function"><a id="papplPrinterSetMaxActiveJobs">papplPrinterSetMaxActiveJobs</a></h3>
 <p class="description">Set the maximum number of active jobs for
-the printer.</p>
+                                   the printer.</p>
 <p class="code">
 void papplPrinterSetMaxActiveJobs(<a href="#pappl_printer_t">pappl_printer_t</a> *printer, int max_active_jobs);</p>
 <h4 class="parameters">Parameters</h4>
@@ -4273,7 +4426,7 @@ Note: This limit does not apply to streaming raster formats such as PWG
 Raster since they are not spooled.</blockquote>
 <h3 class="function"><a id="papplPrinterSetMaxCompletedJobs">papplPrinterSetMaxCompletedJobs</a></h3>
 <p class="description">Set the maximum number of completed
-jobs for the printer.</p>
+                                      jobs for the printer.</p>
 <p class="code">
 void papplPrinterSetMaxCompletedJobs(<a href="#pappl_printer_t">pappl_printer_t</a> *printer, int max_completed_jobs);</p>
 <h4 class="parameters">Parameters</h4>
@@ -4288,7 +4441,7 @@ void papplPrinterSetMaxCompletedJobs(<a href="#pappl_printer_t">pappl_printer_t<
 that are retained in the job history.</p>
 <h3 class="function"><a id="papplPrinterSetMaxPreservedJobs">papplPrinterSetMaxPreservedJobs</a></h3>
 <p class="description">Set the maximum number of preserved
-jobs for the printer.</p>
+                                      jobs for the printer.</p>
 <p class="code">
 void papplPrinterSetMaxPreservedJobs(<a href="#pappl_printer_t">pappl_printer_t</a> *printer, int max_preserved_jobs);</p>
 <h4 class="parameters">Parameters</h4>
@@ -4384,7 +4537,7 @@ bool papplPrinterSetReadyMedia(<a href="#pappl_printer_t">pappl_printer_t</a> *p
 <p class="discussion">This function validates and sets the printer's ready (loaded) media.</p>
 <h3 class="function"><a id="papplPrinterSetReasons">papplPrinterSetReasons</a></h3>
 <p class="description">Add or remove values from
-&quot;printer-state-reasons&quot;.</p>
+                             &quot;printer-state-reasons&quot;.</p>
 <p class="code">
 void papplPrinterSetReasons(<a href="#pappl_printer_t">pappl_printer_t</a> *printer, <a href="#pappl_preason_t">pappl_preason_t</a> add, <a href="#pappl_preason_t">pappl_preason_t</a> remove);</p>
 <h4 class="parameters">Parameters</h4>
@@ -4463,7 +4616,7 @@ void papplSubscriptionCancel(<a href="#pappl_subscription_t">pappl_subscription_
 <h3 class="function"><a id="papplSubscriptionCreate">papplSubscriptionCreate</a></h3>
 <p class="description">Create a subscription.</p>
 <p class="code">
-<a href="#pappl_subscription_t">pappl_subscription_t</a> *papplSubscriptionCreate(<a href="#pappl_system_t">pappl_system_t</a> *system, <a href="#pappl_printer_t">pappl_printer_t</a> *printer, <a href="#pappl_job_t">pappl_job_t</a> *job, int sub_id, <a href="#pappl_event_t">pappl_event_t</a> events, const char *username, const char *language, const void *data, int datalen, int interval, int lease);</p>
+<a href="#pappl_subscription_t">pappl_subscription_t</a> *papplSubscriptionCreate(<a href="#pappl_system_t">pappl_system_t</a> *system, <a href="#pappl_printer_t">pappl_printer_t</a> *printer, <a href="#pappl_job_t">pappl_job_t</a> *job, int sub_id, <a href="#pappl_event_t">pappl_event_t</a> events, const char *username, const char *language, const void *data, size_t datalen, int interval, int lease);</p>
 <h4 class="parameters">Parameters</h4>
 <table class="list"><tbody>
 <tr><th>system</th>
@@ -4660,7 +4813,7 @@ functions.<br>
 Note: This function may not be called while the system is running.</blockquote>
 <h3 class="function"><a id="papplSystemAddResourceCallback">papplSystemAddResourceCallback</a></h3>
 <p class="description">Add a dynamic resource that uses a
-callback function.</p>
+                                     callback function.</p>
 <p class="code">
 void papplSystemAddResourceCallback(<a href="#pappl_system_t">pappl_system_t</a> *system, const char *path, const char *format, <a href="#pappl_resource_cb_t">pappl_resource_cb_t</a> cb, void *data);</p>
 <h4 class="parameters">Parameters</h4>
@@ -4714,7 +4867,7 @@ Note: Any resource that is added prior to calling the <a href="#papplSystemRun">
 function will replace the corresponding standard resource at the same path.</blockquote>
 <h3 class="function"><a id="papplSystemAddResourceDirectory">papplSystemAddResourceDirectory</a></h3>
 <p class="description">Add external files in a directory as
-resources.</p>
+                                      resources.</p>
 <p class="code">
 void papplSystemAddResourceDirectory(<a href="#pappl_system_t">pappl_system_t</a> *system, const char *basepath, const char *directory);</p>
 <h4 class="parameters">Parameters</h4>
@@ -4831,6 +4984,43 @@ the system.<br>
 </p><blockquote>
 Note: Any resource that is added prior to calling the <a href="#papplSystemRun"><code>papplSystemRun</code></a>
 function will replace the corresponding standard resource at the same path.</blockquote>
+<h3 class="function"><a id="papplSystemAddTimerCallback">papplSystemAddTimerCallback</a></h3>
+<p class="description">Add a timer callback to a system.</p>
+<p class="code">
+bool papplSystemAddTimerCallback(<a href="#pappl_system_t">pappl_system_t</a> *system, time_t start, int interval, <a href="#pappl_timer_cb_t">pappl_timer_cb_t</a> cb, void *cb_data);</p>
+<h4 class="parameters">Parameters</h4>
+<table class="list"><tbody>
+<tr><th>system</th>
+<td class="description">System</td></tr>
+<tr><th>start</th>
+<td class="description">Start time in seconds or <code>0</code> for the current time</td></tr>
+<tr><th>interval</th>
+<td class="description">Repeat interval in seconds or <code>0</code> for no repeat</td></tr>
+<tr><th>cb</th>
+<td class="description">Callback function</td></tr>
+<tr><th>cb_data</th>
+<td class="description">Callback data</td></tr>
+</tbody></table>
+<h4 class="returnvalue">Return Value</h4>
+<p class="description"><code>true</code> on success, <code>false</code> on error</p>
+<h4 class="discussion">Discussion</h4>
+<p class="discussion">This function schedules a function that will be called on the main run loop
+thread at the specified time and optionally every &quot;interval&quot; seconds
+thereafter.  The timimg accuracy is typically within a few milliseconds but
+is not guaranteed.  Since the callback is run on the main run loop thread,
+functions should create a new thread for any long-running operations.<br>
+<br>
+The callback function receives the &quot;system&quot; and &quot;cb_data&quot; pointers and
+returns <code>true</code> to repeat the timer or <code>false</code> to remove it:
+
+<pre>
+bool my_timer_cb(pappl_system_t *system, void *cb_data)
+{
+  ... do periodic task ...
+  return (true); // repeat the timer
+}
+</pre>
+</p>
 <h3 class="function"><a id="papplSystemCleanJobs">papplSystemCleanJobs</a></h3>
 <p class="description">Clean out old (completed) jobs.</p>
 <p class="code">
@@ -4885,7 +5075,7 @@ The &quot;options&quot; argument specifies which options are enabled for the ser
 <li><code>PAPPL_SOPTIONS_NONE</code>: No options.
 </li>
 <li><code>PAPPL_SOPTIONS_DNSSD_HOST</code>: When resolving DNS-SD service name collisions,
-use the DNS-SD hostname instead of a serial number or UUID.
+  use the DNS-SD hostname instead of a serial number or UUID.
 </li>
 <li><code>PAPPL_SOPTIONS_WEB_LOG</code>: Include the log file web page.
 </li>
@@ -4894,19 +5084,19 @@ use the DNS-SD hostname instead of a serial number or UUID.
 <li><code>PAPPL_SOPTIONS_WEB_NETWORK</code>: Include the network settings web page.
 </li>
 <li><code>PAPPL_SOPTIONS_RAW_SOCKET</code>: Accept jobs via raw sockets starting on port
-9100.
+  9100.
 </li>
 <li><code>PAPPL_SOPTIONS_WEB_REMOTE</code>: Allow remote queue management.
 </li>
 <li><code>PAPPL_SOPTIONS_WEB_SECURITY</code>: Include the security settings web page.
 </li>
 <li><code>PAPPL_SOPTIONS_WEB_INTERFACE</code>: Include the standard printer and job monitoring
-web pages.
+  web pages.
 </li>
 <li><code>PAPPL_SOPTIONS_WEB_TLS</code>: Include the TLS settings page.
 </li>
 <li><code>PAPPL_SOPTIONS_USB_PRINTER</code>: Accept jobs via USB for the default printer
-(embedded Linux only).</li>
+  (embedded Linux only).</li>
 </ul>
 <p class="discussion">The &quot;name&quot; argument specifies a human-readable name for the system.<br>
 <br>
@@ -5142,7 +5332,7 @@ char *papplSystemGetHostName(<a href="#pappl_system_t">pappl_system_t</a> *syste
 <p class="discussion">This function copies the current system hostname to the specified buffer.</p>
 <h3 class="function"><a id="papplSystemGetHostPort">papplSystemGetHostPort</a></h3>
 <p class="description">Get the port number for network connections to
-the system.</p>
+                             the system.</p>
 <p class="code">
 int papplSystemGetHostPort(<a href="#pappl_system_t">pappl_system_t</a> *system);</p>
 <h4 class="parameters">Parameters</h4>
@@ -5200,6 +5390,24 @@ int papplSystemGetMaxClients(<a href="#pappl_system_t">pappl_system_t</a> *syste
 <h4 class="discussion">Discussion</h4>
 <p class="discussion">This function gets the maximum number of simultaneous clients that are
 allowed by the system.</p>
+<h3 class="function"><a id="papplSystemGetMaxImageSize">papplSystemGetMaxImageSize</a></h3>
+<p class="description">Get the maximum supported size for images.</p>
+<p class="code">
+size_t papplSystemGetMaxImageSize(<a href="#pappl_system_t">pappl_system_t</a> *system, int *max_width, int *max_height);</p>
+<h4 class="parameters">Parameters</h4>
+<table class="list"><tbody>
+<tr><th>system</th>
+<td class="description">System</td></tr>
+<tr><th>max_width</th>
+<td class="description">Maximum width in columns</td></tr>
+<tr><th>max_height</th>
+<td class="description">Maximum height in lines</td></tr>
+</tbody></table>
+<h4 class="returnvalue">Return Value</h4>
+<p class="description">Maximum image size (uncompressed)</p>
+<h4 class="discussion">Discussion</h4>
+<p class="discussion">This function retrieves the image size limits in bytes (uncompressed),
+columns, and lines.</p>
 <h3 class="function"><a id="papplSystemGetMaxLogSize">papplSystemGetMaxLogSize</a></h3>
 <p class="description">Get the maximum log file size.</p>
 <p class="code">
@@ -5552,6 +5760,22 @@ void papplSystemRemoveResource(<a href="#pappl_system_t">pappl_system_t</a> *sys
 </tbody></table>
 <h4 class="discussion">Discussion</h4>
 <p class="discussion">This function removes a resource at the specified path.</p>
+<h3 class="function"><a id="papplSystemRemoveTimerCallback">papplSystemRemoveTimerCallback</a></h3>
+<p class="description">Remove a timer callback.</p>
+<p class="code">
+void papplSystemRemoveTimerCallback(<a href="#pappl_system_t">pappl_system_t</a> *system, <a href="#pappl_timer_cb_t">pappl_timer_cb_t</a> cb, void *cb_data);</p>
+<h4 class="parameters">Parameters</h4>
+<table class="list"><tbody>
+<tr><th>system</th>
+<td class="description">System</td></tr>
+<tr><th>cb</th>
+<td class="description">Callback function</td></tr>
+<tr><th>cb_data</th>
+<td class="description">Callback data</td></tr>
+</tbody></table>
+<h4 class="discussion">Discussion</h4>
+<p class="discussion">This function removes all matching timer callbacks from the specified system.
+Both the callback function and data must match to remove a timer.</p>
 <h3 class="function"><a id="papplSystemRun">papplSystemRun</a></h3>
 <p class="description">Run the printer application.</p>
 <p class="code">
@@ -5586,16 +5810,8 @@ save the state:
 <pre>
 papplSystemSetSaveCallback(system, (pappl_save_cb_t)papplSystemSaveState,
     (void *)filename);
-```</pre>
-inter cannot be created (e.g.,
-because the driver name is no longer valid) then that printer and all of its
-job history will be lost.  In the case of a bad driver name, a printer
-application's driver callback can perform any necessary mapping of the driver
-name, including the use its auto-add callback to find a compatible new
-driver.<br>
-<br>
-</p><blockquote>
-Note: This function must be called prior to <a href="#papplSystemRun"><code>papplSystemRun</code></a></blockquote>
+</pre>
+</p>
 <h3 class="function"><a id="papplSystemSetAdminGroup">papplSystemSetAdminGroup</a></h3>
 <p class="description">Set the administrative group.</p>
 <p class="code">
@@ -5641,7 +5857,7 @@ The callback returns one of the following status codes:
 <li><code>HTTP_STATUS_UNAUTHORIZED</code> if the authentication failed, or
 </li>
 <li><code>HTTP_STATUS_FORBIDDEN</code> if the authentication succeeded but the user is
-not part of the specified group.</li>
+  not part of the specified group.</li>
 </ul>
 <h3 class="function"><a id="papplSystemSetContact">papplSystemSetContact</a></h3>
 <p class="description">Set the &quot;system-contact&quot; value.</p>
@@ -5829,6 +6045,25 @@ allowed by the system from 0 (auto) to 32768 (half of the available TCP
 port numbers).<br>
 <br>
 The default maximum number of clients is based on available system resources.</p>
+<h3 class="function"><a id="papplSystemSetMaxImageSize">papplSystemSetMaxImageSize</a></h3>
+<p class="description">Set the maximum allowed JPEG/PNG image sizes.</p>
+<p class="code">
+void papplSystemSetMaxImageSize(<a href="#pappl_system_t">pappl_system_t</a> *system, size_t max_size, int max_width, int max_height);</p>
+<h4 class="parameters">Parameters</h4>
+<table class="list"><tbody>
+<tr><th>system</th>
+<td class="description">System</td></tr>
+<tr><th>max_size</th>
+<td class="description">Maximum image size (uncompressed) or <code>0</code> for default</td></tr>
+<tr><th>max_width</th>
+<td class="description">Maximum image width in columns or <code>0</code> for default</td></tr>
+<tr><th>max_height</th>
+<td class="description">Maximum image height in lines or <code>0</code> for default</td></tr>
+</tbody></table>
+<h4 class="discussion">Discussion</h4>
+<p class="discussion">This function sets the maximum size allowed for JPEG and PNG images.  The
+default limits are 16384x16384 and 1/10th the maximum memory the current
+process can use or 1GiB, whichever is less.</p>
 <h3 class="function"><a id="papplSystemSetMaxLogSize">papplSystemSetMaxLogSize</a></h3>
 <p class="description">Set the maximum log file size in bytes.</p>
 <p class="code">
@@ -5863,6 +6098,28 @@ void papplSystemSetMaxSubscriptions(<a href="#pappl_system_t">pappl_system_t</a>
 allowed.  A maximum of <code>0</code> means there is no limit.<br>
 <br>
 The default maximum number of event subscriptions is <code>100</code>.</p>
+<h3 class="function"><a id="papplSystemSetNetworkCallbacks">papplSystemSetNetworkCallbacks</a></h3>
+<p class="description">Set the network configuration callbacks.</p>
+<p class="code">
+void papplSystemSetNetworkCallbacks(<a href="#pappl_system_t">pappl_system_t</a> *system, <a href="#pappl_network_get_cb_t">pappl_network_get_cb_t</a> get_cb, <a href="#pappl_network_set_cb_t">pappl_network_set_cb_t</a> set_cb, void *cb_data);</p>
+<h4 class="parameters">Parameters</h4>
+<table class="list"><tbody>
+<tr><th>system</th>
+<td class="description">System</td></tr>
+<tr><th>get_cb</th>
+<td class="description">&quot;Get networks&quot; callback</td></tr>
+<tr><th>set_cb</th>
+<td class="description">&quot;Set networks&quot; callback</td></tr>
+<tr><th>cb_data</th>
+<td class="description">Callback data</td></tr>
+</tbody></table>
+<h4 class="discussion">Discussion</h4>
+<p class="discussion">This function sets the network configuration callbacks for a system.  The
+&quot;get&quot; callback reads the configuration of all network interfaces and stores
+them in an array of <a href="#pappl_network_t"><code>pappl_network_t</code></a> structures that is passed to the
+callback.  The &quot;set&quot; callback writes the configuration of all network
+interfaces and returns a boolean value indicating whether the configuration
+has been written successfully.</p>
 <h3 class="function"><a id="papplSystemSetNextPrinterID">papplSystemSetNextPrinterID</a></h3>
 <p class="description">Set the next &quot;printer-id&quot; value.</p>
 <p class="code">
@@ -5919,7 +6176,7 @@ void papplSystemSetOrganization(<a href="#pappl_system_t">pappl_system_t</a> *sy
 name is cleared.</p>
 <h3 class="function"><a id="papplSystemSetOrganizationalUnit">papplSystemSetOrganizationalUnit</a></h3>
 <p class="description">Set the system organizational unit
-string, if any.</p>
+                                       string, if any.</p>
 <p class="code">
 void papplSystemSetOrganizationalUnit(<a href="#pappl_system_t">pappl_system_t</a> *system, const char *value);</p>
 <h4 class="parameters">Parameters</h4>
@@ -5952,7 +6209,7 @@ Note: The access password is only used when the PAM authentication service
 is not set.</blockquote>
 <h3 class="function"><a id="papplSystemSetPrinterDrivers">papplSystemSetPrinterDrivers</a></h3>
 <p class="description">Set the list of drivers and the driver
-callbacks.</p>
+                                   callbacks.</p>
 <p class="code">
 void papplSystemSetPrinterDrivers(<a href="#pappl_system_t">pappl_system_t</a> *system, int num_drivers, <a href="#pappl_pr_driver_t">pappl_pr_driver_t</a> *drivers, <a href="#pappl_pr_autoadd_cb_t">pappl_pr_autoadd_cb_t</a> autoadd_cb, <a href="#pappl_pr_create_cb_t">pappl_pr_create_cb_t</a> create_cb, <a href="#pappl_pr_driver_cb_t">pappl_pr_driver_cb_t</a> driver_cb, void *data);</p>
 <h4 class="parameters">Parameters</h4>
@@ -6012,6 +6269,7 @@ the state file:
 papplSystemSetSaveCallback(system, (pappl_save_cb_t)papplSystemSaveState,
     (void *)filename);
 </pre>
+
 </p><blockquote>
 Note: The save callback can only be set prior to calling
 <a href="#papplSystemRun"><code>papplSystemRun</code></a>.</blockquote>
@@ -6301,6 +6559,26 @@ typedef <a href="#pappl_system_t">pappl_system_t</a> *(*pappl_ml_system_cb_t)(in
 <p class="code">
 typedef void (*pappl_ml_usage_cb_t)(void *data);
 </p>
+<h3 class="typedef"><a id="pappl_netconf_t">pappl_netconf_t</a></h3>
+<p class="description">Network configuration mode</p>
+<p class="code">
+typedef enum <a href="#pappl_netconf_e">pappl_netconf_e</a> pappl_netconf_t;
+</p>
+<h3 class="typedef"><a id="pappl_network_get_cb_t">pappl_network_get_cb_t</a></h3>
+<p class="description">Get networks callback</p>
+<p class="code">
+typedef size_t (*pappl_network_get_cb_t)(<a href="#pappl_system_t">pappl_system_t</a> *system, void *cb_data, size_t max_networks, <a href="#pappl_network_t">pappl_network_t</a> *networks);
+</p>
+<h3 class="typedef"><a id="pappl_network_set_cb_t">pappl_network_set_cb_t</a></h3>
+<p class="description">Set networks callback</p>
+<p class="code">
+typedef bool (*pappl_network_set_cb_t)(<a href="#pappl_system_t">pappl_system_t</a> *system, void *cb_data, size_t num_networks, <a href="#pappl_network_t">pappl_network_t</a> *networks);
+</p>
+<h3 class="typedef"><a id="pappl_network_t">pappl_network_t</a></h3>
+<p class="description">Network interface information</p>
+<p class="code">
+typedef struct <a href="#pappl_network_s">pappl_network_s</a> pappl_network_t;
+</p>
 <h3 class="typedef"><a id="pappl_pr_autoadd_cb_t">pappl_pr_autoadd_cb_t</a></h3>
 <p class="description">Auto-add callback</p>
 <p class="code">
@@ -6456,6 +6734,11 @@ typedef enum <a href="#pappl_supply_type_e">pappl_supply_type_e</a> pappl_supply
 <p class="code">
 typedef struct _pappl_system_s pappl_system_t;
 </p>
+<h3 class="typedef"><a id="pappl_timer_cb_t">pappl_timer_cb_t</a></h3>
+<p class="description">Timer callback function</p>
+<p class="code">
+typedef bool (*pappl_timer_cb_t)(<a href="#pappl_system_t">pappl_system_t</a> *system, void *cb_data);
+</p>
 <h3 class="typedef"><a id="pappl_uoptions_t">pappl_uoptions_t</a></h3>
 <p class="description">USB gadget options bitfield</p>
 <p class="code">
@@ -6597,6 +6880,55 @@ typedef struct <a href="#pappl_wifi_s">pappl_wifi_s</a> pappl_wifi_t;
 <td class="description">Media tracking</td></tr>
 <tr><th>type[64] </th>
 <td class="description">PWG media type name</td></tr>
+</tbody></table>
+<h3 class="struct"><a id="pappl_network_s">pappl_network_s</a></h3>
+<p class="description">Network interface information</p>
+<p class="code">struct pappl_network_s {<br>
+&#160;&#160;&#160;&#160;http_addr_t addr4;<br>
+&#160;&#160;&#160;&#160;http_addr_t addr6;<br>
+&#160;&#160;&#160;&#160;<a href="#pappl_netconf_t">pappl_netconf_t</a> config4;<br>
+&#160;&#160;&#160;&#160;<a href="#pappl_netconf_t">pappl_netconf_t</a> config6;<br>
+&#160;&#160;&#160;&#160;http_addr_t dns[2];<br>
+&#160;&#160;&#160;&#160;char domain[64];<br>
+&#160;&#160;&#160;&#160;http_addr_t gateway4;<br>
+&#160;&#160;&#160;&#160;http_addr_t gateway6;<br>
+&#160;&#160;&#160;&#160;char ident[256];<br>
+&#160;&#160;&#160;&#160;http_addr_t linkaddr6;<br>
+&#160;&#160;&#160;&#160;http_addr_t mask4;<br>
+&#160;&#160;&#160;&#160;char name[64];<br>
+&#160;&#160;&#160;&#160;unsigned prefix6;<br>
+&#160;&#160;&#160;&#160;bool up;<br>
+};</p>
+<h4 class="members">Members</h4>
+<table class="list"><tbody>
+<tr><th>addr4 </th>
+<td class="description">IPv4 address</td></tr>
+<tr><th>addr6 </th>
+<td class="description">IPv6 address</td></tr>
+<tr><th>config4 </th>
+<td class="description">IPv4 configuration mode</td></tr>
+<tr><th>config6 </th>
+<td class="description">IPv6 configuration mode</td></tr>
+<tr><th>dns[2] </th>
+<td class="description">DNS server addresses, if any</td></tr>
+<tr><th>domain[64] </th>
+<td class="description">Domain name, if any</td></tr>
+<tr><th>gateway4 </th>
+<td class="description">IPv4 router/gateway address</td></tr>
+<tr><th>gateway6 </th>
+<td class="description">IPv6 router address</td></tr>
+<tr><th>ident[256] </th>
+<td class="description">Interface identifier</td></tr>
+<tr><th>linkaddr6 </th>
+<td class="description">IPv6 link-local address (read-only)</td></tr>
+<tr><th>mask4 </th>
+<td class="description">IPv4 netmask</td></tr>
+<tr><th>name[64] </th>
+<td class="description">Interface name</td></tr>
+<tr><th>prefix6 </th>
+<td class="description">IPv6 prefix length</td></tr>
+<tr><th>up </th>
+<td class="description">Is this interface up (read-only)?</td></tr>
 </tbody></table>
 <h3 class="struct"><a id="pappl_pr_driver_data_s">pappl_pr_driver_data_s</a></h3>
 <p class="description">Printer driver data</p>
@@ -6845,7 +7177,7 @@ typedef struct <a href="#pappl_wifi_s">pappl_wifi_s</a> pappl_wifi_t;
 &#160;&#160;&#160;&#160;pappl_dither_t dither;<br>
 &#160;&#160;&#160;&#160;<a href="#pappl_finishings_t">pappl_finishings_t</a> finishings;<br>
 &#160;&#160;&#160;&#160;unsigned first_page;<br>
-&#160;&#160;&#160;&#160;cups_page_header2_t header;<br>
+&#160;&#160;&#160;&#160;cups_page_header_t header;<br>
 &#160;&#160;&#160;&#160;unsigned last_page;<br>
 &#160;&#160;&#160;&#160;<a href="#pappl_media_col_t">pappl_media_col_t</a> media;<br>
 &#160;&#160;&#160;&#160;unsigned num_pages;<br>
@@ -7089,6 +7421,7 @@ typedef struct <a href="#pappl_wifi_s">pappl_wifi_s</a> pappl_wifi_t;
 <tr><th>PAPPL_JREASON_JOB_COMPLETED_WITH_ERRORS </th><td class="description">'job-completed-with-errors'</td></tr>
 <tr><th>PAPPL_JREASON_JOB_COMPLETED_WITH_WARNINGS </th><td class="description">'job-completed-with-warnings'</td></tr>
 <tr><th>PAPPL_JREASON_JOB_DATA_INSUFFICIENT </th><td class="description">'job-data-insufficient'</td></tr>
+<tr><th>PAPPL_JREASON_JOB_HOLD_UNTIL_SPECIFIED </th><td class="description">'job-hold-until-specified'</td></tr>
 <tr><th>PAPPL_JREASON_JOB_INCOMING </th><td class="description">'job-incoming'</td></tr>
 <tr><th>PAPPL_JREASON_JOB_PRINTING </th><td class="description">'job-printing'</td></tr>
 <tr><th>PAPPL_JREASON_JOB_QUEUED </th><td class="description">'job-queued'</td></tr>
@@ -7163,6 +7496,15 @@ typedef struct <a href="#pappl_wifi_s">pappl_wifi_s</a> pappl_wifi_t;
 <tr><th>PAPPL_MEDIA_TRACKING_GAP </th><td class="description">'gap'</td></tr>
 <tr><th>PAPPL_MEDIA_TRACKING_MARK </th><td class="description">'mark'</td></tr>
 <tr><th>PAPPL_MEDIA_TRACKING_WEB </th><td class="description">'web'</td></tr>
+</tbody></table>
+<h3 class="enumeration"><a id="pappl_netconf_e">pappl_netconf_e</a></h3>
+<p class="description">Network configuration mode</p>
+<h4 class="constants">Constants</h4>
+<table class="list"><tbody>
+<tr><th>PAPPL_NETCONF_DHCP </th><td class="description">Full DHCP</td></tr>
+<tr><th>PAPPL_NETCONF_DHCP_MANUAL </th><td class="description">DHCP with manual IP address</td></tr>
+<tr><th>PAPPL_NETCONF_MANUAL </th><td class="description">Manual IP, netmask, and router</td></tr>
+<tr><th>PAPPL_NETCONF_OFF </th><td class="description">Turn network interface off</td></tr>
 </tbody></table>
 <h3 class="enumeration"><a id="pappl_preason_e">pappl_preason_e</a></h3>
 <p class="description">IPP &quot;printer-state-reasons&quot; bit values</p>
