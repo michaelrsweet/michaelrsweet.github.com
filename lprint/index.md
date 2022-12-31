@@ -2,7 +2,7 @@
 title: LPrint
 subtitle: A Label Printer Application
 author: Michael R Sweet
-copyright: Copyright © 2019-2021 by Michael R Sweet
+copyright: Copyright © 2019-2022 by Michael R Sweet
 project: lprint
 project_name: LPrint
 logo: lprint-160.png

@@ -2,7 +2,7 @@
 title: LPrint Documentation
 subtitle: Documentation
 author: Michael R Sweet
-copyright: Copyright © 2019-2021 by Michael R Sweet
+copyright: Copyright © 2019-2022 by Michael R Sweet
 project: lprint
 project_name: LPrint
 logo: lprint-160.png
@@ -14,8 +14,8 @@ layout: project
 LPrint Documentation
 ====================
 
-LPrint v1.1 - December 21, 2021
-Copyright 2019-2021 by Michael R Sweet
+LPrint v1.2 - December 22, 2022
+Copyright 2019-2022 by Michael R Sweet
 
 LPrint is licensed under the Apache License Version 2.0.  See the files
 "LICENSE" and "NOTICE" for more information.
@@ -51,7 +51,7 @@ rather than starting and stopping like CUPS does to support a wider variety of
 printers.
 
 LPrint supports the full range of options and features supported by the
-embedded drivers - currently all DYMO and Zebra EPL2/ZPL label printers.
+embedded drivers - currently most DYMO and Zebra EPL2/ZPL label printers.
 Whenever possible, LPrint will auto-detect the make and model of your printer
 and its installed capabilities.  And you can configure the default values of all
 options as well as manually configure the media that is loaded in each printer.
@@ -69,10 +69,13 @@ job status.
 Installation
 ------------
 
-LPrint is published as a snap for Linux.  Run the following command to install
+LPrint is published as a snap for Linux.  Run the following commands to install
 it:
 
+    sudo snap install core         (if you haven't already done so)
     sudo snap install lprint
+    sudo snap connect lprint:raw-usb
+    sudo snap start lprint.lprint-server
 
 A package file is included with all source releases on Github for use on macOS
 10.14 and higher for both Intel and Apple Silicon.
@@ -255,7 +258,7 @@ You can set the default values for each option with the "add" or "modify"
 sub-commands:
 
     lprint add -d PRINTER -v DEVICE-URI -m DRIVER-NAME -o OPTION=VALUE ...
-    lprint modify -D PRINTER -o OPTION=VALUE ...
+    lprint modify -d PRINTER -o OPTION=VALUE ...
 
 In addition, you can configure the installed media and other printer settings
 using other "-o" options.  For example, the following command configures the
@@ -274,19 +277,37 @@ Running a Server
 The "server" sub-command runs a standalone spooler.  The following options
 control the server operation:
 
-- "-o listen-name=HOSTNAME": Sets the network hostname to resolve for listen
-  addresses - "*" for the wildcard addresses.
-- "-o server-name=HOSTNAME": Sets the network hostname to advertise.
-- "-o server-port=NNN": Sets the network port number; the default is randomly
-  assigned.
-- "-o auth-service=SERVICE": Specifies a PAM service for remote authentication.
 - "-o admin-group=GROUP": Specifies a group to use for remote authentication.
-- "-o spool-directory=DIRECTORY": Specifies the directory to store print files.
+- "-o auth-service=SERVICE": Specifies a PAM service for remote authentication.
+- "-o listen-hostname=HOSTNAME": Sets the network hostname to resolve for listen
+  addresses - "*" for the wildcard addresses.
 - "-o log-file=FILENAME": Specifies a log file.
 - "-o log-file=-": Specifies that log entries are written to the standard error.
 - "-o log-file=syslog": Specifies that log entries are sent to the system log.
 - "-o log-level=LEVEL": Specifies the log level - "debug", "info", "warn",
   "error", or "fatal".
+- "-o server-hostname=HOSTNAME": Sets the network hostname to advertise.
+- "-o server-name=DNS-SD-NAME": Sets the DNS-SD name to advertise.
+- "-o server-options=OPTION[,...,OPTION]": Sets server options:
+  - 'none': No options
+  - 'dnssd-host': Use the hostname in printer DNS-SD names
+  - 'no-multi-queue': Don't allow multiple queues
+  - 'raw-socket': Enable raw socket (JetDirect) support for all printers
+  - 'usb-printer': Enable the IPP-USB gadget for the default printer
+  - 'no-web-interface': Disable the web interface
+  - 'web-log': Enable web access of the log
+  - 'web-network': Enable web-based network configuration
+  - 'web-remote': Enable remote access for the web interface
+  - 'web-security': Enable web-based security configuration
+  - 'no-tls': Disable TLS (encryption) support
+- "-o server-port=NNN": Sets the network port number; the default is randomly
+  assigned.
+- "-o spool-directory=DIRECTORY": Specifies the directory to store print files.
+
+When using the LPrint snap you can set these options using the `snap set`
+command, for example:
+
+    sudo snap set lprint auth-service=other
 
 > *Note:* When you install the LPrint snap on Linux or the package on macOS, the
 > server is automatically run as root.  When you install from source, a
@@ -305,7 +326,7 @@ operations, you set the PAM authentication service with the
 `-o auth-service=SERVICE` option.  For example, to use the "cups" PAM service
 with LPrint, run:
 
-    lprint -o server-name=HOSTNAME -o server-port=NNN -o auth-service=cups
+    lprint server -o server-name=HOSTNAME -o server-port=NNN -o auth-service=cups
 
 By default, any user can authenticate web interface operations.  To restrict
 access to a particular UNIX group, use the `-o admin-group=GROUP` option as
