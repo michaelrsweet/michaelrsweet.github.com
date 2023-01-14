@@ -169,11 +169,18 @@ nav.bg-msweet {
 .navbar.navbar-dark .navbar-nav .nav-item a.nav-link {
   text-decoration: none;
 }
+a.nav-link, a.dropdown-item {
+  color: #cccccc;
+}
+a.nav-link:hover {
+  color: white;
+}
 a.dropdown-item:link, a.dropdown-item:visited {
   text-decoration: none;
 }
 a.dropdown-item:hover {
   background: rgba(238,238,238,0.95);
+  color: black;
   text-decoration: none;
 }
 
