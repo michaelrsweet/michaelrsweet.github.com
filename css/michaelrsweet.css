@@ -159,6 +159,10 @@ div.btn-group {
   margin-top: 10px;
 }
 
+span.project-info {
+  padding-left: 90px;
+}
+
 /* Header, footer, and navigation */
 nav.bg-msweet {
   background-color: rgba(34,34,34,0.8);
@@ -689,11 +693,18 @@ div.body dd {
   }
   pre, pre code, pre.command, pre.example {
     display: block;
-    font-size: 50%;
+    font-size: 75%;
+    line-height: 1.2;
     margin-left: 0px;
     overflow-x: scroll;
     padding: 5px;
     -webkit-overflow-scrolling: touch;
+  }
+  pre.highlight {
+    padding: 5px;
+  }
+  span.project-info {
+    padding-left: 0;
   }
   .mobile {
     display: inline;
