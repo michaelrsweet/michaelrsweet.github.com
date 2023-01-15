@@ -3,9 +3,9 @@ title: PGP Information
 layout: simple
 ---
 
-I've started signing my software releases using PGP.  You can verify the
-authenticity of the software you download using the PGP public key below and
-the `gpg` command included with GnuPG:
+I sign my software releases using PGP.  You can verify the authenticity of the
+software you download using the PGP public key below and the `gpg` command
+included with GnuPG:
 
 ```
 gpg --verify filename.tar.gz.sig filename.tar.gz
