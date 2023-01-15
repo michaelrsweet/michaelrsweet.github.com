@@ -204,6 +204,15 @@ a.navbar-brand img:hover {
   border: thin solid #b8c3ff;
 }
 
+.active>.page-link {
+  background-color: #333;
+  border-color: #333;
+}
+
+a.page-link {
+  text-decoration: none;
+}
+
 .navbar-status {
   float: right;
   margin-top: 8px;
@@ -651,6 +660,16 @@ div.body dd {
   }
   input, textarea {
     background: #333;
+    color: #eee;
+  }
+  .page-link {
+    background: #333;
+    border-color: #333;
+    color: #eee;
+  }
+  .active>.page-link {
+    background: #222;
+    border-color: #333;
     color: #eee;
   }
 }
