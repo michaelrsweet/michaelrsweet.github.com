@@ -21,7 +21,7 @@ layout: default
 
 {% for post in site.posts %}
 {% assign year = post.date | date: "%Y" %}
-{% if year >= "2022" %}
+{% if year >= "2023" %}
     <div class="col-sm-12" id="{{ post.id }}">
       <h2><img class="float-start me-2 glow" src="/{{post.category}}/{{post.category}}-160.png" width="40" height="40"> <a href="{{ post.url }}">{{post.title}}</a> <small>{{ post.date | date: "%B %d, %Y" }}</small></h2>
       {{ post.excerpt }}
