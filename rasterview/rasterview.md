@@ -1,8 +1,8 @@
 ---
 title: RasterView
-subtitle: CUPS/PWG/Apple Raster File Viewer
+subtitle: Apple/CUPS/PWG Raster File Viewer
 author: Michael R Sweet
-copyright: Copyright © 2002-2021 by Michael R Sweet
+copyright: Copyright © 2002-2023 by Michael R Sweet
 project: rasterview
 project_name: RasterView
 logo: rasterview-160.png
@@ -14,7 +14,7 @@ layout: project
 Introduction
 ============
 
-RasterView is a CUPS, PWG, and Apple raster file viewer.  It basically allows
+RasterView is an Apple, CUPS, and PWG raster file viewer.  It basically allows
 you to look at the raster data produced by any of the standard CUPS RIP filters
 (`cgpdftoraster`, `imagetoraster`, `pdftoraster`, and `pstoraster`) or the
 `ipptransform` tool and is normally used to either test those filters or look
@@ -49,10 +49,8 @@ Keyboard Shortcuts
 - `Spacebar`: Show next page
 - `Backspace/Delete`: Show previous page
 - `0`: Zoom to fit
-- `1`: Zoom 100%
-- `2`: Zoom 200%
-- `3`: Zoom 300%
-- `4`: Zoom 400%
+- `1` to '8': Zoom Nx
+- `9`: Zoom 20x
 - `-`: Zoom out
 - `=`: Zoom in
 - `C`: Click or drag mouse to view colors
