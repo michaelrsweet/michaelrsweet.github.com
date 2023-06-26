@@ -33,7 +33,7 @@ LPrint implements printing for a variety of common label and receipt printers co
       <li>Chrome OS™</li>
       <li>iOS® (4+)</li>
       <li>Linux® (w/CUPS 1.4+)</li>
-      <li>macOS® (10.8+)</li>
+      <li>macOS® (10.14+)</li>
       <li>Windows® (10+)</li>
     </ul>
   </div><div class="col-lg-9">
