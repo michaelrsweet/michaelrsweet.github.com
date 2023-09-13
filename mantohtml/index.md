@@ -1,7 +1,7 @@
 ---
 title: Man to HTML Conversion Utility
 author: Michael R Sweet
-copyright: Copyright © 2022 by Michael R Sweet
+copyright: Copyright © 2022-2023 by Michael R Sweet
 project: mantohtml
 project_name: mantohtml
 logo: mantohtml-160.png
