@@ -2,7 +2,7 @@
 title: PAPPL
 subtitle: Printer Application Framework
 author: Michael R Sweet
-copyright: Copyright © 2019-2022 by Michael R Sweet
+copyright: Copyright © 2019-2023 by Michael R Sweet
 project: pappl
 project_name: PAPPL
 logo: pappl-160.png
