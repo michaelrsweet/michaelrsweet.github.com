@@ -11,7 +11,7 @@ included with GnuPG:
 gpg --verify filename.tar.gz.sig filename.tar.gz
 ```
 
-All keys are registered with <keys.openpgp.org>.
+All keys are registered with [keys.openpgp.org](https://keys.openpgp.org).
 
 
 Current PGP Public Key
