@@ -6,8 +6,8 @@
 <meta name="generator" content="codedoc v3.7">
 <meta name="author" content="Michael R Sweet">
 <meta name="language" content="en-US">
-<meta name="copyright" content="Copyright © 2020-2023 by Michael R Sweet">
-<meta name="version" content="1.4.4">
+<meta name="copyright" content="Copyright © 2020-2024 by Michael R Sweet">
+<meta name="version" content="1.4.5">
 <style type="text/css"><!--
 body {
   background: white;
@@ -247,7 +247,7 @@ span.string {
 <p><img class="title" src="pappl-512.png"></p>
 <h1 class="title">PAPPL v1.4 Programmers Manual</h1>
 <p>Michael R Sweet</p>
-<p>Copyright © 2020-2023 by Michael R Sweet</p>
+<p>Copyright © 2020-2024 by Michael R Sweet</p>
 </div>
 <div class="contents">
 <h2 class="title">Contents</h2>
@@ -679,7 +679,7 @@ span.string {
 <p>PAPPL is a simple C-based framework/library for developing CUPS Printer Applications, which are the recommended replacement for printer drivers. It is sufficiently general purpose to support any kind of printer or driver that can be used on desktops, servers, and in embedded environments.</p>
 <p>PAPPL embeds a multi-threaded HTTP / <a href="https://www.pwg.org/ipp/everywhere.html">IPP Everywhere™</a> server and provides callbacks for a variety of events that allows a GUI or command-line application to interact with both the local user that is running the Printer Application and any network clients that are submitting print jobs, querying printer status and capabilities, and so forth.</p>
 <p>PAPPL provides a simple driver interface for raster graphics printing, and developers of CUPS Raster drivers will readily adapt to it. PAPPL can also be used with printers that support vector graphics printing although you'll have to develop more code to support them. Drivers provide configuration and capability information to PAPPL, and PAPPL then calls the driver to print things as needed. PAPPL automatically supports printing of JPEG, PNG, PWG Raster, Apple Raster, and &quot;raw&quot; files to printers connected via USB and network (AppSocket/JetDirect) connections. Other formats can be supported through &quot;filter&quot; callbacks you register.</p>
-<p>PAPPL is Copyright © 2019-2022 by Michael R Sweet and is licensed under the Apache License Version 2.0 with an (optional) exception to allow linking against GPL2/LGPL2 software (like older versions of CUPS), so it can be used <em>freely</em> in any project you'd like. See the files &quot;LICENSE&quot; and &quot;NOTICE&quot; in the source distribution for more information.</p>
+<p>PAPPL is Copyright © 2019-2024 by Michael R Sweet and is licensed under the Apache License Version 2.0 with an (optional) exception to allow linking against GPL2/LGPL2 software (like older versions of CUPS), so it can be used <em>freely</em> in any project you'd like. See the files &quot;LICENSE&quot; and &quot;NOTICE&quot; in the source distribution for more information.</p>
 <h3 class="title" id="requirements">Requirements</h3>
 <p>PAPPL requires Microsoft® Windows® 10 or higher or a POSIX-compliant host operating system such as Linux®, macOS®, QNX®, or VxWorks®. On Windows, the provided project files require Visual Studio 2019 or higher. For POSIX hosts, a &quot;make&quot; utility that supports the <code>include</code> directive (like GNU make), a C99-compatible C compiler such as GCC or Clang, and the &quot;pkg-config&quot; utility are required along with the following support libraries:</p>
 <ul>
@@ -900,7 +900,7 @@ LIBS    +=      `pkg-config --libs pappl`
 </li>
 </ul>
 <p>You can learn more about the second function in the chapter on the <a href="#hp-printer-application-example">HP Printer Application Example</a>.</p>
-<p>The system will run until it receives a Shutdown-System request, a termination signal, or you call the <a href="#papplSystemShutdown"><code>papplSystemShutdown</code></a> function. You can test whether is system is running with the <a href="#papplSystmeIsRunning"><code>papplSystmeIsRunning</code></a> function and whether it has been shut down with the <a href="#papplSystemIsShutdown"><code>papplSystemIsShutdown</code></a> function.</p>
+<p>The system will run until it receives a Shutdown-System request, a termination signal, or you call the <a href="#papplSystemShutdown"><code>papplSystemShutdown</code></a> function. You can test whether is system is running with the <a href="#papplSystemIsRunning"><code>papplSystemIsRunning</code></a> function and whether it has been shut down with the <a href="#papplSystemIsShutdown"><code>papplSystemIsShutdown</code></a> function.</p>
 <h4 id="resources">Resources</h4>
 <p>PAPPL provides several functions for adding static and dynamic resources to the embedded HTTP server:</p>
 <ul>
@@ -1221,7 +1221,7 @@ LIBS    +=      `pkg-config --libs pappl`
 <h2 class="title" id="the-hp-printer-application-example">The HP Printer Application Example</h2>
 <p>This chapter will guide you through creating a simple PCL printer application based on the old CUPS &quot;rastertohp&quot; filter. The complete code can be found in the <a href="https://github.com/michaelrsweet/hp-printer-app">hp-printer-app</a> project and serves as an overgrown &quot;Hello, World!&quot; program for PAPPL.</p>
 <h3 class="title" id="the-main-loop">The Main Loop</h3>
-<p>All printer applications require some sort of a main loop for processing IPP requests, printing files, and so forth. PAPPL provides the <a href="#papplMainLoop"><code>papplMainloop</code></a> convenience function that provides a standard command-line interface, and in the &quot;hp-printer-app&quot; project the <code>main</code> function just calls <code>papplMainloop</code> to do all of the work:</p>
+<p>All printer applications require some sort of a main loop for processing IPP requests, printing files, and so forth. PAPPL provides the <a href="#papplMainloop"><code>papplMainloop</code></a> convenience function that provides a standard command-line interface, and in the &quot;hp-printer-app&quot; project the <code>main</code> function just calls <code>papplMainloop</code> to do all of the work:</p>
 <pre><code class="language-c"><span class="reserved">int</span>
 main(<span class="reserved">int</span>  argc, <span class="reserved">char</span> *argv[])
 {
@@ -1252,6 +1252,8 @@ main(<span class="reserved">int</span>  argc, <span class="reserved">char</span>
 <p>The &quot;usage_cb&quot; argument specifies a callback from displaying the program usage message. Passing <code>NULL</code> yields the default usage message.</p>
 <p>The &quot;data&quot; argument specifies a pointer that will be passed to any of the callback functions. We pass <code>NULL</code> since we do not have any extra contextual information to provide to the callbacks.</p>
 <p>The <code>papplMainloop</code> function runs until all processing for the current sub-command is complete, returning the exit status for the program.</p>
+<h4 id="configuration-and-state-files">Configuration and State Files</h4>
+<p>Printer applications using the main loop API use a configuration file for server options and a state file for printers and jobs. The files are named based on the base name of the printer application, in this case &quot;hp-printer-app.conf&quot; for the server options and &quot;hp-printer-app.state&quot; for the state file. Server options are loaded from the &quot;/etc&quot; and &quot;/usr/local/etc&quot; directories on regular Unix/Linux systems, &quot;$HOME/snap/BASENAME/common&quot; for snap-based applications, and &quot;/Library/Application Support&quot; on macOS.</p>
 <h3 class="title" id="the-driver-callback">The Driver Callback</h3>
 <p>The PAPPL driver callback is called when the system is creating a new printer object. It receives pointers to the system, driver name, device URI, a driver data structure, an IPP attributes pointer, and the callback data, and it returns a boolean indicating whether the driver callback was successful:</p>
 <pre><code class="language-c"><span class="reserved">typedef</span> <span class="reserved">bool</span> (*pappl_pr_driver_cb_t)(pappl_system_t *system,
@@ -2094,7 +2096,7 @@ void papplClientRespondIPPUnsupported(<a href="#pappl_client_t">pappl_client_t</
 <tr><th>client</th>
 <td class="description">Client</td></tr>
 <tr><th>attr</th>
-<td class="description">Atribute</td></tr>
+<td class="description">Attribute</td></tr>
 </tbody></table>
 <h4 class="discussion">Discussion</h4>
 <p class="discussion">This function returns a 'client-error-attributes-or-values-not-supported'
@@ -4344,7 +4346,7 @@ resource name, and &quot;ext&quot; values.  The resource name is &quot;sanitized
 contain alphanumeric characters.<br>
 <br>
 The &quot;mode&quot; argument is &quot;r&quot; to read an existing printer file, &quot;w&quot; to write a
-new printer file, or &quot;x&quot; to remove an exitsing printer file.  New files are
+new printer file, or &quot;x&quot; to remove an existing printer file.  New files are
 created with restricted permissions for security purposes.<br>
 <br>
 For the &quot;r&quot; and &quot;w&quot; modes, the return value is the file descriptor number on
@@ -4764,7 +4766,7 @@ void papplSubscriptionCancel(<a href="#pappl_subscription_t">pappl_subscription_
 <h4 class="discussion">Discussion</h4>
 <p class="discussion">This function creates a new system, printer, or job event subscription.</p>
 <h3 class="function"><a id="papplSubscriptionGetEvents">papplSubscriptionGetEvents</a></h3>
-<p class="description">Return a subcription's events.</p>
+<p class="description">Return a subscription's events.</p>
 <p class="code">
 <a href="#pappl_event_t">pappl_event_t</a> papplSubscriptionGetEvents(<a href="#pappl_subscription_t">pappl_subscription_t</a> *sub);</p>
 <h4 class="parameters">Parameters</h4>
@@ -4777,7 +4779,7 @@ void papplSubscriptionCancel(<a href="#pappl_subscription_t">pappl_subscription_
 <h4 class="discussion">Discussion</h4>
 <p class="discussion">This function returns a subscription's events.</p>
 <h3 class="function"><a id="papplSubscriptionGetID">papplSubscriptionGetID</a></h3>
-<p class="description">Return a subcription's numeric identifier.</p>
+<p class="description">Return a subscription's numeric identifier.</p>
 <p class="code">
 int papplSubscriptionGetID(<a href="#pappl_subscription_t">pappl_subscription_t</a> *sub);</p>
 <h4 class="parameters">Parameters</h4>
@@ -4790,7 +4792,7 @@ int papplSubscriptionGetID(<a href="#pappl_subscription_t">pappl_subscription_t<
 <h4 class="discussion">Discussion</h4>
 <p class="discussion">This function returns a subscription's numeric identifier.</p>
 <h3 class="function"><a id="papplSubscriptionGetJob">papplSubscriptionGetJob</a></h3>
-<p class="description">Return a subcription's associated job, if any.</p>
+<p class="description">Return a subscription's associated job, if any.</p>
 <p class="code">
 <a href="#pappl_job_t">pappl_job_t</a> *papplSubscriptionGetJob(<a href="#pappl_subscription_t">pappl_subscription_t</a> *sub);</p>
 <h4 class="parameters">Parameters</h4>
@@ -4803,7 +4805,7 @@ int papplSubscriptionGetID(<a href="#pappl_subscription_t">pappl_subscription_t<
 <h4 class="discussion">Discussion</h4>
 <p class="discussion">This function returns a subscription's associated job, if any.</p>
 <h3 class="function"><a id="papplSubscriptionGetPrinter">papplSubscriptionGetPrinter</a></h3>
-<p class="description">Return a subcription's associated printer, if any.</p>
+<p class="description">Return a subscription's associated printer, if any.</p>
 <p class="code">
 <a href="#pappl_printer_t">pappl_printer_t</a> *papplSubscriptionGetPrinter(<a href="#pappl_subscription_t">pappl_subscription_t</a> *sub);</p>
 <h4 class="parameters">Parameters</h4>
@@ -4816,7 +4818,7 @@ int papplSubscriptionGetID(<a href="#pappl_subscription_t">pappl_subscription_t<
 <h4 class="discussion">Discussion</h4>
 <p class="discussion">This function returns a subscription's associated printer, if any.</p>
 <h3 class="function"><a id="papplSubscriptionGetUsername">papplSubscriptionGetUsername</a></h3>
-<p class="description">Return a subcription's owner.</p>
+<p class="description">Return a subscription's owner.</p>
 <p class="code">
 const char *papplSubscriptionGetUsername(<a href="#pappl_subscription_t">pappl_subscription_t</a> *sub);</p>
 <h4 class="parameters">Parameters</h4>
@@ -5123,7 +5125,7 @@ bool papplSystemAddTimerCallback(<a href="#pappl_system_t">pappl_system_t</a> *s
 <h4 class="discussion">Discussion</h4>
 <p class="discussion">This function schedules a function that will be called on the main run loop
 thread at the specified time and optionally every &quot;interval&quot; seconds
-thereafter.  The timimg accuracy is typically within a few milliseconds but
+thereafter.  The timing accuracy is typically within a few milliseconds but
 is not guaranteed.  Since the callback is run on the main run loop thread,
 functions should create a new thread for any long-running operations.<br>
 <br>
