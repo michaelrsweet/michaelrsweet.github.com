@@ -2,7 +2,7 @@
 title: LPrint Documentation
 subtitle: Documentation
 author: Michael R Sweet
-copyright: Copyright © 2019-2022 by Michael R Sweet
+copyright: Copyright © 2019-2024 by Michael R Sweet
 project: lprint
 project_name: LPrint
 logo: lprint-160.png
@@ -14,8 +14,8 @@ layout: project
 LPrint Documentation
 ====================
 
-LPrint v1.2 - December 22, 2022
-Copyright 2019-2022 by Michael R Sweet
+LPrint v1.3.0 - January 31, 2024
+Copyright 2019-2024 by Michael R Sweet
 
 LPrint is licensed under the Apache License Version 2.0.  See the files
 "LICENSE" and "NOTICE" for more information.
@@ -40,7 +40,9 @@ Overview
 
 LPrint is a label printer application for macOS® and Linux®.  I wrote it in
 response to criticism that coming changes in CUPS will leave users of label
-printers in the cold - see Apple CUPS Github issue #5271.
+printers in the cold - see [Apple CUPS Github issue #5271][APPLE5271].
+
+[APPLE5271]: https://github.com/apple/cups/issues/5271
 
 Basically, LPrint is a print spooler optimized for label printing.  It accepts
 "raw" print data as well as PNG images (like those used for shipping labels by
@@ -51,14 +53,15 @@ rather than starting and stopping like CUPS does to support a wider variety of
 printers.
 
 LPrint supports the full range of options and features supported by the
-embedded drivers - currently most DYMO and Zebra EPL2/ZPL label printers.
-Whenever possible, LPrint will auto-detect the make and model of your printer
-and its installed capabilities.  And you can configure the default values of all
-options as well as manually configure the media that is loaded in each printer.
+embedded drivers - currently most DYMO, Seiko, TSPL, and Zebra EPL2/ZPL label
+printers.  Whenever possible, LPrint will auto-detect the make and model of your
+printer and its installed capabilities.  And you can configure the default
+values of all options as well as manually configure the media that is loaded in
+each printer.
 
-LPrint also offers a simple network server mode that makes any label printers
+LPrint also offers a simple network server mode that makes your label printers
 appear as IPP Everywhere™/AirPrint™/Mopria™ printers on your network.  Thus, any
-Android™, Chrome OS™, iOS®, Linux, macOS, or Windows 10/11 client can use any
+Android™, Chrome OS™, iOS®, Linux®, macOS®, or Windows® 10/11 client can use any
 label printer supported by LPrint.  And you can, of course, send jobs from
 LPrint to an LPrint server on the network.
 
@@ -70,15 +73,17 @@ Installation
 ------------
 
 LPrint is published as a snap for Linux.  Run the following commands to install
-it:
+it and start the server:
 
     sudo snap install core         (if you haven't already done so)
+    sudo snap install avahi        (some Debian-based distros)
     sudo snap install lprint
     sudo snap connect lprint:raw-usb
+    sudo snap connect lprint:avahi-control
     sudo snap start lprint.lprint-server
 
 A package file is included with all source releases on Github for use on macOS
-10.14 and higher for both Intel and Apple Silicon.
+11 and higher for both Intel and Apple Silicon.
 
 If you need to install LPrint from source, you'll need a "make" program, a C99
 compiler (Clang and GCC work), the CUPS developer files, and the PAPPL developer
@@ -280,7 +285,8 @@ control the server operation:
 - "-o admin-group=GROUP": Specifies a group to use for remote authentication.
 - "-o auth-service=SERVICE": Specifies a PAM service for remote authentication.
 - "-o listen-hostname=HOSTNAME": Sets the network hostname to resolve for listen
-  addresses - "*" for the wildcard addresses.
+  addresses - "*" for the wildcard addresses, "localhost" to only listen for
+  local print requests.
 - "-o log-file=FILENAME": Specifies a log file.
 - "-o log-file=-": Specifies that log entries are written to the standard error.
 - "-o log-file=syslog": Specifies that log entries are sent to the system log.
@@ -293,7 +299,8 @@ control the server operation:
   - 'dnssd-host': Use the hostname in printer DNS-SD names
   - 'no-multi-queue': Don't allow multiple queues
   - 'raw-socket': Enable raw socket (JetDirect) support for all printers
-  - 'usb-printer': Enable the IPP-USB gadget for the default printer
+  - 'usb-printer': Enable the IPP-USB gadget for the default printer (Raspberry
+    Pi)
   - 'no-web-interface': Disable the web interface
   - 'web-log': Enable web access of the log
   - 'web-network': Enable web-based network configuration
@@ -301,13 +308,42 @@ control the server operation:
   - 'web-security': Enable web-based security configuration
   - 'no-tls': Disable TLS (encryption) support
 - "-o server-port=NNN": Sets the network port number; the default is randomly
-  assigned.
+  assigned starting at 8000.
 - "-o spool-directory=DIRECTORY": Specifies the directory to store print files.
 
 When using the LPrint snap you can set these options using the `snap set`
 command, for example:
 
     sudo snap set lprint auth-service=other
+
+When using the LPrint package for macOS, you can set these options by creating
+the "/Library/Application Support/lprint.conf" file and listing the options one
+per line, for example:
+
+    sudo vi "/Library/Application Support/lprint.conf"
+    i
+    auth-service=other
+    listen-hostname=localhost
+    :wq
+
+Other operating systems will look for the "lprint.conf" file in the "/etc" and
+"/usr/local/etc" directories.
+
+After changing these options you'll need to restart the server.  On macOS the
+`launchctl` command is used:
+
+    sudo launchctl stop org.msweet.lprint
+    sudo launchctl start org.msweet.lprint
+
+Similarly, on Linux the `systemctl` command is used:
+
+    sudo systemctl restart lprint.service
+
+If you've run the server by hand, just use the "shutdown" sub-command and then
+run the server again:
+
+    sudo lprint shutdown
+    sudo lprint server
 
 > *Note:* When you install the LPrint snap on Linux or the package on macOS, the
 > server is automatically run as root.  When you install from source, a

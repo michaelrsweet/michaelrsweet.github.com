@@ -2,7 +2,7 @@
 title: LPrint
 subtitle: A Label Printer Application
 author: Michael R Sweet
-copyright: Copyright © 2019-2022 by Michael R Sweet
+copyright: Copyright © 2019-2024 by Michael R Sweet
 project: lprint
 project_name: LPrint
 logo: lprint-160.png
@@ -39,8 +39,11 @@ LPrint implements printing for a variety of common label and receipt printers co
   </div><div class="col-lg-9">
     <p>Printers:</p>
     <ul>
+      <li>Brother: Experimental support for QL- and PT-series printers</li>
       <li>DYMO:  LabelMANAGER 400, LabelMANAGER 450, LabelMANAGER PC, LabelMANAGER PC II, LabelMANAGER PNP, LabelPOINT 350, LabelWriter 300, LabelWriter 310, LabelWriter 315, LabelWriter 320, LabelWriter 330, LabelWriter 330 Turbo, LabelWriter 400, LabelWriter 400 Turbo, LabelWriter 450, LabelWriter 450 DUO, LabelWriter 450 Turbo, LabelWriter 4XL, LabelWriter DUO, LabelWriter DUO 128, and LabelWriter SE450</li>
-      <li>Zebra: All EPL2 and ZPL printers</li>
+      <li>SEIKO: SLP100, SLP200, SLP240, SLP410, SLP420, SLP430, SLP440, SLP450, SLP620, SLP650, SLP650SE</li>
+      <li>TSC: Experimental support for TSPL/TSPL2 printers</li>
+      <li>Zebra: All EPL2 and ZPL printers, experimental support for CPCL printers</li>
     </ul>
   </div></div>
 </div>
@@ -57,9 +60,9 @@ LPrint implements printing for a variety of common label and receipt printers co
     <p>Required Libraries:</p>
     <ul>
       <li>Avahi (0.8+) or mDNSResponder</li>
-      <li>CUPS (2.2+) or libcups (3.0+)</li>
+      <li>CUPS (2.4+) or libcups (3.0+)</li>
       <li>GNU TLS (3.0+), LibreSSL (3.0+), or OpenSSL (1.1+)</li>
-      <li><a href="../pappl">PAPPL</a> (1.1+)</li>
+      <li><a href="../pappl">PAPPL</a> (1.2+)</li>
       <li>ZLIB (1.1+)</li>
     </ul>
   </div><div class="col-lg-4">
