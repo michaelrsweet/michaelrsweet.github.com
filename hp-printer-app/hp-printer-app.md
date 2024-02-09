@@ -2,7 +2,7 @@
 title: HP Printer Application Documentation
 subtitle: Documentation
 author: Michael R Sweet
-copyright: Copyright © 2019-2022 by Michael R Sweet
+copyright: Copyright © 2019-2024 by Michael R Sweet
 project: hp-printer-app
 project_name: hp-printer-app
 logo: hp-printer-app-160.png
@@ -14,8 +14,8 @@ layout: project
 HP Printer Application Documentation
 ====================================
 
-HP Printer Application v1.2.0
-Copyright 2019-2022 by Michael R Sweet
+HP Printer Application v1.3.0
+Copyright 2019-2024 by Michael R Sweet
 
 `hp-printer-app` is licensed under the Apache License Version 2.0.  See the
 files "LICENSE" and "NOTICE" for more information.
@@ -69,12 +69,17 @@ Installation
 ------------
 
 `hp-printer-app` is published as a snap for Linux.  Run the following command to
-install it:
+install it and start the server:
 
+    sudo snap install core         (if you haven't already done so)
+    sudo snap install avahi
     sudo snap install hp-printer-app
+    sudo snap connect hp-printer-app:raw-usb
+    sudo snap connect hp-printer-app:avahi-control avahi:avahi-control
+    sudo snap start hp-printer-app.hp-printer-app-server
 
 A package file is included with all source releases on Github for use on macOS
-10.14 and higher for both Intel and Apple Silicon.
+11 and higher for both Intel and Apple Silicon.
 
 If you need to install `hp-printer-app` from source, you'll need a "make"
 program, a C99 compiler (Clang and GCC work), the CUPS developer files, and the
@@ -249,7 +254,7 @@ You can set the default values for each option with the "add" or "modify"
 sub-commands:
 
     hp-printer-app add -d PRINTER -v DEVICE-URI -m DRIVER-NAME -o OPTION=VALUE ...
-    hp-printer-app modify -D PRINTER -o OPTION=VALUE ...
+    hp-printer-app modify -d PRINTER -o OPTION=VALUE ...
 
 In addition, you can configure the installed media and other printer settings
 using other "-o" options.  For example, the following command configures the
@@ -268,26 +273,71 @@ Running a Server
 The "server" sub-command runs a standalone spooler.  The following options
 control the server operation:
 
+- "-o admin-group=GROUP": Specifies a group to use for remote authentication.
+- "-o auth-service=SERVICE": Specifies a PAM service for remote authentication.
 - "-o listen-hostname=HOSTNAME": Sets the network hostname to resolve for listen
   addresses - use "*" for the wildcard addresses.
-- "-o server-hostname=HOSTNAME": Sets the network hostname to advertise.
-- "-o server-name=DNS-SD-NAME": Sets the DNS-SD name to advertise.
-- "-o server-port=NNN": Sets the network port number; the default is randomly
-  assigned.
-- "-o auth-service=SERVICE": Specifies a PAM service for remote authentication.
-- "-o admin-group=GROUP": Specifies a group to use for remote authentication.
-- "-o spool-directory=DIRECTORY": Specifies the directory to store print files.
 - "-o log-file=FILENAME": Specifies a log file.
 - "-o log-file=-": Specifies that log entries are written to the standard error.
 - "-o log-file=syslog": Specifies that log entries are sent to the system log.
 - "-o log-level=LEVEL": Specifies the log level - "debug", "info", "warn",
   "error", or "fatal".
+- "-o server-hostname=HOSTNAME": Sets the network hostname to advertise.
+- "-o server-name=DNS-SD-NAME": Sets the DNS-SD name to advertise.
+- "-o server-options=OPTION[,...,OPTION]": Sets server options:
+  - 'none': No options
+  - 'dnssd-host': Use the hostname in printer DNS-SD names
+  - 'no-multi-queue': Don't allow multiple queues
+  - 'raw-socket': Enable raw socket (JetDirect) support for all printers
+  - 'usb-printer': Enable the IPP-USB gadget for the default printer
+  - 'no-web-interface': Disable the web interface
+  - 'web-log': Enable web access of the log
+  - 'web-network': Enable web-based network configuration
+  - 'web-remote': Enable remote access for the web interface
+  - 'web-security': Enable web-based security configuration
+  - 'no-tls': Disable TLS (encryption) support
+- "-o server-port=NNN": Sets the network port number; the default is randomly
+  assigned starting at 8000.
+- "-o spool-directory=DIRECTORY": Specifies the directory to store print files.
 
-> *Note:* When you install the `hp-printer-app` snap on Linux, the server is
-> automatically run as root.  On macOS, running the "HP Printer App" application
-> starts the server.  When you install from source, a `systemd` service file is
-> installed but not activated - it can be used to automatically start
-> `hp-printer-app` when the system boots.
+When using the snap you can set these options using the `snap set` command, for
+example:
+
+    sudo snap set hp-printer-app auth-service=other
+
+When using the hp-printer-app package for macOS, you can set these options by
+creating the "/Library/Application Support/hp-printer-app.conf" file and listing
+the options one per line, for example:
+
+    sudo vi "/Library/Application Support/hp-printer-app.conf"
+    i
+    auth-service=other
+    listen-hostname=localhost
+    :wq
+
+Other operating systems will look for the "hp-printer-app.conf" file in the
+"/etc" and "/usr/local/etc" directories.
+
+After changing these options you'll need to restart the server.  On macOS the
+`launchctl` command is used:
+
+    sudo launchctl stop org.msweet.hp-printer-app
+    sudo launchctl start org.msweet.hp-printer-app
+
+Similarly, on Linux the `systemctl` command is used:
+
+    sudo systemctl restart hp-printer-app.service
+
+If you've run the server by hand, just use the "shutdown" sub-command and then
+run the server again:
+
+    sudo hp-printer-app shutdown
+    sudo hp-printer-app server
+
+> *Note:* When you install the `hp-printer-app` snap on Linux or the package on
+> macOS, the server is automatically run as root.  When you install from source,
+> a `systemd` service file is installed but not activated - it can be used to
+> automatically start `hp-printer-app` when the system boots.
 
 
 Server Web Interface
@@ -300,7 +350,7 @@ operations, you set the PAM authentication service with the
 `-o auth-service=SERVICE` option.  For example, to use the "cups" PAM service
 with `hp-printer-app`, run:
 
-    hp-printer-app -o server-name=HOSTNAME -o server-port=NNN -o auth-service=cups
+    hp-printer-app server -o server-name=HOSTNAME -o server-port=NNN -o auth-service=cups
 
 By default, any user can authenticate web interface operations.  To restrict
 access to a particular UNIX group, use the `-o admin-group=GROUP` option as

@@ -2,7 +2,7 @@
 title: HP Printer Application
 subtitle: A Generic PCL Printer Application
 author: Michael R Sweet
-copyright: Copyright © 2019-2022 by Michael R Sweet
+copyright: Copyright © 2019-2024 by Michael R Sweet
 project: hp-printer-app
 project_name: hp-printer-app
 logo: hp-printer-app-160.png
@@ -60,9 +60,9 @@ connected via network or USB.  Features include:
     <p>Required Libraries:</p>
     <ul>
       <li>Avahi (0.8+) or mDNSResponder</li>
-      <li>CUPS (2.2+) or libcups (3.0+)</li>
+      <li>CUPS (2.4+) or libcups (3.0+)</li>
       <li>GNU TLS (3.0+), LibreSSL (3.0+), or OpenSSL (1.1+)</li>
-      <li><a href="../pappl">PAPPL</a> (1.1+)</li>
+      <li><a href="../pappl">PAPPL</a> (1.2+)</li>
       <li>ZLIB (1.1+)</li>
     </ul>
   </div><div class="col-lg-4">
