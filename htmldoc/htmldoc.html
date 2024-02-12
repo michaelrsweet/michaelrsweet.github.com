@@ -3,7 +3,7 @@
 <HEAD>
 <TITLE>HTMLDOC Users Manual</TITLE>
 <META NAME="author" CONTENT="Michael R Sweet">
-<META NAME="copyright" CONTENT="Copyright © 1997-2022, All Rights Reserved.">
+<META NAME="copyright" CONTENT="Copyright © 1997-2024, All Rights Reserved.">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=iso-8859-1">
 <STYLE TYPE="text/css"><!--
 BODY { font-family: serif; }
@@ -21,7 +21,7 @@ PRE { font-family: monospace; margin-left: 36pt; }
 <BODY>
 <CENTER><A HREF="#CONTENTS"><H1>HTMLDOC Users Manual</H1></A><BR>
 Michael R Sweet<BR>
-Copyright © 1997-2022, All Rights Reserved.<BR>
+Copyright © 1997-2024, All Rights Reserved.<BR>
 </CENTER>
 <HR NOSHADE>
 <h1 ALIGN="CENTER"><a NAME="CONTENTS">Table of Contents</a></h1>
@@ -128,27 +128,28 @@ Copyright © 1997-2022, All Rights Reserved.<BR>
 <li><a HREF="#3_2_66">--path dir1;dir2;dir3;...;dirN</a></li>
 <li><a HREF="#3_2_67">--permissions permission[,permission,...]</a></li>
 <li><a HREF="#3_2_68">--portrait</a></li>
-<li><a HREF="#3_2_69">--pscommands</a></li>
-<li><a HREF="#3_2_70">--quiet</a></li>
-<li><a HREF="#3_2_71">--referer url</a></li>
-<li><a HREF="#3_2_72">--right margin</a></li>
-<li><a HREF="#3_2_73">--size size</a></li>
-<li><a HREF="#3_2_74">--strict</a></li>
-<li><a HREF="#3_2_75">--textcolor color</a></li>
-<li><a HREF="#3_2_76">--textfont typeface</a></li>
-<li><a HREF="#3_2_77">--title</a></li>
-<li><a HREF="#3_2_78">--titlefile filename</a></li>
-<li><a HREF="#3_2_79">--titleimage filename</a></li>
-<li><a HREF="#3_2_80">--tocfooter lcr</a></li>
-<li><a HREF="#3_2_81">--tocheader lcr</a></li>
-<li><a HREF="#3_2_82">--toclevels levels</a></li>
-<li><a HREF="#3_2_83">--toctitle string</a></li>
-<li><a HREF="#3_2_84">--top margin</a></li>
-<li><a HREF="#3_2_85">--user-password password</a></li>
-<li><a HREF="#3_2_86">--verbose</a></li>
-<li><a HREF="#3_2_87">--version</a></li>
-<li><a HREF="#3_2_88">--webpage</a></li>
-<li><a HREF="#3_2_89">--xrxcomments</a></li>
+<li><a HREF="#3_2_69">--pdf-indent margin</a></li>
+<li><a HREF="#3_2_70">--pscommands</a></li>
+<li><a HREF="#3_2_71">--quiet</a></li>
+<li><a HREF="#3_2_72">--referer url</a></li>
+<li><a HREF="#3_2_73">--right margin</a></li>
+<li><a HREF="#3_2_74">--size size</a></li>
+<li><a HREF="#3_2_75">--strict</a></li>
+<li><a HREF="#3_2_76">--textcolor color</a></li>
+<li><a HREF="#3_2_77">--textfont typeface</a></li>
+<li><a HREF="#3_2_78">--title</a></li>
+<li><a HREF="#3_2_79">--titlefile filename</a></li>
+<li><a HREF="#3_2_80">--titleimage filename</a></li>
+<li><a HREF="#3_2_81">--tocfooter lcr</a></li>
+<li><a HREF="#3_2_82">--tocheader lcr</a></li>
+<li><a HREF="#3_2_83">--toclevels levels</a></li>
+<li><a HREF="#3_2_84">--toctitle string</a></li>
+<li><a HREF="#3_2_85">--top margin</a></li>
+<li><a HREF="#3_2_86">--user-password password</a></li>
+<li><a HREF="#3_2_87">--verbose</a></li>
+<li><a HREF="#3_2_88">--version</a></li>
+<li><a HREF="#3_2_89">--webpage</a></li>
+<li><a HREF="#3_2_90">--xrxcomments</a></li>
 </ul>
 </li>
 <li><a HREF="#3_3">Environment Variables</a>
@@ -266,7 +267,7 @@ sgi</code> that generated &quot;compiled&quot; Standard Generalized Markup
  freely used and exported under current US laws, other countries may
  restrict your use and possession of this code and software.</p>
 <h2><a NAME="1_4">Legal Stuff</a></h2>
-<p>HTMLDOC is copyright &copy; 1997-2020 by Michael R Sweet. See <a href="#LICENSE">
+<p>HTMLDOC is copyright &copy; 1997-2024 by Michael R Sweet. See <a href="#LICENSE">
 Appendix A - License Agreement</a> for the terms of use. This software
  is based in part on the work of the Independent JPEG Group and FLTK
  project.</p>
@@ -1442,25 +1443,30 @@ spacing</code> value of 1 makes each line of text the same height as the
  be in portrait orientation (short edge on top).</p>
 <p>This option is only available when generating PostScript or PDF
  files.</p>
-<h3><a NAME="3_2_69">--pscommands</a></h3>
+<h3><a NAME="3_2_69">--pdf-indent margin</a></h3>
+<p>The <code>--pdf-indent</code> option specifies the indentation for
+ pre-formatted content. The default units are points (1 point = 1/72nd
+ inch); the suffixes &quot;in&quot;, &quot;cm&quot;, and &quot;mm&quot; specify inches, centimeters,
+ and millimeters, respectively.</p>
+<h3><a NAME="3_2_70">--pscommands</a></h3>
 <p>The <code>--pscommands</code> option specifies that PostScript device
  commands should be written to the output files.</p>
 <p>This option is only available when generating Level 2 and Level 3
  PostScript files.</p>
-<h3><a NAME="3_2_70">--quiet</a></h3>
+<h3><a NAME="3_2_71">--quiet</a></h3>
 <p>The <code>--quiet</code> option prevents error messages from being
  sent to stderr.</p>
-<h3><a NAME="3_2_71">--referer url</a></h3>
+<h3><a NAME="3_2_72">--referer url</a></h3>
 <p>The <code>--referer</code> option sets the URL that is passed in the <code>
 Referer:</code> field of HTTP requests.</p>
-<h3><a NAME="3_2_72">--right margin</a></h3>
+<h3><a NAME="3_2_73">--right margin</a></h3>
 <p>The <code>--right</code> option specifies the right margin. The
  default units are points (1 point = 1/72nd inch); the suffixes &quot;in&quot;,
  &quot;cm&quot;, and &quot;mm&quot; specify inches, centimeters, and millimeters,
  respectively.</p>
 <p>This option is only available when generating PostScript or PDF
  files.</p>
-<h3><a NAME="3_2_73">--size size</a></h3>
+<h3><a NAME="3_2_74">--size size</a></h3>
 <p>The <code>--size</code> option specifies the page size. The <code>
 size</code> parameter can be one of the following standard sizes:</p>
 <center>
@@ -1477,18 +1483,18 @@ size</code> parameter can be one of the following standard sizes:</p>
 <p>This option is only available when generating PostScript or PDF
  files. Use the <code>--pscommands</code> option to generate PostScript
  page size commands.</p>
-<h3><a NAME="3_2_74">--strict</a></h3>
+<h3><a NAME="3_2_75">--strict</a></h3>
 <p>The <code>--strict</code> option turns on strict HTML conformance
  checking. When enabled, HTML elements that are improperly nested and
  dangling close elements will produce error messages.</p>
-<h3><a NAME="3_2_75">--textcolor color</a></h3>
+<h3><a NAME="3_2_76">--textcolor color</a></h3>
 <p>The <code>--textcolor</code> option specifies the default text color
  for all pages in the document. The color can be specified by a standard
  HTML color name or as a 6-digit hexadecimal number of the form <code>
 #RRGGBB</code>.
 <!-- NEED 4in -->
 </p>
-<h3><a NAME="3_2_76">--textfont typeface</a></h3>
+<h3><a NAME="3_2_77">--textfont typeface</a></h3>
 <p>The <code>--textfont</code> options sets the typeface that is used
  for text in the document. The <code>typeface</code> parameter can be
  one of the following:</p>
@@ -1504,16 +1510,16 @@ size</code> parameter can be one of the following standard sizes:</p>
 <tr><td>Times</td><td>Times</td></tr>
 </table>
 </center>
-<h3><a NAME="3_2_77">--title</a></h3>
+<h3><a NAME="3_2_78">--title</a></h3>
 <p>The <code>--title</code> option specifies that a title page should be
  generated.</p>
-<h3><a NAME="3_2_78">--titlefile filename</a></h3>
+<h3><a NAME="3_2_79">--titlefile filename</a></h3>
 <p>The <code>--titlefile</code> option specifies a HTML or Markdown file
  to use for the title page.</p>
-<h3><a NAME="3_2_79">--titleimage filename</a></h3>
+<h3><a NAME="3_2_80">--titleimage filename</a></h3>
 <p>The <code>--titleimage</code> option specifies the title image for
  the title page. The supported formats are GIF, JPEG, and PNG.</p>
-<h3><a NAME="3_2_80">--tocfooter lcr</a></h3>
+<h3><a NAME="3_2_81">--tocfooter lcr</a></h3>
 <p>The <code>--tocfooter</code> option specifies the contents of the
  table-of-contents footer. The <code>lcr</code> parameter is a
  three-character string representing the left, center, and right footer
@@ -1521,7 +1527,7 @@ size</code> parameter can be one of the following standard sizes:</p>
  the list of formatting characters.</p>
 <p>Setting the TOC footer to &quot;<code>...</code>&quot; disables the TOC footer
  entirely.</p>
-<h3><a NAME="3_2_81">--tocheader lcr</a></h3>
+<h3><a NAME="3_2_82">--tocheader lcr</a></h3>
 <p>The <code>--tocheader</code> option specifies the contents of the
  table-of-contents header. The <code>lcr</code> parameter is a
  three-character string representing the left, center, and right header
@@ -1529,39 +1535,39 @@ size</code> parameter can be one of the following standard sizes:</p>
  the list of formatting characters.</p>
 <p>Setting the TOC header to &quot;<code>...</code>&quot; disables the TOC header
  entirely.</p>
-<h3><a NAME="3_2_82">--toclevels levels</a></h3>
+<h3><a NAME="3_2_83">--toclevels levels</a></h3>
 <p>The <code>--toclevels</code> options specifies the number of heading
  levels to include in the table-of-contents pages. The <code>levels</code>
  parameter is a number from 1 to 6.</p>
-<h3><a NAME="3_2_83">--toctitle string</a></h3>
+<h3><a NAME="3_2_84">--toctitle string</a></h3>
 <p>The <code>--toctitle</code> options specifies the string to display
  at the top of the table-of-contents; the default string is &quot;Table of
  Contents&quot;.</p>
-<h3><a NAME="3_2_84">--top margin</a></h3>
+<h3><a NAME="3_2_85">--top margin</a></h3>
 <p>The <code>--top</code> option specifies the top margin. The default
  units are points (1 point = 1/72nd inch); the suffixes &quot;in&quot;, &quot;cm&quot;, and
  &quot;mm&quot; specify inches, centimeters, and millimeters, respectively.</p>
 <p>This option is only available when generating PostScript or PDF
  files.</p>
-<h3><a NAME="3_2_85">--user-password password</a></h3>
+<h3><a NAME="3_2_86">--user-password password</a></h3>
 <p>The <code>--user-password</code> option specifies the user password
  for a PDF file. If not specified or the empty string (&quot;&quot;), no password
  will be required to view the document.</p>
 <p>This option is only available when generating PDF files.</p>
-<h3><a NAME="3_2_86">--verbose</a></h3>
+<h3><a NAME="3_2_87">--verbose</a></h3>
 <p>The <code>--verbose</code> option specifies that progress information
  should be sent/displayed to the standard error file.</p>
-<h3><a NAME="3_2_87">--version</a></h3>
+<h3><a NAME="3_2_88">--version</a></h3>
 <p>The <code>--version</code> option displays the HTMLDOC version
  number.</p>
-<h3><a NAME="3_2_88">--webpage</a></h3>
+<h3><a NAME="3_2_89">--webpage</a></h3>
 <p>The <code>--webpage</code> option specifies that the input files
  comprise a web page (or site) and that no title page or
  table-of-contents should be generated. HTMLDOC will insert a page break
  between each input file.</p>
 <p>This option is only available when generating PostScript or PDF
  files.</p>
-<h3><a NAME="3_2_89">--xrxcomments</a></h3>
+<h3><a NAME="3_2_90">--xrxcomments</a></h3>
 <p>The <code>--xrxcomments</code> option specifies that Xerox PostScript
  job comments should be written to the output files.</p>
 <p>This option is only available when generating PostScript files.
