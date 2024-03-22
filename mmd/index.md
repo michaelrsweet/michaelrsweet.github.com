@@ -2,7 +2,7 @@
 title: Mini-Markdown "Library"
 subtitle: A Miniature Markdown "Library"
 author: Michael R Sweet
-copyright: Copyright © 2017-2022 by Michael R Sweet
+copyright: Copyright © 2017-2024 by Michael R Sweet
 project: mmd
 project_name: mmd
 logo: mmd-160.png
@@ -38,4 +38,5 @@ extensions:
 - Tables and task lists as used by the [Github Flavored Markdown Spec][GFM].
 
 [CommonMark]: https://spec.commonmark.org
+
 [GFM]: https://github.github.com/gfm
