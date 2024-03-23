@@ -2,7 +2,7 @@
 title: Code Documentation Utility
 subtitle: A Code Documentation Utility
 author: Michael R Sweet
-copyright: Copyright © 2003-2020 by Michael R Sweet
+copyright: Copyright © 2003-2024 by Michael R Sweet
 project: codedoc
 project_name: codedoc
 logo: codedoc-160.png

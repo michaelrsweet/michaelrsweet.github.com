@@ -3,11 +3,11 @@
 <head>
 <title>How to Use the codedoc Utility</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-<meta name="generator" content="codedoc v3.6">
+<meta name="generator" content="codedoc v3.7">
 <meta name="author" content="Michael R Sweet">
 <meta name="language" content="en-US">
-<meta name="copyright" content="Copyright © 2003-2020 by Michael R Sweet">
-<meta name="version" content="3.6">
+<meta name="copyright" content="Copyright © 2003-2024 by Michael R Sweet">
+<meta name="version" content="3.7">
 <style type="text/css"><!--
 body {
   background: white;
@@ -84,6 +84,12 @@ blockquote {
   margin: 1em 0;
   padding: 10px;
   page-break-inside: avoid;
+}
+blockquote :first-child {
+  margin-top: 0;
+}
+blockquote :first-child {
+  margin-bottom: 0;
 }
 p code, li code, p.code, pre, ul.code li {
   font-family: monospace;
@@ -185,13 +191,13 @@ span.comment {
   color: darkgreen;
 }
 span.directive {
-  color: purple;
+  color: red;
 }
 span.number {
   color: brown;
 }
 span.reserved {
-  color: darkcyan;
+  color: blue;
 }
 span.string {
   color: magenta;
@@ -244,9 +250,10 @@ span.string {
 </head>
 <body>
 <div class="header">
+<p><img class="title" src="codedoc-256.png"></p>
 <h1 class="title">How to Use the codedoc Utility</h1>
 <p>Michael R Sweet</p>
-<p>Copyright © 2003-2020 by Michael R Sweet</p>
+<p>Copyright © 2003-2024 by Michael R Sweet</p>
 </div>
 <div class="contents">
 <h2 class="title">Contents</h2>
@@ -329,21 +336,21 @@ codedoc --epub documentation.epub documentation.xml
 <h3 class="title" id="markdown-extensions">Markdown Extensions</h3>
 <p>Codedoc uses the <a href="https://www.msweet.org/mmd">mmd</a> library for markdown which mostly conforms to the CommonMark version of markdown syntax with the following exceptions:</p>
 <ul>
-<li><p>Embedded HTML markup and entities are explicitly not supported or allowed; the reason for this is to better support different kinds of output from the markdown &quot;source&quot;, including XHTML, man, and <code>xml2rfc</code>.</p>
+<li><p>Embedded HTML markup and entities are explicitly not supported or allowed; the reason for this is to better support different kinds of output from the markdown &quot;source&quot;, including XHTML and man pages.</p>
 </li>
 <li><p>Tabs are silently expanded to the markdown standard of four spaces since HTML uses eight spaces per tab.</p>
 </li>
-<li><p>Some pathological nested link and inline style features supported by CommonMark (<code>******Really Strong Text******</code>) are not supported.</p>
+<li><p>Some pathological nested link and inline style features supported by CommonMark like &quot;<code>******Really Strong Text******</code>&quot;.</p>
 </li>
 <li><p>Support for metadata as used by Jekyll and other web markdown solutions.</p>
 </li>
-<li><p>Support for <code>@</code> links which resolve to headings within the documentation.</p>
+<li><p>Support for &quot;<code>@</code>&quot; links which resolve to headings within the documentation.</p>
 </li>
-<li><p>Support for <code>@@</code> links which resolve to literal names such as functions and types within the documentation.</p>
+<li><p>Support for &quot;<code>@@</code>&quot; links which resolve to literal names such as functions and types within the documentation.</p>
 </li>
-<li><p>Support for <code>::WIDTHxHEIGHT</code>, <code>::WIDTHx</code>, and <code>::xHEIGHT</code> in image (ALT) text to scale images to the specified size.</p>
+<li><p>Support for &quot;<code>::WIDTHxHEIGHT</code>&quot;, &quot;<code>::WIDTHx</code>&quot;, and &quot;<code>::xHEIGHT</code>&quot; in image (ALT) text to scale images to the specified size.</p>
 </li>
-<li><p>Support for the &quot;c&quot; and &quot;cpp&quot; languages for syntax highlighting in fenced code text.</p>
+<li><p>Support syntax highlighting of &quot;c&quot;, &quot;cpp&quot;, &quot;css&quot;, &quot;html&quot;, and &quot;xml&quot; in fenced code text.</p>
 </li>
 <li><p>Support for tables as used by the <a href="https://github.github.com/gfm">Github Flavored Markdown Spec</a>.</p>
 </li>
@@ -351,32 +358,32 @@ codedoc --epub documentation.epub documentation.xml
 <h2 class="title" id="annotating-your-cc-code">Annotating Your C/C++ Code</h2>
 <p>Codedoc looks for in-line comments to describe the functions, types, and constants in your code. Codedoc documents all public names it finds in your source files - any names starting with the underscore character (_) or names that are documented with the <a href="#-directives-in-comments"><code>@private@</code></a> directive are treated as private and are not documented.</p>
 <p>Comments appearing directly before a function or type definition are used to document that function or type. Comments appearing after argument, definition, return type, or variable declarations are used to document that argument, definition, return type, or variable. For example, the following code excerpt defines a key/value structure and a function that creates a new instance of that structure:</p>
-<pre><code>/* A key/value pair. This is used with the
-   dictionary structure. */
+<pre><code class="language-c"><span class="comment">/* A key/value pair. This is used with the</span>
+<span class="comment">   dictionary structure. */</span>
 
-struct keyval
+<span class="reserved">struct</span> keyval
 {
-  char *key; /* Key string */
-  char *val; /* Value string */
+  <span class="reserved">char</span> *key; <span class="comment">/* Key string */</span>
+  <span class="reserved">char</span> *val; <span class="comment">/* Value string */</span>
 };
 
-/* Create a new key/value pair. */
+<span class="comment">/* Create a new key/value pair. */</span>
 
-struct keyval * /* New key/value pair */
+<span class="reserved">struct</span> keyval * <span class="comment">/* New key/value pair */</span>
 new_keyval(
-    const char *key, /* Key string */
-    const char *val) /* Value string */
+    <span class="reserved">const</span> <span class="reserved">char</span> *key, <span class="comment">/* Key string */</span>
+    <span class="reserved">const</span> <span class="reserved">char</span> *val) <span class="comment">/* Value string */</span>
 {
   ...
 }
 </code></pre>
 <p>Codedoc also knows to remove extra asterisks (*) from the comment string, so the comment string:</p>
-<pre><code>/*
- * Compute the value of PI.
- *
- * The function connects to an Internet server that streams audio of
- * mathematical monks chanting the first 100 digits of PI.
- */
+<pre><code class="language-c"><span class="comment">/*</span>
+<span class="comment"> * Compute the value of PI.</span>
+<span class="comment"> *</span>
+<span class="comment"> * The function connects to an Internet server that streams audio of</span>
+<span class="comment"> * mathematical monks chanting the first 100 digits of PI.</span>
+<span class="comment"> */</span>
 </code></pre>
 <p>will be shown as:</p>
 <blockquote>
@@ -387,6 +394,8 @@ new_keyval(
 <h3 class="title" id="-directives-in-comments">@ Directives in Comments</h3>
 <p>Comments can also include the following special <code>@name ...@</code> directive strings:</p>
 <ul>
+<li><p><code>@body@</code>: appends the comment to the body text</p>
+</li>
 <li><p><code>@code text@</code>: formats the text as code</p>
 </li>
 <li><p><code>@deprecated@</code>: flags the item as deprecated to discourage its use</p>
@@ -416,35 +425,35 @@ new_keyval(
 <li><p>&quot;\&quot;: escapes the character that follows</p>
 </li>
 </ul>
-<p>In addition, example code can be surrounded by lines containing &quot;```&quot;. Use a leading &quot;|&quot; to ensure that any indentation is not lost:</p>
-<pre><code>/*
- * Example code:
- *
- * ```
- * | foo = get_foo() + get_baz();
- * | bar = get_bar() / foo;
- * | if (bar &gt; 42)
- * |   do_waz();
- * ```
- */
+<p>In addition, example code can be surrounded by lines containing &quot;```&quot;:</p>
+<pre><code class="language-c"><span class="comment">/*</span>
+<span class="comment"> * Example code:</span>
+<span class="comment"> *</span>
+<span class="comment"> * ```</span>
+<span class="comment"> * foo = get_foo() + get_baz();</span>
+<span class="comment"> * bar = get_bar() / foo;</span>
+<span class="comment"> * if (bar &gt; 42)</span>
+<span class="comment"> *   do_waz();</span>
+<span class="comment"> * ```</span>
+<span class="comment"> */</span>
 </code></pre>
 <p>Bulleted lists can be provided using a leading hyphen:</p>
-<pre><code>/*
- * Example list:
- *
- * - One fish
- * - Two fish
- * - Red fish
- * - Blue fish
- */
+<pre><code class="language-c"><span class="comment">/*</span>
+<span class="comment"> * Example list:</span>
+<span class="comment"> *</span>
+<span class="comment"> * - One fish</span>
+<span class="comment"> * - Two fish</span>
+<span class="comment"> * - Red fish</span>
+<span class="comment"> * - Blue fish</span>
+<span class="comment"> */</span>
 </code></pre>
 <p>and block quotes can be provided using the &quot;&gt;&quot; character:</p>
-<pre><code>/*
- * Some sort of documentation...
- *
- * &gt; Note: This is a block quote that is typically used for special
- * &gt; notes to the reader.
- */
+<pre><code class="language-c"><span class="comment">/*</span>
+<span class="comment"> * Some sort of documentation...</span>
+<span class="comment"> *</span>
+<span class="comment"> * &gt; Note: This is a block quote that is typically used for special</span>
+<span class="comment"> * &gt; notes to the reader.</span>
+<span class="comment"> */</span>
 </code></pre>
 <h2 class="title" id="epub-and-html-stylesheets">EPUB and HTML Stylesheets</h2>
 <p>Codedoc makes use of a CSS stylesheet for EPUB and HTML output. The default stylesheet should be usable for both display and printing, but you can override it using the <code>--css</code> option, for example:</p>
@@ -588,238 +597,244 @@ new_keyval(
 </tbody>
 </table>
 <h3 class="title" id="default-stylesheet">Default Stylesheet</h3>
-<pre><code>body {
-  background: white;
-  color: black;
-  font-family: sans-serif;
-  font-size: 12pt;
+<pre><code class="language-css">body {
+<span class="reserved">  background:</span><span class="number"> white;</span>
+<span class="reserved">  color:</span><span class="number"> black;</span>
+<span class="reserved">  font-family:</span><span class="number"> sans-serif;</span>
+<span class="reserved">  font-size:</span><span class="number"> 12pt;</span>
 }
 a {
-  color: black;
+<span class="reserved">  color:</span><span class="number"> black;</span>
 }
 a:link, a:visited {
-  color: #00f;
+<span class="reserved">  color:</span><span class="number"> #00f;</span>
 }
 a:link:hover, a:visited:hover, a:active {
-  color: #c0c;
+<span class="reserved">  color:</span><span class="number"> #c0c;</span>
 }
 body, p, h1, h2, h3, h4, h5, h6 {
-  font-family: sans-serif;
-  line-height: 1.4;
+<span class="reserved">  font-family:</span><span class="number"> sans-serif;</span>
+<span class="reserved">  line-height:</span><span class="number"> 1.4;</span>
 }
 h1, h2, h3, h4, h5, h6 {
-  font-weight: bold;
-  page-break-inside: avoid;
+<span class="reserved">  font-weight:</span><span class="number"> bold;</span>
+<span class="reserved">  page-break-inside:</span><span class="number"> avoid;</span>
 }
 h1 {
-  font-size: 250%;
-  margin: 0;
+<span class="reserved">  font-size:</span><span class="number"> 250%;</span>
+<span class="reserved">  margin:</span><span class="number"> 0;</span>
 }
 h2 {
-  font-size: 250%;
-  margin-top: 1.5em;
+<span class="reserved">  font-size:</span><span class="number"> 250%;</span>
+<span class="reserved">  margin-top:</span><span class="number"> 1.5em;</span>
 }
 h3 {
-  font-size: 200%;
-  margin-bottom: 0.5em;
-  margin-top: 1.5em;
+<span class="reserved">  font-size:</span><span class="number"> 200%;</span>
+<span class="reserved">  margin-bottom:</span><span class="number"> 0.5em;</span>
+<span class="reserved">  margin-top:</span><span class="number"> 1.5em;</span>
 }
 h4 {
-  font-size: 150%;
-  margin-bottom: 0.5em;
-  margin-top: 1.5em;
+<span class="reserved">  font-size:</span><span class="number"> 150%;</span>
+<span class="reserved">  margin-bottom:</span><span class="number"> 0.5em;</span>
+<span class="reserved">  margin-top:</span><span class="number"> 1.5em;</span>
 }
 h5 {
-  font-size: 125%;
-  margin-bottom: 0.5em;
-  margin-top: 1.5em;
+<span class="reserved">  font-size:</span><span class="number"> 125%;</span>
+<span class="reserved">  margin-bottom:</span><span class="number"> 0.5em;</span>
+<span class="reserved">  margin-top:</span><span class="number"> 1.5em;</span>
 }
 h6 {
-  font-size: 110%;
-  margin-bottom: 0.5em;
-  margin-top: 1.5em;
+<span class="reserved">  font-size:</span><span class="number"> 110%;</span>
+<span class="reserved">  margin-bottom:</span><span class="number"> 0.5em;</span>
+<span class="reserved">  margin-top:</span><span class="number"> 1.5em;</span>
 }
 img.title {
-  width: 256px;
+<span class="reserved">  width:</span><span class="number"> 256px;</span>
 }
 div.header h1, div.header p {
-  text-align: center;
+<span class="reserved">  text-align:</span><span class="number"> center;</span>
 }
 div.contents, div.body, div.footer {
-  page-break-before: always;
+<span class="reserved">  page-break-before:</span><span class="number"> always;</span>
 }
 .class, .enumeration, .function, .struct, .typedef, .union {
-  border-bottom: solid 2px gray;
+<span class="reserved">  border-bottom:</span><span class="number"> solid 2px gray;</span>
 }
 .description {
-  margin-top: 0.5em;
+<span class="reserved">  margin-top:</span><span class="number"> 0.5em;</span>
 }
 .function {
-  margin-bottom: 0;
+<span class="reserved">  margin-bottom:</span><span class="number"> 0;</span>
 }
 blockquote {
-  border: solid thin gray;
-  box-shadow: 3px 3px 5px rgba(127,127,127,0.25);
-  padding: 0px 10px;
-  page-break-inside: avoid;
+<span class="reserved">  border:</span><span class="number"> solid thin gray;</span>
+<span class="reserved">  box-shadow:</span><span class="number"> 3px 3px 5px rgba(127,127,127,0.25);</span>
+<span class="reserved">  padding:</span><span class="number"> 0px 10px;</span>
+<span class="reserved">  page-break-inside:</span><span class="number"> avoid;</span>
+}
+blockquote :first-child {
+<span class="reserved">  margin-top:</span><span class="number"> 0;</span>
+}
+blockquote :first-child {
+<span class="reserved">  margin-bottom:</span><span class="number"> 0;</span>
 }
 p code, li code, p.code, pre, ul.code li {
-  font-family: monospace;
-  hyphens: manual;
-  -webkit-hyphens: manual;
+<span class="reserved">  font-family:</span><span class="number"> monospace;</span>
+<span class="reserved">  hyphens:</span><span class="number"> manual;</span>
+<span class="reserved">  -webkit-hyphens:</span><span class="number"> manual;</span>
 }
 p.code, pre, ul.code li {
-  background: rgba(127,127,127,0.25);
-  border: thin dotted gray;
-  padding: 10px;
-  page-break-inside: avoid;
+<span class="reserved">  background:</span><span class="number"> rgba(127,127,127,0.25);</span>
+<span class="reserved">  border:</span><span class="number"> thin dotted gray;</span>
+<span class="reserved">  padding:</span><span class="number"> 10px;</span>
+<span class="reserved">  page-break-inside:</span><span class="number"> avoid;</span>
 }
 pre {
-  white-space: pre-wrap;
+<span class="reserved">  white-space:</span><span class="number"> pre-wrap;</span>
 }
 a:link, a:visited {
-  text-decoration: none;
+<span class="reserved">  text-decoration:</span><span class="number"> none;</span>
 }
 span.info {
-  background: black;
-  border: solid thin black;
-  color: white;
-  font-size: 80%;
-  font-style: italic;
-  font-weight: bold;
-  white-space: nowrap;
+<span class="reserved">  background:</span><span class="number"> black;</span>
+<span class="reserved">  border:</span><span class="number"> solid thin black;</span>
+<span class="reserved">  color:</span><span class="number"> white;</span>
+<span class="reserved">  font-size:</span><span class="number"> 80%;</span>
+<span class="reserved">  font-style:</span><span class="number"> italic;</span>
+<span class="reserved">  font-weight:</span><span class="number"> bold;</span>
+<span class="reserved">  white-space:</span><span class="number"> nowrap;</span>
 }
 h1 span.info, h2 span.info, h3 span.info, h4 span.info {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  float: right;
-  padding: 3px 6px;
+<span class="reserved">  border-top-left-radius:</span><span class="number"> 10px;</span>
+<span class="reserved">  border-top-right-radius:</span><span class="number"> 10px;</span>
+<span class="reserved">  float:</span><span class="number"> right;</span>
+<span class="reserved">  padding:</span><span class="number"> 3px 6px;</span>
 }
 ul.code, ul.contents, ul.subcontents {
-  list-style-type: none;
-  margin: 0;
-  padding-left: 0;
+<span class="reserved">  list-style-type:</span><span class="number"> none;</span>
+<span class="reserved">  margin:</span><span class="number"> 0;</span>
+<span class="reserved">  padding-left:</span><span class="number"> 0;</span>
 }
 ul.code li {
-  margin: 0;
+<span class="reserved">  margin:</span><span class="number"> 0;</span>
 }
 ul.contents &gt; li {
-  margin-top: 1em;
+<span class="reserved">  margin-top:</span><span class="number"> 1em;</span>
 }
 ul.contents li ul.code, ul.contents li ul.subcontents {
-  padding-left: 2em;
+<span class="reserved">  padding-left:</span><span class="number"> 2em;</span>
 }
 table {
-  border-collapse: collapse;
-  border-spacing: 0;
+<span class="reserved">  border-collapse:</span><span class="number"> collapse;</span>
+<span class="reserved">  border-spacing:</span><span class="number"> 0;</span>
 }
 td {
-  border: solid 1px gray;
-  padding: 5px 10px;
-  vertical-align: top;
+<span class="reserved">  border:</span><span class="number"> solid 1px gray;</span>
+<span class="reserved">  padding:</span><span class="number"> 5px 10px;</span>
+<span class="reserved">  vertical-align:</span><span class="number"> top;</span>
 }
 td.left {
-  text-align: left;
+<span class="reserved">  text-align:</span><span class="number"> left;</span>
 }
 td.center {
-  text-align: center;
+<span class="reserved">  text-align:</span><span class="number"> center;</span>
 }
 td.right {
-  text-align: right;
+<span class="reserved">  text-align:</span><span class="number"> right;</span>
 }
 th {
-  border-bottom: solid 2px gray;
-  padding: 1px 5px;
-  text-align: center;
-  vertical-align: bottom;
+<span class="reserved">  border-bottom:</span><span class="number"> solid 2px gray;</span>
+<span class="reserved">  padding:</span><span class="number"> 1px 5px;</span>
+<span class="reserved">  text-align:</span><span class="number"> center;</span>
+<span class="reserved">  vertical-align:</span><span class="number"> bottom;</span>
 }
 tr:nth-child(even) {
-  background: rgba(127,127,127,0.25);
+<span class="reserved">  background:</span><span class="number"> rgba(127,127,127,0.25);</span>
 }
 table.list {
-  border-collapse: collapse;
-  width: 100%;
+<span class="reserved">  border-collapse:</span><span class="number"> collapse;</span>
+<span class="reserved">  width:</span><span class="number"> 100%;</span>
 }
 table.list th {
-  border-bottom: none;
-  border-right: 2px solid gray;
-  font-family: monospace;
-  font-weight: normal;
-  padding: 5px 10px 5px 2px;
-  text-align: right;
-  vertical-align: top;
+<span class="reserved">  border-bottom:</span><span class="number"> none;</span>
+<span class="reserved">  border-right:</span><span class="number"> 2px solid gray;</span>
+<span class="reserved">  font-family:</span><span class="number"> monospace;</span>
+<span class="reserved">  font-weight:</span><span class="number"> normal;</span>
+<span class="reserved">  padding:</span><span class="number"> 5px 10px 5px 2px;</span>
+<span class="reserved">  text-align:</span><span class="number"> right;</span>
+<span class="reserved">  vertical-align:</span><span class="number"> top;</span>
 }
 table.list td {
-  border: none;
-  padding: 5px 2px 5px 10px;
-  text-align: left;
-  vertical-align: top;
+<span class="reserved">  border:</span><span class="number"> none;</span>
+<span class="reserved">  padding:</span><span class="number"> 5px 2px 5px 10px;</span>
+<span class="reserved">  text-align:</span><span class="number"> left;</span>
+<span class="reserved">  vertical-align:</span><span class="number"> top;</span>
 }
 h2.title, h3.title {
-  border-bottom: solid 2px gray;
+<span class="reserved">  border-bottom:</span><span class="number"> solid 2px gray;</span>
 }
-/* Syntax highlighting */
+<span class="comment">/* Syntax highlighting */</span>
 span.comment {
-  color: darkgreen;
+<span class="reserved">  color:</span><span class="number"> darkgreen;</span>
 }
 span.directive {
-  color: purple;
+<span class="reserved">  color:</span><span class="number"> purple;</span>
 }
 span.number {
-  color: orange;
+<span class="reserved">  color:</span><span class="number"> orange;</span>
 }
 span.reserved {
-  color: blue;
+<span class="reserved">  color:</span><span class="number"> blue;</span>
 }
 span.string {
-  color: magenta;
+<span class="reserved">  color:</span><span class="number"> magenta;</span>
 }
-/* Dark mode overrides */
-@media (prefers-color-scheme: dark) {
+<span class="comment">/* Dark mode overrides */</span>
+<span class="directive">@media (prefers-color-scheme: dark) {</span>
   body {
-    background: black;
-    color: #ccc;
-  }
+<span class="reserved">    background:</span><span class="number"> black;</span>
+<span class="reserved">    color:</span><span class="number"> #ccc;</span>
+<span class="reserved">  </span>}
   a {
-    color: #ccc;
-  }
+<span class="reserved">    color:</span><span class="number"> #ccc;</span>
+<span class="reserved">  </span>}
   a:link, a:visited {
-    color: #66f;
-  }
+<span class="reserved">    color:</span><span class="number"> #66f;</span>
+<span class="reserved">  </span>}
   a:link:hover, a:visited:hover, a:active {
-    color: #f06;
-  }
-}
+<span class="reserved">    color:</span><span class="number"> #f06;</span>
+<span class="reserved">  </span>}
+<span class="directive">}</span>
 </code></pre>
 <h3 class="title" id="additional-css-for-html-output">Additional CSS for HTML Output</h3>
-<pre><code>/* Show contents on left side in web browser */
-@media screen and (min-width: 800px) {
+<pre><code class="language-css"><span class="comment">/* Show contents on left side in web browser */</span>
+<span class="directive">@media screen and (min-width: 800px) {</span>
   div.contents {
-    border-right: solid thin gray;
-    bottom: 0px;
-    box-shadow: 3px 3px 5px rgba(127,127,127,0.5);
-    font-size: 10pt;
-    left: 0px;
-    overflow: scroll;
-    padding: 1%;
-    position: fixed;
-    top: 0px;
-    width: 18%;
-  }
+<span class="reserved">    border-right:</span><span class="number"> solid thin gray;</span>
+<span class="reserved">    bottom:</span><span class="number"> 0px;</span>
+<span class="reserved">    box-shadow:</span><span class="number"> 3px 3px 5px rgba(127,127,127,0.5);</span>
+<span class="reserved">    font-size:</span><span class="number"> 10pt;</span>
+<span class="reserved">    left:</span><span class="number"> 0px;</span>
+<span class="reserved">    overflow:</span><span class="number"> scroll;</span>
+<span class="reserved">    padding:</span><span class="number"> 1%;</span>
+<span class="reserved">    position:</span><span class="number"> fixed;</span>
+<span class="reserved">    top:</span><span class="number"> 0px;</span>
+<span class="reserved">    width:</span><span class="number"> 18%;</span>
+<span class="reserved">  </span>}
   div.contents h2.title {
-    margin-top: 0px;
-  }
+<span class="reserved">    margin-top:</span><span class="number"> 0px;</span>
+<span class="reserved">  </span>}
   div.header, div.body, div.footer {
-    margin-left: 20%;
-    padding: 1% 2%;
-  }
-}
-/* Center title page content vertically */
-@media print {
+<span class="reserved">    margin-left:</span><span class="number"> 20%;</span>
+<span class="reserved">    padding:</span><span class="number"> 1% 2%;</span>
+<span class="reserved">  </span>}
+<span class="directive">}</span>
+<span class="comment">/* Center title page content vertically */</span>
+<span class="directive">@media print {</span>
   div.header {
-    padding-top: 33%;
-  }
-}
+<span class="reserved">    padding-top:</span><span class="number"> 33%;</span>
+<span class="reserved">  </span>}
+<span class="directive">}</span>
 </code></pre>
 </div>
 </body>
