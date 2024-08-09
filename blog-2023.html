@@ -14,14 +14,14 @@ layout: default
   <div class="row">
     <nav>
       <ul class="pagination">
-	<li class="page-item active"><a class="page-link" href="blog.html">2024</a></li>
-	<li class="page-item"><a class="page-link" href="blog-2023.html">2023</a></li>
+	<li class="page-item"><a class="page-link" href="blog.html">2024</a></li>
+	<li class="page-item active"><a class="page-link" href="blog-2023.html">2023</a></li>
+	<li class="page-item"><a class="page-link" href="blog-2022.html">2022</a></li>
       </ul>
     </nav>
-
 {% for post in site.posts %}
 {% assign year = post.date | date: "%Y" %}
-{% if year >= "2024" %}
+{% if year == "2022" %}
     <div class="col-sm-12" id="{{ post.id }}">
       <h2><img class="float-start me-2 glow" src="/{{post.category}}/{{post.category}}-160.png" width="40" height="40"> <a href="{{ post.url }}">{{post.title}}</a> <small>{{ post.date | date: "%B %d, %Y" }}</small></h2>
       {{ post.excerpt }}
@@ -37,8 +37,9 @@ layout: default
 {% endfor %}
     <nav>
       <ul class="pagination">
-	<li class="page-item active"><a class="page-link" href="blog.html">2024</a></li>
-	<li class="page-item"><a class="page-link" href="blog-2023.html">2023</a></li>
+	<li class="page-item"><a class="page-link" href="blog.html">2024</a></li>
+	<li class="page-item active"><a class="page-link" href="blog-2023.html">2023</a></li>
+	<li class="page-item"><a class="page-link" href="blog-2022.html">2022</a></li>
       </ul>
     </nav>
   </div>
