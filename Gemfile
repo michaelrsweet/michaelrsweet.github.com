@@ -1,4 +1,8 @@
 source 'https://rubygems.org'
+gem 'base64'
+gem 'bigdecimal'
+gem 'logger'
 gem 'netrc'
+gem 'ostruct'
 gem 'github-pages'
 gem 'jekyll-feed'
