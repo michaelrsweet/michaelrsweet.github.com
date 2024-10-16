@@ -12,7 +12,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>{{page.title}}</title>
-    <style><!-- input#website { display: none; } --></style>
     <meta name="keywords" content="linux,macos,software,unix,windows">
   </head>
   <body>
@@ -59,44 +58,7 @@
         </div>
       </div>
     </nav>
-    <div class="container-fluid container-header">
-      <div class="row">
-	<div class="col-12">
-	  <h1><img class="float-start me-2" src="/{{page.category}}/{{page.category}}-160.png" width="40" height="40"> {{page.title}} <small>{{ page.date | date: "%B %d, %Y" }}</small></h1>
-	</div>
-      </div>
-    </div>
-    <div class="container-fluid">
-      <div class="row">
-	<div class="col-12">
-	  {{content}}
-	  {% if page.comments %}
-	  <h2>Comments (<span id="comment-count">0</span>)</h2>
-	  <div id="comments"></div>
-	  {% endif %}
-	  {% if page.commentform %}
-	  <div class="panel panel-default">
-	    <div class="panel-heading"><h3 id="comment-new" class="panel-title">New Comment</h3></div>
-	    <div class="panel-body">
-	      <form id="comment-form">
-		<input type="hidden" name="PAGE" value="{{page.url}}">
-		<input id="website" type="text" name="website">
-		<div class="form-group">
-		  <label for="name">Name:</label>
-		  <input class="form-control" type="text" id="comment-name" name="name" placeholder="Your name or blank for anonymous.">
-		</div>
-		<div class="form-group">
-		  <label for="body">Comment:</label>
-		  <textarea class="form-control" id="comment-body" name="body" rows="5" wrap="virtual" placeholder="Your comment."></textarea>
-		</div>
-		<button type="submit" class="btn">Post Comment</button>
-	      </form>
-	    </div>
-	  </div>
-	  {% endif %}
-	</div>
-      </div>
-    </div>
+    {{ content }}
     <div class="container-fluid container-footer">&nbsp;</div>
     <div class="footer container-fluid">
       <div class="row">
@@ -107,42 +69,14 @@
     </div>
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/jquery-3.7.1.slim.min.js"></script>
-    {% if page.comments %}
     <script type="text/javascript">
     $(document).ready( function() {
-      $('#comments').load('https://api.msweet.org/list-comments.php?PAGE={{page.url | cgi_escape}}', function() {
-	var count = $('#comments div.panel').length;
-	$('#comment-count').html(count.toString());
-      });
-    });
-    function post_comment() {
-      const XHR = new XMLHttpRequest();
-      const FD = new FormData(document.getElementById('comment-form'));
-      XHR.addEventListener('load', function(event) {
-        $('#comments').append(event.target.responseText);
-	count = $('#comments div.panel').length;
-	$('#comment-count').html(count.toString());
-      });
-      XHR.open('POST', 'https://api.msweet.org/post-comment.php');
-      XHR.send(FD);
-    }
-    $('#comment-form').submit('submit', function(event) {
-      event.preventDefault();
-      var re = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/i
-      let name = $('#comment-name').val();
-      let body = $('#comment-body').val();
-      if (body != '') {
-        if (body.length < 12 || !body.includes(" ")) {
-          alert("Sorry, I don't understand your comment?!?");
-        } else if (re.test(name) || re.test(body)) {
-          alert("Please don't include email addresses in comments.");
-        } else {
-          post_comment();
-          $('#comment-body').val('');
-        }
-      }
+    {% for post in site.posts offset: 0 limit: 8 %}
+    {% if post.comments %}
+    $('#{{ post.url | slugify }}').load('https://api.msweet.org/count-comments.php?PAGE={{post.url | cgi_escape}}');
+    {% endif %}
+    {% endfor %}
     });
     </script>
-    {% endif %}
   </body>
 </html>

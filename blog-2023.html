@@ -1,6 +1,6 @@
 ---
-title: Blog
-layout: default
+title: Blog 2023
+layout: blog
 ---
 
 <div class="container-fluid container-header container-header-small">
@@ -21,7 +21,7 @@ layout: default
     </nav>
 {% for post in site.posts %}
 {% assign year = post.date | date: "%Y" %}
-{% if year == "2022" %}
+{% if year == "2023" %}
     <div class="col-sm-12" id="{{ post.id }}">
       <h2><img class="float-start me-2 glow" src="/{{post.category}}/{{post.category}}-160.png" width="40" height="40"> <a href="{{ post.url }}">{{post.title}}</a> <small>{{ post.date | date: "%B %d, %Y" }}</small></h2>
       {{ post.excerpt }}
@@ -44,14 +44,3 @@ layout: default
     </nav>
   </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-<script type="text/javascript">
-$(document).ready( function() {
-{% for post in site.posts offset: 0 limit: 8 %}
-{% if post.comments %}
-$('#{{ post.url | slugify }}').load('https://api.msweet.org/count-comments.php?PAGE={{post.url | cgi_escape}}');
-{% endif %}
-{% endfor %}
-});
-</script>
