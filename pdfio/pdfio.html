@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-<title>PDFio Programming Manual v1.3.2</title>
+<title>PDFio Programming Manual v1.4.0</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-<meta name="generator" content="codedoc v3.7">
+<meta name="generator" content="codedoc v3.8">
 <meta name="author" content="Michael R Sweet">
 <meta name="language" content="en-US">
 <meta name="copyright" content="Copyright © 2021-2024 by Michael R Sweet">
-<meta name="version" content="1.3.2">
+<meta name="version" content="1.4.0">
 <style type="text/css"><!--
 body {
   background: white;
@@ -251,7 +251,7 @@ span.string {
 <body>
 <div class="header">
 <p><img class="title" src="pdfio-512.png"></p>
-<h1 class="title">PDFio Programming Manual v1.3.2</h1>
+<h1 class="title">PDFio Programming Manual v1.4.0</h1>
 <p>Michael R Sweet</p>
 <p>Copyright © 2021-2024 by Michael R Sweet</p>
 </div>
@@ -260,11 +260,12 @@ span.string {
 <ul class="contents">
 <li><a href="#introduction">Introduction</a><ul class="subcontents">
 <li><a href="#requirements">Requirements</a></li>
-<li><a href="#installing-pdfio">Installing pdfio</a></li>
+<li><a href="#installing-pdfio">Installing PDFio</a></li>
 <li><a href="#visual-studio-project">Visual Studio Project</a></li>
 <li><a href="#xcode-project">Xcode Project</a></li>
 <li><a href="#detecting-pdfio">Detecting PDFio</a></li>
 <li><a href="#header-files">Header Files</a></li>
+<li><a href="#understanding-pdf-files">Understanding PDF Files</a></li>
 </ul></li>
 <li><a href="#api-overview">API Overview</a><ul class="subcontents">
 <li><a href="#reading-pdf-files">Reading PDF Files</a></li>
@@ -275,7 +276,10 @@ span.string {
 </ul></li>
 <li><a href="#examples">Examples</a><ul class="subcontents">
 <li><a href="#read-pdf-metadata">Read PDF Metadata</a></li>
-<li><a href="#create-pdf-file-with-text-and-image">Create PDF File With Text and Image</a></li>
+<li><a href="#extract-text-from-pdf-file">Extract Text from PDF File</a></li>
+<li><a href="#create-a-pdf-file-with-text-and-an-image">Create a PDF File With Text and an Image</a></li>
+<li><a href="#generate-a-code-128-barcode">Generate a Code 128 Barcode</a></li>
+<li><a href="#convert-markdown-to-pdf">Convert Markdown to PDF</a></li>
 </ul></li>
 <li><a href="#FUNCTIONS">Functions</a><ul class="subcontents">
 <li><a href="#pdfioArrayAppendArray">pdfioArrayAppendArray</a></li>
@@ -305,6 +309,7 @@ span.string {
 <li><a href="#pdfioArrayGetSize">pdfioArrayGetSize</a></li>
 <li><a href="#pdfioArrayGetString">pdfioArrayGetString</a></li>
 <li><a href="#pdfioArrayGetType">pdfioArrayGetType</a></li>
+<li><a href="#pdfioArrayRemove">pdfioArrayRemove</a></li>
 <li><a href="#pdfioContentClip">pdfioContentClip</a></li>
 <li><a href="#pdfioContentDrawImage">pdfioContentDrawImage</a></li>
 <li><a href="#pdfioContentFill">pdfioContentFill</a></li>
@@ -361,6 +366,7 @@ span.string {
 <li><a href="#pdfioContentTextShow">pdfioContentTextShow</a></li>
 <li><a href="#pdfioContentTextShowJustified">pdfioContentTextShowJustified</a></li>
 <li><a href="#pdfioContentTextShowf">pdfioContentTextShowf</a></li>
+<li><a href="#pdfioDictClear">pdfioDictClear</a></li>
 <li><a href="#pdfioDictCopy">pdfioDictCopy</a></li>
 <li><a href="#pdfioDictCreate">pdfioDictCreate</a></li>
 <li><a href="#pdfioDictGetArray">pdfioDictGetArray</a></li>
@@ -368,7 +374,9 @@ span.string {
 <li><a href="#pdfioDictGetBoolean">pdfioDictGetBoolean</a></li>
 <li><a href="#pdfioDictGetDate">pdfioDictGetDate</a></li>
 <li><a href="#pdfioDictGetDict">pdfioDictGetDict</a></li>
+<li><a href="#pdfioDictGetKey">pdfioDictGetKey</a></li>
 <li><a href="#pdfioDictGetName">pdfioDictGetName</a></li>
+<li><a href="#pdfioDictGetNumPairs">pdfioDictGetNumPairs</a></li>
 <li><a href="#pdfioDictGetNumber">pdfioDictGetNumber</a></li>
 <li><a href="#pdfioDictGetObj">pdfioDictGetObj</a></li>
 <li><a href="#pdfioDictGetRect">pdfioDictGetRect</a></li>
@@ -395,6 +403,7 @@ span.string {
 <li><a href="#pdfioFileCreateICCObjFromFile">pdfioFileCreateICCObjFromFile</a></li>
 <li><a href="#pdfioFileCreateImageObjFromData">pdfioFileCreateImageObjFromData</a></li>
 <li><a href="#pdfioFileCreateImageObjFromFile">pdfioFileCreateImageObjFromFile</a></li>
+<li><a href="#pdfioFileCreateNameObj">pdfioFileCreateNameObj</a></li>
 <li><a href="#pdfioFileCreateNumberObj">pdfioFileCreateNumberObj</a></li>
 <li><a href="#pdfioFileCreateObj">pdfioFileCreateObj</a></li>
 <li><a href="#pdfioFileCreateOutput">pdfioFileCreateOutput</a></li>
@@ -436,6 +445,7 @@ span.string {
 <li><a href="#pdfioObjGetDict">pdfioObjGetDict</a></li>
 <li><a href="#pdfioObjGetGeneration">pdfioObjGetGeneration</a></li>
 <li><a href="#pdfioObjGetLength">pdfioObjGetLength</a></li>
+<li><a href="#pdfioObjGetName">pdfioObjGetName</a></li>
 <li><a href="#pdfioObjGetNumber">pdfioObjGetNumber</a></li>
 <li><a href="#pdfioObjGetSubtype">pdfioObjGetSubtype</a></li>
 <li><a href="#pdfioObjGetType">pdfioObjGetType</a></li>
@@ -496,7 +506,7 @@ span.string {
 </div>
 <div class="body">
 <h2 class="title" id="introduction">Introduction</h2>
-<p>PDFio is a simple C library for reading and writing PDF files. The primary goals of pdfio are:</p>
+<p>PDFio is a simple C library for reading and writing PDF files. The primary goals of PDFio are:</p>
 <ul>
 <li><p>Read and write any version of PDF file</p>
 </li>
@@ -526,7 +536,7 @@ span.string {
 </li>
 </ul>
 <p>IDE files for Xcode (macOS/iOS) and Visual Studio (Windows) are also provided.</p>
-<h3 class="title" id="installing-pdfio">Installing pdfio</h3>
+<h3 class="title" id="installing-pdfio">Installing PDFio</h3>
 <p>PDFio comes with a configure script that creates a portable makefile that will work on any POSIX-compliant system with ZLIB installed. To make it, run:</p>
 <pre><code>./configure
 make
@@ -572,6 +582,117 @@ LIBS    +=      `pkg-config --libs pdfio`
 <p>PDFio also provides <a href="#pdf-content-helper-functions">PDF content helper functions</a> for producing PDF content that are defined in a separate header file:</p>
 <pre><code class="language-c"><span class="directive">#include &lt;pdfio-content.h&gt;</span>
 </code></pre>
+<h3 class="title" id="understanding-pdf-files">Understanding PDF Files</h3>
+<p>A PDF file provides data and commands for displaying pages of graphics and text, and is structured in a way that allows it to be displayed in the same way across multiple devices and platforms. The following is a PDF which shows &quot;Hello, World!&quot; on one page:</p>
+<pre><code>%PDF-1.0                        % Header starts here
+%âãÏÓ
+1 0 obj                         % Body starts here
+&lt;&lt;
+/Kids [2 0 R]
+/Count 1
+/Type /Pages
+&gt;&gt;
+endobj
+2 0 obj
+&lt;&lt;
+/Rotate 0
+/Parent 1 0 R
+/Resources 3 0 R
+/MediaBox [0 0 612 792]
+/Contents [4 0 R]/Type /Page
+&gt;&gt;
+endobj
+3 0 obj
+&lt;&lt;
+/Font
+&lt;&lt;
+/F0
+&lt;&lt;
+/BaseFont /Times-Italic
+/Subtype /Type1
+/Type /Font
+&gt;&gt;
+&gt;&gt;
+&gt;&gt;
+endobj
+4 0 obj
+&lt;&lt;
+/Length 65
+&gt;&gt;
+stream
+1. 0. 0. 1. 50. 700. cm
+BT
+  /F0 36. Tf
+  (Hello, World!) Tj
+ET
+endstream
+endobj
+5 0 obj
+&lt;&lt;
+/Pages 1 0 R
+/Type /Catalog
+&gt;&gt;
+endobj
+xref                            % Cross-reference table starts here
+0 6
+0000000000 65535 f
+0000000015 00000 n
+0000000074 00000 n
+0000000192 00000 n
+0000000291 00000 n
+0000000409 00000 n
+trailer                         % Trailer starts here
+&lt;&lt;
+/Root 5 0 R
+/Size 6
+&gt;&gt;
+startxref
+459
+%%EOF
+</code></pre>
+<h4 id="header">Header</h4>
+<p>The header is the first line of a PDF file that specifies the version of the PDF format that has been used, for example <code>%PDF-1.0</code>.</p>
+<p>Since PDF files almost always contain binary data, they can become corrupted if line endings are changed. For example, if the file is transferred using FTP in text mode or is edited in Notepad on Windows. To allow legacy file transfer programs to determine that the file is binary, the PDF standard recommends including some bytes with character codes higher than 127 in the header, for example:</p>
+<pre><code>%âãÏÓ
+</code></pre>
+<p>The percent sign indicates a comment line while the other few bytes are arbitrary character codes in excess of 127. So, the whole header in our example is:</p>
+<pre><code>%PDF-1.0
+%âãÏÓ
+</code></pre>
+<h4 id="body">Body</h4>
+<p>The file body consists of a sequence of objects, each preceded by an object number, generation number, and the obj keyword on one line, and followed by the endobj keyword on another. For example:</p>
+<pre><code>1 0 obj
+&lt;&lt;
+/Kids [2 0 R]
+/Count 1
+/Type /Pages
+&gt;&gt;
+endobj
+</code></pre>
+<p>In this example, the object number is 1 and the generation number is 0, meaning it is the first version of the object. The content for object 1 is between the initial <code>1 0 obj</code> and trailing <code>endobj</code> lines. In this case, the content is the dictionary <code>&lt;&lt;/Kids [2 0 R] /Count 1 /Type /Pages&gt;&gt;</code>.</p>
+<h4 id="cross-reference-table">Cross-Reference Table</h4>
+<p>The cross-reference table lists the byte offset of each object in the file body. This allows random access to objects, meaning they don't have to be read in order. Objects that are not used are never read, making the process efficient. Operations like counting the number of pages in a PDF document are fast, even in large files.</p>
+<p>Each object has an object number and a generation number. Generation numbers are used when a cross-reference table entry is reused. For simplicity, we will assume generation numbers to be always zero and ignore them. The cross-reference table consists of a header line that indicates the number of entries, a free entry line for object 0, and a line for each of the objects in the file body. For example:</p>
+<pre><code>0 6                             % Six entries in table, starting at 0
+0000000000 65535 f              % Free entry for object 0
+0000000015 00000 n              % Object 1 is at byte offset 15
+0000000074 00000 n              % Object 2 is at byte offset 74
+0000000192 00000 n              % etc...
+0000000291 00000 n
+0000000409 00000 n              % Object 5 is at byte offset 409
+</code></pre>
+<h4 id="trailer">Trailer</h4>
+<p>The first line of the trailer is just the <code>trailer</code> keyword. This is followed by the trailer dictionary which contains at least the <code>/Size</code> entry specifying the number of entries in the cross-reference table and the <code>/Root</code> entry which references the object for the document catalog which is the root element of the graph of objects in the body.</p>
+<p>There follows a line with just the <code>startxref</code> keyword, a line with a single number specifying the byte offset of the start of the cross-reference table within the file, and then the line <code>%%EOF</code> which signals the end of the PDF file.</p>
+<pre><code>trailer                         % Trailer keyword
+&lt;&lt;                              % The trailer dictinonary
+/Root 5 0 R
+/Size 6
+&gt;&gt;
+startxref                       % startxref keyword
+459                             % Byte offset of cross-reference table
+%%EOF                           % End-of-file marker
+</code></pre>
 <h2 class="title" id="api-overview">API Overview</h2>
 <p>PDFio exposes several types:</p>
 <ul>
@@ -588,8 +709,9 @@ LIBS    +=      `pkg-config --libs pdfio`
 </ul>
 <h3 class="title" id="reading-pdf-files">Reading PDF Files</h3>
 <p>You open an existing PDF file using the <a href="#pdfioFileOpen"><code>pdfioFileOpen</code></a> function:</p>
-<pre><code class="language-c">pdfio_file_t *pdf = pdfioFileOpen(<span class="string">&quot;myinputfile.pdf&quot;</span>, password_cb, password_data,
-                                  error_cb, error_data);
+<pre><code class="language-c">pdfio_file_t *pdf =
+    pdfioFileOpen(<span class="string">&quot;myinputfile.pdf&quot;</span>, password_cb, password_data, error_cb,
+                  error_data);
 </code></pre>
 <p>where the five arguments to the function are the filename (&quot;myinputfile.pdf&quot;), an optional password callback function (<code>password_cb</code>) and data pointer value (<code>password_data</code>), and an optional error callback function (<code>error_cb</code>) and data pointer value (<code>error_data</code>). The password callback is called for encrypted PDF files that are not using the default password, for example:</p>
 <pre><code class="language-c"><span class="reserved">const</span> <span class="reserved">char</span> *
@@ -696,14 +818,16 @@ pdfio_array_t *crop_box;        <span class="comment">// CropBox array</span>
 <pre><code class="language-c">pdfio_rect_t media_box = { <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">612.0</span>, <span class="number">792.0</span> };  <span class="comment">// US Letter</span>
 pdfio_rect_t crop_box = { <span class="number">36.0</span>, <span class="number">36.0</span>, <span class="number">576.0</span>, <span class="number">756.0</span> }; <span class="comment">// w/0.5&quot; margins</span>
 
-pdfio_file_t *pdf = pdfioFileCreate(<span class="string">&quot;myoutputfile.pdf&quot;</span>, <span class="string">&quot;2.0&quot;</span>, &amp;media_box, &amp;crop_box, error_cb, error_data);
+pdfio_file_t *pdf = pdfioFileCreate(<span class="string">&quot;myoutputfile.pdf&quot;</span>, <span class="string">&quot;2.0&quot;</span>, &amp;media_box, &amp;crop_box,
+                                    error_cb, error_data);
 </code></pre>
 <p>where the six arguments to the function are the filename (&quot;myoutputfile.pdf&quot;), PDF version (&quot;2.0&quot;), media box (<code>media_box</code>), crop box (<code>crop_box</code>), an optional error callback function (<code>error_cb</code>), and an optional pointer value for the error callback function (<code>error_data</code>). The units for the media and crop boxes are points (1/72nd of an inch).</p>
 <p>Alternately you can stream a PDF file using the <a href="#pdfioFileCreateOutput"><code>pdfioFileCreateOutput</code></a> function:</p>
 <pre><code class="language-c">pdfio_rect_t media_box = { <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">612.0</span>, <span class="number">792.0</span> };  <span class="comment">// US Letter</span>
 pdfio_rect_t crop_box = { <span class="number">36.0</span>, <span class="number">36.0</span>, <span class="number">576.0</span>, <span class="number">756.0</span> }; <span class="comment">// w/0.5&quot; margins</span>
 
-pdfio_file_t *pdf = pdfioFileCreateOutput(output_cb, output_ctx, <span class="string">&quot;2.0&quot;</span>, &amp;media_box, &amp;crop_box, error_cb, error_data);
+pdfio_file_t *pdf = pdfioFileCreateOutput(output_cb, output_ctx, <span class="string">&quot;2.0&quot;</span>, &amp;media_box,
+                                          &amp;crop_box, error_cb, error_data);
 </code></pre>
 <p>Once the file is created, use the <a href="#pdfioFileCreateObj"><code>pdfioFileCreateObj</code></a>, <a href="#pdfioFileCreatePage"><code>pdfioFileCreatePage</code></a>, and <a href="#pdfioPageCopy"><code>pdfioPageCopy</code></a> functions to create objects and pages in the file.</p>
 <p>Finally, the <a href="#pdfioFileClose"><code>pdfioFileClose</code></a> function writes the PDF cross-reference and &quot;trailer&quot; information, closes the file, and frees all memory that was used for it.</p>
@@ -810,13 +934,16 @@ pdfio_obj_t *icc = pdfioFileCreateICCObjFromFile(pdf, <span class="string">&quot
 <pre><code class="language-c">pdfio_file_t *pdf = pdfioFileCreate(...);
 
 <span class="comment">// Create an AdobeRGB color array</span>
-pdfio_array_t *adobe_rgb = pdfioArrayCreateColorFromStandard(pdf, <span class="number">3</span>, PDFIO_CS_ADOBE);
+pdfio_array_t *adobe_rgb =
+    pdfioArrayCreateColorFromStandard(pdf, <span class="number">3</span>, PDFIO_CS_ADOBE);
 
 <span class="comment">// Create an Display P3 color array</span>
-pdfio_array_t *display_p3 = pdfioArrayCreateColorFromStandard(pdf, <span class="number">3</span>, PDFIO_CS_P3_D65);
+pdfio_array_t *display_p3 =
+    pdfioArrayCreateColorFromStandard(pdf, <span class="number">3</span>, PDFIO_CS_P3_D65);
 
 <span class="comment">// Create an sRGB color array</span>
-pdfio_array_t *srgb = pdfioArrayCreateColorFromStandard(pdf, <span class="number">3</span>, PDFIO_CS_SRGB);
+pdfio_array_t *srgb =
+    pdfioArrayCreateColorFromStandard(pdf, <span class="number">3</span>, PDFIO_CS_SRGB);
 </code></pre>
 <h4 id="font-object-functions">Font Object Functions</h4>
 <p>PDF supports many kinds of fonts, including PostScript Type1, PDF Type3, TrueType/OpenType, and CID. PDFio provides two functions for creating font objects. The first is <a href="#pdfioFileCreateFontObjFromBase"><code>pdfioFileCreateFontObjFromBase</code></a> which creates a font object for one of the base PDF fonts:</p>
@@ -850,40 +977,54 @@ pdfio_array_t *srgb = pdfioArrayCreateColorFromStandard(pdf, <span class="number
 <li><p>&quot;ZapfDingbats&quot;</p>
 </li>
 </ul>
-<p>PDFio always uses the Windows CP1252 subset of Unicode for these fonts.</p>
+<p>Except for Symbol and ZapfDingbats (which use a custom 8-bit character set), PDFio always uses the Windows CP1252 subset of Unicode for these fonts.</p>
 <p>The second function is <a href="#pdfioFileCreateFontObjFromFile"><code>pdfioFileCreateFontObjFromFile</code></a> which creates a font object from a TrueType/OpenType font file, for example:</p>
 <pre><code class="language-c">pdfio_file_t *pdf = pdfioFileCreate(...);
-pdfio_obj_t *arial = pdfioFileCreateFontObjFromFile(pdf, <span class="string">&quot;OpenSans-Regular.ttf&quot;</span>, <span class="reserved">false</span>);
+pdfio_obj_t *arial =
+    pdfioFileCreateFontObjFromFile(pdf, <span class="string">&quot;OpenSans-Regular.ttf&quot;</span>, <span class="reserved">false</span>);
 </code></pre>
 <p>will embed an OpenSans Regular TrueType font using the Windows CP1252 subset of Unicode. Pass <code>true</code> for the third argument to embed it as a Unicode CID font instead, for example:</p>
 <pre><code class="language-c">pdfio_file_t *pdf = pdfioFileCreate(...);
-pdfio_obj_t *arial = pdfioFileCreateFontObjFromFile(pdf, <span class="string">&quot;NotoSansJP-Regular.otf&quot;</span>, <span class="reserved">true</span>);
+pdfio_obj_t *arial =
+    pdfioFileCreateFontObjFromFile(pdf, <span class="string">&quot;NotoSansJP-Regular.otf&quot;</span>, <span class="reserved">true</span>);
 </code></pre>
 <p>will embed the NotoSansJP Regular OpenType font with full support for Unicode.</p>
 <blockquote>
-<p>Note: Not all fonts support Unicode.</p>
+<p>Note: Not all fonts support Unicode, and most do not contain a full complement of Unicode characters. <code>pdfioFileCreateFontObjFromFile</code> does not perform any character subsetting, so the entire font file is embedded in the PDF file.</p>
 </blockquote>
 <h4 id="image-object-functions">Image Object Functions</h4>
 <p>PDF supports images with many different color spaces and bit depths with optional transparency. PDFio provides two helper functions for creating image objects that can be referenced in page streams. The first function is <a href="#pdfioFileCreateImageObjFromData"><code>pdfioFileCreateImageObjFromData</code></a> which creates an image object from data in memory, for example:</p>
 <pre><code class="language-c">pdfio_file_t *pdf = pdfioFileCreate(...);
 <span class="reserved">unsigned</span> <span class="reserved">char</span> data[<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">4</span>]; <span class="comment">// 1024x1024 RGBA image data</span>
-pdfio_obj_t *img = pdfioFileCreateImageObjFromData(pdf, data, <span class="comment">/*width*/</span><span class="number">1024</span>, <span class="comment">/*height*/</span><span class="number">1024</span>, <span class="comment">/*num_colors*/</span><span class="number">3</span>, <span class="comment">/*color_data*/</span>NULL, <span class="comment">/*alpha*/</span><span class="reserved">true</span>, <span class="comment">/*interpolate*/</span><span class="reserved">false</span>);
+pdfio_obj_t *img =
+    pdfioFileCreateImageObjFromData(pdf, data, <span class="comment">/*width*/</span><span class="number">1024</span>, <span class="comment">/*height*/</span><span class="number">1024</span>,
+                                    <span class="comment">/*num_colors*/</span><span class="number">3</span>, <span class="comment">/*color_data*/</span>NULL,
+                                    <span class="comment">/*alpha*/</span><span class="reserved">true</span>, <span class="comment">/*interpolate*/</span><span class="reserved">false</span>);
 </code></pre>
 <p>will create an object for a 1024x1024 RGBA image in memory, using the default color space for 3 colors (&quot;DeviceRGB&quot;). We can use one of the <a href="#color-space-functions">color space functions</a> to use a specific color space for this image, for example:</p>
 <pre><code class="language-c">pdfio_file_t *pdf = pdfioFileCreate(...);
 
 <span class="comment">// Create an AdobeRGB color array</span>
-pdfio_array_t *adobe_rgb = pdfioArrayCreateColorFromMatrix(pdf, <span class="number">3</span>, pdfioAdobeRGBGamma, pdfioAdobeRGBMatrix, pdfioAdobeRGBWhitePoint);
+pdfio_array_t *adobe_rgb =
+    pdfioArrayCreateColorFromMatrix(pdf, <span class="number">3</span>, pdfioAdobeRGBGamma,
+                                    pdfioAdobeRGBMatrix, pdfioAdobeRGBWhitePoint);
 
 <span class="comment">// Create a 1024x1024 RGBA image using AdobeRGB</span>
 <span class="reserved">unsigned</span> <span class="reserved">char</span> data[<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">4</span>]; <span class="comment">// 1024x1024 RGBA image data</span>
-pdfio_obj_t *img = pdfioFileCreateImageObjFromData(pdf, data, <span class="comment">/*width*/</span><span class="number">1024</span>, <span class="comment">/*height*/</span><span class="number">1024</span>, <span class="comment">/*num_colors*/</span><span class="number">3</span>, <span class="comment">/*color_data*/</span>adobe_rgb, <span class="comment">/*alpha*/</span><span class="reserved">true</span>, <span class="comment">/*interpolate*/</span><span class="reserved">false</span>);
+pdfio_obj_t *img =
+    pdfioFileCreateImageObjFromData(pdf, data, <span class="comment">/*width*/</span><span class="number">1024</span>, <span class="comment">/*height*/</span><span class="number">1024</span>,
+                                    <span class="comment">/*num_colors*/</span><span class="number">3</span>, <span class="comment">/*color_data*/</span>adobe_rgb,
+                                    <span class="comment">/*alpha*/</span><span class="reserved">true</span>, <span class="comment">/*interpolate*/</span><span class="reserved">false</span>);
 </code></pre>
 <p>The &quot;interpolate&quot; argument specifies whether the colors in the image should be smoothed/interpolated when scaling. This is most useful for photographs but should be <code>false</code> for screenshot and barcode images.</p>
 <p>If you have a JPEG or PNG file, use the <a href="#pdfioFileCreateImageObjFromFile"><code>pdfioFileCreateImageObjFromFile</code></a> function to copy the image into a PDF image object, for example:</p>
 <pre><code class="language-c">pdfio_file_t *pdf = pdfioFileCreate(...);
-pdfio_obj_t *img = pdfioFileCreateImageObjFromFile(pdf, <span class="string">&quot;myphoto.jpg&quot;</span>, <span class="comment">/*interpolate*/</span><span class="reserved">true</span>);
+pdfio_obj_t *img =
+    pdfioFileCreateImageObjFromFile(pdf, <span class="string">&quot;myphoto.jpg&quot;</span>, <span class="comment">/*interpolate*/</span><span class="reserved">true</span>);
 </code></pre>
+<blockquote>
+<p>Note: Currently <code>pdfioFileCreateImageObjFromFile</code> does not support 12 bit JPEG files or PNG files with an alpha channel.</p>
+</blockquote>
 <h4 id="page-dictionary-functions">Page Dictionary Functions</h4>
 <p>PDF pages each have an associated dictionary to specify the images, fonts, and color spaces used by the page. PDFio provides functions to add these resources to the dictionary:</p>
 <ul>
@@ -1007,30 +1148,43 @@ pdfio_obj_t *img = pdfioFileCreateImageObjFromFile(pdf, <span class="string">&qu
 </li>
 </ul>
 <h2 class="title" id="examples">Examples</h2>
+<p>PDFio includes several example programs that are typically installed to the <code>/usr/share/doc/pdfio/examples</code> or <code>/usr/local/share/doc/pdfio/examples</code> directories. A makefile is included to build them.</p>
 <h3 class="title" id="read-pdf-metadata">Read PDF Metadata</h3>
-<p>The following example function will open a PDF file and print the title, author, creation date, and number of pages:</p>
+<p>The <code>pdfioinfo.c</code> example program opens a PDF file and prints the title, author, creation date, and number of pages:</p>
 <pre><code class="language-c"><span class="directive">#include &lt;pdfio.h&gt;</span>
 <span class="directive">#include &lt;time.h&gt;</span>
 
 
-<span class="reserved">void</span>
-show_pdf_info(<span class="reserved">const</span> <span class="reserved">char</span> *filename)
+<span class="reserved">int</span>                                     <span class="comment">// O - Exit status</span>
+main(<span class="reserved">int</span>  argc,                         <span class="comment">// I - Number of command-line arguments</span>
+     <span class="reserved">char</span> *argv[])                      <span class="comment">// Command-line arguments</span>
 {
-  pdfio_file_t *pdf;
-  time_t       creation_date;
-  <span class="reserved">struct</span> tm    *creation_tm;
-  <span class="reserved">char</span>         creation_text[<span class="number">256</span>];
+  <span class="reserved">const</span> <span class="reserved">char</span>    *filename;              <span class="comment">// PDF filename</span>
+  pdfio_file_t  *pdf;                   <span class="comment">// PDF file</span>
+  time_t        creation_date;          <span class="comment">// Creation date</span>
+  <span class="reserved">struct</span> tm     *creation_tm;           <span class="comment">// Creation date/time information</span>
+  <span class="reserved">char</span>          creation_text[<span class="number">256</span>];     <span class="comment">// Creation date/time as a string</span>
 
+
+  <span class="comment">// Get the filename from the command-line...</span>
+  <span class="reserved">if</span> (argc != <span class="number">2</span>)
+  {
+    fputs(<span class="string">&quot;Usage: ./pdfioinfo FILENAME.pdf\n&quot;</span>, stderr);
+    <span class="reserved">return</span> (<span class="number">1</span>);
+  }
+
+  filename = argv[<span class="number">1</span>];
 
   <span class="comment">// Open the PDF file with the default callbacks...</span>
-  pdf = pdfioFileOpen(filename, <span class="comment">/*password_cb*/</span>NULL, <span class="comment">/*password_cbdata*/</span>NULL, <span class="comment">/*error_cb*/</span>NULL, <span class="comment">/*error_cbdata*/</span>NULL);
+  pdf = pdfioFileOpen(filename, <span class="comment">/*password_cb*/</span>NULL, <span class="comment">/*password_cbdata*/</span>NULL,
+                      <span class="comment">/*error_cb*/</span>NULL, <span class="comment">/*error_cbdata*/</span>NULL);
   <span class="reserved">if</span> (pdf == NULL)
-    <span class="reserved">return</span>;
+    <span class="reserved">return</span> (<span class="number">1</span>);
 
   <span class="comment">// Get the creation date and convert to a string...</span>
   creation_date = pdfioFileGetCreationDate(pdf);
   creation_tm   = localtime(&amp;creation_date);
-  strftime(creation_text, <span class="reserved">sizeof</span>(creation_text), <span class="string">&quot;%c&quot;</span>, &amp;creation_tm);
+  strftime(creation_text, <span class="reserved">sizeof</span>(creation_text), <span class="string">&quot;%c&quot;</span>, creation_tm);
 
   <span class="comment">// Print file information to stdout...</span>
   printf(<span class="string">&quot;%s:\n&quot;</span>, filename);
@@ -1041,36 +1195,88 @@ show_pdf_info(<span class="reserved">const</span> <span class="reserved">char</s
 
   <span class="comment">// Close the PDF file...</span>
   pdfioFileClose(pdf);
+
+  <span class="reserved">return</span> (<span class="number">0</span>);
 }
 </code></pre>
-<h3 class="title" id="create-pdf-file-with-text-and-image">Create PDF File With Text and Image</h3>
-<p>The following example function will create a PDF file, embed a base font and the named JPEG or PNG image file, and then creates a page with the image centered on the page with the text centered below:</p>
+<h3 class="title" id="extract-text-from-pdf-file">Extract Text from PDF File</h3>
+<p>The <code>pdf2text.c</code> example code extracts non-Unicode text from a PDF file by scanning each page for strings and text drawing commands. Since it doesn't look at the font encoding or support Unicode text, it is really only useful to extract plain ASCII text from a PDF file. And since it writes text in the order it appears in the page stream, it may not come out in the same order as appears on the page.</p>
+<p>The <a href="#pdfioStreamGetToken"><code>pdfioStreamGetToken</code></a> function is used to read individual tokens from the page streams. Tokens starting with the open parenthesis are text strings, while PDF operators are left as-is. We use some simple logic to make sure that we include spaces between text strings and add newlines for the text operators that start a new line in a text block:</p>
+<pre><code class="language-c">pdfio_stream_t *st;              <span class="comment">// Page stream</span>
+<span class="reserved">bool</span>           first = <span class="reserved">true</span>;     <span class="comment">// First string on line?</span>
+<span class="reserved">char</span>           buffer[<span class="number">1024</span>];     <span class="comment">// Token buffer</span>
+
+<span class="comment">// Read PDF tokens from the page stream...</span>
+<span class="reserved">while</span> (pdfioStreamGetToken(st, buffer, <span class="reserved">sizeof</span>(buffer)))
+{
+  <span class="reserved">if</span> (buffer[<span class="number">0</span>] == <span class="string">'('</span>)
+  {
+    <span class="comment">// Text string using an 8-bit encoding</span>
+    <span class="reserved">if</span> (first)
+      first = <span class="reserved">false</span>;
+    <span class="reserved">else</span> <span class="reserved">if</span> (buffer[<span class="number">1</span>] != <span class="string">' '</span>)
+      putchar(<span class="string">' '</span>);
+
+    fputs(buffer + <span class="number">1</span>, stdout);
+  }
+  <span class="reserved">else</span> <span class="reserved">if</span> (!strcmp(buffer, <span class="string">&quot;Td&quot;</span>) || !strcmp(buffer, <span class="string">&quot;TD&quot;</span>) || !strcmp(buffer, <span class="string">&quot;T*&quot;</span>) ||
+           !strcmp(buffer, <span class="string">&quot;\'&quot;</span>) || !strcmp(buffer, <span class="string">&quot;\&quot;&quot;</span>))
+  {
+    <span class="comment">// Text operators that advance to the next line in the block</span>
+    putchar(<span class="string">'\n'</span>);
+    first = <span class="reserved">true</span>;
+  }
+}
+
+<span class="reserved">if</span> (!first)
+  putchar(<span class="string">'\n'</span>);
+</code></pre>
+<h3 class="title" id="create-a-pdf-file-with-text-and-an-image">Create a PDF File With Text and an Image</h3>
+<p>The <code>image2pdf.c</code> example code creates a PDF file containing a JPEG or PNG image file and optional caption on a single page. The <code>create_pdf_image_file</code> function creates the PDF file, embeds a base font and the named JPEG or PNG image file, and then creates a page with the image centered on the page with any text centered below:</p>
 <pre><code class="language-c"><span class="directive">#include &lt;pdfio.h&gt;</span>
 <span class="directive">#include &lt;pdfio-content.h&gt;</span>
 <span class="directive">#include &lt;string.h&gt;</span>
 
 
-<span class="reserved">void</span>
-create_pdf_image_file(<span class="reserved">const</span> <span class="reserved">char</span> *pdfname, <span class="reserved">const</span> <span class="reserved">char</span> *imagename, <span class="reserved">const</span> <span class="reserved">char</span> *caption)
+<span class="reserved">bool</span>                                    <span class="comment">// O - True on success, false on failure</span>
+create_pdf_image_file(
+    <span class="reserved">const</span> <span class="reserved">char</span> *pdfname,                <span class="comment">// I - PDF filename</span>
+    <span class="reserved">const</span> <span class="reserved">char</span> *imagename,              <span class="comment">// I - Image filename</span>
+    <span class="reserved">const</span> <span class="reserved">char</span> *caption)                <span class="comment">// I - Caption filename</span>
 {
-  pdfio_file_t   *pdf;
-  pdfio_obj_t    *font;
-  pdfio_obj_t    *image;
-  pdfio_dict_t   *dict;
-  pdfio_stream_t *page;
-  <span class="reserved">double</span>         width, height;
-  <span class="reserved">double</span>         swidth, sheight;
-  <span class="reserved">double</span>         tx, ty;
+  pdfio_file_t   *pdf;                  <span class="comment">// PDF file</span>
+  pdfio_obj_t    *font;                 <span class="comment">// Caption font</span>
+  pdfio_obj_t    *image;                <span class="comment">// Image</span>
+  pdfio_dict_t   *dict;                 <span class="comment">// Page dictionary</span>
+  pdfio_stream_t *page;                 <span class="comment">// Page stream</span>
+  <span class="reserved">double</span>         width, height;         <span class="comment">// Width and height of image</span>
+  <span class="reserved">double</span>         swidth, sheight;       <span class="comment">// Scaled width and height on page</span>
+  <span class="reserved">double</span>         tx, ty;                <span class="comment">// Position on page</span>
 
 
   <span class="comment">// Create the PDF file...</span>
-  pdf = pdfioFileCreate(pdfname, <span class="comment">/*version*/</span>NULL, <span class="comment">/*media_box*/</span>NULL, <span class="comment">/*crop_box*/</span>NULL, <span class="comment">/*error_cb*/</span>NULL, <span class="comment">/*error_cbdata*/</span>NULL);
+  pdf = pdfioFileCreate(pdfname, <span class="comment">/*version*/</span>NULL, <span class="comment">/*media_box*/</span>NULL, <span class="comment">/*crop_box*/</span>NULL,
+                        <span class="comment">/*error_cb*/</span>NULL, <span class="comment">/*error_cbdata*/</span>NULL);
+  <span class="reserved">if</span> (!pdf)
+    <span class="reserved">return</span> (<span class="reserved">false</span>);
 
   <span class="comment">// Create a Courier base font for the caption</span>
   font = pdfioFileCreateFontObjFromBase(pdf, <span class="string">&quot;Courier&quot;</span>);
 
+  <span class="reserved">if</span> (!font)
+  {
+    pdfioFileClose(pdf);
+    <span class="reserved">return</span> (<span class="reserved">false</span>);
+  }
+
   <span class="comment">// Create an image object from the JPEG/PNG image file...</span>
   image = pdfioFileCreateImageObjFromFile(pdf, imagename, <span class="reserved">true</span>);
+
+  <span class="reserved">if</span> (!image)
+  {
+    pdfioFileClose(pdf);
+    <span class="reserved">return</span> (<span class="reserved">false</span>);
+  }
 
   <span class="comment">// Create a page dictionary with the font and image...</span>
   dict = pdfioDictCreate(pdf);
@@ -1084,7 +1290,7 @@ create_pdf_image_file(<span class="reserved">const</span> <span class="reserved"
   width  = pdfioImageGetWidth(image);
   height = pdfioImageGetHeight(image);
 
-  <span class="comment">// Default media_box is &quot;universal&quot; 595.28x792 points (8.27x11in or 210x279mm)</span>
+  <span class="comment">// Default media_box is &quot;universal&quot; 595.28x792 points (8.27x11in or 210x279mm).</span>
   <span class="comment">// Use margins of 36 points (0.5in or 12.7mm) with another 36 points for the</span>
   <span class="comment">// caption underneath...</span>
   swidth  = <span class="number">595.28</span> - <span class="number">72.0</span>;
@@ -1117,7 +1323,777 @@ create_pdf_image_file(<span class="reserved">const</span> <span class="reserved"
   <span class="comment">// Close the page stream and the PDF file...</span>
   pdfioStreamClose(page);
   pdfioFileClose(pdf);
+
+  <span class="reserved">return</span> (<span class="reserved">true</span>);
 }
+</code></pre>
+<h3 class="title" id="generate-a-code-128-barcode">Generate a Code 128 Barcode</h3>
+<p>One-dimensional barcodes are often rendered using special fonts that map ASCII characters to sequences of bars that can be read. The <code>examples</code> directory contains such a font (<code>code128.ttf</code>) to create &quot;Code 128&quot; barcodes, with an accompanying bit of example code in <code>code128.c</code>.</p>
+<p>The first thing you need to do is prepare the barcode string to use with the font. Each barcode begins with a start pattern followed by the characters or digits you want to encode, a weighted sum digit, and a stop pattern. The <code>make_code128</code> function creates this string:</p>
+<pre><code class="language-c"><span class="reserved">static</span> <span class="reserved">char</span> *                           <span class="comment">// O - Output string</span>
+make_code128(<span class="reserved">char</span>       *dst,           <span class="comment">// I - Destination buffer</span>
+             <span class="reserved">const</span> <span class="reserved">char</span> *src,           <span class="comment">// I - Source string</span>
+             size_t     dstsize)        <span class="comment">// I - Size of destination buffer</span>
+{
+  <span class="reserved">char</span>          *dstptr,                <span class="comment">// Pointer into destination buffer</span>
+                *dstend;                <span class="comment">// End of destination buffer</span>
+  <span class="reserved">int</span>           sum;                    <span class="comment">// Weighted sum</span>
+  <span class="reserved">static</span> <span class="reserved">const</span> <span class="reserved">char</span> *code128_chars =    <span class="comment">// Code 128 characters</span>
+                <span class="string">&quot; !\&quot;#$%&amp;'()*+,-./0123456789:;&lt;=&gt;?&quot;</span>
+                <span class="string">&quot;@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_&quot;</span>
+                <span class="string">&quot;`abcdefghijklmnopqrstuvwxyz{|}~\303&quot;</span>
+                <span class="string">&quot;\304\305\306\307\310\311\312&quot;</span>;
+  <span class="reserved">static</span> <span class="reserved">const</span> <span class="reserved">char</span> code128_start_code_b = <span class="string">'\314'</span>;
+                                        <span class="comment">// Start code B</span>
+  <span class="reserved">static</span> <span class="reserved">const</span> <span class="reserved">char</span> code128_stop = <span class="string">'\316'</span>;
+                                        <span class="comment">// Stop pattern</span>
+
+
+  <span class="comment">// Start a Code B barcode...</span>
+  dstptr = dst;
+  dstend = dst + dstsize - <span class="number">3</span>;
+
+  *dstptr++ = code128_start_code_b;
+  sum       = code128_start_code_b - <span class="number">100</span>;
+
+  <span class="reserved">while</span> (*src &amp;&amp; dstptr &lt; dstend)
+  {
+    <span class="reserved">if</span> (*src &gt;= <span class="string">' '</span> &amp;&amp; *src &lt; <span class="number">0x7f</span>)
+    {
+      sum       += (dstptr - dst) * (*src - <span class="string">' '</span>);
+      *dstptr++ = *src;
+    }
+
+    src ++;
+  }
+
+  <span class="comment">// Add the weighted sum modulo 103</span>
+  *dstptr++ = code128_chars[sum % <span class="number">103</span>];
+
+  <span class="comment">// Add the stop pattern and return...</span>
+  *dstptr++ = code128_stop;
+  *dstptr   = <span class="string">'\0'</span>;
+
+  <span class="reserved">return</span> (dst);
+}
+</code></pre>
+<p>The <code>main</code> function does the rest of the work. The barcode font is imported using the <a href="#pdfioFileCreateFontObjFromFile"><code>pdfioFileCreateFontObjFromFile</code></a> function. We pass <code>false</code> for the &quot;unicode&quot; argument since we just want the (default) ASCII encoding:</p>
+<pre><code class="language-c">barcode_font = pdfioFileCreateFontObjFromFile(pdf, <span class="string">&quot;code128.ttf&quot;</span>, <span class="comment">/*unicode*/</span><span class="reserved">false</span>);
+</code></pre>
+<p>Since barcodes usually have the number or text represented by the barcode printed underneath it, we also need a regular text font, for which we can choose one of the standard 14 PostScript base fonts using the <a href="#pdfioFIleCreateFontObjFromBase"><code>pdfioFIleCreateFontObjFromBase</code></a> function:</p>
+<pre><code class="language-c">text_font = pdfioFileCreateFontObjFromBase(pdf, <span class="string">&quot;Helvetica&quot;</span>);
+</code></pre>
+<p>Once we have these fonts we can measure the barcode and regular text labels using the <a href="#pdfioContentTextMeasure"><code>pdfioContentTextMeasure</code></a> function to determine how large the PDF page needs to be to hold the barcode and text:</p>
+<pre><code class="language-c"><span class="comment">// Compute sizes of the text...</span>
+<span class="reserved">const</span> <span class="reserved">char</span> *barcode = argv[<span class="number">1</span>];
+<span class="reserved">char</span> barcode_temp[<span class="number">256</span>];
+
+<span class="reserved">if</span> (!(barcode[<span class="number">0</span>] &amp; <span class="number">0x80</span>))
+  barcode = make_code128(barcode_temp, barcode, <span class="reserved">sizeof</span>(barcode_temp));
+
+<span class="reserved">double</span> barcode_height = <span class="number">36.0</span>;
+<span class="reserved">double</span> barcode_width =
+    pdfioContentTextMeasure(barcode_font, barcode, barcode_height);
+
+<span class="reserved">const</span> <span class="reserved">char</span> *text = argv[<span class="number">2</span>];
+<span class="reserved">double</span> text_height = <span class="number">0.0</span>;
+<span class="reserved">double</span> text_width = <span class="number">0.0</span>;
+
+<span class="reserved">if</span> (text &amp;&amp; text_font)
+{
+  text_height = <span class="number">9.0</span>;
+  text_width  = pdfioContentTextMeasure(text_font, text, text_height);
+}
+
+<span class="comment">// Compute the size of the PDF page...</span>
+pdfio_rect_t media_box;
+
+media_box.x1 = <span class="number">0.0</span>;
+media_box.y1 = <span class="number">0.0</span>;
+media_box.x2 = (barcode_width &gt; text_width ? barcode_width : text_width) + <span class="number">18.0</span>;
+media_box.y2 = barcode_height + text_height + <span class="number">18.0</span>;
+</code></pre>
+<p>Finally, we just need to create a page of the specified size that references the two fonts:</p>
+<pre><code class="language-c"><span class="comment">// Start a page for the barcode...</span>
+page_dict = pdfioDictCreate(pdf);
+
+pdfioDictSetRect(page_dict, <span class="string">&quot;MediaBox&quot;</span>, &amp;media_box);
+pdfioDictSetRect(page_dict, <span class="string">&quot;CropBox&quot;</span>, &amp;media_box);
+
+pdfioPageDictAddFont(page_dict, <span class="string">&quot;B128&quot;</span>, barcode_font);
+<span class="reserved">if</span> (text_font)
+  pdfioPageDictAddFont(page_dict, <span class="string">&quot;TEXT&quot;</span>, text_font);
+
+page_st = pdfioFileCreatePage(pdf, page_dict);
+</code></pre>
+<p>With the barcode font called &quot;B128&quot; and the text font called &quot;TEXT&quot;, we can use them to draw two strings:</p>
+<pre><code class="language-c"><span class="comment">// Draw the page...</span>
+pdfioContentSetFillColorGray(page_st, <span class="number">0.0</span>);
+
+pdfioContentSetTextFont(page_st, <span class="string">&quot;B128&quot;</span>, barcode_height);
+pdfioContentTextBegin(page_st);
+pdfioContentTextMoveTo(page_st, <span class="number">0.5</span> * (media_box.x2 - barcode_width),
+                       <span class="number">9.0</span> + text_height);
+pdfioContentTextShow(page_st, <span class="comment">/*unicode*/</span><span class="reserved">false</span>, barcode);
+pdfioContentTextEnd(page_st);
+
+<span class="reserved">if</span> (text &amp;&amp; text_font)
+{
+  pdfioContentSetTextFont(page_st, <span class="string">&quot;TEXT&quot;</span>, text_height);
+  pdfioContentTextBegin(page_st);
+  pdfioContentTextMoveTo(page_st, <span class="number">0.5</span> * (media_box.x2 - text_width), <span class="number">9.0</span>);
+  pdfioContentTextShow(page_st, <span class="comment">/*unicode*/</span><span class="reserved">false</span>, text);
+  pdfioContentTextEnd(page_st);
+}
+
+pdfioStreamClose(page_st);
+</code></pre>
+<h3 class="title" id="convert-markdown-to-pdf">Convert Markdown to PDF</h3>
+<p>Markdown is a simple plain text format that supports things like headings, links, character styles, tables, and embedded images. The <code>md2pdf.c</code> example code uses the <a href="https://www.msweet.org/mmd/">mmd</a> library to convert markdown to a PDF file that can be distributed.</p>
+<blockquote>
+<p>Note: The md2pdf example is by far the most complex example code included with PDFio and shows how to layout text, add headers and footers, add links, embed images, format tables, and add an outline (table of contents) for navigation.</p>
+</blockquote>
+<h4 id="managing-document-state">Managing Document State</h4>
+<p>The <code>md2pdf</code> program needs to maintain three sets of state - one for the markdown document which is represented by nodes of type <code>mmd_t</code> and the others for the PDF document and current PDF page which are contained in the <code>docdata_t</code> structure:</p>
+<pre><code class="language-c"><span class="reserved">typedef</span> <span class="reserved">struct</span> docdata_s                <span class="comment">// Document formatting data</span>
+{
+  <span class="comment">// State for the whole document</span>
+  pdfio_file_t  *pdf;                   <span class="comment">// PDF file</span>
+  pdfio_rect_t  media_box;              <span class="comment">// Media (page) box</span>
+  pdfio_rect_t  crop_box;               <span class="comment">// Crop box (for margins)</span>
+  pdfio_rect_t  art_box;                <span class="comment">// Art box (for markdown content)</span>
+  pdfio_obj_t   *fonts[DOCFONT_MAX];    <span class="comment">// Embedded fonts</span>
+  <span class="reserved">double</span>        font_space;             <span class="comment">// Unit width of a space</span>
+  size_t        num_images;             <span class="comment">// Number of embedded images</span>
+  docimage_t    images[DOCIMAGE_MAX];   <span class="comment">// Embedded images</span>
+  <span class="reserved">const</span> <span class="reserved">char</span>    *title;                 <span class="comment">// Document title</span>
+  <span class="reserved">char</span>          *heading;               <span class="comment">// Current document heading</span>
+  size_t        num_actions;            <span class="comment">// Number of actions for this document</span>
+  docaction_t   actions[DOCACTION_MAX]; <span class="comment">// Actions for this document</span>
+  size_t        num_targets;            <span class="comment">// Number of targets for this document</span>
+  doctarget_t   targets[DOCTARGET_MAX]; <span class="comment">// Targets for this document</span>
+  size_t        num_toc;                <span class="comment">// Number of table-of-contents entries</span>
+  doctoc_t      toc[DOCTOC_MAX];        <span class="comment">// Table-of-contents entries</span>
+
+  <span class="comment">// State for the current page</span>
+  pdfio_stream_t *st;                   <span class="comment">// Current page stream</span>
+  <span class="reserved">double</span>        y;                      <span class="comment">// Current position on page</span>
+  docfont_t     font;                   <span class="comment">// Current font</span>
+  <span class="reserved">double</span>        fsize;                  <span class="comment">// Current font size</span>
+  doccolor_t    color;                  <span class="comment">// Current color</span>
+  pdfio_array_t *annots_array;          <span class="comment">// Annotations array (for links)</span>
+  pdfio_obj_t   *annots_obj;            <span class="comment">// Annotations object (for links)</span>
+  size_t        num_links;              <span class="comment">// Number of links for this page</span>
+  doclink_t     links[DOCLINK_MAX];     <span class="comment">// Links for this page</span>
+} docdata_t;
+</code></pre>
+<h5 id="document-state">Document State</h5>
+<p>The output is fixed to the &quot;universal&quot; media size (the intersection of US Letter and ISO A4) with 1/2 inch margins - the <code>PAGE_</code> constants can be changed to select a different size or margins. The <code>media_box</code> member contains the &quot;MediaBox&quot; rectangle for the PDF pages, while the <code>crop_box</code> and <code>art_box</code> members contain the &quot;CropBox&quot; and &quot;ArtBox&quot; values, respectively.</p>
+<p>Four embedded fonts are used:</p>
+<ul>
+<li><p><code>DOCFONT_REGULAR</code>: the default font used for text,</p>
+</li>
+<li><p><code>DOCFONT_BOLD</code>: a boldface font used for heading and strong text,</p>
+</li>
+<li><p><code>DOCFONT_ITALIC</code>: an italic/oblique font used for emphasized text, and</p>
+</li>
+<li><p><code>DOCFONT_MONOSPACE</code>: a fixed-width font used for code.</p>
+</li>
+</ul>
+<p>By default the code uses the base PostScript fonts Helvetica, Helvetica-Bold, Helvetica-Oblique, and Courier. The <code>USE_TRUETYPE</code> define can be used to replace these with the Roboto TrueType fonts.</p>
+<p>Embedded JPEG and PNG images are copied into the PDF document, with the <code>images</code> array containing the list of the images and their objects.</p>
+<p>The <code>title</code> member contains the document title, while the <code>heading</code> member contains the current heading text.</p>
+<p>The <code>actions</code> array contains a list of action dictionaries for interior document links that need to be resolved, while the <code>targets</code> array keeps track of the location of the headings in the PDF document.</p>
+<p>The <code>toc</code> array contains a list of headings and is used to construct the PDF outlines dictionaries/objects, which provides a table of contents for navigation in most PDF readers.</p>
+<h5 id="page-state">Page State</h5>
+<p>The <code>st</code> member provides the stream for the current page content. The <code>color</code>, <code>font</code>, <code>fsize</code>, and <code>y</code> members provide the current graphics state on the page.</p>
+<p>The <code>annots_array</code>, <code>annots_obj</code>, <code>num_links</code>, and <code>links</code> members contain a list of hyperlinks on the current page.</p>
+<h4 id="creating-pages">Creating Pages</h4>
+<p>The <code>new_page</code> function is used to start a new page. Aside from creating the new page object and stream, it adds a standard header and footer to the page. It starts by closing the current page if it is open:</p>
+<pre><code class="language-c"><span class="comment">// Close the current page...</span>
+<span class="reserved">if</span> (dd-&gt;st)
+{
+  pdfioStreamClose(dd-&gt;st);
+  add_links(dd);
+}
+</code></pre>
+<p>The new page needs a dictionary containing any link annotations, the media and art boxes, the four fonts, and any images:</p>
+<pre><code class="language-c"><span class="comment">// Prep the new page...</span>
+page_dict = pdfioDictCreate(dd-&gt;pdf);
+
+dd-&gt;annots_array = pdfioArrayCreate(dd-&gt;pdf);
+dd-&gt;annots_obj   = pdfioFileCreateArrayObj(dd-&gt;pdf, dd-&gt;annots_array);
+pdfioDictSetObj(page_dict, <span class="string">&quot;Annots&quot;</span>, dd-&gt;annots_obj);
+
+pdfioDictSetRect(page_dict, <span class="string">&quot;MediaBox&quot;</span>, &amp;dd-&gt;media_box);
+pdfioDictSetRect(page_dict, <span class="string">&quot;ArtBox&quot;</span>, &amp;dd-&gt;art_box);
+
+<span class="reserved">for</span> (fontface = DOCFONT_REGULAR; fontface &lt; DOCFONT_MAX; fontface ++)
+  pdfioPageDictAddFont(page_dict, docfont_names[fontface], dd-&gt;fonts[fontface]);
+
+<span class="reserved">for</span> (i = <span class="number">0</span>; i &lt; dd-&gt;num_images; i ++)
+  pdfioPageDictAddImage(page_dict, pdfioStringCreatef(dd-&gt;pdf, <span class="string">&quot;I%u&quot;</span>, (<span class="reserved">unsigned</span>)i),
+                        dd-&gt;images[i].obj);
+</code></pre>
+<p>Once the page dictionary is initialized, we create a new page and initialize the current graphics state:</p>
+<pre><code class="language-c">dd-&gt;st    = pdfioFileCreatePage(dd-&gt;pdf, page_dict);
+dd-&gt;color = DOCCOLOR_BLACK;
+dd-&gt;font  = DOCFONT_MAX;
+dd-&gt;fsize = <span class="number">0.0</span>;
+dd-&gt;y     = dd-&gt;art_box.y2;
+</code></pre>
+<p>The header consists of a dark gray separating line and the document title. We don't show the header on the first page:</p>
+<pre><code class="language-c"><span class="comment">// Add header/footer text</span>
+set_color(dd, DOCCOLOR_GRAY);
+set_font(dd, DOCFONT_REGULAR, SIZE_HEADFOOT);
+
+<span class="reserved">if</span> (pdfioFileGetNumPages(dd-&gt;pdf) &gt; <span class="number">1</span> &amp;&amp; dd-&gt;title)
+{
+  <span class="comment">// Show title in header...</span>
+  width = pdfioContentTextMeasure(dd-&gt;fonts[DOCFONT_REGULAR], dd-&gt;title,
+                                  SIZE_HEADFOOT);
+
+  pdfioContentTextBegin(dd-&gt;st);
+  pdfioContentTextMoveTo(dd-&gt;st,
+                         dd-&gt;crop_box.x1 + <span class="number">0.5</span> * (dd-&gt;crop_box.x2 -
+                             dd-&gt;crop_box.x1 - width),
+                         dd-&gt;crop_box.y2 - SIZE_HEADFOOT);
+  pdfioContentTextShow(dd-&gt;st, UNICODE_VALUE, dd-&gt;title);
+  pdfioContentTextEnd(dd-&gt;st);
+
+  pdfioContentPathMoveTo(dd-&gt;st, dd-&gt;crop_box.x1,
+                         dd-&gt;crop_box.y2 - <span class="number">2</span> * SIZE_HEADFOOT * LINE_HEIGHT +
+                             SIZE_HEADFOOT);
+  pdfioContentPathLineTo(dd-&gt;st, dd-&gt;crop_box.x2,
+                         dd-&gt;crop_box.y2 - <span class="number">2</span> * SIZE_HEADFOOT * LINE_HEIGHT +
+                             SIZE_HEADFOOT);
+  pdfioContentStroke(dd-&gt;st);
+}
+</code></pre>
+<p>The footer contains the same dark gray separating line with the current heading and page number on opposite sides. The page number is always positioned on the outer edge for a two-sided print - right justified on odd numbered pages and left justified on even numbered pages:</p>
+<pre><code class="language-c"><span class="comment">// Show page number and current heading...</span>
+pdfioContentPathMoveTo(dd-&gt;st, dd-&gt;crop_box.x1,
+                       dd-&gt;crop_box.y1 + SIZE_HEADFOOT * LINE_HEIGHT);
+pdfioContentPathLineTo(dd-&gt;st, dd-&gt;crop_box.x2,
+                       dd-&gt;crop_box.y1 + SIZE_HEADFOOT * LINE_HEIGHT);
+pdfioContentStroke(dd-&gt;st);
+
+pdfioContentTextBegin(dd-&gt;st);
+snprintf(temp, <span class="reserved">sizeof</span>(temp), <span class="string">&quot;%u&quot;</span>, (<span class="reserved">unsigned</span>)pdfioFileGetNumPages(dd-&gt;pdf));
+<span class="reserved">if</span> (pdfioFileGetNumPages(dd-&gt;pdf) &amp; <span class="number">1</span>)
+{
+  <span class="comment">// Page number on right...</span>
+  width = pdfioContentTextMeasure(dd-&gt;fonts[DOCFONT_REGULAR], temp, SIZE_HEADFOOT);
+  pdfioContentTextMoveTo(dd-&gt;st, dd-&gt;crop_box.x2 - width, dd-&gt;crop_box.y1);
+}
+<span class="reserved">else</span>
+{
+  <span class="comment">// Page number on left...</span>
+  pdfioContentTextMoveTo(dd-&gt;st, dd-&gt;crop_box.x1, dd-&gt;crop_box.y1);
+}
+
+pdfioContentTextShow(dd-&gt;st, UNICODE_VALUE, temp);
+pdfioContentTextEnd(dd-&gt;st);
+
+<span class="reserved">if</span> (dd-&gt;heading)
+{
+  pdfioContentTextBegin(dd-&gt;st);
+
+  <span class="reserved">if</span> (pdfioFileGetNumPages(dd-&gt;pdf) &amp; <span class="number">1</span>)
+  {
+    <span class="comment">// Current heading on left...</span>
+    pdfioContentTextMoveTo(dd-&gt;st, dd-&gt;crop_box.x1, dd-&gt;crop_box.y1);
+  }
+  <span class="reserved">else</span>
+  {
+    width = pdfioContentTextMeasure(dd-&gt;fonts[DOCFONT_REGULAR], dd-&gt;heading,
+                                    SIZE_HEADFOOT);
+    pdfioContentTextMoveTo(dd-&gt;st, dd-&gt;crop_box.x2 - width, dd-&gt;crop_box.y1);
+  }
+
+  pdfioContentTextShow(dd-&gt;st, UNICODE_VALUE, dd-&gt;heading);
+  pdfioContentTextEnd(dd-&gt;st);
+}
+</code></pre>
+<h4 id="formatting-the-markdown-document">Formatting the Markdown Document</h4>
+<p>Four functions handle the formatting of the markdown document:</p>
+<ul>
+<li><p><code>format_block</code> formats a single paragraph, heading, or table cell,</p>
+</li>
+<li><p><code>format_code</code>: formats a block of code,</p>
+</li>
+<li><p><code>format_doc</code>: formats the document as a whole, and</p>
+</li>
+<li><p><code>format_table</code>: formats a table.</p>
+</li>
+</ul>
+<p>Formatted content is organized into arrays of <code>linefrag_t</code> and <code>tablerow_t</code> structures for a line of content or row of table cells, respectively.</p>
+<h5 id="high-level-formatting">High-Level Formatting</h5>
+<p>The <code>format_doc</code> function iterates over the block nodes in the markdown document. We map a &quot;thematic break&quot; (horizontal rule) to a page break, which is implemented by moving the current vertical position to the bottom of the page:</p>
+<pre><code class="language-c"><span class="reserved">case</span> MMD_TYPE_THEMATIC_BREAK :
+    <span class="comment">// Force a page break</span>
+    dd-&gt;y = dd-&gt;art_box.y1;
+    <span class="reserved">break</span>;
+</code></pre>
+<p>A block quote is indented and uses the italic font by default:</p>
+<pre><code class="language-c"><span class="reserved">case</span> MMD_TYPE_BLOCK_QUOTE :
+    format_doc(dd, current, DOCFONT_ITALIC, left + BQ_PADDING, right - BQ_PADDING);
+    <span class="reserved">break</span>;
+</code></pre>
+<p>Lists have a leading blank line and are indented:</p>
+<pre><code class="language-c"><span class="reserved">case</span> MMD_TYPE_ORDERED_LIST :
+<span class="reserved">case</span> MMD_TYPE_UNORDERED_LIST :
+    <span class="reserved">if</span> (dd-&gt;st)
+      dd-&gt;y -= SIZE_BODY * LINE_HEIGHT;
+
+    format_doc(dd, current, deffont, left + LIST_PADDING, right);
+    <span class="reserved">break</span>;
+</code></pre>
+<p>List items do not have a leading blank line and make use of leader text that is shown in front of the list text. The leader text is either the current item number or a bullet, which then is directly formatted using the <code>format_block</code> function:</p>
+<pre><code class="language-c"><span class="reserved">case</span> MMD_TYPE_LIST_ITEM :
+    <span class="reserved">if</span> (doctype == MMD_TYPE_ORDERED_LIST)
+    {
+      snprintf(leader, <span class="reserved">sizeof</span>(leader), <span class="string">&quot;%d. &quot;</span>, i);
+      format_block(dd, current, deffont, SIZE_BODY, left, right, leader);
+    }
+    <span class="reserved">else</span>
+    {
+      format_block(dd, current, deffont, SIZE_BODY, left, right, <span class="comment">/*leader*/</span><span class="string">&quot;• &quot;</span>);
+    }
+    <span class="reserved">break</span>;
+</code></pre>
+<p>Paragraphs have a leading blank line and are likewise directly formatted:</p>
+<pre><code class="language-c"><span class="reserved">case</span> MMD_TYPE_PARAGRAPH :
+    <span class="comment">// Add a blank line before the paragraph...</span>
+    dd-&gt;y -= SIZE_BODY * LINE_HEIGHT;
+
+    <span class="comment">// Format the paragraph...</span>
+    format_block(dd, current, deffont, SIZE_BODY, left, right, <span class="comment">/*leader*/</span>NULL);
+    <span class="reserved">break</span>;
+</code></pre>
+<p>Tables have a leading blank line and are formatted using the <code>format_table</code> function:</p>
+<pre><code class="language-c"><span class="reserved">case</span> MMD_TYPE_TABLE :
+    <span class="comment">// Add a blank line before the paragraph...</span>
+    dd-&gt;y -= SIZE_BODY * LINE_HEIGHT;
+
+    <span class="comment">// Format the table...</span>
+    format_table(dd, current, left, right);
+    <span class="reserved">break</span>;
+</code></pre>
+<p>Code blocks have a leading blank line, are indented slightly (to account for the padded background), and are formatted using the <code>format_code</code> function:</p>
+<pre><code class="language-c"><span class="reserved">case</span> MMD_TYPE_CODE_BLOCK :
+    <span class="comment">// Add a blank line before the code block...</span>
+    dd-&gt;y -= SIZE_BODY * LINE_HEIGHT;
+
+    <span class="comment">// Format the code block...</span>
+    format_code(dd, current, left + CODE_PADDING, right - CODE_PADDING);
+    <span class="reserved">break</span>;
+</code></pre>
+<p>Headings get some extra processing. First, the current heading is remembered in the <code>docdata_t</code> structure so it can be used in the page footer:</p>
+<pre><code class="language-c"><span class="reserved">case</span> MMD_TYPE_HEADING_1 :
+<span class="reserved">case</span> MMD_TYPE_HEADING_2 :
+<span class="reserved">case</span> MMD_TYPE_HEADING_3 :
+<span class="reserved">case</span> MMD_TYPE_HEADING_4 :
+<span class="reserved">case</span> MMD_TYPE_HEADING_5 :
+<span class="reserved">case</span> MMD_TYPE_HEADING_6 :
+    <span class="comment">// Update the current heading</span>
+    free(dd-&gt;heading);
+    dd-&gt;heading = mmdCopyAllText(current);
+</code></pre>
+<p>Then we add a blank line and format the heading with the boldface font at a larger size using the <code>format_block</code> function:</p>
+<pre><code class="language-c">    <span class="comment">// Add a blank line before the heading...</span>
+    dd-&gt;y -= heading_sizes[curtype - MMD_TYPE_HEADING_1] * LINE_HEIGHT;
+
+    <span class="comment">// Format the heading...</span>
+    format_block(dd, current, DOCFONT_BOLD,
+                 heading_sizes[curtype - MMD_TYPE_HEADING_1], left, right,
+                 <span class="comment">/*leader*/</span>NULL);
+</code></pre>
+<p>Once the heading is formatted, we record it in the <code>toc</code> array as a PDF outline item object/dictionary:</p>
+<pre><code class="language-c">    <span class="comment">// Add the heading to the table-of-contents...</span>
+    <span class="reserved">if</span> (dd-&gt;num_toc &lt; DOCTOC_MAX)
+    {
+      doctoc_t *t = dd-&gt;toc + dd-&gt;num_toc;
+                                  <span class="comment">// New TOC</span>
+      pdfio_array_t *dest;  <span class="comment">// Destination array</span>
+
+      t-&gt;level = curtype - MMD_TYPE_HEADING_1;
+      t-&gt;dict  = pdfioDictCreate(dd-&gt;pdf);
+      t-&gt;obj   = pdfioFileCreateObj(dd-&gt;pdf, t-&gt;dict);
+      dest     = pdfioArrayCreate(dd-&gt;pdf);
+
+      pdfioArrayAppendObj(dest,
+          pdfioFileGetPage(dd-&gt;pdf, pdfioFileGetNumPages(dd-&gt;pdf) - <span class="number">1</span>));
+      pdfioArrayAppendName(dest, <span class="string">&quot;XYZ&quot;</span>);
+      pdfioArrayAppendNumber(dest, PAGE_LEFT);
+      pdfioArrayAppendNumber(dest,
+          dd-&gt;y + heading_sizes[curtype - MMD_TYPE_HEADING_1] * LINE_HEIGHT);
+      pdfioArrayAppendNumber(dest, <span class="number">0.0</span>);
+
+      pdfioDictSetArray(t-&gt;dict, <span class="string">&quot;Dest&quot;</span>, dest);
+      pdfioDictSetString(t-&gt;dict, <span class="string">&quot;Title&quot;</span>, pdfioStringCreate(dd-&gt;pdf, dd-&gt;heading));
+
+      dd-&gt;num_toc ++;
+    }
+</code></pre>
+<p>Finally, we also save the heading's target name and its location in the <code>targets</code> array to allow interior links to work:</p>
+<pre><code class="language-c">    <span class="comment">// Add the heading to the list of link targets...</span>
+    <span class="reserved">if</span> (dd-&gt;num_targets &lt; DOCTARGET_MAX)
+    {
+      doctarget_t *t = dd-&gt;targets + dd-&gt;num_targets;
+                                  <span class="comment">// New target</span>
+
+      make_target_name(t-&gt;name, dd-&gt;heading, <span class="reserved">sizeof</span>(t-&gt;name));
+      t-&gt;page = pdfioFileGetNumPages(dd-&gt;pdf) - <span class="number">1</span>;
+      t-&gt;y    = dd-&gt;y + heading_sizes[curtype - MMD_TYPE_HEADING_1] * LINE_HEIGHT;
+
+      dd-&gt;num_targets ++;
+    }
+    <span class="reserved">break</span>;
+</code></pre>
+<h5 id="formatting-paragraphs-headings-list-items-and-table-cells">Formatting Paragraphs, Headings, List Items, and Table Cells</h5>
+<p>Paragraphs, headings, list items, and table cells all use the same basic formatting algorithm. Text, checkboxes, and images are collected until the nodes in the current block are used up or the content reaches the right margin.</p>
+<p>In order to keep adjacent blocks of text together, the formatting algorithm makes sure that at least 3 lines of text can fit before the bottom edge of the page:</p>
+<pre><code class="language-c"><span class="reserved">if</span> (mmdGetNextSibling(block))
+  need_bottom = <span class="number">3.0</span> * SIZE_BODY * LINE_HEIGHT;
+<span class="reserved">else</span>
+  need_bottom = <span class="number">0.0</span>;
+</code></pre>
+<p>Leader text (used for list items) is right justified to the left margin and becomes the first fragment on the line when present.</p>
+<pre><code class="language-c"><span class="reserved">if</span> (leader)
+{
+  <span class="comment">// Add leader text on first line...</span>
+  frags[<span class="number">0</span>].type     = MMD_TYPE_NORMAL_TEXT;
+  frags[<span class="number">0</span>].width    = pdfioContentTextMeasure(dd-&gt;fonts[deffont], leader, fsize);
+  frags[<span class="number">0</span>].height   = fsize;
+  frags[<span class="number">0</span>].x        = left - frags[<span class="number">0</span>].width;
+  frags[<span class="number">0</span>].imagenum = <span class="number">0</span>;
+  frags[<span class="number">0</span>].text     = leader;
+  frags[<span class="number">0</span>].url      = NULL;
+  frags[<span class="number">0</span>].ws       = <span class="reserved">false</span>;
+  frags[<span class="number">0</span>].font     = deffont;
+  frags[<span class="number">0</span>].color    = DOCCOLOR_BLACK;
+
+  num_frags  = <span class="number">1</span>;
+  lineheight = fsize * LINE_HEIGHT;
+}
+<span class="reserved">else</span>
+{
+  <span class="comment">// No leader text...</span>
+  num_frags  = <span class="number">0</span>;
+  lineheight = <span class="number">0.0</span>;
+}
+
+frag = frags + num_frags;
+</code></pre>
+<p>If the current content fragment won't fit, we call <code>render_line</code> to draw what we have, adjusting the left margin as needed for table cells:</p>
+<pre><code class="language-c">  <span class="comment">// See if this node will fit on the current line...</span>
+  <span class="reserved">if</span> ((num_frags &gt; <span class="number">0</span> &amp;&amp; (x + width + wswidth) &gt;= right) || num_frags == LINEFRAG_MAX)
+  {
+    <span class="comment">// No, render this line and start over...</span>
+    <span class="reserved">if</span> (blocktype == MMD_TYPE_TABLE_HEADER_CELL ||
+        blocktype == MMD_TYPE_TABLE_BODY_CELL_CENTER)
+      margin_left = <span class="number">0.5</span> * (right - x);
+    <span class="reserved">else</span> <span class="reserved">if</span> (blocktype == MMD_TYPE_TABLE_BODY_CELL_RIGHT)
+      margin_left = right - x;
+    <span class="reserved">else</span>
+      margin_left = <span class="number">0.0</span>;
+
+    render_line(dd, margin_left, need_bottom, lineheight, num_frags, frags);
+
+    num_frags   = <span class="number">0</span>;
+    frag        = frags;
+    x           = left;
+    lineheight  = <span class="number">0.0</span>;
+    need_bottom = <span class="number">0.0</span>;
+</code></pre>
+<p>Block quotes (blocks use a default font of italic) have an orange bar to the left of the block:</p>
+<pre><code class="language-c">    <span class="reserved">if</span> (deffont == DOCFONT_ITALIC)
+    {
+      <span class="comment">// Add an orange bar to the left of block quotes...</span>
+      set_color(dd, DOCCOLOR_ORANGE);
+      pdfioContentSave(dd-&gt;st);
+      pdfioContentSetLineWidth(dd-&gt;st, <span class="number">3.0</span>);
+      pdfioContentPathMoveTo(dd-&gt;st, left - <span class="number">6.0</span>, dd-&gt;y - (LINE_HEIGHT - <span class="number">1.0</span>) * fsize);
+      pdfioContentPathLineTo(dd-&gt;st, left - <span class="number">6.0</span>, dd-&gt;y + fsize);
+      pdfioContentStroke(dd-&gt;st);
+      pdfioContentRestore(dd-&gt;st);
+    }
+</code></pre>
+<p>Finally, we add the current content fragment to the array:</p>
+<pre><code class="language-c">  <span class="comment">// Add the current node to the fragment list</span>
+  <span class="reserved">if</span> (num_frags == <span class="number">0</span>)
+  {
+    <span class="comment">// No leading whitespace at the start of the line</span>
+    ws      = <span class="reserved">false</span>;
+    wswidth = <span class="number">0.0</span>;
+  }
+
+  frag-&gt;type       = type;
+  frag-&gt;x          = x;
+  frag-&gt;width      = width + wswidth;
+  frag-&gt;height     = text ? fsize : height;
+  frag-&gt;imagenum   = imagenum;
+  frag-&gt;text       = text;
+  frag-&gt;url        = url;
+  frag-&gt;ws         = ws;
+  frag-&gt;font       = font;
+  frag-&gt;color      = color;
+
+  num_frags ++;
+  frag ++;
+  x += width + wswidth;
+  <span class="reserved">if</span> (height &gt; lineheight)
+    lineheight = height;
+</code></pre>
+<h5 id="formatting-code-blocks">Formatting Code Blocks</h5>
+<p>Code blocks consist of one or more lines of plain monospaced text. We draw a light gray background behind each line with a small bit of padding at the top and bottom:</p>
+<pre><code class="language-c"><span class="comment">// Draw the top padding...</span>
+set_color(dd, DOCCOLOR_LTGRAY);
+pdfioContentPathRect(dd-&gt;st, left - CODE_PADDING, dd-&gt;y + SIZE_CODEBLOCK,
+                     right - left + <span class="number">2.0</span> * CODE_PADDING, CODE_PADDING);
+pdfioContentFillAndStroke(dd-&gt;st, <span class="reserved">false</span>);
+
+<span class="comment">// Start a code text block...</span>
+set_font(dd, DOCFONT_MONOSPACE, SIZE_CODEBLOCK);
+pdfioContentTextBegin(dd-&gt;st);
+pdfioContentTextMoveTo(dd-&gt;st, left, dd-&gt;y);
+
+<span class="reserved">for</span> (code = mmdGetFirstChild(block); code; code = mmdGetNextSibling(code))
+{
+  set_color(dd, DOCCOLOR_LTGRAY);
+  pdfioContentPathRect(dd-&gt;st, left - CODE_PADDING,
+                       dd-&gt;y - (LINE_HEIGHT - <span class="number">1.0</span>) * SIZE_CODEBLOCK,
+                       right - left + <span class="number">2.0</span> * CODE_PADDING, lineheight);
+  pdfioContentFillAndStroke(dd-&gt;st, <span class="reserved">false</span>);
+
+  set_color(dd, DOCCOLOR_RED);
+  pdfioContentTextShow(dd-&gt;st, UNICODE_VALUE, mmdGetText(code));
+  dd-&gt;y -= lineheight;
+
+  <span class="reserved">if</span> (dd-&gt;y &lt; dd-&gt;art_box.y1)
+  {
+    <span class="comment">// End the current text block...</span>
+    pdfioContentTextEnd(dd-&gt;st);
+
+    <span class="comment">// Start a new page...</span>
+    new_page(dd);
+    set_font(dd, DOCFONT_MONOSPACE, SIZE_CODEBLOCK);
+
+    dd-&gt;y -= lineheight;
+
+    pdfioContentTextBegin(dd-&gt;st);
+    pdfioContentTextMoveTo(dd-&gt;st, left, dd-&gt;y);
+  }
+}
+
+<span class="comment">// End the current text block...</span>
+pdfioContentTextEnd(dd-&gt;st);
+dd-&gt;y += lineheight;
+
+<span class="comment">// Draw the bottom padding...</span>
+set_color(dd, DOCCOLOR_LTGRAY);
+pdfioContentPathRect(dd-&gt;st, left - CODE_PADDING,
+                     dd-&gt;y - CODE_PADDING - (LINE_HEIGHT - <span class="number">1.0</span>) * SIZE_CODEBLOCK,
+                     right - left + <span class="number">2.0</span> * CODE_PADDING, CODE_PADDING);
+pdfioContentFillAndStroke(dd-&gt;st, <span class="reserved">false</span>);
+</code></pre>
+<h5 id="formatting-tables">Formatting Tables</h5>
+<p>Tables are the most difficult to format. We start by scanning the entire table and measuring every cell with the <code>measure_cell</code> function:</p>
+<pre><code class="language-c"><span class="reserved">for</span> (num_cols = <span class="number">0</span>, num_rows = <span class="number">0</span>, rowptr = rows, current = mmdGetFirstChild(table);
+     current &amp;&amp; num_rows &lt; TABLEROW_MAX;
+     current = next)
+{
+  next = mmd_walk_next(table, current);
+  type = mmdGetType(current);
+
+  <span class="reserved">if</span> (type == MMD_TYPE_TABLE_ROW)
+  {
+    <span class="comment">// Parse row...</span>
+    <span class="reserved">for</span> (col = <span class="number">0</span>, current = mmdGetFirstChild(current);
+         current &amp;&amp; num_cols &lt; TABLECOL_MAX;
+         current = mmdGetNextSibling(current), col ++)
+    {
+      rowptr-&gt;cells[col] = current;
+
+      measure_cell(dd, current, cols + col);
+
+      <span class="reserved">if</span> (col &gt;= num_cols)
+        num_cols = col + <span class="number">1</span>;
+    }
+
+    rowptr ++;
+    num_rows ++;
+  }
+}
+</code></pre>
+<p>The <code>measure_cell</code> function also updates the minimum and maximum width needed for each column. To this we add the cell padding to compute the total table width:</p>
+<pre><code class="language-c"><span class="comment">// Figure out the width of each column...</span>
+<span class="reserved">for</span> (col = <span class="number">0</span>, table_width = <span class="number">0.0</span>; col &lt; num_cols; col ++)
+{
+  cols[col].max_width += <span class="number">2.0</span> * TABLE_PADDING;
+
+  table_width += cols[col].max_width;
+  cols[col].width = cols[col].max_width;
+}
+</code></pre>
+<p>If the calculated width is more than the available width, we need to adjust the width of the columns. The algorithm used here breaks the available width into N equal-width columns - any columns wider than this will be scaled proportionately. This works out as two steps - one to calculate the the base width of &quot;narrow&quot; columns and a second to distribute the remaining width amongst the wider columns:</p>
+<pre><code class="language-c">format_width = right - left - <span class="number">2.0</span> * TABLE_PADDING * num_cols;
+
+<span class="reserved">if</span> (table_width &gt; format_width)
+{
+  <span class="comment">// Content too wide, try scaling the widths...</span>
+  <span class="reserved">double</span>      avg_width,              <span class="comment">// Average column width</span>
+              base_width,             <span class="comment">// Base width</span>
+              remaining_width,        <span class="comment">// Remaining width</span>
+              scale_width;            <span class="comment">// Width for scaling</span>
+  size_t      num_remaining_cols = <span class="number">0</span>; <span class="comment">// Number of remaining columns</span>
+
+  <span class="comment">// First mark any columns that are narrower than the average width...</span>
+  avg_width = format_width / num_cols;
+
+  <span class="reserved">for</span> (col = <span class="number">0</span>, base_width = <span class="number">0.0</span>, remaining_width = <span class="number">0.0</span>; col &lt; num_cols; col ++)
+  {
+    <span class="reserved">if</span> (cols[col].width &gt; avg_width)
+    {
+      remaining_width += cols[col].width;
+      num_remaining_cols ++;
+    }
+    <span class="reserved">else</span>
+    {
+      base_width += cols[col].width;
+    }
+  }
+
+  <span class="comment">// Then proportionately distribute the remaining width to the other columns...</span>
+  format_width -= base_width;
+
+  <span class="reserved">for</span> (col = <span class="number">0</span>, table_width = <span class="number">0.0</span>; col &lt; num_cols; col ++)
+  {
+    <span class="reserved">if</span> (cols[col].width &gt; avg_width)
+      cols[col].width = cols[col].width * format_width / remaining_width;
+
+    table_width += cols[col].width;
+  }
+}
+</code></pre>
+<p>Now that we have the widths of the columns, we can calculate the left and right margins of each column for formatting the cell text:</p>
+<pre><code class="language-c"><span class="comment">// Calculate the margins of each column in preparation for formatting</span>
+<span class="reserved">for</span> (col = <span class="number">0</span>, x = left + TABLE_PADDING; col &lt; num_cols; col ++)
+{
+  cols[col].left  = x;
+  cols[col].right = x + cols[col].width;
+
+  x += cols[col].width + <span class="number">2.0</span> * TABLE_PADDING;
+}
+</code></pre>
+<p>Then we re-measure the cells using the final column widths to determine the height of each cell and row:</p>
+<pre><code class="language-c"><span class="comment">// Calculate the height of each row and cell in preparation for formatting</span>
+<span class="reserved">for</span> (row = <span class="number">0</span>, rowptr = rows; row &lt; num_rows; row ++, rowptr ++)
+{
+  <span class="reserved">for</span> (col = <span class="number">0</span>; col &lt; num_cols; col ++)
+  {
+    height = measure_cell(dd, rowptr-&gt;cells[col], cols + col) + <span class="number">2.0</span> * TABLE_PADDING;
+    <span class="reserved">if</span> (height &gt; rowptr-&gt;height)
+      rowptr-&gt;height = height;
+  }
+}
+</code></pre>
+<p>Finally, we render each row in the table:</p>
+<pre><code class="language-c"><span class="comment">// Render each table row...</span>
+<span class="reserved">for</span> (row = <span class="number">0</span>, rowptr = rows; row &lt; num_rows; row ++, rowptr ++)
+  render_row(dd, num_cols, cols, rowptr);
+</code></pre>
+<h4 id="rendering-the-markdown-document">Rendering the Markdown Document</h4>
+<p>The formatted content in arrays of <code>linefrag_t</code> and <code>tablerow_t</code> structures are passed to the <code>render_line</code> and <code>render_row</code> functions respectively to produce content in the PDF document.</p>
+<h5 id="rendering-a-line-in-a-paragraph-heading-or-table-cell">Rendering a Line in a Paragraph, Heading, or Table Cell</h5>
+<p>The <code>render_line</code> function adds content from the <code>linefrag_t</code> array to a PDF page. It starts by determining whether a new page is needed:</p>
+<pre><code class="language-c"><span class="reserved">if</span> (!dd-&gt;st)
+{
+  new_page(dd);
+  margin_top = <span class="number">0.0</span>;
+}
+
+dd-&gt;y -= margin_top + lineheight;
+<span class="reserved">if</span> ((dd-&gt;y - need_bottom) &lt; dd-&gt;art_box.y1)
+{
+  new_page(dd);
+
+  dd-&gt;y -= lineheight;
+}
+</code></pre>
+<p>We then loops through the fragments for the current line, drawing checkboxes, images, and text as needed. When a hyperlink is present, we add the link to the <code>links</code> array in the <code>docdata_t</code> structure, mapping &quot;@&quot; and &quot;@@&quot; to an internal link corresponding to the linked text:</p>
+<pre><code class="language-c"><span class="reserved">if</span> (frag-&gt;url &amp;&amp; dd-&gt;num_links &lt; DOCLINK_MAX)
+{
+  doclink_t *l = dd-&gt;links + dd-&gt;num_links;
+                                  <span class="comment">// Pointer to this link record</span>
+
+ �<span class="reserved">if</span> (!strcmp(frag-&gt;url, <span class="string">&quot;@&quot;</span>))
+  {
+    <span class="comment">// Use mapped text as link target...</span>
+    <span class="reserved">char</span>  targetlink[<span class="number">129</span>];        <span class="comment">// Targeted link</span>
+
+    targetlink[<span class="number">0</span>] = <span class="string">'#'</span>;
+    make_target_name(targetlink + <span class="number">1</span>, frag-&gt;text, <span class="reserved">sizeof</span>(targetlink) - <span class="number">1</span>);
+
+    l-&gt;url = pdfioStringCreate(dd-&gt;pdf, targetlink);
+  }
+  <span class="reserved">else</span> <span class="reserved">if</span> (!strcmp(frag-&gt;url, <span class="string">&quot;@@&quot;</span>))
+  {
+    <span class="comment">// Use literal text as anchor...</span>
+    l-&gt;url = pdfioStringCreatef(dd-&gt;pdf, <span class="string">&quot;#%s&quot;</span>, frag-&gt;text);
+  }
+  <span class="reserved">else</span>
+  {
+    <span class="comment">// Use URL as-is...</span>
+    l-&gt;url = frag-&gt;url;
+  }
+
+  l-&gt;box.x1 = frag-&gt;x;
+  l-&gt;box.y1 = dd-&gt;y;
+  l-&gt;box.x2 = frag-&gt;x + frag-&gt;width;
+  l-&gt;box.y2 = dd-&gt;y + frag-&gt;height;
+
+  dd-&gt;num_links ++;
+}
+</code></pre>
+<p>These are later written as annotations in the <code>add_links</code> function.</p>
+<h5 id="rendering-a-table-row">Rendering a Table Row</h5>
+<p>The <code>render_row</code> function takes a row of cells and the corresponding column definitions. It starts by drawing the border boxes around body cells:</p>
+<pre><code class="language-c"><span class="reserved">if</span> (mmdGetType(row-&gt;cells[<span class="number">0</span>]) == MMD_TYPE_TABLE_HEADER_CELL)
+{
+  <span class="comment">// Header row, no border...</span>
+  deffont = DOCFONT_BOLD;
+}
+<span class="reserved">else</span>
+{
+  <span class="comment">// Regular body row, add borders...</span>
+  deffont = DOCFONT_REGULAR;
+
+  set_color(dd, DOCCOLOR_GRAY);
+  pdfioContentPathRect(dd-&gt;st, cols[<span class="number">0</span>].left - TABLE_PADDING, dd-&gt;y - row-&gt;height,
+                       cols[num_cols - <span class="number">1</span>].right - cols[<span class="number">0</span>].left +
+                           <span class="number">2.0</span> * TABLE_PADDING, row-&gt;height);
+  <span class="reserved">for</span> (col = <span class="number">1</span>; col &lt; num_cols; col ++)
+  {
+    pdfioContentPathMoveTo(dd-&gt;st, cols[col].left - TABLE_PADDING, dd-&gt;y);
+    pdfioContentPathLineTo(dd-&gt;st, cols[col].left - TABLE_PADDING, dd-&gt;y - row-&gt;height);
+  }
+  pdfioContentStroke(dd-&gt;st);
+}
+</code></pre>
+<p>Then it formats each cell using the <code>format_block</code> function described previously. The page <code>y</code> value is reset before formatting each cell:</p>
+<pre><code class="language-c">row_y = dd-&gt;y;
+
+<span class="reserved">for</span> (col = <span class="number">0</span>; col &lt; num_cols; col ++)
+{
+  dd-&gt;y = row_y;
+
+  format_block(dd, row-&gt;cells[col], deffont, SIZE_TABLE, cols[col].left,
+               cols[col].right, <span class="comment">/*leader*/</span>NULL);
+}
+
+dd-&gt;y = row_y - row-&gt;height;
 </code></pre>
 <h2 class="title"><a id="FUNCTIONS">Functions</a></h2>
 <h3 class="function"><a id="pdfioArrayAppendArray">pdfioArrayAppendArray</a></h3>
@@ -1502,6 +2478,19 @@ size_t pdfioArrayGetSize(<a href="#pdfio_array_t">pdfio_array_t</a> *a);</p>
 </tbody></table>
 <h4 class="returnvalue">Return Value</h4>
 <p class="description">Value type</p>
+<h3 class="function"><a id="pdfioArrayRemove">pdfioArrayRemove</a></h3>
+<p class="description">Remove an array entry.</p>
+<p class="code">
+<span class="reserved">bool</span> pdfioArrayRemove(<a href="#pdfio_array_t">pdfio_array_t</a> *a, size_t n);</p>
+<h4 class="parameters">Parameters</h4>
+<table class="list"><tbody>
+<tr><th>a</th>
+<td class="description">Array</td></tr>
+<tr><th>n</th>
+<td class="description">Index</td></tr>
+</tbody></table>
+<h4 class="returnvalue">Return Value</h4>
+<p class="description"><code>true</code> on success, <code>false</code> otherwise</p>
 <h3 class="function"><a id="pdfioContentClip">pdfioContentClip</a></h3>
 <p class="description">Clip output to the current path.</p>
 <p class="code">
@@ -2356,6 +3345,19 @@ argument specifies an array of UTF-8 encoded strings.</p>
 <p class="discussion">This function shows some formatted text in a PDF content stream. The
 &quot;unicode&quot; argument specifies that the current font maps to full Unicode.
 The &quot;format&quot; argument specifies a UTF-8 encoded <code>printf</code>-style format string.</p>
+<h3 class="function"><a id="pdfioDictClear">pdfioDictClear</a></h3>
+<p class="description">Remove a key/value pair from a dictionary.</p>
+<p class="code">
+<span class="reserved">bool</span> pdfioDictClear(<a href="#pdfio_dict_t">pdfio_dict_t</a> *dict, <span class="reserved">const</span> <span class="reserved">char</span> *key);</p>
+<h4 class="parameters">Parameters</h4>
+<table class="list"><tbody>
+<tr><th>dict</th>
+<td class="description">Dictionary</td></tr>
+<tr><th>key</th>
+<td class="description">Key</td></tr>
+</tbody></table>
+<h4 class="returnvalue">Return Value</h4>
+<p class="description"><code>true</code> if cleared, <code>false</code> otherwise</p>
 <h3 class="function"><a id="pdfioDictCopy">pdfioDictCopy</a></h3>
 <p class="description">Copy a dictionary to a PDF file.</p>
 <p class="code">
@@ -2447,6 +3449,19 @@ time_t pdfioDictGetDate(<a href="#pdfio_dict_t">pdfio_dict_t</a> *dict, <span cl
 </tbody></table>
 <h4 class="returnvalue">Return Value</h4>
 <p class="description">Value</p>
+<h3 class="function"><a id="pdfioDictGetKey">pdfioDictGetKey</a></h3>
+<p class="description">Get the key for the specified pair.</p>
+<p class="code">
+<span class="reserved">const</span> <span class="reserved">char</span> *pdfioDictGetKey(<a href="#pdfio_dict_t">pdfio_dict_t</a> *dict, size_t n);</p>
+<h4 class="parameters">Parameters</h4>
+<table class="list"><tbody>
+<tr><th>dict</th>
+<td class="description">Dictionary</td></tr>
+<tr><th>n</th>
+<td class="description">Pair index (<code>0</code>-based)</td></tr>
+</tbody></table>
+<h4 class="returnvalue">Return Value</h4>
+<p class="description">Key for specified pair</p>
 <h3 class="function"><a id="pdfioDictGetName">pdfioDictGetName</a></h3>
 <p class="description">Get a key name value from a dictionary.</p>
 <p class="code">
@@ -2460,6 +3475,17 @@ time_t pdfioDictGetDate(<a href="#pdfio_dict_t">pdfio_dict_t</a> *dict, <span cl
 </tbody></table>
 <h4 class="returnvalue">Return Value</h4>
 <p class="description">Value</p>
+<h3 class="function"><a id="pdfioDictGetNumPairs">pdfioDictGetNumPairs</a></h3>
+<p class="description">Get the number of key/value pairs in a dictionary.</p>
+<p class="code">
+size_t pdfioDictGetNumPairs(<a href="#pdfio_dict_t">pdfio_dict_t</a> *dict);</p>
+<h4 class="parameters">Parameters</h4>
+<table class="list"><tbody>
+<tr><th>dict</th>
+<td class="description">Dictionary</td></tr>
+</tbody></table>
+<h4 class="returnvalue">Return Value</h4>
+<p class="description">Number of pairs</p>
 <h3 class="function"><a id="pdfioDictGetNumber">pdfioDictGetNumber</a></h3>
 <p class="description">Get a key number value from a dictionary.</p>
 <p class="code">
@@ -2845,8 +3871,9 @@ specifies the font nane:
 </li>
 <li>&quot;ZapfDingbats&quot;</li>
 </ul>
-<p class="discussion">Base fonts always use the Windows CP1252 (ISO-8859-1 with additional
-characters such as the Euro symbol) subset of Unicode.</p>
+<p class="discussion">Aside from &quot;Symbol&quot; and &quot;Zapf-Dingbats&quot;, Base fonts use the Windows CP1252
+(ISO-8859-1 with additional characters such as the Euro symbol) subset of
+Unicode.</p>
 <h3 class="function"><a id="pdfioFileCreateFontObjFromFile">pdfioFileCreateFontObjFromFile</a></h3>
 <p class="description">Add a font object to a PDF file.</p>
 <p class="code">
@@ -2947,6 +3974,22 @@ image on the page.<br>
 Note: Currently PNG support is limited to grayscale, RGB, or indexed files
 without interlacing or alpha.  Transparency (masking) based on color/index
 is supported.</blockquote>
+<h3 class="function"><a id="pdfioFileCreateNameObj">pdfioFileCreateNameObj</a></h3>
+<p class="description">Create a new object in a PDF file containing a name.</p>
+<p class="code">
+<a href="#pdfio_obj_t">pdfio_obj_t</a> *pdfioFileCreateNameObj(<a href="#pdfio_file_t">pdfio_file_t</a> *pdf, <span class="reserved">const</span> <span class="reserved">char</span> *name);</p>
+<h4 class="parameters">Parameters</h4>
+<table class="list"><tbody>
+<tr><th>pdf</th>
+<td class="description">PDF file</td></tr>
+<tr><th>name</th>
+<td class="description">Name value</td></tr>
+</tbody></table>
+<h4 class="returnvalue">Return Value</h4>
+<p class="description">New object</p>
+<h4 class="discussion">Discussion</h4>
+<p class="discussion">This function creates a new object with a name value in a PDF file.
+You must call <a href="#pdfioObjClose"><code>pdfioObjClose</code></a> to write the object to the file.</p>
 <h3 class="function"><a id="pdfioFileCreateNumberObj">pdfioFileCreateNumberObj</a></h3>
 <p class="description">Create a new object in a PDF file containing a number.</p>
 <p class="code">
@@ -3528,6 +4571,17 @@ size_t pdfioObjGetLength(<a href="#pdfio_obj_t">pdfio_obj_t</a> *obj);</p>
 </tbody></table>
 <h4 class="returnvalue">Return Value</h4>
 <p class="description">Length in bytes or <code>0</code> for none</p>
+<h3 class="function"><a id="pdfioObjGetName">pdfioObjGetName</a></h3>
+<p class="description">Get the name value associated with an object.</p>
+<p class="code">
+<span class="reserved">const</span> <span class="reserved">char</span> *pdfioObjGetName(<a href="#pdfio_obj_t">pdfio_obj_t</a> *obj);</p>
+<h4 class="parameters">Parameters</h4>
+<table class="list"><tbody>
+<tr><th>obj</th>
+<td class="description">Object</td></tr>
+</tbody></table>
+<h4 class="returnvalue">Return Value</h4>
+<p class="description">Dictionary or <code>NULL</code> on error</p>
 <h3 class="function"><a id="pdfioObjGetNumber">pdfioObjGetNumber</a></h3>
 <p class="description">Get the object's number.</p>
 <p class="code">
