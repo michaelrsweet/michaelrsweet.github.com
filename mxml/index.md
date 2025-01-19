@@ -2,7 +2,7 @@
 title: Mini-XML
 subtitle: Tiny XML Library
 author: Michael R Sweet
-copyright: Copyright © 2003-2024 by Michael R Sweet.
+copyright: Copyright © 2003-2025 by Michael R Sweet.
 layout: project-news
 logo: mxml-160.png
 epub_doc: mxml.epub
