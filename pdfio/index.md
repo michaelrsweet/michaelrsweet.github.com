@@ -42,4 +42,9 @@ This software is licensed under the Apache License Version 2.0 with an (optional
   <ul>
     <li>ZLIB (1.1+)</li>
   </ul>
+
+  <p>Recommended Libraries:</p>
+  <ul>
+    <li>libpng (1.6+)</li>
+  </ul>
 </div>
