@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/michaelrsweet.css">
+    <link rel="shortcut icon" href="/apple-touch-icon.png" type="image/png">
+    <link type="application/atom+xml" rel="alternate" href="/msweet.xml">
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>{{page.title}}</title>
+    <meta name="keywords" content="linux,macos,software,unix,windows">
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+	  <h1>{{page.title}}{% if page.subtitle %} <small>{{page.subtitle}}</small>{% endif %}</h1>
+	  {{ content }}
+	</div>
+      </div>
+    </div>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
