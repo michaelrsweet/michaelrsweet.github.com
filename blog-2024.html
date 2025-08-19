@@ -1,0 +1,46 @@
+---
+title: Blog 2024
+layout: blog
+---
+
+<div class="container-fluid container-header container-header-small">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>Blog <small>Project Updates and Random Thoughts</small></h1>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <nav>
+      <ul class="pagination">
+	<li class="page-item"><a class="page-link" href="blog.html">2025</a></li>
+	<li class="page-item active"><a class="page-link" href="blog-2024.html">2024</a></li>
+	<li class="page-item"><a class="page-link" href="blog-2023.html">2023</a></li>
+      </ul>
+    </nav>
+{% for post in site.posts %}
+{% assign year = post.date | date: "%Y" %}
+{% if year == "2024" %}
+    <div class="col-sm-12" id="{{ post.id }}">
+      <h2><img class="float-start me-2 glow" src="/{{post.category}}/{{post.category}}-160.png" width="40" height="40"> <a href="{{ post.url }}">{{post.title}}</a> <small>{{ post.date | date: "%B %d, %Y" }}</small></h2>
+      {{ post.excerpt }}
+      {% if post.excerpt != post.content %}
+      <p><a class="btn btn-default btn-xs" href="{{ post.url }}">More{% if post.comments %} + <span  id="{{ post.url | slugify }}">Comments</span>{% endif %}</a><br>&nbsp;</p>
+      {% elsif post.comments %}
+      <p><a class="btn btn-default btn-xs" href="{{ post.url }}" id="{{ post.url | slugify }}">Comments</a><br>&nbsp;</p>
+      {% else %}
+      <p>&nbsp;</p>
+      {% endif %}
+    </div>
+{% endif %}
+{% endfor %}
+    <nav>
+      <ul class="pagination">
+	<li class="page-item"><a class="page-link" href="blog.html">2025</a></li>
+	<li class="page-item active"><a class="page-link" href="blog-2024.html">2024</a></li>
+	<li class="page-item"><a class="page-link" href="blog-2023.html">2023</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
