@@ -58,7 +58,7 @@ testing (Live Translation) requires a newer iPhone than I have - a new phone is
 on order and I will report back on how well it works...
 
 As with all LLM solutions, if you ask it to do something that has been done
-before (and thus can be ---stolen--- indexed by the various training bots and
+before (and thus can be ~~stolen~~ indexed by the various training bots and
 incorporated into the models) you *might* get something useful out of it.  At
 least Apple Intelligence runs on-device...
 
