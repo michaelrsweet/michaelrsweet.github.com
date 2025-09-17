@@ -5,6 +5,7 @@
 
 body, p {
   font-family: 'Open Sans', sans-serif;
+  text-wrap: pretty;
 }
 
 code, kbd, p.code, p.command, p.summary, pre, ul.code li, input[type="search"] {
