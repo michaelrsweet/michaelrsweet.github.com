@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-<title>StringsUtil v1.1 Manual</title>
+<title>StringsUtil v1.2 Manual</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-<meta name="generator" content="codedoc v3.7">
+<meta name="generator" content="codedoc v3.8">
 <meta name="author" content="Michael R Sweet">
 <meta name="language" content="en-US">
-<meta name="copyright" content="Copyright © 2022-2024 by Michael R Sweet">
-<meta name="version" content="1.1">
+<meta name="copyright" content="Copyright © 2022-2025 by Michael R Sweet">
+<meta name="version" content="1.2">
 <style type="text/css"><!--
 body {
   background: white;
@@ -92,13 +92,16 @@ blockquote :first-child {
   margin-bottom: 0;
 }
 p code, li code, p.code, pre, ul.code li {
+  background: rgba(127,127,127,0.25);
+  border: thin dotted gray;
   font-family: monospace;
   hyphens: manual;
   -webkit-hyphens: manual;
 }
+p code, li code {
+  padding: 0 5px;
+}
 p.code, pre, ul.code li {
-  background: rgba(127,127,127,0.25);
-  border: thin dotted gray;
   padding: 10px;
   page-break-inside: avoid;
 }
@@ -217,6 +220,21 @@ span.string {
   a:link:hover, a:visited:hover, a:active {
     color: #f06;
   }
+  span.comment {
+    color: #7c7;
+  }
+  span.directive {
+    color: red;
+  }
+  span.number {
+    color: #c64;
+  }
+  span.reserved {
+    color: #77f;
+  }
+  span.string {
+    color: #f7f;
+  }
 }
 /* Show contents on left side in web browser */
 @media screen and (min-width: 800px) {
@@ -251,9 +269,9 @@ span.string {
 <body>
 <div class="header">
 <p><img class="title" src="stringsutil-512.png"></p>
-<h1 class="title">StringsUtil v1.1 Manual</h1>
+<h1 class="title">StringsUtil v1.2 Manual</h1>
 <p>Michael R Sweet</p>
-<p>Copyright © 2022-2024 by Michael R Sweet</p>
+<p>Copyright © 2022-2025 by Michael R Sweet</p>
 </div>
 <div class="contents">
 <h2 class="title">Contents</h2>

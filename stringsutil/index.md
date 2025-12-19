@@ -2,7 +2,7 @@
 title: StringsUtil
 subtitle: A Strings File Library and Utility
 author: Michael R Sweet
-copyright: Copyright © 2022-2024 by Michael R Sweet
+copyright: Copyright © 2022-2025 by Michael R Sweet
 project: stringsutil
 project_name: stringsutil
 logo: stringsutil-160.png
@@ -11,7 +11,7 @@ snap: stringsutil
 layout: project-news
 language: C
 lgtm: cpp
-platforms: Linux | macOS | Unix
+platforms: Linux | macOS | Unix | Windows
 ---
 
 StringsUtil provides a library for using Apple ".strings" localization files and a utility for managing those files.  It is intended as a free, smaller, embeddable, and more flexible alternative to GNU gettext.  Key features include:
