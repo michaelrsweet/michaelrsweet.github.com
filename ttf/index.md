@@ -2,7 +2,7 @@
 title: TTF
 subtitle: TrueType/OpenType library
 author: Michael R Sweet
-copyright: Copyright © 2018-2024 by Michael R Sweet
+copyright: Copyright © 2018-2025 by Michael R Sweet
 project: ttf
 project_name: TTF
 logo: ttf-160.png
