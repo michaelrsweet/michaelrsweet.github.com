@@ -2,7 +2,7 @@
 title: PDFio
 subtitle: PDF read/write library
 author: Michael R Sweet
-copyright: Copyright © 2021-2025 by Michael R Sweet
+copyright: Copyright © 2021-2026 by Michael R Sweet
 project: pdfio
 project_name: PDFio
 logo: pdfio-160.png
