@@ -2,7 +2,7 @@
 title: HP Printer Application
 subtitle: A Generic PCL Printer Application
 author: Michael R Sweet
-copyright: Copyright © 2019-2024 by Michael R Sweet
+copyright: Copyright © 2019-2026 by Michael R Sweet
 project: hp-printer-app
 project_name: hp-printer-app
 logo: hp-printer-app-160.png
@@ -36,14 +36,14 @@ connected via network or USB.  Features include:
       <li>Chrome OS™</li>
       <li>iOS® (4+)</li>
       <li>Linux® (w/CUPS 1.4+)</li>
-      <li>macOS® (10.14+)</li>
+      <li>macOS® (11+)</li>
       <li>Windows® (10+)</li>
     </ul>
   </div><div class="col-lg-9">
     <p>Printers:</p>
     <ul>
       <li>HP: Most DeskJet, LaserJet, Photosmart, and OfficeJet</li>
-      <li>Other: Laser printers with PCL 5 support from Canon, IBM, Lexmark, Kyocera, Ricoh, Xerox, etc.</li>
+      <li>Other: Laser printers with PCL 5/6 support from Canon, IBM, Lexmark, Kyocera, Ricoh, Xerox, etc.</li>
     </ul>
   </div></div>
 </div>

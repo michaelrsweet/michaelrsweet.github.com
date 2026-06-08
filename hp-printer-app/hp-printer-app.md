@@ -14,8 +14,8 @@ layout: project
 HP Printer Application Documentation
 ====================================
 
-HP Printer Application v1.3.0
-Copyright 2019-2024 by Michael R Sweet
+HP Printer Application v1.3.1
+Copyright 2019-2026 by Michael R Sweet
 
 `hp-printer-app` is licensed under the Apache License Version 2.0.  See the
 files "LICENSE" and "NOTICE" for more information.
@@ -77,6 +77,9 @@ install it and start the server:
     sudo snap connect hp-printer-app:raw-usb
     sudo snap connect hp-printer-app:avahi-control avahi:avahi-control
     sudo snap start hp-printer-app.hp-printer-app-server
+
+ArchLinux and other Linux distributions also provide native packages for
+`hp-printer-app` that you can use.
 
 A package file is included with all source releases on Github for use on macOS
 11 and higher for both Intel and Apple Silicon.
