@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="creator" content="mantohtml v2.0.2">
+    <title>msysmon(1)</title>
+  </head>
+  <body>
+    <h1 id="msysmon-1">msysmon(1)</h1>
+    <h2 id="msysmon-1.name">Name</h2>
+<p>msysmon - mike's system monitor
+</p>
+    <h2 id="msysmon-1.synopsis">Synopsis</h2>
+<p><strong>msysmon</strong>
+[
+<strong>--help</strong>
+] [
+<strong>--version</strong>
+] [
+<strong>-C</strong>
+<em>CPU-LIMIT</em>
+] [
+<strong>-I</strong>
+<em>INTERVAL</em>
+] [
+<strong>-M</strong>
+<em>MEMORY-LIMIT</em>
+] [
+<strong>-p</strong>
+<em>PORT-NUMBER</em>
+] [
+<strong>-s</strong>
+<em>FIELD</em>
+] [
+<strong>-w</strong>
+<em>COMMAND</em>
+]
+</p>
+    <h2 id="msysmon-1.description">Description</h2>
+<p><strong>msysmon</strong>
+monitors the running system and its processes to identify trends and peak users
+of CPU, memory, network, and storage on the system.
+By default,
+<strong>msysmon</strong>
+provides a simple web interface to view up to the last four weeks of system
+usage and download the data as CSV files for offline processing.
+</p>
+    <h2 id="msysmon-1.options">Options</h2>
+    <p style="margin-left: 2.5em; text-indent: -2.5em;"><strong>--help</strong><br>
+Shows program usage.
+</p>
+    <p style="margin-left: 2.5em; text-indent: -2.5em;"><strong>--version</strong><br>
+Shows program version.
+</p>
+    <p style="margin-left: 2.5em; text-indent: -2.5em;"><strong>-C </strong><em>CPU-LIMIT</em><br>
+Specifies the minimum CPU usage (as a percentage) that will trigger monitoring of a process.
+The default is 25%.
+</p>
+    <p style="margin-left: 2.5em; text-indent: -2.5em;"><strong>-I </strong><em>INTERVAL</em><br>
+Specifies the sampling interval.
+The default is 300 seconds (5 minutes).
+The interval can use the unit suffix &quot;s&quot; for seconds (the default unit), &quot;m&quot; for minutes, &quot;h&quot; for hours, or &quot;d&quot; for days.
+</p>
+    <p style="margin-left: 2.5em; text-indent: -2.5em;"><strong>-M </strong><em>MEMORY-LIMIT</em><br>
+Specifies the minimum virtual memory usage that will trigger monitoring of a process.
+The default is 5% of available real system memory.
+The limit can use the unit suffix &quot;%&quot; for a percentage of real memory, &quot;k&quot; for multiples of 1,024 bytes, &quot;m&quot; for multiples of 1,048,576 bytes, or &quot;g&quot; for multiples of 1,073,741,824 bytes.
+</p>
+    <p style="margin-left: 2.5em; text-indent: -2.5em;"><strong>-p </strong><em>PORT-NUMBER</em><br>
+Specifies the port number of the web interface.
+The default post number is 8080.
+</p>
+    <p style="margin-left: 2.5em; text-indent: -2.5em;"><strong>-s </strong><em>FIELD</em><br>
+Specifies the primary sorting field for the process list in the web interface - &quot;cpu&quot;, &quot;mem&quot;, &quot;name&quot;, &quot;pid&quot;, or &quot;threads&quot;.
+A leading &quot;-&quot; specifies descending order.
+The default is &quot;-cpu&quot;.
+</p>
+    <p style="margin-left: 2.5em; text-indent: -2.5em;"><strong>-w </strong><em>COMMAND</em><br>
+Explicitly watches the specified command.
+By default
+<strong>msysmon</strong>
+watches any process that exceeds the specified CPU or memory limits.
+</p>
+    <h2 id="msysmon-1.see-also">See Also</h2>
+<p><strong>proc</strong>(5)
+
+</p>
+    <h2 id="msysmon-1.copyright">Copyright</h2>
+<p>Copyright &copy; 2026 by Michael R Sweet.
+  </body>
+</html>
